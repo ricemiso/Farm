@@ -576,11 +576,11 @@ MonoBehaviour:
   speed: 12
   gravity: -19.62
   jumpHeight: 3
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 1790098038}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1 &1790098037
 GameObject:
   m_ObjectHideFlags: 0
