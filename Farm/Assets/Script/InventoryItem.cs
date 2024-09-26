@@ -27,6 +27,15 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public float hydrationEffect;
 
 
+    // --- Equipping --- //
+    public bool isEquippable;
+    private GameObject itemPendingEquipping;
+    public bool isInsideQuiqSlot;
+
+
+    public bool isSelected;
+
+
     private void Start()
     {
         itemInfoUI = InventorySystem.Instance.ItemInfoUI;
@@ -35,7 +44,21 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemInfoUI_itemFunctionality = itemInfoUI.transform.Find("itemFunctionality").GetComponent<Text>();
     }
 
-    // Triggered when the mouse enters into the area of the item that has this script.
+
+    void Update()
+    {
+        if (isSelected)
+        {
+            gameObject.GetComponent<DragDrop>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<DragDrop>().enabled = true;
+        }
+    }
+
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         itemInfoUI.SetActive(true);
@@ -44,28 +67,38 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemInfoUI_itemFunctionality.text = thisFunctionality;
     }
 
-    // Triggered when the mouse exits the area of the item that has this script.
+   
     public void OnPointerExit(PointerEventData eventData)
     {
         itemInfoUI.SetActive(false);
     }
 
-    // Triggered when the mouse is clicked over the item that has this script.
+    
     public void OnPointerDown(PointerEventData eventData)
     {
-        //Right Mouse Button Click on
+       
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (isConsumable)
             {
-                // Setting this specific gameobject to be the item we want to destroy later
+                
                 itemPendingConsumption = gameObject;
                 consumingFunction(healthEffect, caloriesEffect, hydrationEffect);
             }
+
+
+            if (isEquippable && isInsideQuiqSlot == false && EquipSystem.Instance.CheckIfFull() == false)
+            {
+                EquipSystem.Instance.AddToQuickSlots(gameObject);
+                isInsideQuiqSlot = true;
+            }
         }
+
+        
+        
     }
 
-    // Triggered when the mouse button is released over the item that has this script.
+   
     public void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)

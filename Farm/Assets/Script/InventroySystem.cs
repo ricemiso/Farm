@@ -46,6 +46,8 @@ public class InventorySystem : MonoBehaviour
         isOpen = false;
 
         PopulateSlotList();
+
+        Cursor.visible = false;
     }
 
     private void PopulateSlotList()
@@ -68,6 +70,11 @@ public class InventorySystem : MonoBehaviour
             Debug.Log("i is pressed");
             inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            SelectionManager.instance.DisableSelection();
+            SelectionManager.instance.GetComponent<SelectionManager>().enabled = false;
+
             isOpen = true;
 
         }
@@ -78,6 +85,10 @@ public class InventorySystem : MonoBehaviour
             if (!CraftingSystem.Instance.isOpen)
             {
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
+                SelectionManager.instance.EnableSelection();
+                SelectionManager.instance.GetComponent<SelectionManager>().enabled = true;
             }
             
             isOpen = false;

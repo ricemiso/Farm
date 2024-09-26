@@ -118,7 +118,10 @@ MonoBehaviour:
   thisName: Stick
   thisDescription: A dry Stick
   thisFunctionality: Used for crahting
-  isConsumable: 1
+  isConsumable: 0
   healthEffect: 10
   caloriesEffect: 100
   hydrationEffect: 2
+  isEquippable: 1
+  isInsideQuiqSlot: 0
+  isSelected: 0
