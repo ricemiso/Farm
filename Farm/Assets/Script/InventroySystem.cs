@@ -104,8 +104,16 @@ public class InventorySystem : MonoBehaviour
         pickupAlert.SetActive(true);
         pickupName.text = itemName;
         pickupImage.sprite = itemSprite;
+
+        StartCoroutine(PopHide());
     }
 
+    public IEnumerator PopHide()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        pickupAlert.SetActive(false);
+    }
 
 
     private GameObject FindNextEmptySlot()
