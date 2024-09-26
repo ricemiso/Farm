@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CraftingSystem : MonoBehaviour
 {
-    public static CraftingSystem instance { get; set; }
+    public static CraftingSystem Instance { get; set; }
 
     public GameObject craftingScreenUI;
     public GameObject toolScreenUI;
@@ -24,13 +24,13 @@ public class CraftingSystem : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null && instance != this)
+        if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 
@@ -145,7 +145,7 @@ public class CraftingSystem : MonoBehaviour
     {
         yield return 0;
 
-        InventorySystem.Instance.ReCalculateList();
+        InventorySystem.Instance.ReCalculeList();
         RefreshNeededItems();
     }
 }

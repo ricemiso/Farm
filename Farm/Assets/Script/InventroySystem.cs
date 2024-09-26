@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class InventorySystem : MonoBehaviour
 {
 
+    public GameObject ItemInfoUI;
+
     public static InventorySystem Instance { get; set; }
 
     public GameObject inventoryScreenUI;
@@ -73,7 +75,7 @@ public class InventorySystem : MonoBehaviour
         {
             inventoryScreenUI.SetActive(false);
 
-            if (!CraftingSystem.instance.isOpen)
+            if (!CraftingSystem.Instance.isOpen)
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
@@ -94,8 +96,8 @@ public class InventorySystem : MonoBehaviour
 
         TriggerPickupPop(itemName,itemToAdd.GetComponent<Image>().sprite);
 
-        ReCalculateList();
-        CraftingSystem.instance.RefreshNeededItems();
+        ReCalculeList();
+        CraftingSystem.Instance.RefreshNeededItems();
     }
 
 
@@ -171,7 +173,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void ReCalculateList()
+    public void ReCalculeList()
     {
         itemList.Clear();
 

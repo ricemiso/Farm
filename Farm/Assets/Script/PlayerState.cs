@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     
-    public static PlayerState instance { get; set; }
+    public static PlayerState Instance { get; set; }
 
     //Health
     public float currentHealth;
@@ -29,13 +29,13 @@ public class PlayerState : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null && instance != this)
+        if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 
@@ -74,5 +74,20 @@ public class PlayerState : MonoBehaviour
         {
             currentHealth -= 10;
         }
+    }
+
+    public void setHealth(float newHealth)
+    {
+        currentHealth = newHealth;
+    }
+
+    public void setCalories(float newCalories)
+    {
+        currentCalories = newCalories;
+    }
+
+    public void setHydration(float newHydration)
+    {
+        currentHydrationPercent = newHydration;
     }
 }
