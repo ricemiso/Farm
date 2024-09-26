@@ -27,6 +27,11 @@ public class CalodesBar : MonoBehaviour
 
         Slider.value = fillValue;
 
+        if (Slider.value <= 0)
+        {
+            currentcalories = 0;
+        }
+
         caloriesCounter.text = currentcalories + "/" + maxcalories;
     }
 }

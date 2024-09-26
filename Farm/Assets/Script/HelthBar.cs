@@ -28,6 +28,11 @@ public class HelthBar : MonoBehaviour
 
         Slider.value = fillValue;
 
+        if (Slider.value <= 0)
+        {
+            currentHealth = 0;
+        }
+
         healthCounter.text = currentHealth + "/" + maxHealth;
     }
 }

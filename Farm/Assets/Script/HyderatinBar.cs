@@ -27,6 +27,13 @@ public class HyderatinBar : MonoBehaviour
 
         Slider.value = fillValue;
 
+
+        if (Slider.value <= 0)
+        {
+            currenthydration = 0;
+        }
+
+
         hydrationCounter.text = currenthydration + "%" ;
     }
 }
