@@ -202,4 +202,19 @@ public class InventorySystem : MonoBehaviour
             }
         }
     }
+
+    public int GetItemCount(string itemName)
+    {
+        int count = 0;
+
+        foreach (var item in itemList)
+        {
+            if (item == itemName)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

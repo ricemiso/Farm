@@ -97,22 +97,43 @@ public class CraftingSystem : MonoBehaviour
 
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
+        // 現在のインベントリ内の素材の数を取得
+        int currentAmountReq1 = InventorySystem.Instance.GetItemCount(blueprintToCraft.Req1);
+        int currentAmountReq2 = blueprintToCraft.numOfRequirement == 2 ? InventorySystem.Instance.GetItemCount(blueprintToCraft.Req2) : 0;
 
-        InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
+        // 不足している数を計算
+        int req1Shortage = Mathf.Max(0, blueprintToCraft.Req1amount - currentAmountReq1);
+        int req2Shortage = blueprintToCraft.numOfRequirement == 2 ? Mathf.Max(0, blueprintToCraft.Req2amount - currentAmountReq2) : 0;
 
+        // クイックスロットのアイテム削除処理
+        if (req1Shortage > 0)
+        {
+            EquipSystem.Instance.RemoveItemFromQuickSlots(blueprintToCraft.Req1, req1Shortage);
+        }
+
+        if (req2Shortage > 0)
+        {
+            EquipSystem.Instance.RemoveItemFromQuickSlots(blueprintToCraft.Req2, req2Shortage);
+        }
+
+        // インベントリから必要なアイテムを削除する
         if (blueprintToCraft.numOfRequirement == 1)
         {
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
-
-        }else if(blueprintToCraft.numOfRequirement == 2)
+        }
+        else if (blueprintToCraft.numOfRequirement == 2)
         {
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
         }
 
+        // クラフトされたアイテムをインベントリに追加
+        InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
 
-        StartCoroutine(calulate()) ;
+        // 再計算とUIの更新をコルーチンで呼び出し
+        StartCoroutine(calulate());
     }
+
 
     public void RefreshNeededItems()
     {

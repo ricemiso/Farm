@@ -195,4 +195,25 @@ public class EquipSystem : MonoBehaviour
             return false;
         }
     }
+
+    public void RemoveItemFromQuickSlots(string itemName, int amountToRemove)
+    {
+        int counter = amountToRemove;
+
+        for (var i = quickSlotsList.Count - 1; i >= 0; i--)
+        {
+            if (quickSlotsList[i].transform.childCount > 0)
+            {
+                if (quickSlotsList[i].transform.GetChild(0).name == itemName + "(Clone)" && counter > 0)
+                {
+                    Destroy(quickSlotsList[i].transform.GetChild(0).gameObject);
+                    counter--;
+                }
+            }
+
+            // 必要な数だけ削除できた場合はループを抜ける
+            if (counter <= 0)
+                break;
+        }
+    }
 }
