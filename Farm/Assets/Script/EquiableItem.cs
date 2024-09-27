@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator))]
 
 public class EquiableItem : MonoBehaviour
 {
@@ -17,9 +17,12 @@ public class EquiableItem : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)
+            && InventorySystem.Instance.isOpen == false
+            && CraftingSystem.Instance.isOpen == false
+            && SelectionManager.instance.HandIsVisible == false)
         {
-            animator.SetTrigger("Attack1");
+            animator.SetTrigger("hit");
         }
     }
 }
