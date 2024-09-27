@@ -12,6 +12,7 @@ public class CraftingSystem : MonoBehaviour
     public GameObject toolScreenUI;
 
     public List<string> inventryitemList = new List<string>();
+    public List<GameObject> quickitemList = new List<GameObject>();
 
     Button toolsBTN;
     Button craftAxeBTN;
@@ -140,11 +141,12 @@ public class CraftingSystem : MonoBehaviour
         int stone_count = 0;
         int stick_count = 0;
 
+        // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
 
         foreach (string itemname in inventryitemList)
         {
-            switch(itemname)
+            switch (itemname)
             {
                 case "Stone":
                     stone_count += 1;
@@ -155,11 +157,32 @@ public class CraftingSystem : MonoBehaviour
             }
         }
 
-        //Axe
-        AxeReq1.text = "3 Stone [" + stone_count + "]";
-        AxeReq2.text = "3 Stick [" + stick_count + "]";
+        // クイックスロット内のアイテムもカウント
+        int quickStoneCount = 0;
+        int quickStickCount = 0;
 
-        if (stone_count >= 3 && stick_count >= 3)
+        foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
+        {
+            if (quickSlot.transform.childCount > 0)
+            {
+                string itemName = quickSlot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
+                if (itemName == "Stone")
+                {
+                    quickStoneCount++;
+                }
+                else if (itemName == "Stick")
+                {
+                    quickStickCount++;
+                }
+            }
+        }
+
+        // 必要なアイテムの数を表示
+        AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
+        AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
+
+        // クラフトボタンの有効化
+        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3)
         {
             craftAxeBTN.gameObject.SetActive(true);
         }
@@ -167,9 +190,8 @@ public class CraftingSystem : MonoBehaviour
         {
             craftAxeBTN.gameObject.SetActive(false);
         }
-
-
     }
+
 
     public IEnumerator calulate()
     {

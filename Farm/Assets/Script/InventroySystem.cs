@@ -178,7 +178,7 @@ public class InventorySystem : MonoBehaviour
                 {
                     Destroy(slotlist[i].transform.GetChild(0).gameObject);
 
-                    counter += 1;
+                    counter --;
                 }
             }
         }
