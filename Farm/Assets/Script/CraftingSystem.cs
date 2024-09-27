@@ -12,7 +12,6 @@ public class CraftingSystem : MonoBehaviour
     public GameObject toolScreenUI;
 
     public List<string> inventryitemList = new List<string>();
-    public List<GameObject> quickitemList = new List<GameObject>();
 
     Button toolsBTN;
     Button craftAxeBTN;
