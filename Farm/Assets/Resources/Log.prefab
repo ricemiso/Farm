@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2849ab9ab90e0dc47af748c26bde4a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTrashable: 0
+  isTrashable: 1
   thisName: Log
   thisDescription: "\u6728"
   thisFunctionality: "\u30AF\u30E9\u30D5\u30C8\u306B\u4F7F\u7528\u53EF"

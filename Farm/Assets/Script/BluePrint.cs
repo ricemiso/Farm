@@ -14,11 +14,16 @@ public class BluePrint : MonoBehaviour
 
     public int numOfRequirement;
 
-    public BluePrint(string name,int reqNum,string R1, int R1Num,string R2,int R2Num)
+    public int numberOfItemsToProduce;
+
+
+    public BluePrint(string name, int producedItems, int reqNum, string R1, int R1Num, string R2, int R2Num)
     {
         itemName = name;
 
         numOfRequirement = reqNum;
+
+        numberOfItemsToProduce = producedItems;
 
         Req1 = R1;
         Req2 = R2;

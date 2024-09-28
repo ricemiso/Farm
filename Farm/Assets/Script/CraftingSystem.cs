@@ -9,18 +9,21 @@ public class CraftingSystem : MonoBehaviour
     public static CraftingSystem Instance { get; set; }
 
     public GameObject craftingScreenUI;
-    public GameObject toolScreenUI;
+    public GameObject toolScreenUI, survivalScreenUI, refineScreenUI;
 
     public List<string> inventryitemList = new List<string>();
 
-    Button toolsBTN;
-    Button craftAxeBTN;
+    Button toolsBTN, survivalBTN, refineBTN;
+    Button craftAxeBTN, craftPlankBTN;
 
-    Text AxeReq1, AxeReq2;
+    Text AxeReq1, AxeReq2, PlankReq1;
 
     public bool isOpen;
 
-    public BluePrint AxeBLP;
+
+    [HideInInspector] public BluePrint AxeBLP;
+    [HideInInspector] public BluePrint PlankBLP;
+
 
     private void Awake()
     {
@@ -37,25 +40,64 @@ public class CraftingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AxeBLP = new BluePrint("Axe", 2, "Stone", 3, "Stick", 3);
+        AxeBLP = new BluePrint("Axe", 1, 2, "Stone", 3, "Stick", 3);
+        PlankBLP = new BluePrint("Plank", 2, 1, "Log", 1, "", 0);
 
         isOpen = false;
 
         toolsBTN = craftingScreenUI.transform.Find("ToolButton").GetComponent<Button>();
         toolsBTN.onClick.AddListener(delegate { OpenToolsCategory(); });
 
+        survivalBTN = craftingScreenUI.transform.Find("SurvivalButton").GetComponent<Button>();
+        survivalBTN.onClick.AddListener(delegate { OpenSurvivalCategory(); });
 
+        refineBTN = craftingScreenUI.transform.Find("RefineButton").GetComponent<Button>();
+        refineBTN.onClick.AddListener(delegate { OpenRefineCategory(); });
+
+        //Axe
         AxeReq1 = toolScreenUI.transform.Find("Axe").transform.Find("rec1").GetComponent<Text>();
         AxeReq2 = toolScreenUI.transform.Find("Axe").transform.Find("rec2").GetComponent<Text>();
 
         craftAxeBTN = toolScreenUI.transform.Find("Axe").transform.Find("AxeButton").GetComponent<Button>();
         craftAxeBTN.onClick.AddListener(delegate { CraftAnyItem(AxeBLP); });
 
+
+        //Plank
+        PlankReq1 = refineScreenUI.transform.Find("Plank").transform.Find("rec1").GetComponent<Text>();
+
+        craftPlankBTN = refineScreenUI.transform.Find("Plank").transform.Find("PlankButton").GetComponent<Button>();
+        craftPlankBTN.onClick.AddListener(delegate { CraftAnyItem(PlankBLP); });
+
     }
 
-    
+    void OpenToolsCategory()
+    {
+        craftingScreenUI.SetActive(false);
+        toolScreenUI.SetActive(true);
+        survivalScreenUI.SetActive(false);
+        refineScreenUI.SetActive(false);
+    }
 
-    // Update is called once per frame
+    void OpenSurvivalCategory()
+    {
+        toolScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(true);
+        refineScreenUI.SetActive(false);
+    }
+
+
+    void OpenRefineCategory()
+    {
+        toolScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(false);
+        refineScreenUI.SetActive(true);
+    }
+
+
+
+
     void Update()
     {
 
@@ -76,6 +118,8 @@ public class CraftingSystem : MonoBehaviour
         {
             craftingScreenUI.SetActive(false);
             toolScreenUI.SetActive(false);
+            survivalScreenUI.SetActive(false);
+            refineScreenUI.SetActive(false);
 
             if (!InventorySystem.Instance.isOpen)
             {
@@ -89,14 +133,18 @@ public class CraftingSystem : MonoBehaviour
         }
     }
 
-    void OpenToolsCategory()
-    {
-        craftingScreenUI.SetActive(false);
-        toolScreenUI.SetActive(true);
-    }
+    
 
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
+
+        for(var i = 0; i < blueprintToCraft.numberOfItemsToProduce; i++)
+        {
+            InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
+        }
+        
+
+
         // 現在のインベントリ内の素材の数を取得
         int currentAmountReq1 = InventorySystem.Instance.GetItemCount(blueprintToCraft.Req1);
         int currentAmountReq2 = blueprintToCraft.numOfRequirement == 2 ? InventorySystem.Instance.GetItemCount(blueprintToCraft.Req2) : 0;
@@ -127,8 +175,7 @@ public class CraftingSystem : MonoBehaviour
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
         }
 
-        // クラフトされたアイテムをインベントリに追加
-        InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
+        
 
         // 再計算とUIの更新をコルーチンで呼び出し
         StartCoroutine(calulate());
@@ -139,6 +186,7 @@ public class CraftingSystem : MonoBehaviour
     {
         int stone_count = 0;
         int stick_count = 0;
+        int log_count = 0;
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
@@ -153,12 +201,16 @@ public class CraftingSystem : MonoBehaviour
                 case "Stick":
                     stick_count += 1;
                     break;
+                case "Log":
+                    log_count += 1;
+                    break;
             }
         }
 
         // クイックスロット内のアイテムもカウント
         int quickStoneCount = 0;
         int quickStickCount = 0;
+        int quickLogCount = 0;
 
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
@@ -173,21 +225,38 @@ public class CraftingSystem : MonoBehaviour
                 {
                     quickStickCount++;
                 }
+                else if (itemName == "Log")
+                {
+                    quickStickCount++;
+                }
             }
         }
 
-        // 必要なアイテムの数を表示
+        // ----Axe---- //
         AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
         AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
 
-        // クラフトボタンの有効化
-        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3)
+        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
+            && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftAxeBTN.gameObject.SetActive(true);
         }
         else
         {
             craftAxeBTN.gameObject.SetActive(false);
+        }
+
+
+        // ----Plank x2---- //
+        PlankReq1.text = "1 Log [" + (log_count + quickLogCount) + "]";
+
+        if ((log_count + quickLogCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(2))
+        {
+            craftPlankBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftPlankBTN.gameObject.SetActive(false);
         }
     }
 
