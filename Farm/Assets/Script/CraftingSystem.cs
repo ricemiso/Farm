@@ -227,7 +227,7 @@ public class CraftingSystem : MonoBehaviour
                 }
                 else if (itemName == "Log")
                 {
-                    quickStickCount++;
+                    quickLogCount++;
                 }
             }
         }

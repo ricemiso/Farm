@@ -23,6 +23,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        InventorySystem.Instance.inventoryUpdated = true;
+
         Debug.Log("OnDrop");
 
         //if there is not item already then set our item.

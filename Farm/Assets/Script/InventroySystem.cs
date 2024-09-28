@@ -27,6 +27,8 @@ public class InventorySystem : MonoBehaviour
     public Text pickupName;
     public Image pickupImage;
 
+    public bool inventoryUpdated;
+
 
     private void Awake()
     {
@@ -44,6 +46,7 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         isOpen = false;
+        inventoryUpdated = false;
 
         PopulateSlotList();
 
@@ -63,6 +66,14 @@ public class InventorySystem : MonoBehaviour
 
     void Update()
     {
+
+        if (inventoryUpdated)
+        {
+            ReCalculeList();
+            CraftingSystem.Instance.RefreshNeededItems();
+            inventoryUpdated = false; 
+        }
+
 
         if (Input.GetKeyDown(KeyCode.I) && !isOpen)
         {
@@ -97,7 +108,7 @@ public class InventorySystem : MonoBehaviour
 
     public void AddToinventry(string itemName)
     {
-
+        inventoryUpdated = true;
         whatSlotToEquip = FindNextEmptySlot();
 
         itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
@@ -168,6 +179,7 @@ public class InventorySystem : MonoBehaviour
 
     public void RemoveItem(string nameToRemove,int amountToRemove)
     {
+        inventoryUpdated = true;
         int counter = amountToRemove;
 
         for (var i = slotlist.Count - 1; i >= 0; i--)

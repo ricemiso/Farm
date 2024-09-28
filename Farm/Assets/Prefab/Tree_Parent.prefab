@@ -114,6 +114,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 7852705723419757360, guid: 47356d574ebc3a545bfaef26eb02a2ea, type: 3}
+      propertyPath: treeMaxHealth
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
