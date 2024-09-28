@@ -23,15 +23,17 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.instance.HandIsVisible == false)
         {
 
-            GameObject selectedTree = SelectionManager.instance.selectedTree;
-
-            if(selectedTree != null)
-            {
-                selectedTree.GetComponent<ChoppableTree>().GetHit();
-            }
-
-
             animator.SetTrigger("hit");
+        }
+    }
+
+    public void GetHit()
+    {
+        GameObject selectedTree = SelectionManager.instance.selectedTree;
+
+        if (selectedTree != null)
+        {
+            selectedTree.GetComponent<ChoppableTree>().GetHit();
         }
     }
 }
