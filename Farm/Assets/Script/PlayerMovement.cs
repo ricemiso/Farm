@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
        
         controller.Move(move * speed * Time.deltaTime);
-        //anim.SetBool("Run", true);
 
         //check if the player is on the ground so he can jump
         if (Input.GetButtonDown("Jump") && isGrounded)

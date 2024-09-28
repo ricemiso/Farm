@@ -22,6 +22,15 @@ public class EquiableItem : MonoBehaviour
             && CraftingSystem.Instance.isOpen == false
             && SelectionManager.instance.HandIsVisible == false)
         {
+
+            GameObject selectedTree = SelectionManager.instance.selectedTree;
+
+            if(selectedTree != null)
+            {
+                selectedTree.GetComponent<ChoppableTree>().GetHit();
+            }
+
+
             animator.SetTrigger("hit");
         }
     }
