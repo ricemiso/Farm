@@ -3097,7 +3097,7 @@ MonoBehaviour:
   isValidPlacement: 0
   selectingAGhost: 0
   selectedGhost: {fileID: 0}
-  ghostSelectedMat: {fileID: 2100000, guid: 2e33bbab7e15136458ba13176b3fdba5, type: 2}
+  ghostSelectedMat: {fileID: 2100000, guid: e5e7b505e2d82b0498691c9cd467f834, type: 2}
   ghostSemiTransparentMat: {fileID: 2100000, guid: 2d24ed54f393c3b4aae3e3e588462a13, type: 2}
   ghostFullTransparentMat: {fileID: 2100000, guid: 8d445aaacf6bc8d459c9a80b4fbe2731, type: 2}
   allGhostsInExistence: []
@@ -9139,14 +9139,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6528301, g: 0.4974567, b: 0.19584897, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f44433e52bee9294db4baf5858f523bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2703714730e377449a2e15338b1c19fe, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10810,7 +10810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 187582, guid: 38105c352d3ce7b498fcb42e7dd666f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 487582, guid: 38105c352d3ce7b498fcb42e7dd666f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14794,7 +14794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1952526501
 RectTransform:
   m_ObjectHideFlags: 0

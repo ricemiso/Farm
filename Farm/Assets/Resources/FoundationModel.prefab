@@ -1225,7 +1225,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7beaf90d4d7038841b558f4d7ac2f990, type: 2}
+  - {fileID: 2100000, guid: 10f2af32659ad864ba3c5308cc62cd1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1332,8 +1332,8 @@ MonoBehaviour:
   isOverlappingItems: 0
   isValidToBeBuilt: 0
   detectedGhostMemeber: 0
-  redMaterial: {fileID: 2100000, guid: f942638cd493e1d42957a182c11a329f, type: 2}
-  greenMaterial: {fileID: 2100000, guid: 2e33bbab7e15136458ba13176b3fdba5, type: 2}
-  defaultMaterial: {fileID: 2100000, guid: 7beaf90d4d7038841b558f4d7ac2f990, type: 2}
+  redMaterial: {fileID: 2100000, guid: 653289c951dadc248b62cdc99f1ea4df, type: 2}
+  greenMaterial: {fileID: 2100000, guid: e5e7b505e2d82b0498691c9cd467f834, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 10f2af32659ad864ba3c5308cc62cd1f, type: 2}
   ghostList: []
   solidCollider: {fileID: 5129507589166341239}
