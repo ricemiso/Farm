@@ -36,6 +36,9 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool isSelected;
 
 
+    public bool isUseable;
+
+
     private void Start()
     {
         itemInfoUI = InventorySystem.Instance.ItemInfoUI;
@@ -92,6 +95,17 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 EquipSystem.Instance.AddToQuickSlots(gameObject);
                 isInsideQuiqSlot = true;
             }
+
+
+            if (isUseable)
+            {
+                ConstructionManager.Instance.ItemToBeDestroy = gameObject;
+                gameObject.SetActive(false);
+
+                UseItem();
+            }
+
+
         }
 
         
@@ -99,6 +113,46 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
    
+    private void UseItem()
+    {
+
+        itemInfoUI.SetActive(false);
+
+        InventorySystem.Instance.isOpen = false;
+        InventorySystem.Instance.inventoryScreenUI.SetActive(false);
+
+        CraftingSystem.Instance.isOpen = false;
+        CraftingSystem.Instance.craftingScreenUI.SetActive(false);
+        CraftingSystem.Instance.toolScreenUI.SetActive(false);
+        CraftingSystem.Instance.survivalScreenUI.SetActive(false);
+        CraftingSystem.Instance.refineScreenUI.SetActive(false);
+        CraftingSystem.Instance.constractionScreenUI.SetActive(false);
+
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SelectionManager.Instance.EnableSelection();
+        SelectionManager.Instance.enabled = true; ;
+
+        switch (gameObject.name)
+        {
+            case "Foundation(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
+                break;
+            case "Foundation":
+                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
+                break;
+            //case "Wall":
+            //    ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
+            //    break;
+            default:
+                break;
+        }
+
+    }
+
+
     public void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
@@ -127,7 +181,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void healthEffectCalculation(float healthEffect)
     {
-        // --- Health --- //
+       
 
         float healthBeforeConsumption = PlayerState.Instance.currentHealth;
         float maxHealth = PlayerState.Instance.maxHealth;
@@ -148,7 +202,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void caloriesEffectCalculation(float caloriesEffect)
     {
-        // --- Calories --- //
+        
 
         float caloriesBeforeConsumption = PlayerState.Instance.currentCalories;
         float maxCalories = PlayerState.Instance.maxCalories;
@@ -169,7 +223,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void hydrationEffectCalculation(float hydrationEffect)
     {
-        // --- Hydration --- //
+        
 
         float hydrationBeforeConsumption = PlayerState.Instance.currentHydrationPercent;
         float maxHydration = PlayerState.Instance.maxHydrationPercent;

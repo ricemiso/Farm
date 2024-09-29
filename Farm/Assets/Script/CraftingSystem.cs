@@ -9,20 +9,22 @@ public class CraftingSystem : MonoBehaviour
     public static CraftingSystem Instance { get; set; }
 
     public GameObject craftingScreenUI;
-    public GameObject toolScreenUI, survivalScreenUI, refineScreenUI;
+    public GameObject toolScreenUI, survivalScreenUI, refineScreenUI, constractionScreenUI;
 
     public List<string> inventryitemList = new List<string>();
 
-    Button toolsBTN, survivalBTN, refineBTN;
-    Button craftAxeBTN, craftPlankBTN;
+    Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN;
 
-    Text AxeReq1, AxeReq2, PlankReq1;
+    Text AxeReq1, AxeReq2, PlankReq1, foundationReq1, WallReq1;
 
     public bool isOpen;
 
 
     [HideInInspector] public BluePrint AxeBLP;
     [HideInInspector] public BluePrint PlankBLP;
+    [HideInInspector] public BluePrint foundationBLP;
+    [HideInInspector] public BluePrint WallBLP;
 
 
     private void Awake()
@@ -40,8 +42,12 @@ public class CraftingSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventryitemList = new List<string>();
+
         AxeBLP = new BluePrint("Axe", 1, 2, "Stone", 3, "Stick", 3);
         PlankBLP = new BluePrint("Plank", 2, 1, "Log", 1, "", 0);
+        foundationBLP = new BluePrint("Foundation", 1, 1, "Plank", 4, "", 0);
+        WallBLP = new BluePrint("Wall", 1, 1, "Plank", 2, "", 0);
 
         isOpen = false;
 
@@ -53,6 +59,9 @@ public class CraftingSystem : MonoBehaviour
 
         refineBTN = craftingScreenUI.transform.Find("RefineButton").GetComponent<Button>();
         refineBTN.onClick.AddListener(delegate { OpenRefineCategory(); });
+
+        construnctinBTN = craftingScreenUI.transform.Find("ConstructionButton").GetComponent<Button>();
+        construnctinBTN.onClick.AddListener(delegate { OpenconstrunctinCategory(); });
 
         //Axe
         AxeReq1 = toolScreenUI.transform.Find("Axe").transform.Find("rec1").GetComponent<Text>();
@@ -68,6 +77,19 @@ public class CraftingSystem : MonoBehaviour
         craftPlankBTN = refineScreenUI.transform.Find("Plank").transform.Find("PlankButton").GetComponent<Button>();
         craftPlankBTN.onClick.AddListener(delegate { CraftAnyItem(PlankBLP); });
 
+
+        //foundatin
+        foundationReq1 = constractionScreenUI.transform.Find("foundation").transform.Find("rec1").GetComponent<Text>();
+
+        craftfoundationBTN = constractionScreenUI.transform.Find("foundation").transform.Find("foundationButton").GetComponent<Button>();
+        craftfoundationBTN.onClick.AddListener(delegate { CraftAnyItem(foundationBLP); });
+
+        //Waall
+        WallReq1 = constractionScreenUI.transform.Find("Wall").transform.Find("rec1").GetComponent<Text>();
+
+        craftWallBTN = constractionScreenUI.transform.Find("Wall").transform.Find("WallButton").GetComponent<Button>();
+        craftWallBTN.onClick.AddListener(delegate { CraftAnyItem(WallBLP); });
+
     }
 
     void OpenToolsCategory()
@@ -76,6 +98,7 @@ public class CraftingSystem : MonoBehaviour
         toolScreenUI.SetActive(true);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
+        constractionScreenUI.SetActive(false);
     }
 
     void OpenSurvivalCategory()
@@ -84,6 +107,7 @@ public class CraftingSystem : MonoBehaviour
         craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(true);
         refineScreenUI.SetActive(false);
+        constractionScreenUI.SetActive(false);
     }
 
 
@@ -93,23 +117,31 @@ public class CraftingSystem : MonoBehaviour
         craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(true);
+        constractionScreenUI.SetActive(false);
     }
 
-
+    void OpenconstrunctinCategory()
+    {
+        toolScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(false);
+        refineScreenUI.SetActive(false);
+        constractionScreenUI.SetActive(true);
+    }
 
 
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.C) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.C) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
 
             craftingScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            SelectionManager.instance.DisableSelection();
-            SelectionManager.instance.GetComponent<SelectionManager>().enabled = false;
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
 
             isOpen = true;
 
@@ -120,14 +152,15 @@ public class CraftingSystem : MonoBehaviour
             toolScreenUI.SetActive(false);
             survivalScreenUI.SetActive(false);
             refineScreenUI.SetActive(false);
+            constractionScreenUI.SetActive(false);
 
             if (!InventorySystem.Instance.isOpen)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
 
-                SelectionManager.instance.EnableSelection();
-                SelectionManager.instance.GetComponent<SelectionManager>().enabled = true;
+                SelectionManager.Instance.EnableSelection();
+                SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
             }
             isOpen = false;
         }
@@ -190,6 +223,7 @@ public class CraftingSystem : MonoBehaviour
         int stone_count = 0;
         int stick_count = 0;
         int log_count = 0;
+        int plank_count = 0;
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
@@ -207,6 +241,9 @@ public class CraftingSystem : MonoBehaviour
                 case "Log":
                     log_count += 1;
                     break;
+                case "Plank":
+                    plank_count += 1;
+                    break;
             }
         }
 
@@ -214,6 +251,7 @@ public class CraftingSystem : MonoBehaviour
         int quickStoneCount = 0;
         int quickStickCount = 0;
         int quickLogCount = 0;
+        int quickPlankCount = 0;
 
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
@@ -231,6 +269,10 @@ public class CraftingSystem : MonoBehaviour
                 else if (itemName == "Log")
                 {
                     quickLogCount++;
+                }
+                else if (itemName == "Plank")
+                {
+                    quickPlankCount++;
                 }
             }
         }
@@ -260,6 +302,30 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             craftPlankBTN.gameObject.SetActive(false);
+        }
+
+        // ----Foundation---- //
+        foundationReq1.text = "4 Plank [" + (plank_count + quickPlankCount) + "]";
+
+        if ((plank_count + quickPlankCount) >= 4 && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftfoundationBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftfoundationBTN.gameObject.SetActive(false);
+        }
+
+        // ----Wall---- //
+        WallReq1.text = "2 Plank [" + (plank_count + quickPlankCount) + "]";
+
+        if ((plank_count + quickPlankCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftWallBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftWallBTN.gameObject.SetActive(false);
         }
     }
 

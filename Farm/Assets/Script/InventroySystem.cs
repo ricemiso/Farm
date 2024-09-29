@@ -75,7 +75,7 @@ public class InventorySystem : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
 
             Debug.Log("i is pressed");
@@ -83,8 +83,8 @@ public class InventorySystem : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            SelectionManager.instance.DisableSelection();
-            SelectionManager.instance.GetComponent<SelectionManager>().enabled = false;
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
 
             isOpen = true;
 
@@ -98,8 +98,8 @@ public class InventorySystem : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
 
-                SelectionManager.instance.EnableSelection();
-                SelectionManager.instance.GetComponent<SelectionManager>().enabled = true;
+                SelectionManager.Instance.EnableSelection();
+                SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
             }
             
             isOpen = false;

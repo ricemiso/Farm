@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SelectionManager : MonoBehaviour
 {
 
-    public static SelectionManager instance { get; set; }
+    public static SelectionManager Instance { get; set; }
 
     public bool onTarget;
 
@@ -31,13 +31,13 @@ public class SelectionManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance !=null && instance != this)
+        if(Instance !=null && Instance != this)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 

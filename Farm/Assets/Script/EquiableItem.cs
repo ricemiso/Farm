@@ -20,7 +20,8 @@ public class EquiableItem : MonoBehaviour
         if (Input.GetMouseButtonDown(0)
             && InventorySystem.Instance.isOpen == false
             && CraftingSystem.Instance.isOpen == false
-            && SelectionManager.instance.HandIsVisible == false)
+            && SelectionManager.Instance.HandIsVisible == false
+            && !ConstructionManager.Instance.inConstructionMode)
         {
 
             StartCoroutine(SwingSoundDelay());
@@ -31,7 +32,7 @@ public class EquiableItem : MonoBehaviour
 
     public void GetHit()
     {
-        GameObject selectedTree = SelectionManager.instance.selectedTree;
+        GameObject selectedTree = SelectionManager.Instance.selectedTree;
 
         if (selectedTree != null)
         {
@@ -45,7 +46,7 @@ public class EquiableItem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        GameObject selectedTree = SelectionManager.instance.selectedTree;
+        GameObject selectedTree = SelectionManager.Instance.selectedTree;
 
         if (selectedTree == null)
         {
@@ -58,7 +59,7 @@ public class EquiableItem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        GameObject selectedTree = SelectionManager.instance.selectedTree;
+        GameObject selectedTree = SelectionManager.Instance.selectedTree;
         selectedTree.GetComponent<ChoppableTree>().GetHit();
 
     }
