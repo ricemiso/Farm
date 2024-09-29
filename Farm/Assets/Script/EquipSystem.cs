@@ -136,9 +136,25 @@ public class EquipSystem : MonoBehaviour
         }
 
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
-        selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
-            new Vector3(0.75f, 0.22f, 1.6f), Quaternion.Euler(-9.4f, -94.2f, 15.6f));
-        selecteditemModel.transform.SetParent(toolHolder.transform, false);
+
+        //Axe
+        if (selectedItem.name == "Axe(Clone)")
+        {
+            
+            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
+                new Vector3(0.75f, 0.22f, 1.6f), Quaternion.Euler(-9.4f, -94.2f, 15.6f));
+            selecteditemModel.transform.SetParent(toolHolder.transform, false);
+        }
+
+        //Stone
+        if (selectedItem.name == "Stone(Clone)")
+        {
+            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
+                new Vector3(0.74f, 0.79f, 1.18f), Quaternion.Euler(-9.4f, -94.2f, 15.6f));
+            selecteditemModel.transform.SetParent(toolHolder.transform, false);
+        }
+
+
     }
 
 
