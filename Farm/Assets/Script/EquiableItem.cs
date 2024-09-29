@@ -23,6 +23,8 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.instance.HandIsVisible == false)
         {
 
+            StartCoroutine(SwingSoundDelay());
+
             animator.SetTrigger("hit");
         }
     }
@@ -33,7 +35,31 @@ public class EquiableItem : MonoBehaviour
 
         if (selectedTree != null)
         {
-            selectedTree.GetComponent<ChoppableTree>().GetHit();
+            SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
+            StartCoroutine(HitSoundDelay());
+           
         }
+    }
+
+    IEnumerator SwingSoundDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject selectedTree = SelectionManager.instance.selectedTree;
+
+        if (selectedTree == null)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
+        }
+       
+    }
+
+    IEnumerator HitSoundDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject selectedTree = SelectionManager.instance.selectedTree;
+        selectedTree.GetComponent<ChoppableTree>().GetHit();
+
     }
 }

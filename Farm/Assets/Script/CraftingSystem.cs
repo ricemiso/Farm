@@ -138,7 +138,10 @@ public class CraftingSystem : MonoBehaviour
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
 
-        for(var i = 0; i < blueprintToCraft.numberOfItemsToProduce; i++)
+        SoundManager.Instance.PlaySound(SoundManager.Instance.craftingSound);
+
+
+        for (var i = 0; i < blueprintToCraft.numberOfItemsToProduce; i++)
         {
             InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
         }
