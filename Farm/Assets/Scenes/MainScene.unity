@@ -10013,7 +10013,8 @@ Transform:
   m_LocalPosition: {x: 410.81934, y: 1027.1041, z: 2.2045097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2130662681}
   m_Father: {fileID: 1092094759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1040980723
@@ -10596,7 +10597,6 @@ Transform:
   - {fileID: 742667850}
   - {fileID: 1439752064}
   - {fileID: 1040980722}
-  - {fileID: 2130662681}
   - {fileID: 1623924292}
   - {fileID: 61512402}
   - {fileID: 261921312}
@@ -14449,7 +14449,7 @@ Transform:
   m_GameObject: {fileID: 1686317345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.85, y: 2.35, z: 2.79}
+  m_LocalPosition: {x: 3.85, y: 2.05, z: 2.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14486,14 +14486,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1686317346}
+  terrain: {fileID: 302434190}
   speed: 12
   gravity: -19.62
   jumpHeight: 3
   groundCheck: {fileID: 1790098038}
-  groundDistance: 1
+  groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  isGrounded: 0
   isMoving: 0
 --- !u!1 &1686409633
 GameObject:
@@ -17762,12 +17764,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130662680}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -410.81934, y: -1027.1041, z: -2.2045097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1092094759}
+  m_Father: {fileID: 1040980722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2130662682
 MonoBehaviour:

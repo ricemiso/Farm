@@ -6,6 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
+    public Terrain terrain;
+    private TerrainData terrainData;
+    private Vector3 terrainPos;
+    private AudioSource currentAudioSource; // 現在の足音用のAudioSource
+
     public float speed = 12f;
     public float gravity = -9.81f * 2;
     public float jumpHeight = 3f;
@@ -15,8 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     Vector3 velocity;
-
-    bool isGrounded;
+    public bool isGrounded;
 
     private Vector3 lastPosition;
     public bool isMoving;
@@ -24,12 +28,16 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         lastPosition = new Vector3(0f, 0f, 0f);
+        terrainData = terrain.terrainData;
+        terrainPos = terrain.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.Raycast(groundCheck.position,Vector3.down, groundDistance, groundMask);
+
 
         if (isGrounded && velocity.y < 0)
         {
@@ -41,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-       
         controller.Move(move * speed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -50,23 +57,90 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-
         controller.Move(velocity * Time.deltaTime);
 
-        if(lastPosition != gameObject.transform.position && isGrounded)
+        if (isGrounded && move.magnitude > 0.1f) // 動いていて地面にいるとき
         {
             isMoving = true;
-
-            SoundManager.Instance.PlaySound(SoundManager.Instance.grassWalkSound);
+            UpdateFootstepSound(); // 常に足音を更新
         }
         else
         {
             isMoving = false;
-
-            SoundManager.Instance.grassWalkSound.Stop();
+            if (currentAudioSource != null && currentAudioSource.isPlaying)
+            {
+                currentAudioSource.Stop(); // 停止時に足音を止める
+            }
         }
 
         lastPosition = gameObject.transform.position;
     }
 
+    private void UpdateFootstepSound()
+    {
+        Vector3 playerPosition = transform.position;
+        int layerIndex = GetCurrentTerrainLayer(playerPosition);
+        AudioSource newAudioSource = GetFootstepSoundForLayer(layerIndex);
+
+        if (newAudioSource != currentAudioSource) 
+        {
+            if (currentAudioSource != null && currentAudioSource.isPlaying)
+            {
+                currentAudioSource.Stop(); 
+            }
+
+            currentAudioSource = newAudioSource;
+            currentAudioSource.loop = true; 
+            currentAudioSource.Play();
+        }
+        else if (!currentAudioSource.isPlaying)
+        {
+            currentAudioSource.Play(); 
+        }
+    }
+
+    private AudioSource GetFootstepSoundForLayer(int layerIndex)
+    {
+        AudioSource audioSource;
+
+        switch (layerIndex)
+        {
+            case 0: // 草
+                audioSource = SoundManager.Instance.grassWalkSound;
+                break;
+            case 1: // 砂利
+                audioSource = SoundManager.Instance.chopSound;
+                break;
+            default:
+                audioSource = SoundManager.Instance.grassWalkSound;
+                break;
+        }
+
+        return audioSource;
+    }
+
+    private int GetCurrentTerrainLayer(Vector3 position)
+    {
+        TerrainData terrainData = terrain.terrainData;
+        float[,,] splatmapData = terrainData.GetAlphamaps(
+            (int)((position.x / terrainData.size.x) * terrainData.alphamapWidth),
+            (int)((position.z / terrainData.size.z) * terrainData.alphamapHeight),
+            1, 1);
+
+        int maxTextureIndex = 0;
+        float maxAlpha = 0f;
+
+        for (int i = 0; i < splatmapData.GetLength(2); i++)
+        {
+            float alpha = splatmapData[0, 0, i];
+
+            if (alpha > maxAlpha)
+            {
+                maxAlpha = alpha;
+                maxTextureIndex = i;
+            }
+        }
+
+        return maxTextureIndex;
+    }
 }
