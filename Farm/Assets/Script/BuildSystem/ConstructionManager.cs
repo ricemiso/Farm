@@ -174,7 +174,7 @@ public class ConstructionManager : MonoBehaviour
         if (itemToBeConstructed != null && inConstructionMode)
         {
 
-            if(itemToBeConstructed.name == "FoundationModel")
+            if (itemToBeConstructed.name == "FoundationModel")
             {
                 if (CheckValidConstructionPosition())
                 {
@@ -186,6 +186,10 @@ public class ConstructionManager : MonoBehaviour
                     isValidPlacement = false;
                     itemToBeConstructed.GetComponent<Constructable>().SetInvalidColor();
                 }
+            }
+            else
+            {
+                itemToBeConstructed.GetComponent<Constructable>().SetInvalidColor();
             }
 
             
@@ -207,7 +211,7 @@ public class ConstructionManager : MonoBehaviour
                 {
                     itemToBeConstructed.SetActive(false);
                     selectingAGhost = true;
-                    selectedGhost = selectionTransform.gameObject;
+                    selectedGhost = selectionTransform.gameObject;   
 
                 }
                 else

@@ -661,6 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: White Rabbit
+  playerRange: 0
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0

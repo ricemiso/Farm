@@ -14,11 +14,13 @@ public class CraftingSystem : MonoBehaviour
     public List<string> inventryitemList = new List<string>();
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
+    Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
     Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN;
 
     Text AxeReq1, AxeReq2, PlankReq1, foundationReq1, WallReq1;
 
     public bool isOpen;
+    private bool canCraft = true;
 
 
     [HideInInspector] public BluePrint AxeBLP;
@@ -51,6 +53,8 @@ public class CraftingSystem : MonoBehaviour
 
         isOpen = false;
 
+
+        //選択画面
         toolsBTN = craftingScreenUI.transform.Find("ToolButton").GetComponent<Button>();
         toolsBTN.onClick.AddListener(delegate { OpenToolsCategory(); });
 
@@ -63,6 +67,23 @@ public class CraftingSystem : MonoBehaviour
         construnctinBTN = craftingScreenUI.transform.Find("ConstructionButton").GetComponent<Button>();
         construnctinBTN.onClick.AddListener(delegate { OpenconstrunctinCategory(); });
 
+
+
+        //Exit
+        toolsExitBTN = toolScreenUI.transform.Find("CraftingToolsButton").GetComponent<Button>();
+        toolsExitBTN.onClick.AddListener(delegate { CloseToolsCategory(); });
+
+        survivalExitBTN = survivalScreenUI.transform.Find("SurvivalToolsButton").GetComponent<Button>();
+        survivalExitBTN.onClick.AddListener(delegate { CloseSurvivalCategory(); });
+
+        refineExitBTN = refineScreenUI.transform.Find("RefineToolsButton").GetComponent<Button>();
+        refineExitBTN.onClick.AddListener(delegate { CloseRefineCategory(); });
+
+        construnctinExitBTN = constractionScreenUI.transform.Find("ConstractionButton").GetComponent<Button>();
+        construnctinExitBTN.onClick.AddListener(delegate { CloseConstractionCategory(); });
+
+
+        //----クラフト-----//
         //Axe
         AxeReq1 = toolScreenUI.transform.Find("Axe").transform.Find("rec1").GetComponent<Text>();
         AxeReq2 = toolScreenUI.transform.Find("Axe").transform.Find("rec2").GetComponent<Text>();
@@ -92,6 +113,13 @@ public class CraftingSystem : MonoBehaviour
 
     }
 
+
+    void CloseToolsCategory()
+    {
+        toolScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(true);
+    }
+
     void OpenToolsCategory()
     {
         craftingScreenUI.SetActive(false);
@@ -99,6 +127,12 @@ public class CraftingSystem : MonoBehaviour
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
         constractionScreenUI.SetActive(false);
+    }
+
+    void CloseSurvivalCategory()
+    {
+        survivalScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(true);
     }
 
     void OpenSurvivalCategory()
@@ -110,6 +144,11 @@ public class CraftingSystem : MonoBehaviour
         constractionScreenUI.SetActive(false);
     }
 
+    void CloseRefineCategory()
+    {
+        refineScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(true);
+    }
 
     void OpenRefineCategory()
     {
@@ -118,6 +157,12 @@ public class CraftingSystem : MonoBehaviour
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(true);
         constractionScreenUI.SetActive(false);
+    }
+
+    void CloseConstractionCategory()
+    {
+        constractionScreenUI.SetActive(false);
+        craftingScreenUI.SetActive(true);
     }
 
     void OpenconstrunctinCategory()
@@ -166,20 +211,25 @@ public class CraftingSystem : MonoBehaviour
         }
     }
 
-    
+
 
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
+        if (!canCraft) return; 
+        StartCoroutine(CraftWithCooldown(blueprintToCraft));
+    }
+
+    private IEnumerator CraftWithCooldown(BluePrint blueprintToCraft)
+    {
+        canCraft = false; 
 
         SoundManager.Instance.PlaySound(SoundManager.Instance.craftingSound);
 
-
+        // アイテムを追加
         for (var i = 0; i < blueprintToCraft.numberOfItemsToProduce; i++)
         {
             InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
         }
-        
-
 
         // 現在のインベントリ内の素材の数を取得
         int currentAmountReq1 = InventorySystem.Instance.GetItemCount(blueprintToCraft.Req1);
@@ -200,7 +250,7 @@ public class CraftingSystem : MonoBehaviour
             EquipSystem.Instance.RemoveItemFromQuickSlots(blueprintToCraft.Req2, req2Shortage);
         }
 
-        // インベントリから必要なアイテムを削除する
+        // インベントリから必要なアイテムを削除
         if (blueprintToCraft.numOfRequirement == 1)
         {
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
@@ -211,10 +261,14 @@ public class CraftingSystem : MonoBehaviour
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
         }
 
-        
-
         // 再計算とUIの更新をコルーチンで呼び出し
-        StartCoroutine(calulate());
+        yield return StartCoroutine(calulate());
+
+        // 1秒待機
+        yield return new WaitForSeconds(1f);
+
+        // クラフト可能に再設定
+        canCraft = true;
     }
 
 

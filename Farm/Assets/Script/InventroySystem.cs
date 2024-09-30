@@ -133,7 +133,35 @@ public class InventorySystem : MonoBehaviour
     void TriggerPickupPop(string itemName,Sprite itemSprite)
     {
         pickupAlert.SetActive(true);
-        pickupName.text = itemName;
+
+        string japanese = itemName;
+
+        switch (itemName)
+        {
+            case "Axe":
+                japanese = "•€";
+                break;
+            case "Plank":
+                japanese = "–Ø‚Ì”Â";
+                break;
+            case "Foundation":
+                japanese = "–Ø‚Ì°";
+                break;
+            case "Wall":
+                japanese = "–Ø‚Ì•Ç";
+                break;
+            case "Log":
+                japanese = "ŠÛ‘¾";
+                break;
+            case "Stone":
+                japanese = "Î";
+                break;
+            case "Stick":
+                japanese = "–Ø‚Ì–_";
+                break;
+        }
+
+        pickupName.text = japanese;
         pickupImage.sprite = itemSprite;
 
         StartCoroutine(PopHide());
