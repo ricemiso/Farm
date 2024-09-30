@@ -25,7 +25,7 @@ public class ConstructionManager : MonoBehaviour
     public List<GameObject> allGhostsInExistence = new List<GameObject>();
 
     public GameObject ItemToBeDestroy;
-
+    public GameObject ConstructionUI;
 
 
     private void Awake()
@@ -146,6 +146,15 @@ public class ConstructionManager : MonoBehaviour
 
     private void Update()
     {
+        if (inConstructionMode)
+        {
+            ConstructionUI.SetActive(true);
+        }
+        else
+        {
+            ConstructionUI.SetActive(false);
+        }
+
 
         if (itemToBeConstructed != null && inConstructionMode)
         {
