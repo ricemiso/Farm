@@ -53,12 +53,13 @@ public class ChoppableTree : MonoBehaviour
 
         if (treeHealth <= 0)
         {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
+
             TreeIsDead();
+
         }
         
     }
-
-    
 
     void TreeIsDead()
     {

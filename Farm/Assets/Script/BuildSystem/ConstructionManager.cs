@@ -231,12 +231,14 @@ public class ConstructionManager : MonoBehaviour
         {
             if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "FoundationModel")
             {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
             }
 
             if (selectingAGhost)
             {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemInGhostPosition(selectedGhost);
                 DestroyItem(ItemToBeDestroy);
             }

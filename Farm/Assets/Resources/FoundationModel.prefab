@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6191549832344996443}
   - component: {fileID: 860882116534284638}
   - component: {fileID: 9093427112990168328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wallghost2
   m_TagString: wallghost
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 2803451228988594450}
   - component: {fileID: 7235713842059341328}
   - component: {fileID: 4345235992103917646}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wallghost3
   m_TagString: wallghost
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 3116890552787281203}
   - component: {fileID: 1464010917133423594}
   - component: {fileID: 518739251696292593}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost4
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 6073855454728377755}
   - component: {fileID: 6969333527047388539}
   - component: {fileID: 8174112792236605566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost2
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 6507731858843728952}
   - component: {fileID: 6673615155277919692}
   - component: {fileID: 4636253619266114196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost8
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 7312725089351430966}
   - component: {fileID: 3129019394626429524}
   - component: {fileID: 3267539795501157887}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost3
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -878,7 +878,7 @@ GameObject:
   - component: {fileID: 6355537902454476352}
   - component: {fileID: 3149940776598679628}
   - component: {fileID: 4584317924235570144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wallghost1
   m_TagString: wallghost
   m_Icon: {fileID: 0}
@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 4616644394976993722}
   - component: {fileID: 932748096800724849}
   - component: {fileID: 8217679905645122719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost6
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ GameObject:
   - component: {fileID: 3632661833532718248}
   - component: {fileID: 4564167050344931965}
   - component: {fileID: 8014844828663165147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost5
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 384278763534283767}
   - component: {fileID: 613687816068948759}
   - component: {fileID: 1973746876854358147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost7
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -1454,7 +1454,7 @@ GameObject:
   - component: {fileID: 5111926294011198864}
   - component: {fileID: 1819584370614823766}
   - component: {fileID: 9099539131877938245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wallghost4
   m_TagString: wallghost
   m_Icon: {fileID: 0}
@@ -1598,7 +1598,7 @@ GameObject:
   - component: {fileID: 1815913882848981407}
   - component: {fileID: 7552801171287128937}
   - component: {fileID: 2010988404034705575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost1
   m_TagString: ghost
   m_Icon: {fileID: 0}
@@ -1743,7 +1743,7 @@ GameObject:
   - component: {fileID: 7074506538589014142}
   - component: {fileID: 5984376656283657582}
   - component: {fileID: 3521476980300347386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FoundationModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1846,7 +1846,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.2, y: 1.2, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &7074506538589014142
 BoxCollider:
@@ -1867,7 +1867,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.0000002, z: 0.99999994}
+  m_Size: {x: 1, y: 1.0000002, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5984376656283657582
 Rigidbody:

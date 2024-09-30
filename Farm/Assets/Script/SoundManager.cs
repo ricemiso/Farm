@@ -13,6 +13,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource chopSound;
     public AudioSource PickUpItemSound;
     public AudioSource grassWalkSound;
+    public AudioSource treeFallSound;
+    public AudioSource PutSeSound;
 
 
     //BGM
