@@ -15,6 +15,8 @@ public class GhostItem : MonoBehaviour
 
    
     public bool hasSamePosition = false;
+
+
     private void Start()
     {
         mRenderer = GetComponent<Renderer>();
@@ -23,14 +25,19 @@ public class GhostItem : MonoBehaviour
         fullTransparentnMat = ConstructionManager.Instance.ghostFullTransparentMat;
         selectedMaterial = ConstructionManager.Instance.ghostSelectedMat;
 
-        mRenderer.material = semiTransparentMat; 
+        mRenderer.material = fullTransparentnMat; 
         
         solidCollider.enabled = false;
     }
 
     private void Update()
     {
-        
+        if (ConstructionManager.Instance.inConstructionMode)
+        {
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), ConstructionManager.Instance.player.GetComponent<Collider>());
+        }
+
+
         if (ConstructionManager.Instance.inConstructionMode && isPlaced)
         {
             solidCollider.enabled = true;
@@ -48,7 +55,22 @@ public class GhostItem : MonoBehaviour
         }
         else
         {
-            mRenderer.material = semiTransparentMat; 
+            mRenderer.material = fullTransparentnMat; 
+        }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!this.gameObject.CompareTag("wallghost") && other.CompareTag("placedFoundation") && !ConstructionManager.Instance.inConstructionMode)
+        {
+           
+            this.gameObject.SetActive(false);
+            Debug.Log("Ghost hit placedFoundation"+gameObject.name);
+
         }
     }
+
+
+
 }

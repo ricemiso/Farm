@@ -27,6 +27,8 @@ public class ConstructionManager : MonoBehaviour
     public GameObject ItemToBeDestroy;
     public GameObject ConstructionUI;
 
+    public GameObject player;
+
 
     private void Awake()
     {
@@ -78,6 +80,8 @@ public class ConstructionManager : MonoBehaviour
             {
                 if (ghost.GetComponent<GhostItem>().hasSamePosition == false)
                 {
+                    
+
                     foreach (GameObject ghostX in allGhostsInExistence)
                     {
 
@@ -103,6 +107,9 @@ public class ConstructionManager : MonoBehaviour
             }
         }
 
+
+
+
         foreach (GameObject ghost in allGhostsInExistence)
         {
             if (ghost != null)
@@ -111,9 +118,13 @@ public class ConstructionManager : MonoBehaviour
                 {
                     DestroyImmediate(ghost);
                 }
+
+                
             }
 
         }
+
+       
     }
 
     private float XPositionToAccurateFloat(GameObject ghost)
@@ -146,6 +157,10 @@ public class ConstructionManager : MonoBehaviour
 
     private void Update()
     {
+
+        
+
+
         if (inConstructionMode)
         {
             ConstructionUI.SetActive(true);
@@ -158,16 +173,22 @@ public class ConstructionManager : MonoBehaviour
 
         if (itemToBeConstructed != null && inConstructionMode)
         {
-            if (CheckValidConstructionPosition())
+
+            if(itemToBeConstructed.name == "FoundationModel")
             {
-                isValidPlacement = true;
-                itemToBeConstructed.GetComponent<Constructable>().SetValidColor();
+                if (CheckValidConstructionPosition())
+                {
+                    isValidPlacement = true;
+                    itemToBeConstructed.GetComponent<Constructable>().SetValidColor();
+                }
+                else
+                {
+                    isValidPlacement = false;
+                    itemToBeConstructed.GetComponent<Constructable>().SetInvalidColor();
+                }
             }
-            else
-            {
-                isValidPlacement = false;
-                itemToBeConstructed.GetComponent<Constructable>().SetInvalidColor();
-            }
+
+            
 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -175,25 +196,36 @@ public class ConstructionManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 var selectionTransform = hit.transform;
-                if (selectionTransform.gameObject.CompareTag("ghost"))
+                if (selectionTransform.gameObject.CompareTag("ghost") && itemToBeConstructed.name == "FoundationModel")
                 {
                     itemToBeConstructed.SetActive(false);
                     selectingAGhost = true;
                     selectedGhost = selectionTransform.gameObject;
+
+                }
+                else if(selectionTransform.gameObject.CompareTag("wallghost") && itemToBeConstructed.name == "WallModel")
+                {
+                    itemToBeConstructed.SetActive(false);
+                    selectingAGhost = true;
+                    selectedGhost = selectionTransform.gameObject;
+
                 }
                 else
                 {
                     itemToBeConstructed.SetActive(true);
+                    selectedGhost = null;
                     selectingAGhost = false;
+                    
+
                 }
 
             }
         }
 
 
-        if (Input.GetMouseButtonDown(0) && inConstructionMode)
+        if (Input.GetMouseButtonDown(0) && inConstructionMode )
         {
-            if (isValidPlacement && selectedGhost == false)
+            if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "FoundationModel")
             {
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
@@ -233,21 +265,33 @@ public class ConstructionManager : MonoBehaviour
 
         itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
 
-        itemToBeConstructed.transform.position = ghostPosition;
+
+        var randomOffset = UnityEngine.Random.Range(0.01f, 0.03f);
+
+
+
+        itemToBeConstructed.transform.position = new Vector3(ghostPosition.x,ghostPosition.y,ghostPosition.z+randomOffset);
         itemToBeConstructed.transform.rotation = ghostRotation;
-
-
-        itemToBeConstructed.GetComponent<Constructable>().ExtractGhostMembers();
-
-        itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
-        itemToBeConstructed.tag = "placedFoundation";
-
 
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
 
 
-        GetAllGhosts(itemToBeConstructed);
-        PerformGhostDeletionScan();
+        itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
+
+        if(itemToBeConstructed.name == "FoundationModel")
+        {
+            itemToBeConstructed.GetComponent<Constructable>().ExtractGhostMembers();
+            itemToBeConstructed.tag = "placedFoundation";
+            GetAllGhosts(itemToBeConstructed);
+            PerformGhostDeletionScan();
+        }
+        else
+        {
+            itemToBeConstructed.GetComponent<Constructable>().ExtractGhostMembers();
+            itemToBeConstructed.tag = "placeWall";
+            GetAllGhosts(itemToBeConstructed);
+            DestroyItem(selectedGhost);
+        }
 
         itemToBeConstructed = null;
 
