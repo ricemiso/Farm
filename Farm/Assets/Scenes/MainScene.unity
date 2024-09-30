@@ -14490,7 +14490,7 @@ MonoBehaviour:
   gravity: -19.62
   jumpHeight: 3
   groundCheck: {fileID: 1790098038}
-  groundDistance: 0.4
+  groundDistance: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 256
