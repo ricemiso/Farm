@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource grassWalkSound;
     public AudioSource treeFallSound;
     public AudioSource PutSeSound;
+    public AudioSource gravelWalkSound;
 
 
     //BGM

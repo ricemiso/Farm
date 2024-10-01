@@ -59,17 +59,17 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (isGrounded && move.magnitude > 0.1f) // “®‚¢‚Ä‚¢‚Ä’n–Ê‚É‚¢‚é‚Æ‚«
+        if (isGrounded && move.magnitude > 0.1f) 
         {
             isMoving = true;
-            UpdateFootstepSound(); // í‚É‘«‰¹‚ğXV
+            UpdateFootstepSound();
         }
         else
         {
             isMoving = false;
             if (currentAudioSource != null && currentAudioSource.isPlaying)
             {
-                currentAudioSource.Stop(); // ’â~‚É‘«‰¹‚ğ~‚ß‚é
+                currentAudioSource.Stop();
             }
         }
 
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
                 audioSource = SoundManager.Instance.grassWalkSound;
                 break;
             case 1: // »—˜
-                audioSource = SoundManager.Instance.chopSound;
+                audioSource = SoundManager.Instance.gravelWalkSound;
                 break;
             default:
                 audioSource = SoundManager.Instance.grassWalkSound;

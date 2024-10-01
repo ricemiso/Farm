@@ -23,11 +23,10 @@ public class InventorySystem : MonoBehaviour
 
     public bool isOpen;
 
-    public GameObject pickupAlert;
-    public Text pickupName;
-    public Image pickupImage;
-
     public bool inventoryUpdated;
+
+    public bool isPop;
+    
 
 
     private void Awake()
@@ -114,7 +113,6 @@ public class InventorySystem : MonoBehaviour
         }
         
 
-
         inventoryUpdated = true;
         whatSlotToEquip = FindNextEmptySlot();
 
@@ -123,55 +121,10 @@ public class InventorySystem : MonoBehaviour
 
         itemList.Add(itemName);
 
-        TriggerPickupPop(itemName,itemToAdd.GetComponent<Image>().sprite);
-
         ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
-    }
 
-
-    void TriggerPickupPop(string itemName,Sprite itemSprite)
-    {
-        pickupAlert.SetActive(true);
-
-        string japanese = itemName;
-
-        switch (itemName)
-        {
-            case "Axe":
-                japanese = "ïÄ";
-                break;
-            case "Plank":
-                japanese = "ñÿÇÃî¬";
-                break;
-            case "Foundation":
-                japanese = "ñÿÇÃè∞";
-                break;
-            case "Wall":
-                japanese = "ñÿÇÃï«";
-                break;
-            case "Log":
-                japanese = "ä€ëæ";
-                break;
-            case "Stone":
-                japanese = "êŒ";
-                break;
-            case "Stick":
-                japanese = "ñÿÇÃñ_";
-                break;
-        }
-
-        pickupName.text = japanese;
-        pickupImage.sprite = itemSprite;
-
-        StartCoroutine(PopHide());
-    }
-
-    public IEnumerator PopHide()
-    {
-        yield return new WaitForSeconds(1.0f);
-
-        pickupAlert.SetActive(false);
+        PopupManager.Instance.TriggerPickupPop(itemName, itemToAdd.GetComponent<Image>().sprite);
     }
 
 
