@@ -78,8 +78,6 @@ public class ChoppableTree : MonoBehaviour
 
     }
 
-
-
     private void Update()
     {
         if (canBeChopped)

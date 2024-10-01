@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     public bool isGrounded;
+    private bool isGroundedD;
+    private bool isGroundedR;
+    private bool isGroundedL;
 
     private Vector3 lastPosition;
     public bool isMoving;
@@ -30,14 +33,18 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = new Vector3(0f, 0f, 0f);
         terrainData = terrain.terrainData;
         terrainPos = terrain.transform.position;
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        isGrounded = Physics.Raycast(groundCheck.position,Vector3.down, groundDistance, groundMask);
 
+        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+       // RaycastHit hitInfoD;
+
+       // isGrounded = Physics.SphereCast(groundCheck.position, 0.1f, Vector3.down, out hitInfoD, groundDistance, groundMask);
+        isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0)
         {

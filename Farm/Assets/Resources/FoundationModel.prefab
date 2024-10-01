@@ -1743,6 +1743,7 @@ GameObject:
   - component: {fileID: 7074506538589014142}
   - component: {fileID: 5984376656283657582}
   - component: {fileID: 3521476980300347386}
+  - component: {fileID: 5124829395315584687}
   m_Layer: 8
   m_Name: FoundationModel
   m_TagString: Untagged
@@ -1867,7 +1868,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.0000002, z: 1}
+  m_Size: {x: 2.5, y: 7, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5984376656283657582
 Rigidbody:
@@ -1917,3 +1918,22 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 10f2af32659ad864ba3c5308cc62cd1f, type: 2}
   ghostList: []
   solidCollider: {fileID: 5129507589166341239}
+--- !u!114 &5124829395315584687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8264226725564702539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec8df43057776343b3c13f9720fe4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRange: 0
+  canBeChopped: 0
+  animcooltime: 0
+  MaxHealth: 10
+  Health: 0
+  craftName: "\u6728\u306E\u5E8A"
+  caloriesSpendChoppingWood: 10

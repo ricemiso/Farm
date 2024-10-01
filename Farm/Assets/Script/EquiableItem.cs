@@ -33,12 +33,19 @@ public class EquiableItem : MonoBehaviour
     public void GetHit()
     {
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
+        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
 
         if (selectedTree != null)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitSoundDelay());
            
+        }
+
+        if(selectedCraft != null)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
+            StartCoroutine(HitCraftSoundDelay());
         }
     }
 
@@ -55,12 +62,25 @@ public class EquiableItem : MonoBehaviour
        
     }
 
+
+    //Todo: âΩÇ©ÇêÿÇËì|Ç∑Ç∆Ç´ÇÕÇ±Ç±Ç…í«â¡Ç∑ÇÈ
     IEnumerator HitSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
 
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
         selectedTree.GetComponent<ChoppableTree>().GetHit();
+
+    }
+
+
+
+    IEnumerator HitCraftSoundDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
+        selectedCraft.GetComponent<Choppablecraft>().GetHit();
 
     }
 }

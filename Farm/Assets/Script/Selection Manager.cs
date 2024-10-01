@@ -20,13 +20,19 @@ public class SelectionManager : MonoBehaviour
 
     public bool HandIsVisible;
 
-    public GameObject selectedTree;
     public GameObject chopHolder;
+
+   [HideInInspector] public GameObject selectedTree;
+   [HideInInspector] public GameObject selectedCraft;
+
+    private Text chopText;
+
 
     private void Start()
     {
         onTarget = false;
         interaction_text = interaction_Info_UI.GetComponent<Text>();
+        chopText = chopHolder.GetComponentInChildren<Text>(); ;
     }
 
     private void Awake()
@@ -55,12 +61,21 @@ public class SelectionManager : MonoBehaviour
 
 
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
+            Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
 
-
-            if(choppableTree && choppableTree.playerRange)
+            //êÿÇËì|Ç∑
+            if (choppableTree && choppableTree.playerRange)
             {
                 choppableTree.canBeChopped = true;
                 selectedTree = choppableTree.gameObject;
+                chopText.text = "ñÿ";
+                chopHolder.gameObject.SetActive(true);
+
+            }else if(choppableCraft && choppableCraft.playerRange)
+            {
+                choppableCraft.canBeChopped = true;
+                selectedCraft = choppableCraft.gameObject;
+                chopText.text = choppableCraft.CraftItemName();
                 chopHolder.gameObject.SetActive(true);
             }
             else
@@ -71,9 +86,17 @@ public class SelectionManager : MonoBehaviour
                     selectedTree = null;
                     chopHolder.gameObject.SetActive(false);
                 }
+                else if(selectedCraft != null)
+                {
+                    selectedCraft.gameObject.GetComponent<Choppablecraft>().canBeChopped = false;
+                    selectedCraft = null;
+                    chopHolder.gameObject.SetActive(false);
+                }
             }
 
 
+
+            //èEÇ§
             if (interactable && interactable.playerRange)
             {
                 onTarget = true;
