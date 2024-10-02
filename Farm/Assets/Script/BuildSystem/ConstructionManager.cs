@@ -196,6 +196,7 @@ public class ConstructionManager : MonoBehaviour
 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
@@ -265,7 +266,6 @@ public class ConstructionManager : MonoBehaviour
         Quaternion ghostRotation = copyOfGhost.transform.rotation;
 
         selectedGhost.gameObject.SetActive(false);
-
 
         itemToBeConstructed.gameObject.SetActive(true);
 

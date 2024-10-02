@@ -17,6 +17,7 @@ public class GhostItem : MonoBehaviour
     public bool hasSamePosition = false;
 
 
+
     private void Start()
     {
         mRenderer = GetComponent<Renderer>();
@@ -62,6 +63,9 @@ public class GhostItem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log(other.gameObject);
+
+
         if (!this.gameObject.CompareTag("wallghost") && other.CompareTag("placedFoundation") && !ConstructionManager.Instance.inConstructionMode)
         {
            
