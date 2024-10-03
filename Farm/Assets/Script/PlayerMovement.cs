@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,9 +43,9 @@ public class PlayerMovement : MonoBehaviour
     {
 
         //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-       // RaycastHit hitInfoD;
+        // RaycastHit hitInfoD;
 
-       // isGrounded = Physics.SphereCast(groundCheck.position, 0.1f, Vector3.down, out hitInfoD, groundDistance, groundMask);
+        // isGrounded = Physics.SphereCast(groundCheck.position, 0.1f, Vector3.down, out hitInfoD, groundDistance, groundMask);
         isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0)
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (isGrounded && move.magnitude > 0.1f) 
+        if (isGrounded && move.magnitude > 0.1f)
         {
             isMoving = true;
             UpdateFootstepSound();
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         lastPosition = gameObject.transform.position;
+        PlayerState.Instance.setPlayerPosition(lastPosition);
     }
 
     private void UpdateFootstepSound()
@@ -89,20 +92,20 @@ public class PlayerMovement : MonoBehaviour
         int layerIndex = GetCurrentTerrainLayer(playerPosition);
         AudioSource newAudioSource = GetFootstepSoundForLayer(layerIndex);
 
-        if (newAudioSource != currentAudioSource) 
+        if (newAudioSource != currentAudioSource)
         {
             if (currentAudioSource != null && currentAudioSource.isPlaying)
             {
-                currentAudioSource.Stop(); 
+                currentAudioSource.Stop();
             }
 
             currentAudioSource = newAudioSource;
-            currentAudioSource.loop = true; 
+            currentAudioSource.loop = true;
             currentAudioSource.Play();
         }
         else if (!currentAudioSource.isPlaying)
         {
-            currentAudioSource.Play(); 
+            currentAudioSource.Play();
         }
     }
 
@@ -118,6 +121,10 @@ public class PlayerMovement : MonoBehaviour
             case 1: // çªóò
                 audioSource = SoundManager.Instance.gravelWalkSound;
                 break;
+            case 2: // åÕÇÍëê
+                audioSource = SoundManager.Instance.grassWalkSound;
+                break;
+
             default:
                 audioSource = SoundManager.Instance.grassWalkSound;
                 break;
