@@ -26,6 +26,8 @@ public class PlayerState : MonoBehaviour
 
     public bool isHydrationActive;
 
+    public Vector3 isPosition;
+
 
     private void Awake()
     {
@@ -89,5 +91,15 @@ public class PlayerState : MonoBehaviour
     public void setHydration(float newHydration)
     {
         currentHydrationPercent = newHydration;
+    }
+
+    public void setPlayerPosition(Vector3 newPosition)
+    {
+        isPosition = newPosition;
+    }
+
+    public Vector3 getPlayerPosition()
+    {
+        return isPosition;
     }
 }

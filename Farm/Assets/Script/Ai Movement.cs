@@ -8,9 +8,14 @@ public class AI_Movement : MonoBehaviour
 
     Animator animator;
 
+    public GameObject Player;
+    private PlayerMovement playerMovement;
+
     public float moveSpeed = 0.2f;
 
     Vector3 stopPosition;
+
+    bool isCheck;
 
     float walkTime;
     public float walkCounter;
@@ -40,6 +45,13 @@ public class AI_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isCheck)
+        {
+            Vector3 temp = PlayerState.Instance.getPlayerPosition() - transform.position;
+            transform.localRotation = Quaternion.Euler(0f, Mathf.Atan2(temp.x,temp.z), 0f);
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
+
         if (isWalking)
         {
 
@@ -99,5 +111,21 @@ public class AI_Movement : MonoBehaviour
 
         isWalking = true;
         walkCounter = walkTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isCheck = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isCheck = false;
+        }
     }
 }
