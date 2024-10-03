@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         lastPosition = gameObject.transform.position;
-        PlayerState.Instance.setPlayerPosition(lastPosition);
     }
 
     private void UpdateFootstepSound()
