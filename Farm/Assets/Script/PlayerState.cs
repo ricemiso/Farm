@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-
+    
     public static PlayerState Instance { get; set; }
 
     //Health
@@ -26,12 +26,10 @@ public class PlayerState : MonoBehaviour
 
     public bool isHydrationActive;
 
-    public Vector3 isPosition;
-
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -66,7 +64,7 @@ public class PlayerState : MonoBehaviour
         distanceTravelled += Vector3.Distance(playerBody.transform.position, lastPosition);
         lastPosition = playerBody.transform.position;
 
-        if (distanceTravelled >= 50)
+        if(distanceTravelled >= 50)
         {
             distanceTravelled = 0;
             currentCalories -= 1;
@@ -91,15 +89,5 @@ public class PlayerState : MonoBehaviour
     public void setHydration(float newHydration)
     {
         currentHydrationPercent = newHydration;
-    }
-
-    public void setPlayerPosition(Vector3 newPosition)
-    {
-        isPosition = newPosition;
-    }
-
-    public Vector3 getPlayerPosition()
-    {
-        return isPosition;
     }
 }
