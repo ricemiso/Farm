@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AI_Movement : MonoBehaviour
+public class EnemyAI_Movement : MonoBehaviour
 {
     Animator animator;
 
@@ -23,8 +23,6 @@ public class AI_Movement : MonoBehaviour
     public Transform player;  // 追従するプレイヤーのTransform
     public float followSpeed = 5f;  // 追従速度
     private bool isFollowing = false;  // プレイヤーが範囲内にいるかどうか
-    private bool isChaseEnemy = false; // 敵を追いかける変数
-    private GameObject target; // ターゲット中の敵
 
     // Start is called before the first frame update
     void Start()
@@ -50,12 +48,8 @@ public class AI_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 敵に追従する場合
-        if (isChaseEnemy)
-        {
-            ChaseEnemy();
-        }
-        else if (isFollowing)
+        // プレイヤーに追従する場合
+        if (isFollowing)
         {
             FollowPlayer();
         }
@@ -83,22 +77,6 @@ public class AI_Movement : MonoBehaviour
         Vector3 directionBehindPlayer = -player.forward;  // プレイヤーの後ろ側
         Vector3 followPosition = player.position + directionBehindPlayer * 2f;  // プレイヤーから2ユニット後ろ
 
-        Chase(followPosition);
-    }
-
-    void ChaseEnemy()
-    {
-        animator.SetBool("isRunning", true);
-
-        // プレイヤーの進行方向を取得し、後ろの位置を計算
-        Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
-
-        Chase(followPosition);
-    }
-
-    // 追いかけるメソッド
-    void Chase(Vector3 followPosition)
-    {
         // 目的地と現在位置の距離
         float distance = Vector3.Distance(followPosition, transform.position);
 
@@ -174,16 +152,6 @@ public class AI_Movement : MonoBehaviour
         {
             isFollowing = true;
             animator.SetBool("isRunning", true);
-
-            target = other.gameObject;
-        }
-
-        if (other.CompareTag("Enemy") && !isChaseEnemy)  // 敵が入って、まだ追従していない場合
-        {
-            isChaseEnemy = true;
-            animator.SetBool("isRunning", true);
-
-            target = other.gameObject;
         }
     }
 

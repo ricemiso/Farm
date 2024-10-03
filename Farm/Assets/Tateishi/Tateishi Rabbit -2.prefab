@@ -900,8 +900,8 @@ GameObject:
   - component: {fileID: 5319019704427638503}
   - component: {fileID: -8623627813729442999}
   m_Layer: 0
-  m_Name: Tateishi Rabbit 1
-  m_TagString: Untagged
+  m_Name: Tateishi Rabbit -2
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

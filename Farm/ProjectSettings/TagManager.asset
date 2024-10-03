@@ -15,6 +15,7 @@ TagManager:
   - placedFoundation
   - wallghost
   - placeWall
+  - Enemy
   layers:
   - Default
   - TransparentFX
