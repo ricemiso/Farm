@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlayerMovementOnline : NetworkBehaviour
 {
     public CharacterController controller;
-
     public Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPos;
@@ -25,20 +24,42 @@ public class PlayerMovementOnline : NetworkBehaviour
     public bool isMoving;
     private Vector2 m_moveInput = Vector2.zero;
 
-    // ネットワーク同期用のプレイヤーのポジション
+    // ネットワーク同期用のプレイヤーのポジションと移動状態
     private NetworkVariable<Vector3> networkedPosition = new NetworkVariable<Vector3>();
     private NetworkVariable<bool> isMovingNetwork = new NetworkVariable<bool>();
+    private NetworkVariable<bool> isJumpingNetwork = new NetworkVariable<bool>();
 
     private SoundManager soundManager;
+
+    private Camera playerCamera;
 
     private void Start()
     {
         if (IsLocalPlayer) // 自分自身のプレイヤーのみ移動を処理
         {
             controller = GetComponent<CharacterController>();
+            playerCamera = GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            playerCamera = GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.gameObject.SetActive(false);
+            }
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // プレイヤーの状態を初期化
+        if (IsServer)
+        {
+            InitializePlayerState(); // サーバーのみ初期化
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -94,9 +115,17 @@ public class PlayerMovementOnline : NetworkBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
 
+        // ジャンプ処理
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            SetJumpStateServerRpc(true);
+        }
+
+        // ジャンプ終了を検出
+        if (isGrounded && velocity.y <= 0)
+        {
+            SetJumpStateServerRpc(false);
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -110,8 +139,25 @@ public class PlayerMovementOnline : NetworkBehaviour
             SetMoveInputServerRpc(x, z, isMovingNow);
         }
 
-        // プレイヤーの位置情報をネットワーク変数に反映
+        // クライアントでサーバーからの位置を受け取る
+        if (!IsServer)
+        {
+            transform.position = networkedPosition.Value;
+        }
+
+        // 足音の再生状態を更新
+        UpdateFootstepSound(isMovingNow && !isJumpingNetwork.Value);
+    }
+
+    private void InitializePlayerState()
+    {
+        // プレイヤーの初期位置を設定
         networkedPosition.Value = transform.position;
+        isMovingNetwork.Value = false;
+        isJumpingNetwork.Value = false;
+
+        // 初期位置を全クライアントに送信
+        UpdateClientPositionClientRpc(transform.position, false);
     }
 
     [ServerRpc]
@@ -120,26 +166,44 @@ public class PlayerMovementOnline : NetworkBehaviour
         Vector3 move = new Vector3(x, 0, z);
         transform.position += move * speed * Time.deltaTime;
 
+        // サーバー側でネットワーク変数を更新
+        networkedPosition.Value = transform.position;
+
         // クライアントに位置と移動状態を同期
         UpdateClientPositionClientRpc(transform.position, moving);
+    }
+
+    [ServerRpc]
+    private void SetJumpStateServerRpc(bool isJumping)
+    {
+        // サーバー側でジャンプ状態を更新
+        isJumpingNetwork.Value = isJumping;
+
+        // クライアントにジャンプ状態を同期
+        UpdateJumpStateClientRpc(isJumping);
     }
 
     [ClientRpc]
     private void UpdateClientPositionClientRpc(Vector3 newPosition, bool moving)
     {
-        if (!IsOwner)
+        if (!IsOwner) // 自分のオブジェクト以外の位置を更新
         {
             transform.position = newPosition;
         }
-        isMovingNetwork.Value = moving;
-        UpdateFootstepSound(moving);
+        isMovingNetwork.Value = moving; // 移動状態を同期
     }
 
-    private void UpdateFootstepSound(bool moving)
+    [ClientRpc]
+    private void UpdateJumpStateClientRpc(bool isJumping)
     {
-        if (soundManager == null) return; // SoundManagerがまだ取得されていない場合は処理をスキップ
+        isJumpingNetwork.Value = isJumping; // ジャンプ状態を同期
+    }
 
-        if (moving)
+    private void UpdateFootstepSound(bool shouldPlaySound)
+    {
+        if (soundManager == null) return;
+
+        if (shouldPlaySound)
         {
             Vector3 playerPosition = transform.position;
             int layerIndex = GetCurrentTerrainLayer(playerPosition);
@@ -182,7 +246,6 @@ public class PlayerMovementOnline : NetworkBehaviour
             case 2: // 枯れ草
                 audioSource = soundManager.grassWalkSound;
                 break;
-
             default:
                 audioSource = soundManager.grassWalkSound;
                 break;
@@ -194,10 +257,14 @@ public class PlayerMovementOnline : NetworkBehaviour
     private int GetCurrentTerrainLayer(Vector3 position)
     {
         TerrainData terrainData = terrain.terrainData;
-        float[,,] splatmapData = terrainData.GetAlphamaps(
-            (int)((position.x / terrainData.size.x) * terrainData.alphamapWidth),
-            (int)((position.z / terrainData.size.z) * terrainData.alphamapHeight),
-            1, 1);
+
+        float normalizedX = (position.x - terrain.transform.position.x) / terrainData.size.x;
+        float normalizedZ = (position.z - terrain.transform.position.z) / terrainData.size.z;
+
+        int xIndex = Mathf.Clamp((int)(normalizedX * terrainData.alphamapWidth), 0, terrainData.alphamapWidth - 1);
+        int zIndex = Mathf.Clamp((int)(normalizedZ * terrainData.alphamapHeight), 0, terrainData.alphamapHeight - 1);
+
+        float[,,] splatmapData = terrainData.GetAlphamaps(xIndex, zIndex, 1, 1);
 
         int maxTextureIndex = 0;
         float maxAlpha = 0f;
@@ -205,7 +272,6 @@ public class PlayerMovementOnline : NetworkBehaviour
         for (int i = 0; i < splatmapData.GetLength(2); i++)
         {
             float alpha = splatmapData[0, 0, i];
-
             if (alpha > maxAlpha)
             {
                 maxAlpha = alpha;
