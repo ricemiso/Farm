@@ -25,12 +25,11 @@ public class PlayerMovementOnline : NetworkBehaviour
     private Vector2 m_moveInput = Vector2.zero;
 
     // ネットワーク同期用のプレイヤーのポジションと移動状態
-    private NetworkVariable<Vector3> networkedPosition = new NetworkVariable<Vector3>();
-    private NetworkVariable<bool> isMovingNetwork = new NetworkVariable<bool>();
-    private NetworkVariable<bool> isJumpingNetwork = new NetworkVariable<bool>();
+    private NetworkVariable<Vector3> networkedPosition = new NetworkVariable<Vector3>(new Vector3(), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<bool> isMovingNetwork = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<bool> isJumpingNetwork = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     private SoundManager soundManager;
-
     private Camera playerCamera;
 
     private void Start()
@@ -99,7 +98,7 @@ public class PlayerMovementOnline : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner) return; // プレイヤーのオブジェクトのオーナーだけが移動処理を行う
 
         isGrounded = controller.isGrounded;
 
@@ -166,8 +165,9 @@ public class PlayerMovementOnline : NetworkBehaviour
         Vector3 move = new Vector3(x, 0, z);
         transform.position += move * speed * Time.deltaTime;
 
-        // サーバー側でネットワーク変数を更新
+        // サーバー側でのみネットワーク変数を更新
         networkedPosition.Value = transform.position;
+        isMovingNetwork.Value = moving; // サーバー側で移動状態も更新
 
         // クライアントに位置と移動状態を同期
         UpdateClientPositionClientRpc(transform.position, moving);
@@ -188,9 +188,8 @@ public class PlayerMovementOnline : NetworkBehaviour
     {
         if (!IsOwner) // 自分のオブジェクト以外の位置を更新
         {
-            transform.position = newPosition;
+            transform.position = newPosition; // クライアントではNetworkVariableには書き込まない
         }
-        isMovingNetwork.Value = moving; // 移動状態を同期
     }
 
     [ClientRpc]
@@ -264,21 +263,20 @@ public class PlayerMovementOnline : NetworkBehaviour
         int xIndex = Mathf.Clamp((int)(normalizedX * terrainData.alphamapWidth), 0, terrainData.alphamapWidth - 1);
         int zIndex = Mathf.Clamp((int)(normalizedZ * terrainData.alphamapHeight), 0, terrainData.alphamapHeight - 1);
 
-        float[,,] splatmapData = terrainData.GetAlphamaps(xIndex, zIndex, 1, 1);
+        float[,,] alphaMap = terrainData.GetAlphamaps(xIndex, zIndex, 1, 1);
 
-        int maxTextureIndex = 0;
-        float maxAlpha = 0f;
+        int maxLayerIndex = 0;
+        float maxValue = alphaMap[0, 0, 0];
 
-        for (int i = 0; i < splatmapData.GetLength(2); i++)
+        for (int i = 1; i < alphaMap.GetLength(2); i++)
         {
-            float alpha = splatmapData[0, 0, i];
-            if (alpha > maxAlpha)
+            if (alphaMap[0, 0, i] > maxValue)
             {
-                maxAlpha = alpha;
-                maxTextureIndex = i;
+                maxValue = alphaMap[0, 0, i];
+                maxLayerIndex = i;
             }
         }
 
-        return maxTextureIndex;
+        return maxLayerIndex;
     }
 }
