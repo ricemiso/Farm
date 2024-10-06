@@ -122,7 +122,7 @@ public class CraftingSystem : MonoBehaviour
 
     void OpenToolsCategory()
     {
-        craftingScreenUI.SetActive(false);
+       // craftingScreenUI.SetActive(false);
         toolScreenUI.SetActive(true);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
@@ -138,7 +138,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenSurvivalCategory()
     {
         toolScreenUI.SetActive(false);
-        craftingScreenUI.SetActive(false);
+       // craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(true);
         refineScreenUI.SetActive(false);
         constractionScreenUI.SetActive(false);
@@ -153,7 +153,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenRefineCategory()
     {
         toolScreenUI.SetActive(false);
-        craftingScreenUI.SetActive(false);
+      //  craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(true);
         constractionScreenUI.SetActive(false);
@@ -168,7 +168,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenconstrunctinCategory()
     {
         toolScreenUI.SetActive(false);
-        craftingScreenUI.SetActive(false);
+       // craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
         constractionScreenUI.SetActive(true);
