@@ -4271,6 +4271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3a157c51c30c54b9b1d540889e9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSavingJason: 0
 --- !u!1 &1802305501
 GameObject:
   m_ObjectHideFlags: 0
