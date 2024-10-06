@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuSaveManager : MonoBehaviour
 {
@@ -18,22 +19,25 @@ public class MainMenuSaveManager : MonoBehaviour
         else
         {
             Instance = this;
+          
         }
 
-
         DontDestroyOnLoad(gameObject);
+
     }
 
     public bool isSavingJason;
 
     #region || -------- General Section -------- ||
 
+
+    #region || -------- Saving -------- ||
     public void SaveGame()
     {
         AllGameData data = new AllGameData();
 
         data.playerData = GetPlayerData();
-        SaveAllGameData(data);
+        SelectSavingType(data);
     }
 
     private PlayerData GetPlayerData()
@@ -55,7 +59,7 @@ public class MainMenuSaveManager : MonoBehaviour
         return new PlayerData(playerStates, playerPosAndRot);
     }
 
-    public void SaveAllGameData(AllGameData gameData)
+    public void SelectSavingType(AllGameData gameData)
     {
         if (isSavingJason)
         {
@@ -67,6 +71,94 @@ public class MainMenuSaveManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region || -------- Loading -------- ||
+
+    public void LoadGame()
+    {
+        print("Starting to load game...");  // デバッグメッセージ追加
+
+        SetPlayerData(SelectedLoadingType().playerData);
+
+        //ここに追加していく
+    }
+
+    public AllGameData SelectedLoadingType()
+    {
+        print("Selecting loading type...");  // デバッグメッセージ追加
+
+        if (isSavingJason)
+        {
+            AllGameData gameData = LoadGameDataFromBinaryFile();
+            return gameData;
+        }
+        else
+        {
+            AllGameData gameData = LoadGameDataFromBinaryFile();
+
+            return gameData;
+        }
+    }
+
+    private void SetPlayerData(PlayerData playerData)
+    {
+        if (PlayerState.Instance == null)
+        {
+            print("PlayerState.Instance is null!");
+            return;
+        }
+
+        if (PlayerState.Instance.playerBody == null)
+        {
+            print("Player body is null!");
+            return;
+        }
+
+        //プレイヤーの状態
+        PlayerState.Instance.currentHealth = playerData.playerStats[0];
+        PlayerState.Instance.currentCalories = playerData.playerStats[1];
+        PlayerState.Instance.currentHydrationPercent = playerData.playerStats[2];
+
+
+        //プレイヤーの位置
+        Vector3 loadedPosition;
+        loadedPosition.x = playerData.playerPositionAndRotation[0];
+        loadedPosition.y = playerData.playerPositionAndRotation[1];
+        loadedPosition.z = playerData.playerPositionAndRotation[2];
+
+        PlayerState.Instance.playerBody.transform.position = loadedPosition;
+
+
+        //プレイヤーの回転
+        Vector3 loadRotation;
+        loadRotation.x = playerData.playerPositionAndRotation[3];
+        loadRotation.y = playerData.playerPositionAndRotation[4];
+        loadRotation.z = playerData.playerPositionAndRotation[5];
+
+        PlayerState.Instance.playerBody.transform.rotation = Quaternion.Euler(loadRotation);
+    }
+
+
+    public void StartLoadedGame()
+    {
+        SceneManager.LoadScene("MainScene");
+
+        StartCoroutine(DelayerLoading());
+
+        
+    }
+
+    private IEnumerator DelayerLoading()
+    {
+        yield return new WaitForSeconds(2f);
+
+        print("Now loading game data...");
+        LoadGame(); 
+
+        print("Game Loaded");
+    }
+    #endregion
     #endregion
 
 
@@ -89,6 +181,8 @@ public class MainMenuSaveManager : MonoBehaviour
 
     public AllGameData LoadGameDataFromBinaryFile()
     {
+        print("Attempting to load game data...");
+
         string path = Application.persistentDataPath + "/save_game.bin";
 
         if (File.Exists(path))
@@ -96,14 +190,16 @@ public class MainMenuSaveManager : MonoBehaviour
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-
             AllGameData data = formatter.Deserialize(stream) as AllGameData;
             stream.Close();
+
+            print("Loaded from " + path);
 
             return data;
         }
         else
         {
+            print("Save file not found at " + path); // ファイルが見つからない場合のメッセージ
             return null;
         }
     }
