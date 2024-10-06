@@ -26,6 +26,11 @@ public class AI_Movement : MonoBehaviour
     private bool isChaseEnemy = false; // 敵を追いかける変数
     private GameObject target; // ターゲット中の敵
 
+    public bool isStopped = false; // 動きを停止しているかどうかのフラグ
+
+    public float stopRange = 20f;  // 停止できる範囲
+    public Color gizmoColor = Color.green;  // Gizmoの色
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +55,21 @@ public class AI_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // プレイヤーとの距離を計算
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // 一定範囲内かつEキーが押された場合のみ停止・再開を切り替える
+        if (distanceToPlayer <= stopRange && Input.GetKeyDown(KeyCode.E))  // Eキーで動作を停止/再開
+        {
+            isStopped = !isStopped;  // Eキーで動作を停止/再開
+            if (isStopped)
+            {
+                animator.SetBool("isRunning", false);  // アニメーションを停止
+            }
+        }
+
+        if (isStopped) return;  // 停止中なら処理を中断
+
         // 敵に追従する場合
         if (isChaseEnemy)
         {
@@ -106,8 +126,6 @@ public class AI_Movement : MonoBehaviour
         Vector3 directionToFollowPosition = (followPosition - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(directionToFollowPosition);  // AIが向く方向を計算
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);  // 方向転換をスムーズに
-
-        //Debug.Log("距離：" + distance);
 
         // プレイヤーから離れすぎているか
         if (distance > 10.0f)  // 距離が1.5ユニット以上なら追従を続ける
