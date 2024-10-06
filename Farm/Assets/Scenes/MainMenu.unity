@@ -578,6 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837bcd66b33722f4f861dc15b0385a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadGameBTN: {fileID: 0}
 --- !u!114 &216633258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,7 +1750,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1764981943}
   - {fileID: 812311742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3436,18 +3436,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 216633255}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1523725345}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3459,7 +3447,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 0
       - m_Target: {fileID: 1867176771}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -3471,7 +3459,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &1369349276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3848,6 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837bcd66b33722f4f861dc15b0385a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadGameBTN: {fileID: 1369349275}
 --- !u!1 &1551396026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4253,11 +4242,11 @@ Transform:
   m_GameObject: {fileID: 1764981942}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 94.77728, y: -81.68713, z: 24.9659}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 843779210}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1764981944
 MonoBehaviour:
@@ -4271,6 +4260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3a157c51c30c54b9b1d540889e9038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSavingJason: 0
 --- !u!1 &1802305501
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,6 +4702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837bcd66b33722f4f861dc15b0385a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadGameBTN: {fileID: 0}
 --- !u!114 &1867176774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5174,6 +5165,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1764981943}
   - {fileID: 843779210}
   - {fileID: 1242376502}
   - {fileID: 1353925843}
