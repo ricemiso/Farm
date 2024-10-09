@@ -26,8 +26,8 @@ public class InventorySystem : MonoBehaviour
     public bool inventoryUpdated;
 
     public bool isPop;
+    
 
-    public List<string> itemsPickedup = new List<string>();
 
     private void Awake()
     {
@@ -125,23 +125,6 @@ public class InventorySystem : MonoBehaviour
         CraftingSystem.Instance.RefreshNeededItems();
 
         PopupManager.Instance.TriggerPickupPop(itemName, itemToAdd.GetComponent<Image>().sprite);
-    }
-
-    public void LoadToinventry(string itemName)
-    {
-       
-
-        inventoryUpdated = true;
-        whatSlotToEquip = FindNextEmptySlot();
-
-        itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
-        itemToAdd.transform.SetParent(whatSlotToEquip.transform);
-
-        itemList.Add(itemName);
-
-        ReCalculeList();
-        CraftingSystem.Instance.RefreshNeededItems();
-
     }
 
 

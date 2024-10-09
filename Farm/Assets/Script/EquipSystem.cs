@@ -200,7 +200,7 @@ public class EquipSystem : MonoBehaviour
     }
 
 
-    public GameObject FindNextEmptySlot()
+    private GameObject FindNextEmptySlot()
     {
         foreach (GameObject slot in quickSlotsList)
         {
