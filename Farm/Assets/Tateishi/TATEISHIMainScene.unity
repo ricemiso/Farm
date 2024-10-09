@@ -16294,7 +16294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 302434190}
-  numberOfObjects: 1500
+  numberOfTrees: 1000
+  numberOfStones: 1000
   inventoryUpdated: 0
 --- !u!4 &1888072968
 Transform:

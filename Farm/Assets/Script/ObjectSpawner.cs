@@ -54,10 +54,10 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         // Stone_modelのリソースをロード
-        SetName("Stone_model");
+        SetName("Rock");
         if (itemToAdd == null)
         {
-            Debug.LogError("Stone_modelのリソースが見つかりません！");
+            Debug.LogError("Rockのリソースが見つかりません！");
             return;
         }
 
@@ -69,11 +69,11 @@ public class ObjectSpawner : MonoBehaviour
             {
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
                 Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                Debug.Log($"Stone_modelが生成されました: {spawnPosition}");
+                Debug.Log($"Rockが生成されました: {spawnPosition}");
             }
             else
             {
-                Debug.Log("草の層が見つかりません、Stone_model生成スキップ");
+                Debug.Log("草の層が見つかりません、Rock生成スキップ");
             }
         }
     }
