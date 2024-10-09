@@ -9,11 +9,12 @@ public class PlayerData
    
     public float[] playerPositionAndRotation;
 
-    //public float[] inventortContent;
+    public string[] inventortContent;
 
-    public PlayerData(float[] PlayerState, float[] PlayerPosAndRot)
+    public PlayerData(float[] PlayerState, float[] PlayerPosAndRot,string[] InventortContent)
     {
         playerStats = PlayerState;
         playerPositionAndRotation = PlayerPosAndRot;
+        inventortContent = InventortContent;
     }
 }
