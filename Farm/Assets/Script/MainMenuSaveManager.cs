@@ -72,7 +72,10 @@ public class MainMenuSaveManager : MonoBehaviour
         playerPosAndRot[4] = PlayerState.Instance.playerBody.transform.rotation.y;
         playerPosAndRot[5] = PlayerState.Instance.playerBody.transform.rotation.z;
 
-        return new PlayerData(playerStates, playerPosAndRot);
+        string[] inventry = InventorySystem.Instance.itemList.ToArray();
+
+
+        return new PlayerData(playerStates, playerPosAndRot, inventry);
     }
 
     public void SelectSavingType(AllGameData gameData,int slotNumber)
@@ -136,15 +139,6 @@ public class MainMenuSaveManager : MonoBehaviour
 
     private void SetPlayerData(PlayerData playerData)
     {
-        if (PlayerState.Instance.playerBody == null)
-        {
-            Debug.LogError("playerBody is null!");
-        }
-        else
-        {
-            Debug.Log("playerBody is not null, proceeding to set position and rotation.");
-        }
-
         //ÉvÉåÉCÉÑÅ[ÇÃèÛë‘
         PlayerState.Instance.currentHealth = playerData.playerStats[0];
         PlayerState.Instance.currentCalories = playerData.playerStats[1];
@@ -167,13 +161,17 @@ public class MainMenuSaveManager : MonoBehaviour
         loadRotation.z = playerData.playerPositionAndRotation[5];
 
         PlayerState.Instance.playerBody.transform.rotation = Quaternion.Euler(loadRotation);
+    
+    
+        foreach(string item in playerData.inventortContent)
+        {
+            InventorySystem.Instance.AddToinventry(item);
+        }
     }
 
 
     public void StartLoadedGame(int slotNumber)
     {
-
-
 
         SceneManager.LoadScene("MainScene");
 
