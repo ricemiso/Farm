@@ -3,7 +3,8 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     public Terrain terrain; // Terrainオブジェクト
-    public int numberOfObjects = 10; // 生成するオブジェクトの数
+    public int numberOfTrees = 1000; // 生成するTreeの数
+    public int numberOfStones = 1000; // 生成するStone_modelの数
 
     private GameObject itemToAdd;
 
@@ -16,6 +17,11 @@ public class ObjectSpawner : MonoBehaviour
         SpawnObjectsOnTerrain();
     }
 
+    private GameObject SetName(string gameObject)
+    {
+        return itemToAdd = Resources.Load<GameObject>(gameObject);
+    }
+
     void SpawnObjectsOnTerrain()
     {
         // Terrainのサイズを取得
@@ -24,32 +30,50 @@ public class ObjectSpawner : MonoBehaviour
         Vector3 terrainPosition = terrain.transform.position;
 
         // Treeのリソースをロード
-        itemToAdd = Resources.Load<GameObject>("Tree");
-
+        SetName("Tree");
         if (itemToAdd == null)
         {
             Debug.LogError("Treeのリソースが見つかりません！");
             return;
         }
 
-        for (int i = 0; i < numberOfObjects; i++)
+        // Treeを生成
+        for (int i = 0; i < numberOfTrees; i++)
         {
-            // Terrainの範囲内のランダムな位置を計算
             Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
-
-            // 現在の位置のテクスチャが草であればオブジェクトを生成
             if (CheckLayerForObjectSpawn(spawnPosition))
             {
-                // 高低差に合わせてY座標を取得
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
-
-                // オブジェクトをTerrain上に生成 (Y座標は高低差に合わせる)
                 Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
                 Debug.Log($"Treeが生成されました: {spawnPosition}");
             }
             else
             {
-                Debug.Log("草の層が見つかりません、オブジェクト生成スキップ");
+                Debug.Log("草の層が見つかりません、Tree生成スキップ");
+            }
+        }
+
+        // Stone_modelのリソースをロード
+        SetName("Stone_model");
+        if (itemToAdd == null)
+        {
+            Debug.LogError("Stone_modelのリソースが見つかりません！");
+            return;
+        }
+
+        // Stone_modelを生成
+        for (int i = 0; i < numberOfStones; i++)
+        {
+            Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
+            if (CheckLayerForObjectSpawn(spawnPosition))
+            {
+                float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
+                Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+                Debug.Log($"Stone_modelが生成されました: {spawnPosition}");
+            }
+            else
+            {
+                Debug.Log("草の層が見つかりません、Stone_model生成スキップ");
             }
         }
     }
