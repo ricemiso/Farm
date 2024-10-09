@@ -26,18 +26,34 @@ public class MainMenuSaveManager : MonoBehaviour
 
     }
 
+    string JsonPathProject;
+    string JsonPathPersistant;
+
+    string binaryPath;
+
+    string fileName = "SaveGame";
+
     public bool isSavingJason;
 
-    #region || -------- General Section -------- ||
+
+    private void Start()
+    {
+        JsonPathProject = Application.dataPath + Path.AltDirectorySeparatorChar;
+        JsonPathPersistant = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+        binaryPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
+    }
+
+
+    #region || -------- セーブ＆ロード -------- ||
 
 
     #region || -------- Saving -------- ||
-    public void SaveGame()
+    public void SaveGame(int sloaNumber)
     {
         AllGameData data = new AllGameData();
 
         data.playerData = GetPlayerData();
-        SelectSavingType(data);
+        SelectSavingType(data, sloaNumber);
     }
 
     private PlayerData GetPlayerData()
@@ -59,15 +75,15 @@ public class MainMenuSaveManager : MonoBehaviour
         return new PlayerData(playerStates, playerPosAndRot);
     }
 
-    public void SelectSavingType(AllGameData gameData)
+    public void SelectSavingType(AllGameData gameData,int slotNumber)
     {
         if (isSavingJason)
         {
-            //SaveGameDataToJsonFile();
+            SaveGameDataToJsonFile(gameData, slotNumber);
         }
         else
         {
-            SaveGameDataToBinaryFile(gameData);
+            SaveGameDataToBinaryFile(gameData, slotNumber);
         }
     }
 
@@ -75,44 +91,58 @@ public class MainMenuSaveManager : MonoBehaviour
 
     #region || -------- Loading -------- ||
 
-    public void LoadGame()
+    public void LoadGame(int slotNumber)
     {
-        print("Starting to load game...");  // デバッグメッセージ追加
+        Debug.Log("Loading game for slot number: " + slotNumber);
+        AllGameData loadedData = SelectedLoadingType(slotNumber);
 
-        SetPlayerData(SelectedLoadingType().playerData);
-
-        //ここに追加していく
-    }
-
-    public AllGameData SelectedLoadingType()
-    {
-        print("Selecting loading type...");  // デバッグメッセージ追加
-
-        if (isSavingJason)
+        if (loadedData != null)
         {
-            AllGameData gameData = LoadGameDataFromBinaryFile();
-            return gameData;
+            Debug.Log("Loaded data is not null");
+            SetPlayerData(loadedData.playerData);
         }
         else
         {
-            AllGameData gameData = LoadGameDataFromBinaryFile();
-
-            return gameData;
+            Debug.LogError("Loaded data is null for slot number: " + slotNumber);
         }
+    }
+
+    public AllGameData SelectedLoadingType(int slotNumber)
+    {
+        Debug.Log("Selecting loading type for slot: " + slotNumber);
+
+        AllGameData gameData = null;
+
+        if (isSavingJason)
+        {
+            gameData = LoadGameDataFromJsonFile(slotNumber);
+        }
+        else
+        {
+            gameData = LoadGameDataFromBinaryFile(slotNumber);
+        }
+
+        if (gameData != null)
+        {
+            Debug.Log("Game data successfully loaded from " + (isSavingJason ? "JSON" : "Binary") + " for slot: " + slotNumber);
+        }
+        else
+        {
+            Debug.LogError("Failed to load game data for slot: " + slotNumber);
+        }
+
+        return gameData;
     }
 
     private void SetPlayerData(PlayerData playerData)
     {
-        if (PlayerState.Instance == null)
-        {
-            print("PlayerState.Instance is null!");
-            return;
-        }
-
         if (PlayerState.Instance.playerBody == null)
         {
-            print("Player body is null!");
-            return;
+            Debug.LogError("playerBody is null!");
+        }
+        else
+        {
+            Debug.Log("playerBody is not null, proceeding to set position and rotation.");
         }
 
         //プレイヤーの状態
@@ -140,66 +170,65 @@ public class MainMenuSaveManager : MonoBehaviour
     }
 
 
-    public void StartLoadedGame()
+    public void StartLoadedGame(int slotNumber)
     {
+
+
+
         SceneManager.LoadScene("MainScene");
 
-        StartCoroutine(DelayerLoading());
+        StartCoroutine(DelayerLoading(slotNumber));
 
         
     }
 
-    private IEnumerator DelayerLoading()
+    private IEnumerator DelayerLoading(int slotNumber)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
-        print("Now loading game data...");
-        LoadGame(); 
 
-        print("Game Loaded");
+        LoadGame(slotNumber);
+
+
     }
     #endregion
     #endregion
 
 
 
-    #region || -------- To Binary Section -------- ||
+    #region || -------- バイナリに保存 -------- ||
 
 
-    public void SaveGameDataToBinaryFile(AllGameData gameData)
+    public void SaveGameDataToBinaryFile(AllGameData gameData ,int slotNumber)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/save_game.bin";
-        FileStream stream = new FileStream(path, FileMode.Create);
+        FileStream stream = new FileStream(binaryPath + fileName + slotNumber + ".bin", FileMode.Create);
 
         formatter.Serialize(stream, gameData);
         stream.Close();
 
-        print("Save to" + Application.persistentDataPath + "/save_game.bin");
+        print("Save to" + binaryPath + fileName + slotNumber + ".bin");
     }
 
-    public AllGameData LoadGameDataFromBinaryFile()
+    public AllGameData LoadGameDataFromBinaryFile(int slotNumber)
     {
-        print("Attempting to load game data...");
 
-        string path = Application.persistentDataPath + "/save_game.bin";
-
-        if (File.Exists(path))
+        if (File.Exists(binaryPath + fileName + slotNumber + ".bin"))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            FileStream stream = new FileStream(binaryPath + fileName + slotNumber + ".bin", FileMode.Open);
 
             AllGameData data = formatter.Deserialize(stream) as AllGameData;
             stream.Close();
 
-            print("Loaded from " + path);
+            print("Loaded from " + binaryPath + fileName + slotNumber + ".bin");
 
             return data;
         }
         else
         {
-            print("Save file not found at " + path); // ファイルが見つからない場合のメッセージ
+            print("Save file not found at " + binaryPath + fileName + slotNumber + ".bin"); // ファイルが見つからない場合のメッセージ
             return null;
         }
     }
@@ -207,7 +236,44 @@ public class MainMenuSaveManager : MonoBehaviour
 
     #endregion
 
-    #region || -------- Setting Section -------- ||
+
+
+    #region || -------- Jsonに保存 -------- ||
+
+
+    public void SaveGameDataToJsonFile(AllGameData gameData,int slotNumber)
+    {
+        string Json = JsonUtility.ToJson(gameData);
+
+        string encrypted = EncryptionDecryption(Json);
+
+
+        using (StreamWriter writer = new StreamWriter(JsonPathProject + fileName + slotNumber + ".json")) 
+        {
+            writer.Write(encrypted);
+            print("Saved Game To Json" + JsonPathProject + fileName + slotNumber + ".json");
+        }
+    }
+
+    public AllGameData LoadGameDataFromJsonFile(int slotNumber)
+    {
+        using(StreamReader reader = new StreamReader(JsonPathProject + fileName + slotNumber + ".json"))
+        {
+            string Json = reader.ReadToEnd();
+
+            string decrypted = EncryptionDecryption(Json);
+
+            AllGameData data = JsonUtility.FromJson<AllGameData>(decrypted);
+            return data;
+        }
+    }
+
+
+    #endregion
+
+
+
+    #region || -------- 設定 -------- ||
 
 
     #region || -------- Volume Setting -------- ||
@@ -255,6 +321,77 @@ public class MainMenuSaveManager : MonoBehaviour
 
     #endregion 
 
+
+    #region || -------- 暗号化 -------- ||
+
+    public string EncryptionDecryption(string data)
+    {
+        string keyword = "1234567";
+
+        string result = "";
+
+
+        //キーワードとJsonの文字列をびっとえんざん(XOR)を行うことで暗号化
+        for(int i = 0; i < data.Length; i++)
+        {
+            result += (char)(data[i] ^ keyword[i % keyword.Length]);
+        }
+
+        return result;
+    }
+
+    #endregion
+
+
+    #region || -------- ボタンからロード -------- ||
+
+    public bool DoesFileExist(int sloatNumber)
+    {
+        if(isSavingJason)
+        {
+            if (System.IO.File.Exists(JsonPathProject + fileName + sloatNumber + ".json")) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (System.IO.File.Exists(binaryPath + fileName + sloatNumber + ".bin"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+
+    public bool IsSlotEmpty(int slotNumber)
+    {
+        if (DoesFileExist(slotNumber))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
+    public void DeselectButton()
+    {
+        GameObject myEventSystem = GameObject.Find("EventSystem");
+        myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
+    }
+
+    #endregion
 
 
 
