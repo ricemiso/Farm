@@ -35,7 +35,6 @@ public class MainMenuSaveManager : MonoBehaviour
 
     public bool isSavingJason;
 
-    public Canvas loadScreen;
 
     private void Start()
     {
@@ -54,18 +53,7 @@ public class MainMenuSaveManager : MonoBehaviour
         AllGameData data = new AllGameData();
 
         data.playerData = GetPlayerData();
-
-        data.enviromentData = GetEnviromentData();
-
         SelectSavingType(data, sloaNumber);
-    }
-
-    private EnviromentData GetEnviromentData()
-    {
-        List<string> itemsPickedup = InventorySystem.Instance.itemsPickedup;
-        print(InventorySystem.Instance.itemsPickedup);
-        print(itemsPickedup);
-        return new EnviromentData(itemsPickedup);
     }
 
     private PlayerData GetPlayerData()
@@ -86,28 +74,8 @@ public class MainMenuSaveManager : MonoBehaviour
 
         string[] inventry = InventorySystem.Instance.itemList.ToArray();
 
-        string[] quickSlot = GetQuickSlotcontent();
 
-
-        return new PlayerData(playerStates, playerPosAndRot, inventry, quickSlot);
-    }
-
-    private string[] GetQuickSlotcontent()
-    {
-        List<string> temp = new List<string>();
-
-        foreach(GameObject slot in EquipSystem.Instance.quickSlotsList)
-        {
-            if(slot.transform.childCount != 0)
-            {
-                string name = slot.transform.GetChild(0).name;
-                string str2 = "(Clone)";
-                string cleanName = name.Replace(str2, "");
-                temp.Add(cleanName);
-            }
-        }
-
-        return temp.ToArray();
+        return new PlayerData(playerStates, playerPosAndRot, inventry);
     }
 
     public void SelectSavingType(AllGameData gameData,int slotNumber)
@@ -128,33 +96,19 @@ public class MainMenuSaveManager : MonoBehaviour
 
     public void LoadGame(int slotNumber)
     {
-      
-        SetPlayerData(SelectedLoadingType(slotNumber).playerData);
-        SetEnviromentData(SelectedLoadingType(slotNumber).enviromentData);
+        Debug.Log("Loading game for slot number: " + slotNumber);
+        AllGameData loadedData = SelectedLoadingType(slotNumber);
 
-
-        DisableLoadingScene();
-    }
-
-
-    private void SetEnviromentData(EnviromentData enviromentData)
-    {
-
-        foreach (Transform itemType in EnviromentManager.Instance.allItems.transform)
+        if (loadedData != null)
         {
-            foreach (Transform item in itemType.transform)
-            {
-                if (enviromentData.pickedupItems.Contains(item.name))
-                {
-                    Destroy(item.gameObject);
-                }
-            }
+            Debug.Log("Loaded data is not null");
+            SetPlayerData(loadedData.playerData);
         }
-
-        InventorySystem.Instance.itemsPickedup = enviromentData.pickedupItems;
+        else
+        {
+            Debug.LogError("Loaded data is null for slot number: " + slotNumber);
+        }
     }
-
-
 
     public AllGameData SelectedLoadingType(int slotNumber)
     {
@@ -211,22 +165,13 @@ public class MainMenuSaveManager : MonoBehaviour
     
         foreach(string item in playerData.inventortContent)
         {
-            InventorySystem.Instance.LoadToinventry(item);
-        }
-
-        foreach (string item in playerData.quickSlotContent)
-        {
-            GameObject availableSlot = EquipSystem.Instance.FindNextEmptySlot();
-
-            var itemToAdd = Instantiate(Resources.Load<GameObject>(item));
-            itemToAdd.transform.SetParent(availableSlot.transform, false);
+            InventorySystem.Instance.AddToinventry(item);
         }
     }
 
 
     public void StartLoadedGame(int slotNumber)
     {
-        ActivateLoadingScene();
 
         SceneManager.LoadScene("MainScene");
 
@@ -447,22 +392,5 @@ public class MainMenuSaveManager : MonoBehaviour
     #endregion
 
 
-    #region || -------- ロードセクション -------- ||
 
-    public void ActivateLoadingScene()
-    {
-        loadScreen.gameObject.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        //Todo::ロードアニメーション、Tipsなどはここで
-    }
-
-    public void DisableLoadingScene()
-    {
-        loadScreen.gameObject.SetActive(false);
-    }
-
-    #endregion
 }

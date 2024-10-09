@@ -21,8 +21,7 @@ public class EquiableItem : MonoBehaviour
             && InventorySystem.Instance.isOpen == false
             && CraftingSystem.Instance.isOpen == false
             && SelectionManager.Instance.HandIsVisible == false
-            && !ConstructionManager.Instance.inConstructionMode
-            && MenuManager.Instance.isMenuOpen == false) 
+            && !ConstructionManager.Instance.inConstructionMode)
         {
 
             StartCoroutine(SwingSoundDelay());
