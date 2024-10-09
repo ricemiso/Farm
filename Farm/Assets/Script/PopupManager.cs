@@ -50,6 +50,7 @@ public class PopupManager : MonoBehaviour
     // ポップアップのリクエストを追加
     public void TriggerPickupPop(string itemName, Sprite itemSprite)
     {
+       
         pickupQueue.Enqueue(new PickupRequest(itemName, itemSprite));
 
         if (!isProcessing)
@@ -75,6 +76,8 @@ public class PopupManager : MonoBehaviour
     // 実際にポップアップを表示する処理
     private IEnumerator ShowPickupPopup(string itemName, Sprite itemSprite)
     {
+       
+
         pickupAlert.SetActive(true);
 
         Animator.SetTrigger("pop");

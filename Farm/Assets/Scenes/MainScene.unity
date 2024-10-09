@@ -4164,6 +4164,7 @@ MonoBehaviour:
   isOpen: 0
   inventoryUpdated: 0
   isPop: 0
+  itemsPickedup: []
 --- !u!4 &211531091
 Transform:
   m_ObjectHideFlags: 0
@@ -4311,7 +4312,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (5)
+      value: Wood Stick006
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -5783,7 +5784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 382763190}
   m_Layer: 0
-  m_Name: '[WOOD STICK]'
+  m_Name: '[WOOD STICKS]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5809,7 +5810,7 @@ Transform:
   - {fileID: 1031816643}
   - {fileID: 232233288}
   - {fileID: 1736151391}
-  m_Father: {fileID: 1001211231}
+  m_Father: {fileID: 1732852569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &402230046
 PrefabInstance:
@@ -8778,7 +8779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (3)
+      value: Wood Stick004
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -11059,7 +11060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 850606902}
   m_Layer: 0
-  m_Name: '[STONE]'
+  m_Name: '[STONES]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11085,7 +11086,7 @@ Transform:
   - {fileID: 480002662}
   - {fileID: 588098964}
   - {fileID: 312546082}
-  m_Father: {fileID: 1001211231}
+  m_Father: {fileID: 1732852569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857338081
 GameObject:
@@ -12656,8 +12657,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001211231}
+  - component: {fileID: 1001211232}
   m_Layer: 0
-  m_Name: -----Object-----
+  m_Name: Enviroment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12678,10 +12680,22 @@ Transform:
   m_Children:
   - {fileID: 1747301792}
   - {fileID: 1859459827}
-  - {fileID: 850606902}
-  - {fileID: 382763190}
+  - {fileID: 1732852569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1001211232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001211230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a148c73eb5286ca408601b93daa57ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems: {fileID: 1732852568}
 --- !u!1 &1001533626
 GameObject:
   m_ObjectHideFlags: 0
@@ -13234,7 +13248,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (4)
+      value: Wood Stick0015
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -13568,7 +13582,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (1)
+      value: Wood Stick002
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -14180,7 +14194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (2)
+      value: Wood Stick003
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -14928,7 +14942,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick
+      value: Wood Stick001
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
@@ -19796,6 +19810,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6084939095003004198, guid: b4d08da742d2ed346a84e3efe2e47bff, type: 3}
   m_PrefabInstance: {fileID: 1732444325}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1732852568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1732852569}
+  m_Layer: 0
+  m_Name: '[ITEMS]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1732852569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732852568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 850606902}
+  - {fileID: 382763190}
+  m_Father: {fileID: 1001211231}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733181588
 GameObject:
   m_ObjectHideFlags: 0
@@ -19881,7 +19928,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1550394345974339798, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Name
-      value: Wood Stick (6)
+      value: Wood Stick007
       objectReference: {fileID: 0}
     - target: {fileID: 3803609020908604596, guid: 91c526413d6f4d24fac69b56c163f098, type: 3}
       propertyPath: m_Size.x
