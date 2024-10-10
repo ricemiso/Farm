@@ -61,19 +61,7 @@ public class SettingManager : MonoBehaviour
         musicSlider.value = volumeSettings.musics;
         effectSlider.value = volumeSettings.effects;
 
-        AudioListener.volume = masterSlider.value;
-
-        SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value;
-
-        SoundManager.Instance.dropItemSound.volume = effectSlider.value;
-        SoundManager.Instance.craftingSound.volume = effectSlider.value;
-        SoundManager.Instance.toolSwingSound.volume = effectSlider.value;
-        SoundManager.Instance.chopSound.volume = effectSlider.value;
-        SoundManager.Instance.PickUpItemSound.volume = effectSlider.value;
-        SoundManager.Instance.grassWalkSound.volume = effectSlider.value;
-        SoundManager.Instance.treeFallSound.volume = effectSlider.value;
-        SoundManager.Instance.PutSeSound.volume = effectSlider.value;
-        SoundManager.Instance.gravelWalkSound.volume = effectSlider.value;
+        
 
 
         print("Volume Setting Load");
@@ -84,5 +72,20 @@ public class SettingManager : MonoBehaviour
         masterValue.GetComponent<TextMeshProUGUI>().text = "" + (masterSlider.value) + "";
         musicValue.GetComponent<TextMeshProUGUI>().text = "" + (musicSlider.value) + "";
         effectValue.GetComponent<TextMeshProUGUI>().text = "" + (effectSlider.value) + "";
+
+
+        AudioListener.volume = masterSlider.value/10;
+
+        SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value / 10;
+
+        SoundManager.Instance.dropItemSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.craftingSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.toolSwingSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.chopSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.PickUpItemSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.grassWalkSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.treeFallSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.PutSeSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.gravelWalkSound.volume = effectSlider.value / 10;
     }
 }
