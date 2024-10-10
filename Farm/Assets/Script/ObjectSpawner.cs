@@ -7,10 +7,8 @@ public class ObjectSpawner : MonoBehaviour
     public int numberOfStones = 1000; // 生成するStone_modelの数
 
     private GameObject itemToAdd;
-
-    public bool inventoryUpdated;
-
-    private bool isWaking; // 生成するかどうかのフラグ
+    public GameObject treeParent;
+    public GameObject StoneParent;
 
     void Start()
     {
@@ -44,8 +42,10 @@ public class ObjectSpawner : MonoBehaviour
             if (CheckLayerForObjectSpawn(spawnPosition))
             {
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
-                Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                Debug.Log($"Treeが生成されました: {spawnPosition}");
+                GameObject newTree = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+                newTree.name = "Tree_" + (i + 1);  // 名前に連番を追加
+                newTree.transform.SetParent(treeParent.transform);  // treeParentの子に設定
+                Debug.Log($"Tree_{i + 1} が生成されました: {spawnPosition}");
             }
             else
             {
@@ -68,8 +68,10 @@ public class ObjectSpawner : MonoBehaviour
             if (CheckLayerForObjectSpawn(spawnPosition))
             {
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
-                Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                Debug.Log($"Rockが生成されました: {spawnPosition}");
+                GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+                newStone.name = "Rock_" + (i + 1);  // 名前に連番を追加
+                newStone.transform.SetParent(StoneParent.transform);  // StoneParentの子に設定
+                Debug.Log($"Rock_{i + 1} が生成されました: {spawnPosition}");
             }
             else
             {
