@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca8b82d2ea5097645b6f835971237811
+guid: 253adf3f918a5384d86cf0da4d98e4dd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -440,13 +440,13 @@ ModelImporter:
     serializedVersion: 3
     human: []
     skeleton:
-    - name: HuaYao@Fight(Clone)
+    - name: HuaYao@Idle 1(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.018471265, y: 0.03019182, z: -0.013171452, w: 0.99928665}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip01
-      parentName: HuaYao@Fight(Clone)
+      parentName: HuaYao@Idle 1(Clone)
       position: {x: -2.7202868e-10, y: 1.6268499, z: -0.0062232795}
       rotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}

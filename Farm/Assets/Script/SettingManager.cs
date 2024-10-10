@@ -55,9 +55,26 @@ public class SettingManager : MonoBehaviour
     {
         VolumeSettings volumeSettings = MainMenuSaveManager.Instance.LoadVolumeSettings();
 
+
+
         masterSlider.value = volumeSettings.masters;
         musicSlider.value = volumeSettings.musics;
         effectSlider.value = volumeSettings.effects;
+
+        AudioListener.volume = masterSlider.value;
+
+        SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value;
+
+        SoundManager.Instance.dropItemSound.volume = effectSlider.value;
+        SoundManager.Instance.craftingSound.volume = effectSlider.value;
+        SoundManager.Instance.toolSwingSound.volume = effectSlider.value;
+        SoundManager.Instance.chopSound.volume = effectSlider.value;
+        SoundManager.Instance.PickUpItemSound.volume = effectSlider.value;
+        SoundManager.Instance.grassWalkSound.volume = effectSlider.value;
+        SoundManager.Instance.treeFallSound.volume = effectSlider.value;
+        SoundManager.Instance.PutSeSound.volume = effectSlider.value;
+        SoundManager.Instance.gravelWalkSound.volume = effectSlider.value;
+
 
         print("Volume Setting Load");
     }

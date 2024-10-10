@@ -363,7 +363,7 @@ public class MainMenuSaveManager : MonoBehaviour
 
     public float LoadMusicSettings()
     {
-        var volumesettings = JsonUtility.FromJson<VolumeSettings>(PlayerPrefs.GetString("Volume"));
+        var volumesettings = JsonUtility.FromJson<VolumeSettings>(PlayerPrefs.GetString("Music"));
         return volumesettings.musics;
     }
 
