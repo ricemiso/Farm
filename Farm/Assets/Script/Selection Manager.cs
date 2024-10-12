@@ -25,6 +25,9 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedTree;
    [HideInInspector] public GameObject selectedCraft;
 
+
+   [HideInInspector] public GameObject selectedSoil;
+
     private Text chopText;
 
 
@@ -59,11 +62,11 @@ public class SelectionManager : MonoBehaviour
 
             InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
 
-
+            //TODO : îjâÛÇÕÇ±Ç±Ç…í«â¡ÇµÇƒÇ¢Ç≠
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
 
-            //êÿÇËì|Ç∑
+            //TODO:êÿÇËì|Ç∑èàóù
             if (choppableTree && choppableTree.playerRange)
             {
                 choppableTree.canBeChopped = true;
@@ -96,7 +99,7 @@ public class SelectionManager : MonoBehaviour
 
 
 
-            //èEÇ§
+            //TODO:èEÇ§èàóù
             if (interactable && interactable.playerRange)
             {
                 onTarget = true;
@@ -131,6 +134,34 @@ public class SelectionManager : MonoBehaviour
                 HandIsVisible = false;
             }
 
+
+
+            //Soil soil = selectionTransform.GetComponent<Soil>();
+            //if(/*soil && soil.playerInRange*/)
+            //{
+            //    if (soil.isEmpty)
+            //    {
+            //        interaction_text.text = "Soil";
+            //        interaction_Info_UI.SetActive(true);
+            //    }
+            //    else
+            //    {
+            //        interaction_text.text = "Name of plant";
+            //        interaction_Info_UI.SetActive(false);
+            //    }
+
+            //    selectedSoil = soil.gameObject;
+
+            //}
+            //else
+            //{
+            //   if(selectedSoil != null)
+            //    {
+            //        selectedSoil = null;
+            //    }
+            //}
+
+
         }
         else
         {
@@ -141,6 +172,7 @@ public class SelectionManager : MonoBehaviour
 
             HandIsVisible = false;
         }
+
     }
 
     public void DisableSelection()
