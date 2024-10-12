@@ -5,4 +5,6 @@ using UnityEngine;
 public class Soil : MonoBehaviour
 {
     public bool isEmpty = true;
+
+
 }
