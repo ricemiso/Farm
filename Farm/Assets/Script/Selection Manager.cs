@@ -53,51 +53,27 @@ public class SelectionManager : MonoBehaviour
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
+
+        bool interactionInfoActive = false;
+        bool handIconActive = false; // 手アイコンの表示状態を追跡するフラグ
 
         if (Physics.Raycast(ray, out hit))
         {
             var selectionTransform = hit.transform;
 
-            Animal animal = selectionTransform.GetComponent<Animal>();
-            InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
-
-           
-
-
-            if(animal && animal.playerRange)
-            {
-                interaction_text.text = animal.animalName;
-                Debug.Log(animal.animalName);
-                interaction_Info_UI.SetActive(true);
-
-                if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
-                {
-                    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
-                }
-
-            }
-            else
-            {
-                interaction_text.text = "";
-                interaction_Info_UI.SetActive(false);
-            }
-
-
-            //TODO : 破壊はここに追加していく
+            // TODO: 破壊処理
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
 
-            //TODO:切り倒す処理
             if (choppableTree && choppableTree.playerRange)
             {
                 choppableTree.canBeChopped = true;
                 selectedTree = choppableTree.gameObject;
                 chopText.text = "木";
                 chopHolder.gameObject.SetActive(true);
-
-            }else if(choppableCraft && choppableCraft.playerRange)
+            }
+            else if (choppableCraft && choppableCraft.playerRange)
             {
                 choppableCraft.canBeChopped = true;
                 selectedCraft = choppableCraft.gameObject;
@@ -106,13 +82,13 @@ public class SelectionManager : MonoBehaviour
             }
             else
             {
-                if(selectedTree != null)
+                if (selectedTree != null)
                 {
                     selectedTree.gameObject.GetComponent<ChoppableTree>().canBeChopped = false;
                     selectedTree = null;
                     chopHolder.gameObject.SetActive(false);
                 }
-                else if(selectedCraft != null)
+                else if (selectedCraft != null)
                 {
                     selectedCraft.gameObject.GetComponent<Choppablecraft>().canBeChopped = false;
                     selectedCraft = null;
@@ -120,9 +96,10 @@ public class SelectionManager : MonoBehaviour
                 }
             }
 
+            Animal animal = selectionTransform.GetComponent<Animal>();
+            InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
 
-
-            //TODO:拾う処理
+            // 拾う処理
             if (interactable && interactable.playerRange)
             {
                 onTarget = true;
@@ -130,73 +107,48 @@ public class SelectionManager : MonoBehaviour
 
                 interaction_text.text = interactable.GetItemName();
                 interaction_Info_UI.SetActive(true);
+                interactionInfoActive = true;
 
                 if (interactable.CompareTag("Pickable"))
                 {
-                    centerDotimage.gameObject.SetActive(false);
-                    handIcon.gameObject.SetActive(true);
-
-                    HandIsVisible = true;
+                    handIconActive = true; // 手アイコンを表示するフラグを立てる
                 }
-                else
-                {
-                    centerDotimage.gameObject.SetActive(true);
-                    handIcon.gameObject.SetActive(false);
-
-                    HandIsVisible = false;
-                }
-
             }
-            else
+
+            // 動物処理
+            if (animal && animal.playerISRange)
             {
-                onTarget = false;
-                interaction_Info_UI.SetActive(false);
-                centerDotimage.gameObject.SetActive(true);
-                handIcon.gameObject.SetActive(false);
+                interaction_text.text = animal.GetAnimalName();
+                interaction_Info_UI.SetActive(true);
+                interactionInfoActive = true;
 
-                HandIsVisible = false;
+                if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
+                {
+                    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                }
             }
 
-
-
-            //Soil soil = selectionTransform.GetComponent<Soil>();
-            //if(/*soil && soil.playerInRange*/)
-            //{
-            //    if (soil.isEmpty)
-            //    {
-            //        interaction_text.text = "Soil";
-            //        interaction_Info_UI.SetActive(true);
-            //    }
-            //    else
-            //    {
-            //        interaction_text.text = "Name of plant";
-            //        interaction_Info_UI.SetActive(false);
-            //    }
-
-            //    selectedSoil = soil.gameObject;
-
-            //}
-            //else
-            //{
-            //   if(selectedSoil != null)
-            //    {
-            //        selectedSoil = null;
-            //    }
-            //}
-
-
         }
-        else
+
+        // onTarget が true でない場合は UI をリセット
+        if (!onTarget)
         {
-            onTarget = false;
-            interaction_Info_UI.SetActive(false);
             centerDotimage.gameObject.SetActive(true);
-            handIcon.gameObject.SetActive(false);
-
-            HandIsVisible = false;
+            handIconActive = false;
         }
 
+        // フラグに基づいて手アイコンの状態を設定
+        handIcon.gameObject.SetActive(handIconActive);
+        centerDotimage.gameObject.SetActive(!handIconActive); // handIcon が表示されていない場合は中央ドットを表示
+
+        // interactionInfoActive フラグが false の場合のみ UI を非アクティブ化
+        if (!interactionInfoActive)
+        {
+            interaction_Info_UI.SetActive(false);
+        }
     }
+
+
 
     IEnumerator DealDamageTo(Animal animal, float delay, int damage)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Animal : MonoBehaviour
 {
     public string animalName;
-    public bool playerRange;
+    public bool playerISRange;
 
     [SerializeField] int currentHealth;
     [SerializeField] int maxHelth;
@@ -15,29 +15,97 @@ public class Animal : MonoBehaviour
     [SerializeField] AudioClip rabbithitAndScreem;
     [SerializeField] AudioClip rabitHitAndDie;
 
+    enum AnimalType
+    {
+        Rabbit,
+        PlantEnemy
+    }
 
+    [SerializeField] AnimalType thisAnimalType;
+
+
+    private Animator animator;
+    public bool isDead;
+    [SerializeField] ParticleSystem bloodparticle;
+    [SerializeField] GameObject bloodPaddle;
+
+    public string GetAnimalName()
+    {
+        return animalName;
+    }
 
     private void Start()
     {
         currentHealth = maxHelth;
+        animator = GetComponent<Animator>();
     }
 
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
+        if (isDead == false)
         {
-            Destroy(gameObject);
+            currentHealth -= damage;
+
+            bloodparticle.Play();
+
+            if (currentHealth <= 0)
+            {
+                PlayDyingSound();
+
+
+                animator.SetTrigger("Die");
+                GetComponent<AI_Movement>().enabled = false;
+                StartCoroutine(puddleDelay());
+                isDead = true;
+            }
+            else
+            {
+                PlayHitSound();
+
+            }
         }
+       
     }
+    IEnumerator puddleDelay()
+    {
+        yield return new WaitForSeconds(1);
+        bloodPaddle.SetActive(true);
+    }
+
+    private void PlayDyingSound()
+    {
+        switch (thisAnimalType)
+        {
+            case AnimalType.Rabbit:
+                soundChannel.PlayOneShot(rabitHitAndDie);
+                break;
+            default:
+                break;
+        }
+       
+    }
+
+    private void PlayHitSound()
+    {
+        switch (thisAnimalType)
+        {
+            case AnimalType.Rabbit:
+                soundChannel.PlayOneShot(rabbithitAndScreem);
+                break;
+            default:
+                break;
+        }
+       
+    }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerRange = true;
+            playerISRange = true;
         }
     }
 
@@ -45,7 +113,7 @@ public class Animal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerRange = false;
+            playerISRange = false;
         }
     }
 }
