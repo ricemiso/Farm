@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soil : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    public bool isEmpty = true;
-
+    public int weaponDamage;
 
 }

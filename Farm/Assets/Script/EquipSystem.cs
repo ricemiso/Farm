@@ -127,6 +127,38 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    internal int GetWeaPonDamage()
+    {
+        if(selectedItem != null)
+        {
+            return selectedItem.GetComponent<Weapon>().weaponDamage;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    internal bool IsHoldingWeapon()
+    {
+        if(selectedItem != null)
+        {
+            if(selectedItem.GetComponent<Weapon>() != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //TODO:éËÇ…éùÇΩÇπÇÈÉÇÉfÉãÇÃí«â¡
     private void SetEquippedModel(GameObject selectedItem)
     {
         if (selecteditemModel != null)
