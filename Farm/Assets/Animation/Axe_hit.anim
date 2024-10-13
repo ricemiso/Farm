@@ -482,7 +482,7 @@ AnimationClip:
   - time: 0.5
     functionName: GetHit
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 187582, guid: 38105c352d3ce7b498fcb42e7dd666f4, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

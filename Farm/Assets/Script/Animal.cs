@@ -27,7 +27,7 @@ public class Animal : MonoBehaviour
     private Animator animator;
     public bool isDead;
     [SerializeField] ParticleSystem bloodparticle;
-    [SerializeField] GameObject bloodPaddle;
+    public GameObject bloodPaddle;
 
     public string GetAnimalName()
     {

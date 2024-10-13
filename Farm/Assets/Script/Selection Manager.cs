@@ -29,7 +29,8 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedSoil;
 
     private Text chopText;
-
+    private bool isdamageDelay = false;
+    private bool islootDelay = false;
 
     private void Start()
     {
@@ -53,25 +54,28 @@ public class SelectionManager : MonoBehaviour
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        bool interactionInfoActive = false;
-        bool handIconActive = false; // 手アイコンの表示状態を追跡するフラグ
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
             var selectionTransform = hit.transform;
 
-            // TODO: 破壊処理
+
+
+
+            //TODO : 破壊はここに追加していく
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
 
+            //TODO:切り倒す処理
             if (choppableTree && choppableTree.playerRange)
             {
                 choppableTree.canBeChopped = true;
                 selectedTree = choppableTree.gameObject;
                 chopText.text = "木";
                 chopHolder.gameObject.SetActive(true);
+
             }
             else if (choppableCraft && choppableCraft.playerRange)
             {
@@ -96,10 +100,9 @@ public class SelectionManager : MonoBehaviour
                 }
             }
 
-            Animal animal = selectionTransform.GetComponent<Animal>();
+            
             InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
-
-            // 拾う処理
+            //TODO:拾う処理
             if (interactable && interactable.playerRange)
             {
                 onTarget = true;
@@ -107,51 +110,196 @@ public class SelectionManager : MonoBehaviour
 
                 interaction_text.text = interactable.GetItemName();
                 interaction_Info_UI.SetActive(true);
-                interactionInfoActive = true;
 
-                if (interactable.CompareTag("Pickable"))
-                {
-                    handIconActive = true; // 手アイコンを表示するフラグを立てる
-                }
+                centerDotimage.gameObject.SetActive(false);
+                handIcon.gameObject.SetActive(true);
+
+
+                HandIsVisible = true;
             }
+           
 
-            // 動物処理
+            Animal animal = selectionTransform.GetComponent<Animal>();
+
             if (animal && animal.playerISRange)
             {
-                interaction_text.text = animal.GetAnimalName();
-                interaction_Info_UI.SetActive(true);
-                interactionInfoActive = true;
 
-                if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
+                if (animal.isDead)
                 {
-                    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                    
+                    interaction_text.text = "奪う";
+                    interaction_Info_UI.SetActive(true);
+
+                    centerDotimage.gameObject.SetActive(false);
+                    handIcon.gameObject.SetActive(true);
+
+                    HandIsVisible = true;
+
+
+                  
+                    if (Input.GetMouseButtonDown(0)&& !islootDelay)
+                    {
+                        StartCoroutine(DelayedLoot(animal));
+                    }
+
                 }
+                else
+                {
+                    interaction_text.text = animal.GetAnimalName();
+                    interaction_Info_UI.SetActive(true);
+
+                    centerDotimage.gameObject.SetActive(true);
+                    handIcon.gameObject.SetActive(false);
+
+                    HandIsVisible = false;
+
+                    if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
+                    {
+
+                        //なぜかうまくいかない
+                        //Debug.Log("Calling IsThereSwingLock()");
+                        //if (EquipSystem.Instance.IsThereSwingLock() == false)
+                        //{
+
+                        //    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                        //}
+                        if (isdamageDelay)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                            StartCoroutine(DelayedAttribute());
+                        }
+                       
+                    }
+                }
+
+            }
+
+
+
+            //Soil soil = selectionTransform.GetComponent<Soil>();
+            //if(/*soil && soil.playerInRange*/)
+            //{
+            //    if (soil.isEmpty)
+            //    {
+            //        interaction_text.text = "Soil";
+            //        interaction_Info_UI.SetActive(true);
+            //    }
+            //    else
+            //    {
+            //        interaction_text.text = "Name of plant";
+            //        interaction_Info_UI.SetActive(false);
+            //    }
+
+            //    selectedSoil = soil.gameObject;
+
+            //}
+            //else
+            //{
+            //   if(selectedSoil != null)
+            //    {
+            //        selectedSoil = null;
+            //    }
+            //}
+
+
+            if (!interactable && !animal)
+            {
+                onTarget = false;
+                HandIsVisible = false;
+
+                centerDotimage.gameObject.SetActive(true);
+                handIcon.gameObject.SetActive(false);
+            }
+
+
+            if(!interactable && !animal &&!choppableTree&&!choppableCraft)
+            {
+                interaction_text.text = "";
+                handIcon.gameObject.SetActive(false);
             }
 
         }
 
-        // onTarget が true でない場合は UI をリセット
-        if (!onTarget)
-        {
-            centerDotimage.gameObject.SetActive(true);
-            handIconActive = false;
-        }
-
-        // フラグに基づいて手アイコンの状態を設定
-        handIcon.gameObject.SetActive(handIconActive);
-        centerDotimage.gameObject.SetActive(!handIconActive); // handIcon が表示されていない場合は中央ドットを表示
-
-        // interactionInfoActive フラグが false の場合のみ UI を非アクティブ化
-        if (!interactionInfoActive)
-        {
-            interaction_Info_UI.SetActive(false);
-        }
     }
 
+    IEnumerator DelayedAttribute()
+    {
+        isdamageDelay = true;
+        yield return new WaitForSeconds(1f);
+        isdamageDelay = false;
+    }
 
+    private IEnumerator DelayedLoot(Animal animal)
+    {
+        islootDelay = true;
+        yield return new WaitForSeconds(2.5f);
+        Lootable lootable = animal.GetComponent<Lootable>();
+        Loot(lootable); // 遅延後にLootを呼び出す
+        islootDelay = false;
+        Debug.Log("Looted!");
+    }
+
+    private void Loot(Lootable lootable)
+    {
+       if(lootable.wasLootCalulated == false)
+        {
+            List<LootRecieved> lootRecieveds = new List<LootRecieved>();
+
+            foreach(LootPossibility loot in lootable.possibilities)
+            {
+                var lootAmount = UnityEngine.Random.Range(loot.amountMin, loot.amountMax + 1);
+                if(lootAmount > 0)
+                {
+                    LootRecieved It = new LootRecieved();
+                    It.item = loot.item;
+                    It.amount = lootAmount;
+
+                    lootRecieveds.Add(It);
+                }
+            }
+
+
+            lootable.finalLoot = lootRecieveds;
+            lootable.wasLootCalulated = true;
+
+        }
+
+
+
+        Vector3 lootSpawnPosition = lootable.gameObject.transform.position;
+
+        foreach(LootRecieved lootRecieved in lootable.finalLoot)
+        {
+            for(int i = 0; i < lootRecieved.amount; i++)
+            {
+                GameObject lootSpawn = Instantiate(Resources.Load<GameObject>(lootRecieved.item.name + "_model"),
+                    new Vector3(lootSpawnPosition.x, lootSpawnPosition.y + 0.2f, lootSpawnPosition.z),
+                    Quaternion.Euler(0, 0, 0));
+
+                Debug.Log(lootRecieved.item.name);
+
+            }
+        }
+
+
+        if (lootable.GetComponent<Animal>())
+        {
+            lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
+        }
+
+
+        Destroy(lootable.gameObject);
+
+    }
 
     IEnumerator DealDamageTo(Animal animal, float delay, int damage)
     {
+       
+
         yield return new WaitForSeconds(delay);
 
         animal.TakeDamage(damage);

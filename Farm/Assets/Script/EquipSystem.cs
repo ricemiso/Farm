@@ -189,6 +189,25 @@ public class EquipSystem : MonoBehaviour
 
     }
 
+    public float returnTime()
+    {
+        return selectedItem.GetComponent<EquiableItem>().AxeDelay;
+    }
+
+    public bool IsThereSwingLock()
+    {
+
+        if (selecteditemModel && selecteditemModel.GetComponent<EquiableItem>())
+        {
+            Debug.Log("SwingWait in IsThereSwingLock: " + selecteditemModel.GetComponent<EquiableItem>().SwingWait);
+            return selecteditemModel.GetComponent<EquiableItem>().SwingWait;
+        }
+        else
+        {
+            return false;
+            Debug.Log("SwingWait in IsThereSwingLock: false");
+        }
+    }
 
     GameObject GetSelectedItem(int slotnumber)
     {
