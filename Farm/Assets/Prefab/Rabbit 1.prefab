@@ -5382,6 +5382,7 @@ GameObject:
   - component: {fileID: 1923683543366757911}
   - component: {fileID: 8446402970950498804}
   - component: {fileID: 2710428140813291052}
+  - component: {fileID: 5065931816046800050}
   m_Layer: 0
   m_Name: Rabbit 1
   m_TagString: Untagged
@@ -5639,6 +5640,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5065931816046800050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447362327422923096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c72dfda527c6f44b41f3774de134b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibilities:
+  - item: {fileID: 7354959038218525618, guid: c591fe7140cc2ea438af9f10a922a71a, type: 3}
+    amountMin: 1
+    amountMax: 1
+  - item: {fileID: 1722597568480135006, guid: 642fc2ab93a625548aef3b06af05bdcd, type: 3}
+    amountMin: 0
+    amountMax: 2
+  finalLoot: []
+  wasLootCalulated: 0
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0

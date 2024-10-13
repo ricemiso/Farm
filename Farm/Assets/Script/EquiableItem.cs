@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,14 @@ public class EquiableItem : MonoBehaviour
 {
 
     public Animator animator;
+    public bool SwingWait;
+    public float AxeDelay = 1f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        SwingWait = false;
+        AxeDelay = 1f;
     }
 
     
@@ -22,13 +27,27 @@ public class EquiableItem : MonoBehaviour
             && CraftingSystem.Instance.isOpen == false
             && SelectionManager.Instance.HandIsVisible == false
             && !ConstructionManager.Instance.inConstructionMode
-            && MenuManager.Instance.isMenuOpen == false) 
+            && MenuManager.Instance.isMenuOpen == false
+            && SwingWait ==false) 
         {
-
-            StartCoroutine(SwingSoundDelay());
-
-            animator.SetTrigger("hit");
+            SwingWait = true;
+           
+            StartCoroutine(SwingAction());
         }
+    }
+
+
+    IEnumerator SwingAction()
+    {
+        //SwingWait = true; 
+        animator.SetTrigger("hit");
+
+        yield return new WaitForSeconds(0.2f);  // ƒXƒCƒ“ƒOƒTƒEƒ“ƒh‚Ì’x‰„
+        StartCoroutine(SwingSoundDelay());
+
+        yield return new WaitForSeconds(1f);  // 1•b‚Ì’x‰„‚ð’Ç‰Á
+       
+        SwingWait = false;
     }
 
     public void GetHit()
@@ -60,7 +79,7 @@ public class EquiableItem : MonoBehaviour
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
-       
+
     }
 
 

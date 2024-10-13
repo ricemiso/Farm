@@ -45,11 +45,11 @@ public class ObjectSpawner : MonoBehaviour
                 GameObject newTree = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
                 newTree.name = "Tree_" + (i + 1);  // 名前に連番を追加
                 newTree.transform.SetParent(treeParent.transform);  // treeParentの子に設定
-                Debug.Log($"Tree_{i + 1} が生成されました: {spawnPosition}");
+               // Debug.Log($"Tree_{i + 1} が生成されました: {spawnPosition}");
             }
             else
             {
-                Debug.Log("草の層が見つかりません、Tree生成スキップ");
+                //Debug.Log("草の層が見つかりません、Tree生成スキップ");
             }
         }
 
@@ -71,11 +71,11 @@ public class ObjectSpawner : MonoBehaviour
                 GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
                 newStone.name = "Rock_" + (i + 1);  // 名前に連番を追加
                 newStone.transform.SetParent(StoneParent.transform);  // StoneParentの子に設定
-                Debug.Log($"Rock_{i + 1} が生成されました: {spawnPosition}");
+                //Debug.Log($"Rock_{i + 1} が生成されました: {spawnPosition}");
             }
             else
             {
-                Debug.Log("草の層が見つかりません、Rock生成スキップ");
+                //Debug.Log("草の層が見つかりません、Rock生成スキップ");
             }
         }
     }
@@ -92,7 +92,7 @@ public class ObjectSpawner : MonoBehaviour
     private bool CheckLayerForObjectSpawn(Vector3 position)
     {
         int layerIndex = GetCurrentTerrainLayer(position);
-        Debug.Log("現在のテクスチャ層のインデックス: " + layerIndex);
+       // Debug.Log("現在のテクスチャ層のインデックス: " + layerIndex);
 
         // もしLayer 0（草の層）ならばオブジェクト生成
         if (layerIndex == 0) // 草の層（Layer 0）
