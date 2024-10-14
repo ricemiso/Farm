@@ -10,13 +10,11 @@ public class EquiableItem : MonoBehaviour
 
     public Animator animator;
     public bool SwingWait;
-    public float AxeDelay = 1f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         SwingWait = false;
-        AxeDelay = 1f;
     }
 
     
@@ -55,7 +53,6 @@ public class EquiableItem : MonoBehaviour
     {
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
         GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
-        GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
         if (selectedTree != null)
         {
@@ -63,19 +60,32 @@ public class EquiableItem : MonoBehaviour
             StartCoroutine(HitSoundDelay());
            
         }
-
-        if(selectedCraft != null)
+        else if(selectedCraft != null)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitCraftSoundDelay());
         }
+        else
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
+        }
 
+       
+    }
+
+    public void GetStoneHit()
+    {
         
+        GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
         if (selectedStone != null)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitStoneSoundDelay());
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
     }
 

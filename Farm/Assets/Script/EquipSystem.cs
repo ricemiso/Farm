@@ -38,7 +38,7 @@ public class EquipSystem : MonoBehaviour
 
     private void Start()
     {
-        
+
         PopulateSlotList();
     }
 
@@ -48,7 +48,7 @@ public class EquipSystem : MonoBehaviour
         {
             SelectQuickSlot(1);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SelectQuickSlot(2);
         }
@@ -77,10 +77,13 @@ public class EquipSystem : MonoBehaviour
 
     public void SelectQuickSlot(int number)
     {
-        if (checkIfSlotIsFull(number)== true)
+        if (checkIfSlotIsFull(number) == true)
         {
             if (selectedNumber != number)
             {
+
+
+
                 selectedNumber = number;
 
                 if (selectedItem != null)
@@ -117,7 +120,7 @@ public class EquipSystem : MonoBehaviour
                     DestroyImmediate(selecteditemModel.gameObject);
                     selecteditemModel = null;
                 }
-                
+
 
                 foreach (Transform child in numbersHolder.transform)
                 {
@@ -129,7 +132,7 @@ public class EquipSystem : MonoBehaviour
 
     internal int GetWeaPonDamage()
     {
-        if(selectedItem != null)
+        if (selectedItem != null)
         {
             return selectedItem.GetComponent<Weapon>().weaponDamage;
         }
@@ -139,11 +142,30 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    //TODO:種が増えるごとにここに追加する
+    public bool IsPlayerHooldingSeed()
+    {
+        if (selecteditemModel != null)
+        {
+            switch (selecteditemModel.gameObject.name)
+            {
+                case "Hand_model(Clone)":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     internal bool IsHoldingWeapon()
     {
-        if(selectedItem != null)
+        if (selectedItem != null)
         {
-            if(selectedItem.GetComponent<Weapon>() != null)
+            if (selectedItem.GetComponent<Weapon>() != null)
             {
                 return true;
             }
@@ -169,37 +191,37 @@ public class EquipSystem : MonoBehaviour
 
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
 
-        //Axe
-        if (selectedItem.name == "Axe(Clone)")
-        {
-            
-            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
-                new Vector3(0.75f, 0.22f, 1.6f), Quaternion.Euler(-9.4f, -94.2f, 15.6f));
-            selecteditemModel.transform.SetParent(toolHolder.transform, false);
-        }
+        selecteditemModel = Instantiate(Resources.Load<GameObject>(CaculateItemModel(selectedItemName)));
 
-        //Stone
-        if (selectedItem.name == "Stone(Clone)")
-        {
-            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
-                new Vector3(0.74f, 0.79f, 1.18f), Quaternion.Euler(-9.4f, -94.2f, 15.6f));
-            selecteditemModel.transform.SetParent(toolHolder.transform, false);
-        }
-
-        //Pickaxe
-        if (selectedItem.name == "Pickaxe(Clone)")
-        {
-            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
-                new Vector3(1.054725f, -0.53f, -2.08f), Quaternion.Euler(0, -105.063f, 0));
-            selecteditemModel.transform.SetParent(toolHolder.transform, false);
-        }
-
-
+        selecteditemModel.transform.SetParent(toolHolder.transform, false);
     }
 
-    public float returnTime()
+    //持つ武器はここで追加する(位置、回転はプレハブの座標で!!)
+    private string CaculateItemModel(string selectedItemName)
     {
-        return selectedItem.GetComponent<EquiableItem>().AxeDelay;
+        switch (selectedItemName)
+        {
+            case "Axe":
+                //TODO:音を後で直す
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                return "Axe_model";
+
+            case "Stone":
+                return "Stone_model";
+
+            case "Pickaxe":
+                //TODO:音を後で直す
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                return "Pickaxe_model";
+
+            case "TomatoSeed":
+                return "Hand_model";
+
+            default:
+                return null;
+
+        }
+
     }
 
     public bool IsThereSwingLock()
@@ -225,7 +247,7 @@ public class EquipSystem : MonoBehaviour
 
     bool checkIfSlotIsFull(int slotNumber)
     {
-        if (quickSlotsList[slotNumber - 1].transform.childCount > 0) 
+        if (quickSlotsList[slotNumber - 1].transform.childCount > 0)
         {
             return true;
         }
@@ -249,9 +271,9 @@ public class EquipSystem : MonoBehaviour
 
     public void AddToQuickSlots(GameObject itemToEquip)
     {
-        
+
         GameObject availableSlot = FindNextEmptySlot();
-        
+
         itemToEquip.transform.SetParent(availableSlot.transform, false);
 
         InventorySystem.Instance.ReCalculeList();
