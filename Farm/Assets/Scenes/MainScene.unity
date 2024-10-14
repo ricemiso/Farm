@@ -11939,6 +11939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caloriesCounter: {fileID: 1348790827}
   playerState: {fileID: 1040980721}
+  weakSpeedRate: 0.3
 --- !u!1 &947797478
 GameObject:
   m_ObjectHideFlags: 0
@@ -13512,6 +13513,7 @@ MonoBehaviour:
   maxHydrationPercent: 100
   isHydrationActive: 0
   isPosition: {x: 0, y: 0, z: 0}
+  playerSpeedRate: 1
 --- !u!1 &1049366976
 GameObject:
   m_ObjectHideFlags: 0

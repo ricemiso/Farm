@@ -23,9 +23,10 @@ public class CrystalGrowth : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		rotAngle.y += 0.1f;
+		rotAngle.y += 0.3f;
 		transform.eulerAngles = rotAngle;
 
+		//デバッグ用
 		if (Input.GetKeyDown(KeyCode.G))
 		{
 			if (currentEnergy < maxEnergy)
@@ -34,11 +35,11 @@ public class CrystalGrowth : MonoBehaviour
 			}
 			Debug.Log("currentEnergy:" + currentEnergy);
 		}
-
 		if (Input.GetKeyDown(KeyCode.H))
 		{
 			Sato_ChoppableTree.instance.GetHit();
 		}
+		//------
 
 		if (currentEnergy >= maxEnergy)
 		{
