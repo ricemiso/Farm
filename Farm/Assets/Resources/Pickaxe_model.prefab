@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2378622}
   - component: {fileID: -6254709943218952502}
   - component: {fileID: -1270470774245680213}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pickaxe_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8973994, y: 1.7815986, z: 6.9987073}
+  m_LocalRotation: {x: 0, y: -0.7936879, z: 0, w: 0.60832524}
+  m_LocalPosition: {x: 1.13, y: -0.13, z: 2}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -105.063, z: 0}
 --- !u!33 &3378622
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 178622}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85fe940e58c966244bd4b51f9aab4428, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -122,4 +122,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   SwingWait: 0
-  AxeDelay: 1

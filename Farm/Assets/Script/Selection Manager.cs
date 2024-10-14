@@ -135,15 +135,31 @@ public class SelectionManager : MonoBehaviour
             Soil soil = selectionTransform.GetComponent<Soil>();
             if (soil && soil.playerInRange)
             {
-                if (soil.isEmpty)
+                if (soil.isEmpty&&EquipSystem.Instance.IsPlayerHooldingSeed())
+                {
+                    string seedName = EquipSystem.Instance.selectedItem.GetComponent<InventoryItem>().thisName;
+                    string onlyPlantName = seedName.Split(new string[] { "ÇÃéÌ" }, StringSplitOptions.None)[0];
+
+                    //TODO:ì˙ñ{åÍÇ…èCê≥Ç∑ÇÈSwitchï∂ÇèëÇ≠
+
+                    interaction_text.text = onlyPlantName + "ÇêAÇ¶ÇÈ";
+                    interaction_Info_UI.SetActive(true);
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        soil.PlantSeed();
+                        Destroy(EquipSystem.Instance.selectedItem);
+                        Destroy(EquipSystem.Instance.selecteditemModel);
+                    }
+                }
+                else if (soil.isEmpty)
                 {
                     interaction_text.text = "ìyèÎ";
                     interaction_Info_UI.SetActive(true);
-                }
-                else
+                }else
                 {
-                    interaction_text.text = "Name of plant";
-                    interaction_Info_UI.SetActive(false);
+                    interaction_text.text = soil.plantName;
+                    interaction_Info_UI.SetActive(true);
                 }
 
                 selectedSoil = soil.gameObject;
@@ -252,7 +268,7 @@ public class SelectionManager : MonoBehaviour
     private IEnumerator DelayedLoot(Animal animal)
     {
         islootDelay = true;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         Lootable lootable = animal.GetComponent<Lootable>();
         Loot(lootable); // íxâÑå„Ç…LootÇåƒÇ—èoÇ∑
         islootDelay = false;

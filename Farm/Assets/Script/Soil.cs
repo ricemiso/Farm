@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Soil : MonoBehaviour
     public bool isEmpty = true;
 
     public bool playerInRange;
+    public string plantName;
 
     private void Update()
     {
@@ -21,5 +23,17 @@ public class Soil : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    internal void PlantSeed()
+    {
+        InventoryItem selectedSeed = EquipSystem.Instance.selectedItem.GetComponent<InventoryItem>();
+        isEmpty = false;
+
+        //TODO:ì˙ñ{åÍÇ…èCê≥Ç∑ÇÈSwitchï∂ÇèëÇ≠
+        string onlyPlantName = selectedSeed.thisName.Split(new string[] { "ÇÃéÌ" }, StringSplitOptions.None)[0];
+
+        plantName = onlyPlantName;
+
     }
 }
