@@ -28,6 +28,7 @@ public class PlayerState : MonoBehaviour
 
     public Vector3 isPosition;
 
+    public float playerSpeedRate;
 
     private void Awake()
     {
@@ -101,5 +102,15 @@ public class PlayerState : MonoBehaviour
     public Vector3 getPlayerPosition()
     {
         return isPosition;
+    }
+
+    public void setPlayerSpeedRate(float newPlayerSpeed)
+    {
+		playerSpeedRate = newPlayerSpeed;
+    }
+
+    public float  getPlayerSpeedRate()
+    {
+        return playerSpeedRate;
     }
 }

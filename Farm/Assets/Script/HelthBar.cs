@@ -31,8 +31,18 @@ public class HelthBar : MonoBehaviour
         if (Slider.value <= 0)
         {
             currentHealth = 0;
-        }
+
+            dead();
+		}
 
         healthCounter.text = currentHealth + "/" + maxHealth;
     }
+
+    void dead()
+    {
+        //Todo プレイヤーが倒れるアニメーション(仮)
+
+		//Todo 実際のゲームオーバーシーンを入れる
+		//SceneManager.LoadScene("GameOverScene");
+	}
 }
