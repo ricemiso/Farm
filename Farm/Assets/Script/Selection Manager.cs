@@ -130,7 +130,33 @@ public class SelectionManager : MonoBehaviour
 
                 HandIsVisible = true;
             }
-           
+
+
+            Soil soil = selectionTransform.GetComponent<Soil>();
+            if (soil && soil.playerInRange)
+            {
+                if (soil.isEmpty)
+                {
+                    interaction_text.text = "ìyèÎ";
+                    interaction_Info_UI.SetActive(true);
+                }
+                else
+                {
+                    interaction_text.text = "Name of plant";
+                    interaction_Info_UI.SetActive(false);
+                }
+
+                selectedSoil = soil.gameObject;
+
+            }
+            else
+            {
+                if (selectedSoil != null)
+                {
+                    selectedSoil = null;
+                }
+            }
+
 
             Animal animal = selectionTransform.GetComponent<Animal>();
 
@@ -193,30 +219,7 @@ public class SelectionManager : MonoBehaviour
 
 
 
-            //Soil soil = selectionTransform.GetComponent<Soil>();
-            //if(/*soil && soil.playerInRange*/)
-            //{
-            //    if (soil.isEmpty)
-            //    {
-            //        interaction_text.text = "Soil";
-            //        interaction_Info_UI.SetActive(true);
-            //    }
-            //    else
-            //    {
-            //        interaction_text.text = "Name of plant";
-            //        interaction_Info_UI.SetActive(false);
-            //    }
-
-            //    selectedSoil = soil.gameObject;
-
-            //}
-            //else
-            //{
-            //   if(selectedSoil != null)
-            //    {
-            //        selectedSoil = null;
-            //    }
-            //}
+           
 
 
             if (!interactable && !animal)
@@ -229,7 +232,7 @@ public class SelectionManager : MonoBehaviour
             }
 
 
-            if(!interactable && !animal &&!choppableTree&&!choppableCraft)
+            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil) 
             {
                 interaction_text.text = "";
                 handIcon.gameObject.SetActive(false);
