@@ -271,7 +271,7 @@ public class CraftingSystem : MonoBehaviour
         canCraft = true;
     }
 
-
+    //TODO:アイテムを追加した時にここの条件を追加する
     public void RefreshNeededItems()
     {
         int stone_count = 0;
@@ -301,7 +301,7 @@ public class CraftingSystem : MonoBehaviour
             }
         }
 
-        // クイックスロット内のアイテムもカウント
+        // TODO:クイックスロット内のアイテムもカウント
         int quickStoneCount = 0;
         int quickStickCount = 0;
         int quickLogCount = 0;
@@ -331,6 +331,8 @@ public class CraftingSystem : MonoBehaviour
             }
         }
 
+
+        //TODO: クラフトアイテムはここで追加
         // ----Axe---- //
         AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
         AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
@@ -381,6 +383,8 @@ public class CraftingSystem : MonoBehaviour
         {
             craftWallBTN.gameObject.SetActive(false);
         }
+
+
     }
 
 

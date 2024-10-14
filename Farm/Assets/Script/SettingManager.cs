@@ -74,18 +74,18 @@ public class SettingManager : MonoBehaviour
         effectValue.GetComponent<TextMeshProUGUI>().text = "" + (effectSlider.value) + "";
 
 
-        AudioListener.volume = masterSlider.value/10;
+        AudioListener.volume = masterSlider.value/20;
 
-        SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value / 10;
+        SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value / 20;
 
-        SoundManager.Instance.dropItemSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.craftingSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.toolSwingSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.chopSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.PickUpItemSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.grassWalkSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.treeFallSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.PutSeSound.volume = effectSlider.value / 10;
-        SoundManager.Instance.gravelWalkSound.volume = effectSlider.value / 10;
+        SoundManager.Instance.dropItemSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.craftingSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.toolSwingSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.chopSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.PickUpItemSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.grassWalkSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.treeFallSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.PutSeSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.gravelWalkSound.volume = effectSlider.value / 20;
     }
 }

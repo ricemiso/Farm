@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 446978}
   - component: {fileID: 3303868}
   - component: {fileID: 2368066}
-  - component: {fileID: 5025876244960831156}
-  - component: {fileID: 4086499478908788570}
   - component: {fileID: 1490832241483861329}
-  - component: {fileID: 3602089153696316621}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Untagged
@@ -88,50 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5025876244960831156
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147034}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.0415406
-  m_Height: 3.7238913
-  m_Direction: 1
-  m_Center: {x: 0.04015857, y: -0.12752867, z: 0.19236124}
---- !u!135 &4086499478908788570
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147034}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2.0415406
-  m_Center: {x: 0.04015857, y: -0.12752867, z: 0.19236124}
 --- !u!65 &1490832241483861329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,20 +106,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.27, y: 8.9, z: 8.7}
   m_Center: {x: 0.04015857, y: -0.12752867, z: 0.19236124}
---- !u!114 &3602089153696316621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 147034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6af692f748c34740824225ff7937f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemName: Rock
-  playerRange: 0
 --- !u!1 &4789159392883273315
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,13 +117,14 @@ GameObject:
   - component: {fileID: 2016733230118170270}
   - component: {fileID: 1490353508545299504}
   - component: {fileID: 8352408885059109364}
+  - component: {fileID: 2361424237386804306}
   m_Layer: 0
   m_Name: RockBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2016733230118170270
 Transform:
   m_ObjectHideFlags: 0
@@ -242,3 +182,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.31
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2361424237386804306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4789159392883273315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af32ffb605de1e47bfa96c8da34882a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRange: 0
+  canBeChopped: 0
+  animcooltime: 0
+  stoneMaxHealth: 5
+  stoneHealth: 0
+  caloriesSpendChoppingWood: 20
