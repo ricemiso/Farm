@@ -50,10 +50,12 @@ public class EquiableItem : MonoBehaviour
         SwingWait = false;
     }
 
+    //Todo: âΩÇ©ÇêÿÇËì|Ç∑Ç∆Ç´ÇÕÇ±Ç±Ç…í«â¡Ç∑ÇÈ
     public void GetHit()
     {
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
         GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
+        GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
         if (selectedTree != null)
         {
@@ -67,6 +69,14 @@ public class EquiableItem : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitCraftSoundDelay());
         }
+
+        
+
+        if (selectedStone != null)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
+            StartCoroutine(HitStoneSoundDelay());
+        }
     }
 
     IEnumerator SwingSoundDelay()
@@ -74,8 +84,10 @@ public class EquiableItem : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
+        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
+        GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
-        if (selectedTree == null)
+        if (selectedTree == null && selectedCraft == null && selectedStone == null)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
@@ -83,7 +95,15 @@ public class EquiableItem : MonoBehaviour
     }
 
 
-    //Todo: âΩÇ©ÇêÿÇËì|Ç∑Ç∆Ç´ÇÕÇ±Ç±Ç…í«â¡Ç∑ÇÈ
+    IEnumerator HitCraftSoundDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
+        selectedCraft.GetComponent<Choppablecraft>().GetHit();
+
+    }
+
     IEnumerator HitSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
@@ -93,14 +113,12 @@ public class EquiableItem : MonoBehaviour
 
     }
 
-
-
-    IEnumerator HitCraftSoundDelay()
+    IEnumerator HitStoneSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
 
-        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
-        selectedCraft.GetComponent<Choppablecraft>().GetHit();
+        GameObject selectedCraft = SelectionManager.Instance.selectedStone;
+        selectedCraft.GetComponent<ChoppableStone>().GetHit();
 
     }
 }

@@ -24,9 +24,10 @@ public class SelectionManager : MonoBehaviour
 
    [HideInInspector] public GameObject selectedTree;
    [HideInInspector] public GameObject selectedCraft;
+   [HideInInspector] public GameObject selectedStone;
 
 
-   [HideInInspector] public GameObject selectedSoil;
+    [HideInInspector] public GameObject selectedSoil;
 
     private Text chopText;
     private bool isdamageDelay = false;
@@ -62,11 +63,10 @@ public class SelectionManager : MonoBehaviour
             var selectionTransform = hit.transform;
 
 
-
-
             //TODO : îjâÛÇÕÇ±Ç±Ç…í«â¡ÇµÇƒÇ¢Ç≠
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
+            ChoppableStone choppableStone = selectionTransform.GetComponent<ChoppableStone>();
 
             //TODO:êÿÇËì|Ç∑èàóù
             if (choppableTree && choppableTree.playerRange)
@@ -83,6 +83,13 @@ public class SelectionManager : MonoBehaviour
                 selectedCraft = choppableCraft.gameObject;
                 chopText.text = choppableCraft.CraftItemName();
                 chopHolder.gameObject.SetActive(true);
+
+            }else if(choppableStone && choppableStone.playerRange)
+            {
+                choppableStone.canBeChopped = true;
+                selectedStone = choppableStone.gameObject;
+                chopText.text = "êŒ";
+                chopHolder.gameObject.SetActive(true);
             }
             else
             {
@@ -96,6 +103,12 @@ public class SelectionManager : MonoBehaviour
                 {
                     selectedCraft.gameObject.GetComponent<Choppablecraft>().canBeChopped = false;
                     selectedCraft = null;
+                    chopHolder.gameObject.SetActive(false);
+                }
+                else if (selectedStone != null)
+                {
+                    selectedStone.gameObject.GetComponent<ChoppableStone>().canBeChopped = false;
+                    selectedStone = null;
                     chopHolder.gameObject.SetActive(false);
                 }
             }

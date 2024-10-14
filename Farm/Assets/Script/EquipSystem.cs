@@ -186,6 +186,14 @@ public class EquipSystem : MonoBehaviour
             selecteditemModel.transform.SetParent(toolHolder.transform, false);
         }
 
+        //Pickaxe
+        if (selectedItem.name == "Pickaxe(Clone)")
+        {
+            selecteditemModel = Instantiate(Resources.Load<GameObject>(selectedItemName + "_Model"),
+                new Vector3(1.054725f, -0.53f, -2.08f), Quaternion.Euler(0, -105.063f, 0));
+            selecteditemModel.transform.SetParent(toolHolder.transform, false);
+        }
+
 
     }
 

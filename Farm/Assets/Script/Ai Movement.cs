@@ -55,6 +55,12 @@ public class AI_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // player が null でないことを確認
+        if (player == null || this.gameObject==null)
+        {
+            return;  
+        }
+
         // プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
