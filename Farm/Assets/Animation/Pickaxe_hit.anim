@@ -480,7 +480,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: GetHit
+    functionName: GetStoneHit
     data: 
     objectReferenceParameter: {fileID: 178622, guid: 7c9ccf8bb531b3e4983bc7f698f6dc93, type: 3}
     floatParameter: 0
