@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AI_Movement : MonoBehaviour
+public class Ai_Movement : MonoBehaviour
 {
 	public Animator animator;
 
