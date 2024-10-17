@@ -367,15 +367,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.099995
+      value: -15.6
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 106.17
+      value: 105.988
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -183.04495
+      value: -138.6
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -405,6 +405,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1830026702440311596, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1686317345}
     - target: {fileID: 5447362327422923096, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_Name
       value: Rabbit 1

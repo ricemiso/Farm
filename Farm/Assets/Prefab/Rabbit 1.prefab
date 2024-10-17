@@ -5378,11 +5378,11 @@ GameObject:
   - component: {fileID: 7009993587871073479}
   - component: {fileID: 6861225627235584793}
   - component: {fileID: 1002354545007044409}
-  - component: {fileID: 1580168538834733014}
   - component: {fileID: 1923683543366757911}
   - component: {fileID: 8446402970950498804}
   - component: {fileID: 2710428140813291052}
   - component: {fileID: 5065931816046800050}
+  - component: {fileID: 1830026702440311596}
   m_Layer: 0
   m_Name: Rabbit 1
   m_TagString: Untagged
@@ -5478,28 +5478,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.58, y: 0.8, z: 1.2}
-  m_Center: {x: 0, y: 0.31, z: 0}
---- !u!114 &1580168538834733014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447362327422923096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e3f0c770679a47409d97424f0315f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0.2
-  walkCounter: 0
-  waitCounter: 0
-  isWalking: 0
-  player: {fileID: 0}
-  followSpeed: 5
-  isStopped: 0
-  stopRange: 20
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  m_Center: {x: 0, y: 0.42, z: 0}
 --- !u!114 &1923683543366757911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5661,6 +5640,28 @@ MonoBehaviour:
     amountMax: 2
   finalLoot: []
   wasLootCalulated: 0
+--- !u!114 &1830026702440311596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447362327422923096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795d129e2fb9e52498baa1634b6722c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  moveSpeed: 0.2
+  walkCounter: 0
+  waitCounter: 0
+  state: 0
+  player: {fileID: 0}
+  followSpeed: 5
+  isStopped: 0
+  stopRange: 20
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0
