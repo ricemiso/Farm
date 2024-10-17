@@ -15,15 +15,16 @@ public class CraftingSystem : MonoBehaviour
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
-    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN;
 
-    Text AxeReq1, AxeReq2, PlankReq1, foundationReq1, WallReq1;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1;
 
     public bool isOpen;
     private bool canCraft = true;
 
 
     [HideInInspector] public BluePrint AxeBLP;
+    [HideInInspector] public BluePrint PickaxeBLP;
     [HideInInspector] public BluePrint PlankBLP;
     [HideInInspector] public BluePrint foundationBLP;
     [HideInInspector] public BluePrint WallBLP;
@@ -47,6 +48,7 @@ public class CraftingSystem : MonoBehaviour
         inventryitemList = new List<string>();
 
         AxeBLP = new BluePrint("Axe", 1, 2, "Stone", 3, "Stick", 3);
+        PickaxeBLP = new BluePrint("Pickaxe", 1, 2, "Stone", 3, "Stick", 3);
         PlankBLP = new BluePrint("Plank", 2, 1, "Log", 1, "", 0);
         foundationBLP = new BluePrint("Foundation", 1, 1, "Plank", 4, "", 0);
         WallBLP = new BluePrint("Wall", 1, 1, "Plank", 2, "", 0);
@@ -91,6 +93,13 @@ public class CraftingSystem : MonoBehaviour
         craftAxeBTN = toolScreenUI.transform.Find("Axe").transform.Find("AxeButton").GetComponent<Button>();
         craftAxeBTN.onClick.AddListener(delegate { CraftAnyItem(AxeBLP); });
 
+        //Pickaxe
+        PickaxeReq1 = toolScreenUI.transform.Find("Pickaxe").transform.Find("rec1").GetComponent<Text>();
+        PickaxeReq2 = toolScreenUI.transform.Find("Pickaxe").transform.Find("rec2").GetComponent<Text>();
+
+        craftPickaxeBTN = toolScreenUI.transform.Find("Pickaxe").transform.Find("PickaxeButton").GetComponent<Button>();
+        craftPickaxeBTN.onClick.AddListener(delegate { CraftAnyItem(PickaxeBLP); });
+
 
         //Plank
         PlankReq1 = refineScreenUI.transform.Find("Plank").transform.Find("rec1").GetComponent<Text>();
@@ -105,7 +114,7 @@ public class CraftingSystem : MonoBehaviour
         craftfoundationBTN = constractionScreenUI.transform.Find("foundation").transform.Find("foundationButton").GetComponent<Button>();
         craftfoundationBTN.onClick.AddListener(delegate { CraftAnyItem(foundationBLP); });
 
-        //Waall
+        //Wall
         WallReq1 = constractionScreenUI.transform.Find("Wall").transform.Find("rec1").GetComponent<Text>();
 
         craftWallBTN = constractionScreenUI.transform.Find("Wall").transform.Find("WallButton").GetComponent<Button>();
@@ -345,6 +354,34 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             craftAxeBTN.gameObject.SetActive(false);
+        }
+
+        // ----Axe---- //
+        AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
+        AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
+
+        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftAxeBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftAxeBTN.gameObject.SetActive(false);
+        }
+
+        // ----Pickaxe---- //
+        PickaxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
+        PickaxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
+
+        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftPickaxeBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftPickaxeBTN.gameObject.SetActive(false);
         }
 
 

@@ -39,7 +39,7 @@ public class AI_Movement : MonoBehaviour
         // プレイヤーを自動的に取得する
         if (player == null)
         {
-            player = GameObject.FindWithTag("Player").transform;  // タグが"Player"のオブジェクトを自動的に取得
+            player = GameObject.FindWithTag("Player").transform;
         }
 
         // ランダムな歩行時間と待機時間を設定
