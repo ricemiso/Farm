@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAi_Movement : Ai_Movement
+public class EnemyAi_Movement : AI_Movement
 {
 
 	public new enum MoveState

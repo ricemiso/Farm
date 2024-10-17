@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
-public class SupportAi_Movement : Ai_Movement
+public class SupportAI_Movement : AI_Movement
 {
 
 
