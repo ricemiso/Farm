@@ -7,6 +7,8 @@ public class InteractableObject : MonoBehaviour
     public string ItemName;
     public bool playerRange;
 
+    [SerializeField] float ditectionRange = 10f;
+
     public string GetItemName()
     {
         return ItemName;
@@ -14,6 +16,19 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
+        //TODO : ‹——£‚Í‚±‚±‚Å”»’è‚·‚é 
+        float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+
+        if (distance < ditectionRange)
+        {
+            playerRange = true;
+        }
+        else
+        {
+            playerRange = false;
+        }
+
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && playerRange && SelectionManager.Instance.onTarget && SelectionManager.Instance.selectgameObject == gameObject) 
         {
             if (InventorySystem.Instance.CheckSlotAvailable(1))
@@ -32,21 +47,19 @@ public class InteractableObject : MonoBehaviour
             
         }
     }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        playerRange = true;
+    //    }
+    //}
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerRange = false;
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        playerRange = false;
+    //    }
+    //}
 }

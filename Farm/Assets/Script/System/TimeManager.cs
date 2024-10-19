@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance { get; set; }
+
+    public UnityEvent oneDayPass = new UnityEvent();
+
 
     private void Awake()
     {
@@ -32,5 +36,7 @@ public class TimeManager : MonoBehaviour
     {
         dayInGame += 1;
         dayUI.text = $"{dayInGame}“ú–Ú";
+
+        oneDayPass.Invoke();
     }
 }

@@ -156,10 +156,38 @@ public class SelectionManager : MonoBehaviour
                 {
                     interaction_text.text = "土壌";
                     interaction_Info_UI.SetActive(true);
-                }else
+                }
+                else
                 {
-                    interaction_text.text = soil.plantName;
-                    interaction_Info_UI.SetActive(true);
+                    if (EquipSystem.Instance.IsPlayerHooldingWateringCan())
+                    {
+                        if (soil.currentplant.isWatered)
+                        {
+                            interaction_text.text = soil.plantName;
+                            interaction_Info_UI.SetActive(true);
+                        }
+                        else
+                        {
+                            interaction_text.text = "水をあげてください";
+                            interaction_Info_UI.SetActive(true);
+
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                //TODO:変更する　(オーディオクリップを使用する場合は上)
+                                //SoundManager.Instance.wateringCannel.PlayoneShot(SoundManager.Instance.wateringChannel);
+                                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+
+                                soil.currentplant.isWatered = true;
+                                soil.MakeSoilWatered();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        interaction_text.text = soil.plantName;
+                        interaction_Info_UI.SetActive(true);
+                    }
+                   
                 }
 
                 selectedSoil = soil.gameObject;
@@ -268,7 +296,7 @@ public class SelectionManager : MonoBehaviour
     private IEnumerator DelayedLoot(Animal animal)
     {
         islootDelay = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         Lootable lootable = animal.GetComponent<Lootable>();
         Loot(lootable); // 遅延後にLootを呼び出す
         islootDelay = false;

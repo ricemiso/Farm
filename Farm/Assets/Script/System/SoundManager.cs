@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource PutSeSound;
     public AudioSource gravelWalkSound;
 
+    //public AudioSource WateringSound;
+    //public AudioSource WateringCanSound;
 
     //BGM
     public AudioSource startingZoneBGMMusic;

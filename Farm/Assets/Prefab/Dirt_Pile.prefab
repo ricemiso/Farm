@@ -119,3 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a90784b0fdc47244bcc9a0791696409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmpty: 1
+  playerInRange: 0
+  plantName: 
+  currentplant: {fileID: 0}
+  defaltMaterial: {fileID: 2100000, guid: 1b6ad9e6ace69c2448dda1ea645d4556, type: 2}
+  waterMaterial: {fileID: 2100000, guid: 45d03e372ff86354ba13b8bb50db3531, type: 2}

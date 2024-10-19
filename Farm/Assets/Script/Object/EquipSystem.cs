@@ -82,8 +82,6 @@ public class EquipSystem : MonoBehaviour
             if (selectedNumber != number)
             {
 
-
-
                 selectedNumber = number;
 
                 if (selectedItem != null)
@@ -142,7 +140,7 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-    //TODO:種が増えるごとにここに追加する
+    
     public bool IsPlayerHooldingSeed()
     {
         if (selecteditemModel != null)
@@ -151,6 +149,25 @@ public class EquipSystem : MonoBehaviour
             {
                 case "Hand_model(Clone)":
                     return true;
+                default:
+                    return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    internal bool IsPlayerHooldingWateringCan()
+    {
+        if (selectedItem != null)
+        {
+            switch (selectedItem.GetComponent<InventoryItem>().thisName)
+            {
+                case "じょうろ":
+                    return true;
+
                 default:
                     return false;
             }
@@ -196,7 +213,8 @@ public class EquipSystem : MonoBehaviour
         selecteditemModel.transform.SetParent(toolHolder.transform, false);
     }
 
-    //持つ武器はここで追加する(位置、回転はプレハブの座標で!!)
+    //TODO:持つ武器はここで追加する(位置、回転はプレハブの座標で!!)
+    //TODO:種が増えるごとにここに追加する
     private string CaculateItemModel(string selectedItemName)
     {
         switch (selectedItemName)
@@ -217,12 +235,20 @@ public class EquipSystem : MonoBehaviour
             case "TomatoSeed":
                 return "Hand_model";
 
+            case "Minion2Seed":
+                return "Hand_model";
+
+            case "WateringCan":
+                return "WateringCan_model";
+
             default:
                 return null;
 
         }
 
     }
+
+    
 
     public bool IsThereSwingLock()
     {
