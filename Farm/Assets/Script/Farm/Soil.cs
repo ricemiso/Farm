@@ -10,6 +10,11 @@ public class Soil : MonoBehaviour
     public bool playerInRange;
     public string plantName;
 
+    public Plant currentplant;
+
+    public Material defaltMaterial;
+    public Material waterMaterial;
+
     private void Update()
     {
         //Todo:‹——£‚ð“¾‚é•û–@
@@ -35,5 +40,26 @@ public class Soil : MonoBehaviour
 
         plantName = onlyPlantName;
 
+
+        GameObject instancePlant = Instantiate(Resources.Load($"{onlyPlantName}Plant") as GameObject);
+
+        instancePlant.transform.parent = gameObject.transform;
+        Vector3 plantPos = Vector3.zero;
+        plantPos.y = 0f;
+        instancePlant.transform.localPosition = plantPos;
+
+
+        currentplant = instancePlant.GetComponent<Plant>();
+        currentplant.dayOfPlanting = TimeManager.Instance.dayInGame;
+    }
+
+    internal void MakeSoilWatered()
+    {
+        GetComponent<Renderer>().material = waterMaterial;
+    }
+
+    internal void MakeSoilNotWatered()
+    {
+        GetComponent<Renderer>().material = defaltMaterial;
     }
 }
