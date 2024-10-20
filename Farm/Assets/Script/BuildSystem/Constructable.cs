@@ -25,7 +25,14 @@ public class Constructable : MonoBehaviour
     {
         mRenderer = GetComponent<Renderer>();
 
+        if(mRenderer == null)
+        {
+            mRenderer = GetComponentInChildren<Renderer>();
+        }
+
         mRenderer.material = defaultMaterial;
+
+
         foreach (Transform child in transform)
         {
             ghostList.Add(child.gameObject);

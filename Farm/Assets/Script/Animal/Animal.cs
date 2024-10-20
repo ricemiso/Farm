@@ -100,7 +100,7 @@ public class Animal : MonoBehaviour
     }
 
     
-
+    //TODO:ƒLƒƒƒŠ‚É•Ï‚¦‚½‚Ù‚¤‚ª—Ç‚¢‚©‚à
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

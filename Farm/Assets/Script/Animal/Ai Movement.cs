@@ -42,7 +42,7 @@ public class AI_Movement : MonoBehaviour
 	const float stopDistance = 10.0f;	// ’âŽ~‚·‚é‹——£
 
 	// Start is called before the first frame update
-	void Start()
+	protected virtual void Start()
 	{
 		animator = GetComponent<Animator>();
 

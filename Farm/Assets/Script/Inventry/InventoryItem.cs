@@ -135,6 +135,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         SelectionManager.Instance.EnableSelection();
         SelectionManager.Instance.enabled = true; ;
 
+
+        //TODO:配置オブジェクトの追加
         switch (gameObject.name)
         {
             case "Foundation(Clone)":
@@ -148,6 +150,12 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 break;
             case "Wall":
                 ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
+                break;
+            case "ミニオン(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
+                break;
+            case "ミニオン":
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
                 break;
             default:
                 break;
