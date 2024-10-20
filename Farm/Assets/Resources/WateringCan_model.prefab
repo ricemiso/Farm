@@ -64,12 +64,102 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7786098951424120670, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -7078671914543597616, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -6979771915329754626, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -1418804120126247587, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -389071068348742327, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -259972160606440404, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7155e0d0439218449bb1c9569304443, type: 3}
       propertyPath: m_Name
-      value: WateringCan
+      value: WateringCan_model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210511114257162251, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766212503428324877, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146158051506761396, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8197698979241819299, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6017048307138113615}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 580102562344545993}
   m_SourcePrefab: {fileID: 100100000, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+--- !u!1 &5787865252446138387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d7155e0d0439218449bb1c9569304443, type: 3}
+  m_PrefabInstance: {fileID: 6670896586570976578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6017048307138113615
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787865252446138387}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ef4d4c8fb9fe8b4e8f03fc4e1e06bf2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &580102562344545993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787865252446138387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4773b8a5db4abcb4e8980979855906dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  SwingWait: 0

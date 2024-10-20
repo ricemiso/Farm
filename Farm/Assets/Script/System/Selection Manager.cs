@@ -19,6 +19,7 @@ public class SelectionManager : MonoBehaviour
     public Image handIcon;
 
     public bool HandIsVisible;
+    public bool Watering;
 
     public GameObject chopHolder;
 
@@ -35,6 +36,7 @@ public class SelectionManager : MonoBehaviour
 
     private void Start()
     {
+        Watering = false;
         onTarget = false;
         interaction_text = interaction_Info_UI.GetComponent<Text>();
         chopText = chopHolder.GetComponentInChildren<Text>(); ;
@@ -171,11 +173,16 @@ public class SelectionManager : MonoBehaviour
                             interaction_text.text = "水をあげてください";
                             interaction_Info_UI.SetActive(true);
 
-                            if (Input.GetMouseButtonDown(0))
+                            if (Input.GetMouseButtonDown(0) && !Watering)
                             {
+
+                                Watering = true;
+
                                 //TODO:変更する　(オーディオクリップを使用する場合は上)
                                 //SoundManager.Instance.wateringCannel.PlayoneShot(SoundManager.Instance.wateringChannel);
                                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+
+                                StartCoroutine(DelayWatering());
 
                                 soil.currentplant.isWatered = true;
                                 soil.MakeSoilWatered();
@@ -284,6 +291,13 @@ public class SelectionManager : MonoBehaviour
 
         }
 
+    }
+
+
+    IEnumerator DelayWatering()
+    {
+        yield return new WaitForSeconds(2.0f);
+        Watering = false;
     }
 
     IEnumerator DelayedAttribute()
