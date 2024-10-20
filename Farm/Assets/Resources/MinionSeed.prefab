@@ -125,4 +125,4 @@ MonoBehaviour:
   isEquippable: 1
   isInsideQuiqSlot: 0
   isSelected: 0
-  isUseable: 0
+  isUseable: 1

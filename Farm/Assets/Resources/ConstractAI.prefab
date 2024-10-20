@@ -5383,8 +5383,9 @@ GameObject:
   - component: {fileID: 2710428140813291052}
   - component: {fileID: 5065931816046800050}
   - component: {fileID: 1830026702440311596}
+  - component: {fileID: 6868006363749424123}
   m_Layer: 0
-  m_Name: Rabbit 2
+  m_Name: ConstractAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5398,8 +5399,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5447362327422923096}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.960648, y: -0.00000047683716, z: 24.02994}
+  m_LocalRotation: {x: 0.009966388, y: 0.9918983, z: -0.11008497, w: -0.06260928}
+  m_LocalPosition: {x: 0.66, y: 1.88, z: 8.52}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5409,7 +5410,7 @@ Transform:
   - {fileID: 2152038060088535131}
   - {fileID: 3992599567629068509}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 12.541, y: 187.44, z: 1.97}
 --- !u!95 &7009993587871073479
 Animator:
   serializedVersion: 5
@@ -5521,8 +5522,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8, y: 1, z: 8}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &2710428140813291052
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5662,6 +5663,27 @@ MonoBehaviour:
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &6868006363749424123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5447362327422923096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b62fdf204c572c43bf2621bd18a9500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  isOverlappingItems: 0
+  isValidToBeBuilt: 0
+  detectedGhostMemeber: 0
+  redMaterial: {fileID: 2100000, guid: 3532dc94976cc354f88588371c99fe73, type: 2}
+  greenMaterial: {fileID: 2100000, guid: 0bc7b179d76200b4bb19108f882cc6ba, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 11f39b2ab10a2184d84e62f1906a4a05, type: 2}
+  ghostList: []
+  solidCollider: {fileID: 1002354545007044409}
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0

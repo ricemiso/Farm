@@ -158,9 +158,6 @@ public class ConstructionManager : MonoBehaviour
     private void Update()
     {
 
-        
-
-
         if (inConstructionMode)
         {
             ConstructionUI.SetActive(true);
@@ -173,9 +170,15 @@ public class ConstructionManager : MonoBehaviour
 
         if (itemToBeConstructed != null && inConstructionMode)
         {
-
-            if (itemToBeConstructed.name == "FoundationModel")
+            //TODO:配置する物の条件の追加
+            if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI")
             {
+                if(itemToBeConstructed.name == "ConstractAI")
+                {
+                    itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
+                    itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                }
+
                 if (CheckValidConstructionPosition())
                 {
                     isValidPlacement = true;
@@ -198,6 +201,8 @@ public class ConstructionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
+
+
             if (Physics.Raycast(ray, out hit))
             {
                 var selectionTransform = hit.transform;
@@ -227,7 +232,7 @@ public class ConstructionManager : MonoBehaviour
             }
         }
 
-
+        //TODO:配置アイテムの追加
         if (Input.GetMouseButtonDown(0) && inConstructionMode )
         {
             if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "FoundationModel")
@@ -235,7 +240,16 @@ public class ConstructionManager : MonoBehaviour
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
+            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI")
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
+                AIPlaceItemFreeStyle();
+                
+                DestroyItem(ItemToBeDestroy);
             }
+
 
             if (selectingAGhost)
             {
@@ -339,6 +353,28 @@ public class ConstructionManager : MonoBehaviour
 
         inConstructionMode = false;
     }
+
+    private void AIPlaceItemFreeStyle()
+    {
+        // アイテムを親の下に移動
+        itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
+
+        // デフォルトの色に設定
+        itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
+
+        // タグを設定
+        itemToBeConstructed.tag = "placedFoundation";
+
+        // solidCollider を有効にする
+        itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
+
+        // アイテムを配置した後に、itemToBeConstructed を null に設定
+        itemToBeConstructed = null;
+
+        // 建設モードを終了
+        inConstructionMode = false;
+    }
+
 
     private bool CheckValidConstructionPosition()
     {

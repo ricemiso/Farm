@@ -10,6 +10,7 @@ public class EquiableItem : MonoBehaviour
 
     public Animator animator;
     public bool SwingWait;
+    private bool wasWatering = false;
 
     void Start()
     {
@@ -26,16 +27,22 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.Instance.HandIsVisible == false
             && !ConstructionManager.Instance.inConstructionMode
             && MenuManager.Instance.isMenuOpen == false
-            && SwingWait ==false) 
+            && SwingWait ==false
+            && EquipSystem.Instance.IsPlayerHooldingWateringCan()== false) 
         {
             SwingWait = true;
            
             StartCoroutine(SwingAction());
         }
 
-        if (SelectionManager.Instance.Watering)
+        if (SelectionManager.Instance.Watering && !wasWatering)
         {
             animator.SetTrigger("Watering");
+            wasWatering = true;
+        }
+        else if (!SelectionManager.Instance.Watering && wasWatering)
+        {
+            wasWatering = false;
         }
 
     }
