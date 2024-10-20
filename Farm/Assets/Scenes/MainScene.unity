@@ -6702,6 +6702,7 @@ MonoBehaviour:
   centerDotimage: {fileID: 380608646}
   handIcon: {fileID: 1575943114}
   HandIsVisible: 0
+  Watering: 0
   chopHolder: {fileID: 922331393}
   selectedTree: {fileID: 0}
   selectedCraft: {fileID: 0}
@@ -17156,7 +17157,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17172,15 +17173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 723832171663836928, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

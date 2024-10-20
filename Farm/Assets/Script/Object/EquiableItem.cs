@@ -32,8 +32,13 @@ public class EquiableItem : MonoBehaviour
            
             StartCoroutine(SwingAction());
         }
-    }
 
+        if (SelectionManager.Instance.Watering)
+        {
+            animator.SetTrigger("Watering");
+        }
+
+    }
 
     IEnumerator SwingAction()
     {
