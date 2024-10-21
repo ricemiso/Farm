@@ -310,7 +310,6 @@ public class CraftingSystem : MonoBehaviour
             }
         }
 
-        // TODO:クイックスロット内のアイテムもカウント
         int quickStoneCount = 0;
         int quickStickCount = 0;
         int quickLogCount = 0;

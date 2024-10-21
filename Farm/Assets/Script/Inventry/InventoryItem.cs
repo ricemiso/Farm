@@ -139,23 +139,17 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         //TODO:配置オブジェクトの追加
         switch (gameObject.name)
         {
-            case "Foundation(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
-                break;
             case "Foundation":
                 ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
-                break;
-            case "Wall(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
                 break;
             case "Wall":
                 ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
                 break;
-            case "ミニオン(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
-                break;
             case "ミニオン":
                 ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
+                break;
+            case "Stairs":
+                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
                 break;
             default:
                 break;

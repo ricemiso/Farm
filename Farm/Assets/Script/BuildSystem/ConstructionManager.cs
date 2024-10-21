@@ -171,7 +171,8 @@ public class ConstructionManager : MonoBehaviour
         if (itemToBeConstructed != null && inConstructionMode)
         {
             //TODO:配置する物の条件の追加
-            if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI")
+            if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI" 
+                || itemToBeConstructed.name == "StairsWoodemodel")
             {
                 if(itemToBeConstructed.name == "ConstractAI")
                 {
@@ -240,6 +241,8 @@ public class ConstructionManager : MonoBehaviour
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
+
+
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI")
             {
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
@@ -247,6 +250,12 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
                 
+                DestroyItem(ItemToBeDestroy);
+            }
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "StairsWoodemodel")
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
             }
 
@@ -336,7 +345,6 @@ public class ConstructionManager : MonoBehaviour
 
         itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
 
-
         itemToBeConstructed.GetComponent<Constructable>().ExtractGhostMembers();
 
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
@@ -363,7 +371,7 @@ public class ConstructionManager : MonoBehaviour
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
         // タグを設定
-        itemToBeConstructed.tag = "placedFoundation";
+        itemToBeConstructed.tag = "SupportUnit";
 
         // solidCollider を有効にする
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
