@@ -17,6 +17,8 @@ public class ChoppableStone : MonoBehaviour
 
     public float caloriesSpendChoppingWood;
 
+    [SerializeField] float dis = 10f;
+
     private void Start()
     {
         stoneHealth = stoneMaxHealth;
@@ -24,17 +26,22 @@ public class ChoppableStone : MonoBehaviour
        // Animator = transform.parent.GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player"))
+        if (canBeChopped)
+        {
+            GrobalState.Instance.resourceHelth = stoneHealth;
+            GrobalState.Instance.resourceMaxHelth = stoneMaxHealth;
+
+        }
+
+        float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+
+        if (distance < dis)
         {
             playerRange = true;
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        else
         {
             playerRange = false;
         }
@@ -76,13 +83,5 @@ public class ChoppableStone : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (canBeChopped)
-        {
-            GrobalState.Instance.resourceHelth = stoneHealth;
-            GrobalState.Instance.resourceMaxHelth = stoneMaxHealth;
-
-        }
-    }
+    
 }

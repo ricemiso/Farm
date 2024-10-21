@@ -53,7 +53,7 @@ public class Constructable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground") && gameObject.CompareTag("activeConstructable"))
+        if ((other.CompareTag("Ground")|| other.CompareTag("placedFoundation")) && gameObject.CompareTag("activeConstructable"))
         {
             isGrounded = true;
         }
