@@ -356,8 +356,8 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Pickaxe---- //
-        PickaxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
-        PickaxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
+        PickaxeReq1.text = "Î 3 [" + (stone_count + quickStoneCount) + "]";
+        PickaxeReq2.text = "Ž} 3 [" + (stick_count + quickStickCount) + "]";
 
         if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
             && InventorySystem.Instance.CheckSlotAvailable(1))
