@@ -342,22 +342,8 @@ public class CraftingSystem : MonoBehaviour
 
         //TODO: クラフトアイテムはここで追加
         // ----Axe---- //
-        AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
-        AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
-
-        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
-            && InventorySystem.Instance.CheckSlotAvailable(1))
-        {
-            craftAxeBTN.gameObject.SetActive(true);
-        }
-        else
-        {
-            craftAxeBTN.gameObject.SetActive(false);
-        }
-
-        // ----Axe---- //
-        AxeReq1.text = "3 Stone [" + (stone_count + quickStoneCount) + "]";
-        AxeReq2.text = "3 Stick [" + (stick_count + quickStickCount) + "]";
+        AxeReq1.text = "石 3 [" + (stone_count + quickStoneCount) + "]";
+        AxeReq2.text = "枝 3 [" + (stick_count + quickStickCount) + "]";
 
         if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
             && InventorySystem.Instance.CheckSlotAvailable(1))
