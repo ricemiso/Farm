@@ -18,6 +18,8 @@ TagManager:
   - Enemy
   - Minion1
   - SupportUnit
+  - Stone
+  - Strage
   layers:
   - Default
   - TransparentFX

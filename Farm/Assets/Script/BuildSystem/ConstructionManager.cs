@@ -28,7 +28,7 @@ public class ConstructionManager : MonoBehaviour
     public GameObject ConstructionUI;
 
     public GameObject player;
-
+    public GameObject placementHoldingSpot;
 
     private void Awake()
     {
@@ -172,7 +172,7 @@ public class ConstructionManager : MonoBehaviour
         {
             //TODO:配置する物の条件の追加
             if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI" 
-                || itemToBeConstructed.name == "StairsWoodemodel")
+                || itemToBeConstructed.name == "StairsWoodemodel" || itemToBeConstructed.name == "Chestmodel")
             {
                 if(itemToBeConstructed.name == "ConstractAI")
                 {
@@ -245,6 +245,7 @@ public class ConstructionManager : MonoBehaviour
 
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI")
             {
+                //TODO:修正する
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
@@ -256,6 +257,11 @@ public class ConstructionManager : MonoBehaviour
             {
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
+                DestroyItem(ItemToBeDestroy);
+            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "Chestmodel")
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                AIPlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
             }
 
@@ -365,13 +371,21 @@ public class ConstructionManager : MonoBehaviour
     private void AIPlaceItemFreeStyle()
     {
         // アイテムを親の下に移動
-        itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
+        itemToBeConstructed.transform.SetParent(placementHoldingSpot.transform, true);
 
         // デフォルトの色に設定
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
         // タグを設定
-        itemToBeConstructed.tag = "Minion1";
+        if(itemToBeConstructed.name == "ConstractAI")
+        {
+            itemToBeConstructed.tag = "Minion1";
+        }
+        else
+        {
+            itemToBeConstructed.tag = "Strage";
+        }
+        
 
         // solidCollider を有効にする
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
@@ -379,6 +393,12 @@ public class ConstructionManager : MonoBehaviour
         // アイテムを配置した後に、itemToBeConstructed を null に設定
         itemToBeConstructed = null;
 
+        StartCoroutine(delayMode());
+    }
+
+    IEnumerator delayMode()
+    {
+        yield return new WaitForSeconds(1.0f);
         // 建設モードを終了
         inConstructionMode = false;
     }

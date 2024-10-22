@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        if (StorageManager.Instance.storageUIOpen == true) return;
+
         isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0)

@@ -100,6 +100,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (isUseable)
             {
                 ConstructionManager.Instance.ItemToBeDestroy = gameObject;
+
                 gameObject.SetActive(false);
 
                 UseItem();
@@ -149,7 +150,11 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
                 break;
             case "Stairs":
+               
                 ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
+                break;
+            case "Chest":
+                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
                 break;
             default:
                 break;
