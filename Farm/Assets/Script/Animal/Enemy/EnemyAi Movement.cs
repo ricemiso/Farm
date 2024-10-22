@@ -4,45 +4,38 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAi_Movement : AI_Movement
+public class EnemyAI_Movement : AI_Movement
 {
 
-	public new enum MoveState
-	{
-		WALKING,
-		FOLLOWING,
-		CHASE,
-		WAITING,
-	}
+    protected override void Start()
+    {
+        base.Start();
+    }
 
-	public new MoveState state;
-
-
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+    protected override void Update()
 	{
 
-		if (isStopped) return;  // 停止中なら処理を中断
-
-		switch (state)
+		if (!isStopped && onGround)
 		{
-			case MoveState.CHASE:
-				ChaseEnemy();
-				break;
-			case MoveState.WALKING:
-				Walk();
-				break;
-			case MoveState.WAITING:
-			default:
-				waitCounter -= Time.deltaTime;
+            switch (state)
+            {
+                case MoveState.CHASE:
+                    ChaseEnemy();
+                    break;
+                case MoveState.WALKING:
+                    Walk();
+                    break;
+                case MoveState.WAITING:
+                default:
+					Wait();
+					break;
+            }
+        }
 
-				if (waitCounter <= 0)
-				{
-					ChooseDirection();
-				}
-				break;
-		}
-	}
+
+        base.Update();
+    }
 
 	// プレイヤーに後ろから追従するメソッド
 	//void FollowPlayer()

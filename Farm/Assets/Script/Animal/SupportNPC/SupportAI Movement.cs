@@ -13,7 +13,7 @@ public class SupportAI_Movement : AI_Movement
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
 	{
 		// プレイヤーとの距離を計算
 		float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -28,30 +28,28 @@ public class SupportAI_Movement : AI_Movement
 			}
 		}
 
-		if (isStopped) return;  // 停止中なら処理を中断
-
-		switch (state)
+		if (!isStopped && onGround)
 		{
-			case MoveState.CHASE:
-				ChaseEnemy();
-				break;
-			case MoveState.FOLLOWING:
-				FollowPlayer();
-				break;
-			case MoveState.WALKING:
-				Walk();
-				break;
-			case MoveState.WAITING:
-			default:
-				waitCounter -= Time.deltaTime;
-
-				if (waitCounter <= 0)
-				{
-					ChooseDirection();
-				}
-				break;
+			switch (state)
+			{
+				case MoveState.CHASE:
+					ChaseEnemy();
+					break;
+				case MoveState.FOLLOWING:
+					FollowPlayer();
+					break;
+				case MoveState.WALKING:
+					Walk();
+					break;
+				case MoveState.WAITING:
+				default:
+					Wait();
+					break;
+			}
 		}
-	}
+
+        base.Update();
+    }
 
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
