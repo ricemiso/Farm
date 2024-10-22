@@ -1117,6 +1117,7 @@ MonoBehaviour:
   treeFallSound: {fileID: 61512411}
   PutSeSound: {fileID: 61512412}
   gravelWalkSound: {fileID: 61512413}
+  foundationWalkSound: {fileID: 0}
   startingZoneBGMMusic: {fileID: 61512410}
 --- !u!82 &61512404
 AudioSource:
@@ -3031,6 +3032,7 @@ MonoBehaviour:
   isOpen: 0
   inventoryUpdated: 0
   isPop: 0
+  itemsPickedup: []
 --- !u!4 &211531091
 Transform:
   m_ObjectHideFlags: 0
@@ -4803,9 +4805,12 @@ MonoBehaviour:
   centerDotimage: {fileID: 380608646}
   handIcon: {fileID: 1575943114}
   HandIsVisible: 0
+  Watering: 0
   chopHolder: {fileID: 922331393}
   selectedTree: {fileID: 0}
   selectedCraft: {fileID: 0}
+  selectedStone: {fileID: 0}
+  selectedSoil: {fileID: 0}
 --- !u!4 &484624253
 Transform:
   m_ObjectHideFlags: 0
@@ -7438,6 +7443,7 @@ MonoBehaviour:
   inventryitemList: []
   isOpen: 0
   AxeBLP: {fileID: 0}
+  PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
   foundationBLP: {fileID: 0}
   WallBLP: {fileID: 0}
@@ -9028,6 +9034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caloriesCounter: {fileID: 1348790827}
   playerState: {fileID: 1040980721}
+  weakSpeedRate: 0
 --- !u!1 &947797478
 GameObject:
   m_ObjectHideFlags: 0
@@ -10200,6 +10207,7 @@ MonoBehaviour:
   maxHydrationPercent: 100
   isHydrationActive: 0
   isPosition: {x: 0, y: 0, z: 0}
+  playerSpeedRate: 0
 --- !u!1 &1049366976
 GameObject:
   m_ObjectHideFlags: 0
@@ -18355,6 +18363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9054034566264345876, guid: 0eaa0af570e9e0b45b122d9319ca03ca, type: 3}
+      propertyPath: terrain
+      value: 
+      objectReference: {fileID: 302434190}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

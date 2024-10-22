@@ -73,7 +73,7 @@ public class SettingManager : MonoBehaviour
         musicValue.GetComponent<TextMeshProUGUI>().text = "" + (musicSlider.value) + "";
         effectValue.GetComponent<TextMeshProUGUI>().text = "" + (effectSlider.value) + "";
 
-
+        //TODO:‰¹‚ð’Ç‰Á‚µ‚½Žž‚Í‚±‚±‚É’Ç‰Á‚·‚é
         AudioListener.volume = masterSlider.value/20;
 
         SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value / 20;
@@ -87,5 +87,6 @@ public class SettingManager : MonoBehaviour
         SoundManager.Instance.treeFallSound.volume = effectSlider.value / 20;
         SoundManager.Instance.PutSeSound.volume = effectSlider.value / 20;
         SoundManager.Instance.gravelWalkSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.foundationWalkSound.volume = effectSlider.value / 20;
     }
 }

@@ -371,7 +371,7 @@ public class ConstructionManager : MonoBehaviour
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
         // ƒ^ƒO‚ğİ’è
-        itemToBeConstructed.tag = "SupportUnit";
+        itemToBeConstructed.tag = "Minion1";
 
         // solidCollider ‚ğ—LŒø‚É‚·‚é
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;

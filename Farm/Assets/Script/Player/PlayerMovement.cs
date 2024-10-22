@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 lastPosition;
     public bool isMoving;
 
+    // foundationに乗っているかのフラグ
+    private bool isOnFoundation = false;
+
     private void Start()
     {
         lastPosition = new Vector3(0f, 0f, 0f);
@@ -99,6 +102,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateFootstepSound()
     {
+        ////if (isOnFoundation)
+        ////{
+        ////    PlayFoundationFootstep();
+        ////    return;
+        ////}
+        //else
+        //{
+            
+        //}
+
+        // 通常の地形ごとの足音を再生
         Vector3 playerPosition = transform.position;
         int layerIndex = GetCurrentTerrainLayer(playerPosition);
         AudioSource newAudioSource = GetFootstepSoundForLayer(layerIndex);
@@ -168,4 +182,46 @@ public class PlayerMovement : MonoBehaviour
 
         return maxTextureIndex;
     }
+
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if (hit.collider.CompareTag("placedFoundation") && !hit.collider.CompareTag("Ground"))
+    //    {
+    //        isOnFoundation = true;
+    //    }
+    //    else
+    //    {
+    //        isOnFoundation = false;
+    //    }
+    //}
+
+    //private void PlayFoundationFootstep()
+    //{
+    //    if (SoundManager.Instance.foundationWalkSound == null)
+    //    {
+    //        Debug.LogError("foundationWalkSound is not set in SoundManager.");
+    //        return;
+    //    }
+
+    //    if (currentAudioSource != null && currentAudioSource.isPlaying)
+    //    {
+    //        currentAudioSource.Stop();
+    //    }
+
+    //    currentAudioSource = SoundManager.Instance.foundationWalkSound;
+    //    Debug.Log("Assigned foundationWalkSound to currentAudioSource.");
+
+    //    if (currentAudioSource.clip == null)
+    //    {
+    //        Debug.LogError("No AudioClip assigned to foundationWalkSound.");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Assigned AudioClip: " + currentAudioSource.clip.name);
+    //    }
+
+    //    currentAudioSource.loop = true;
+    //    currentAudioSource.Play();
+    //    Debug.Log("Playing foundationWalkSound.");
+    //}
 }
