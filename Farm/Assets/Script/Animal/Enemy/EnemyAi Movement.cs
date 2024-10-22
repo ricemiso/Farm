@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAi_Movement : AI_Movement
+public class EnemyAI_Movement : AI_Movement
 {
 
     protected override void Start()
