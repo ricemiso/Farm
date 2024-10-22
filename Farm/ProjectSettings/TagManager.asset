@@ -16,6 +16,8 @@ TagManager:
   - wallghost
   - placeWall
   - Enemy
+  - Minion1
+  - Soundall
   layers:
   - Default
   - TransparentFX

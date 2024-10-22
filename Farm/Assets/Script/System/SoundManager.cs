@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource treeFallSound;
     public AudioSource PutSeSound;
     public AudioSource gravelWalkSound;
+    public AudioSource foundationWalkSound;
 
     //public AudioSource WateringSound;
     //public AudioSource WateringCanSound;
