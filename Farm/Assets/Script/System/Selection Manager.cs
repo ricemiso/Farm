@@ -26,6 +26,7 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedTree;
    [HideInInspector] public GameObject selectedCraft;
    [HideInInspector] public GameObject selectedStone;
+    public GameObject selectedStorageBox;
 
 
     [HideInInspector] public GameObject selectedSoil;
@@ -209,6 +210,31 @@ public class SelectionManager : MonoBehaviour
             }
 
 
+            StrageBox strageBox = selectionTransform.GetComponent<StrageBox>();
+
+            if (strageBox && strageBox.playerInRange && ConstructionManager.Instance.inConstructionMode == false) 
+            {
+                interaction_text.text = "ŠJ‚¯‚é";
+                interaction_Info_UI.SetActive(true);
+
+                selectedStorageBox = strageBox.gameObject;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StorageManager.Instance.OpenBox(strageBox);
+                }
+            }
+            else
+            {
+                if(selectedStorageBox != null)
+                {
+                    selectedStorageBox = null;
+                }
+            }
+
+
+
+
             Animal animal = selectionTransform.GetComponent<Animal>();
 
             if (animal && animal.playerISRange)
@@ -283,7 +309,7 @@ public class SelectionManager : MonoBehaviour
             }
 
 
-            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil) 
+            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil && !strageBox)  
             {
                 interaction_text.text = "";
                 handIcon.gameObject.SetActive(false);

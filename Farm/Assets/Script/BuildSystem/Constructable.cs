@@ -51,8 +51,11 @@ public class Constructable : MonoBehaviour
         }
     }
 
+    //TODO : PlacebleItemの配置スクリプトのアルゴリズムを使いたい
+
     private void OnTriggerEnter(Collider other)
     {
+        //TODO:配置アイテムが増えたらここに追加していく(タグ)
         if ((other.CompareTag("Ground")|| other.CompareTag("placedFoundation")) && gameObject.CompareTag("activeConstructable"))
         {
             isGrounded = true;
