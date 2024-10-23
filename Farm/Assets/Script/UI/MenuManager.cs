@@ -14,6 +14,7 @@ public class MenuManager : MonoBehaviour
     public GameObject menu;
 
     public bool isMenuOpen;
+    public bool isCrystalMove;
 
     private void Awake()
     {
@@ -42,11 +43,18 @@ public class MenuManager : MonoBehaviour
             SelectionManager.Instance.DisableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
 
+            isCrystalMove = false;
+			Time.timeScale = 0f;
+			AudioListener.pause = true;
 
-        }else if (Input.GetKeyDown(KeyCode.M) && isMenuOpen)
+		}
+		else if (Input.GetKeyDown(KeyCode.M) && isMenuOpen)
         {
+			Time.timeScale = 1.0f;
+			AudioListener.pause = false;
+			isCrystalMove = true;
 
-            savemenu.SetActive(false);
+			savemenu.SetActive(false);
             settingmenu.SetActive(false);
             menu.SetActive(true);
 

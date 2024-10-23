@@ -52,23 +52,36 @@ public class Choppablecraft : MonoBehaviour
 
     public void GetHit()
     {
-
         Health -= 1;
 
         PlayerState.Instance.currentCalories -= caloriesSpendChoppingWood;
 
         if (Health <= 0)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
-
-            Destroy(gameObject);
-            canBeChopped = false;
-            SelectionManager.Instance.selectedCraft = null;
-            SelectionManager.Instance.chopHolder.gameObject.SetActive(false);
-
-        }
+            Destroy();
+		}
 
     }
 
-    
+    public void GetDamage()
+    {
+		//Todo EnemyAI_Movement‚É—^‚¦‚éƒ_ƒ[ƒW—Ê‚ð“ü‚ê‚é•Ï”‚ðì¬
+		//Health -= EnemyAI_Movement.Instantiate.damage;
+
+		if (Health <= 0)
+		{
+			Destroy();
+		}
+	}
+
+	public void Destroy()
+	{
+		SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
+
+		Destroy(gameObject);
+		canBeChopped = false;
+		SelectionManager.Instance.selectedCraft = null;
+		SelectionManager.Instance.chopHolder.gameObject.SetActive(false);
+	}
+
 }
