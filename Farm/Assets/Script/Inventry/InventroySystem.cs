@@ -121,8 +121,6 @@ public class InventorySystem : MonoBehaviour
 
         itemList.Add(itemName);
 
-       
-
         ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
 

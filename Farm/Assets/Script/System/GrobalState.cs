@@ -9,10 +9,6 @@ public class GrobalState : MonoBehaviour
     public float resourceHelth;
     public float resourceMaxHelth;
     public float resourceMana;
-    public int level;
-    public int damage;
-
-
 
     private void Awake()
     {

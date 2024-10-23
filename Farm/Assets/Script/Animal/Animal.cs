@@ -8,15 +8,9 @@ public class Animal : MonoBehaviour
     public string animalName;
     public bool playerISRange;
 
-    public float currentHealth;
-    public float maxHealth;
+    public int currentHealth;
+    public int maxHealth;
 
-    public bool isCraftedMinion = false;
-    public int damage = 10;
-
-    public int healthIncrease = 20;
-    public int damageIncrease = 5;
-    public int level;
 
     [SerializeField] AudioSource soundChannel;
     [SerializeField] AudioClip rabbithitAndScreem;
@@ -43,27 +37,7 @@ public class Animal : MonoBehaviour
 
     private void Start()
     {
-
-        if (CraftingSystem.Instance.islevelUp)
-        {
-            // 現在のレベルに基づいてステータスを反映
-            for (int i = 0; i < GrobalState.Instance.level; i++)
-            {
-                LevelUp(level);  // レベルに応じて繰り返しレベルアップ
-            }
-
-            GrobalState.Instance.level = 0;
-        }
-        else
-        {
-            // 初期状態を設定
-            currentHealth = maxHealth;
-            damage = 10;
-            level = 0;
-            
-        }
-
-
+        currentHealth = maxHealth;
         animator = GetComponent<Animator>();
     }
 
@@ -144,25 +118,5 @@ public class Animal : MonoBehaviour
         {
             playerISRange = false;
         }
-    }
-
-
-    public void LevelUp(int nowlevel)
-    {
-
-
-        nowlevel += 1;
-        level = nowlevel;
-
-        int healthIncrease = 20 * nowlevel;
-        int damageIncrease = 5 * nowlevel;
-
-
-        maxHealth += healthIncrease;
-        currentHealth = maxHealth;
-        damage += damageIncrease;
-
-        CraftingSystem.Instance.islevelUp = false;
-        // Debug.Log($"{animalName} のレベルが {level} に上がりました！ 体力: {maxHealth}, ダメージ: { GrobalState.Instance.Damage}");
     }
 }

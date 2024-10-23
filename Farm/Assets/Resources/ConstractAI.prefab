@@ -5384,7 +5384,6 @@ GameObject:
   - component: {fileID: 5065931816046800050}
   - component: {fileID: 1830026702440311596}
   - component: {fileID: 6868006363749424123}
-  - component: {fileID: 7949410182037434107}
   m_Layer: 0
   m_Name: ConstractAI
   m_TagString: Untagged
@@ -5497,10 +5496,6 @@ MonoBehaviour:
   playerISRange: 0
   currentHealth: 0
   maxHealth: 40
-  isCraftedMinion: 0
-  damage: 10
-  healthIncrease: 20
-  damageIncrease: 5
   soundChannel: {fileID: 2710428140813291052}
   rabbithitAndScreem: {fileID: 8300000, guid: a518b76513a06e54895367b10fa4d067, type: 3}
   rabitHitAndDie: {fileID: 8300000, guid: 88c28dd83f9855a429e14c6185a524f1, type: 3}
@@ -5687,18 +5682,6 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 11f39b2ab10a2184d84e62f1906a4a05, type: 2}
   ghostList: []
   solidCollider: {fileID: 1002354545007044409}
---- !u!114 &7949410182037434107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447362327422923096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77cf0b7791637d54290cb9ca63e7dd96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0
