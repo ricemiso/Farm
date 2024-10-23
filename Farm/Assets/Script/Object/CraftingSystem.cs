@@ -15,11 +15,12 @@ public class CraftingSystem : MonoBehaviour
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
-    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN;
 
-    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2;
 
     public bool isOpen;
+    public bool islevelUp;
     private bool canCraft = true;
 
 
@@ -28,11 +29,12 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint PlankBLP;
     [HideInInspector] public BluePrint foundationBLP;
     [HideInInspector] public BluePrint WallBLP;
+    [HideInInspector] public BluePrint MinionBLP;
 
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -52,6 +54,7 @@ public class CraftingSystem : MonoBehaviour
         PlankBLP = new BluePrint("Plank", 2, 1, "Log", 1, "", 0);
         foundationBLP = new BluePrint("Foundation", 1, 1, "Plank", 4, "", 0);
         WallBLP = new BluePrint("Wall", 1, 1, "Plank", 2, "", 0);
+        MinionBLP = new BluePrint("ミニオン", 1, 2, "Mana", 1, "ミニオン", 1);
 
         isOpen = false;
 
@@ -120,6 +123,13 @@ public class CraftingSystem : MonoBehaviour
         craftWallBTN = constractionScreenUI.transform.Find("Wall").transform.Find("WallButton").GetComponent<Button>();
         craftWallBTN.onClick.AddListener(delegate { CraftAnyItem(WallBLP); });
 
+        //Minion
+        MinionReq1 = survivalScreenUI.transform.Find("Minion").transform.Find("rec1").GetComponent<Text>();
+        MinionReq2 = survivalScreenUI.transform.Find("Minion").transform.Find("rec2").GetComponent<Text>();
+
+        MinionBTN = survivalScreenUI.transform.Find("Minion").transform.Find("MinionButton").GetComponent<Button>();
+        MinionBTN.onClick.AddListener(delegate { CraftAnyItem(MinionBLP); });
+
     }
 
 
@@ -131,7 +141,7 @@ public class CraftingSystem : MonoBehaviour
 
     void OpenToolsCategory()
     {
-       // craftingScreenUI.SetActive(false);
+        // craftingScreenUI.SetActive(false);
         toolScreenUI.SetActive(true);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
@@ -147,7 +157,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenSurvivalCategory()
     {
         toolScreenUI.SetActive(false);
-       // craftingScreenUI.SetActive(false);
+        // craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(true);
         refineScreenUI.SetActive(false);
         constractionScreenUI.SetActive(false);
@@ -162,7 +172,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenRefineCategory()
     {
         toolScreenUI.SetActive(false);
-      //  craftingScreenUI.SetActive(false);
+        //  craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(true);
         constractionScreenUI.SetActive(false);
@@ -177,7 +187,7 @@ public class CraftingSystem : MonoBehaviour
     void OpenconstrunctinCategory()
     {
         toolScreenUI.SetActive(false);
-       // craftingScreenUI.SetActive(false);
+        // craftingScreenUI.SetActive(false);
         survivalScreenUI.SetActive(false);
         refineScreenUI.SetActive(false);
         constractionScreenUI.SetActive(true);
@@ -224,20 +234,28 @@ public class CraftingSystem : MonoBehaviour
 
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
-        if (!canCraft) return; 
+        if (!canCraft) return;
         StartCoroutine(CraftWithCooldown(blueprintToCraft));
     }
 
     private IEnumerator CraftWithCooldown(BluePrint blueprintToCraft)
     {
-        canCraft = false; 
+        canCraft = false;
 
         SoundManager.Instance.PlaySound(SoundManager.Instance.craftingSound);
 
-        // アイテムを追加
         for (var i = 0; i < blueprintToCraft.numberOfItemsToProduce; i++)
         {
-            InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
+
+            if (blueprintToCraft.itemName == "ミニオン")
+            {
+                islevelUp = true;
+                GrobalState.Instance.level += 1;
+            }
+            else
+            {
+                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
+            }
         }
 
         // 現在のインベントリ内の素材の数を取得
@@ -288,6 +306,7 @@ public class CraftingSystem : MonoBehaviour
         int log_count = 0;
         int plank_count = 0;
         int mana_count = 0;
+        int minion_count = 0;
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
@@ -311,6 +330,9 @@ public class CraftingSystem : MonoBehaviour
                 case "Mana":
                     mana_count += 1;
                     break;
+                case "ミニオン":
+                    minion_count += 1;
+                    break;
             }
         }
 
@@ -319,6 +341,7 @@ public class CraftingSystem : MonoBehaviour
         int quickLogCount = 0;
         int quickPlankCount = 0;
         int quickManaCount = 0;
+        int quickMinionCount = 0;
 
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
@@ -345,13 +368,17 @@ public class CraftingSystem : MonoBehaviour
                 {
                     quickManaCount++;
                 }
+                else if (itemName == "ミニオン")
+                {
+                    quickMinionCount++;
+                }
             }
         }
 
 
         //TODO: クラフトアイテムはここで追加
         // ----Axe---- //
-        AxeReq1.text = "石 3 [" + (stone_count + quickStoneCount) + "]";
+        AxeReq1.text = "マナ 3 [" + (stone_count + quickStoneCount) + "]";
         AxeReq2.text = "枝 3 [" + (stick_count + quickStickCount) + "]";
 
         if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
@@ -415,6 +442,20 @@ public class CraftingSystem : MonoBehaviour
             craftWallBTN.gameObject.SetActive(false);
         }
 
+
+        // ---Minion---- //
+        MinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
+        MinionReq2.text = "ミニオン 1 [" + (minion_count + quickMinionCount) + "]";
+
+        if ((mana_count + quickManaCount) >= 1 && (minion_count + quickMinionCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            MinionBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            MinionBTN.gameObject.SetActive(false);
+        }
 
     }
 
