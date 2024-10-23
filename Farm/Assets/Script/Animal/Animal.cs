@@ -8,8 +8,8 @@ public class Animal : MonoBehaviour
     public string animalName;
     public bool playerISRange;
 
-    [SerializeField] int currentHealth;
-    [SerializeField] int maxHelth;
+    public int currentHealth;
+    public int maxHealth;
 
 
     [SerializeField] AudioSource soundChannel;
@@ -37,7 +37,7 @@ public class Animal : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHelth;
+        currentHealth = maxHealth;
         animator = GetComponent<Animator>();
     }
 

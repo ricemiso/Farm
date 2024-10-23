@@ -5495,7 +5495,7 @@ MonoBehaviour:
   animalName: "\u30A6\u30B5\u30AE"
   playerISRange: 0
   currentHealth: 0
-  maxHelth: 40
+  maxHealth: 40
   soundChannel: {fileID: 2710428140813291052}
   rabbithitAndScreem: {fileID: 8300000, guid: a518b76513a06e54895367b10fa4d067, type: 3}
   rabitHitAndDie: {fileID: 8300000, guid: 88c28dd83f9855a429e14c6185a524f1, type: 3}
