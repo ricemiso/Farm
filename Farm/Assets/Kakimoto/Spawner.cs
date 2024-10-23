@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour
             // è¢ä´
             GameObject obj = Instantiate(m_EnemyList[Random.Range(0, m_EnemyList.Count)],
                 gap + this.transform.position, Quaternion.identity);
-            obj.GetComponent<Animal>().maxHelth = (int)(obj.GetComponent<Animal>().maxHelth * health);
+            obj.GetComponent<Animal>().maxHealth = (int)(obj.GetComponent<Animal>().maxHealth * health);
             obj.transform.localScale *= size;
 
 

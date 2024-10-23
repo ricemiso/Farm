@@ -8,8 +8,8 @@ public class Animal : MonoBehaviour
     public string animalName;
     public bool playerISRange;
 
-    public int currentHealth;
-    public int maxHelth;
+    [SerializeField] int currentHealth;
+    [SerializeField] int maxHelth;
 
 
     [SerializeField] AudioSource soundChannel;

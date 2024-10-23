@@ -46,9 +46,10 @@ public class WaveSystem : MonoBehaviour
 	void Update()
 	{
 		int day = TimeManager.Instance.dayInGame;
+		float time = DayNightSystem.Instance.currentTimeOfDay;
 
 		// 日付が変更されていたら召喚（要検討）
-		if (day > m_WaveCount)
+		if (day > m_WaveCount && time >= 0.50f)
 		{
 			m_WaveCount = day;
 
