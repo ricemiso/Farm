@@ -260,7 +260,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
             else
             {
-                PlayerState.Instance.setHydration(hydrationBeforeConsumption + hydrationEffect);
+                PlayerState.Instance.setHydration(hydrationBeforeConsumption - hydrationEffect);
             }
         }
     }

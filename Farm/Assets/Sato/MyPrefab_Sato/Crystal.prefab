@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 6894462754392983609}
   - component: {fileID: 4256489742871501199}
   - component: {fileID: 5156680898816114880}
-  - component: {fileID: 5417361447742179822}
   - component: {fileID: 3532922016771072326}
   m_Layer: 0
   m_Name: Cube
@@ -63,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 7343448564977988862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -0.44, y: 3, z: 1.37}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -154,26 +153,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEnergy: 100
   currentEnergy: 0
-  getEnergy: 10
   rotAngle: {x: 0, y: 0, z: 0}
---- !u!114 &5417361447742179822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7343448564977988862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3009808e30354b643a9cec4ae893afe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   playerRange: 0
-  canBeChopped: 0
-  animcooltime: 0
-  treeMaxHealth: 5
-  treeHealth: 0
-  caloriesSpendChoppingWood: 0
+  CrystalMaxHealth: 1000
+  CrystalHealth: 0
+  canBeCharge: 0
+  dis: 10
 --- !u!135 &3532922016771072326
 SphereCollider:
   m_ObjectHideFlags: 0

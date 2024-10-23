@@ -26,7 +26,8 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedTree;
    [HideInInspector] public GameObject selectedCraft;
    [HideInInspector] public GameObject selectedStone;
-    public GameObject selectedStorageBox;
+   [HideInInspector] public GameObject selectedCrystal;
+   [HideInInspector] public GameObject selectedStorageBox;
 
 
     [HideInInspector] public GameObject selectedSoil;
@@ -70,6 +71,7 @@ public class SelectionManager : MonoBehaviour
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
             ChoppableStone choppableStone = selectionTransform.GetComponent<ChoppableStone>();
+            CrystalGrowth crystal = selectionTransform.GetComponent<CrystalGrowth>();
 
             //TODO:切り倒す処理
             if (choppableTree && choppableTree.playerRange)
@@ -93,6 +95,19 @@ public class SelectionManager : MonoBehaviour
                 selectedStone = choppableStone.gameObject;
                 chopText.text = "石";
                 chopHolder.gameObject.SetActive(true);
+            }else if(crystal && crystal.playerRange)
+            {
+                crystal.canBeCharge = true;
+                selectedCrystal = crystal.gameObject;
+                chopText.text = "マナクリスタル";
+                chopHolder.gameObject.SetActive(true);
+
+                if (Input.GetMouseButtonDown(0)&&EquipSystem.Instance.IsPlayerHooldingMana())
+                {
+                    crystal.GetEnergy(1);
+                    Destroy(EquipSystem.Instance.selectedItem);
+                    Destroy(EquipSystem.Instance.selecteditemModel);
+                }
             }
             else
             {
@@ -112,6 +127,12 @@ public class SelectionManager : MonoBehaviour
                 {
                     selectedStone.gameObject.GetComponent<ChoppableStone>().canBeChopped = false;
                     selectedStone = null;
+                    chopHolder.gameObject.SetActive(false);
+                }
+                else if (selectedCrystal != null)
+                {
+                    selectedCrystal.gameObject.GetComponent<CrystalGrowth>().canBeCharge = false;
+                    selectedCrystal = null;
                     chopHolder.gameObject.SetActive(false);
                 }
             }

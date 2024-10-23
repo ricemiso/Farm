@@ -59,6 +59,7 @@ public class Animal : MonoBehaviour
                 GetComponent<AI_Movement>().enabled = false;
                 StartCoroutine(puddleDelay());
                 isDead = true;
+
             }
             else
             {
