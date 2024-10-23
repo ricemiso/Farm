@@ -20,9 +20,9 @@ public class WaveSystem : MonoBehaviour
 	public List<SpawnerStruct> m_SpawnerList;
 
 	// 1Waveあたりの体力の上昇値
-	float m_HealthMultiply;
+	public float m_HealthMultiply = 1.0f;
 	// 1Waveあたりのサイズの上昇値
-	float m_SizeMultiply;
+	public float m_SizeMultiply = 1.0f;
 
 	private void Awake()
 	{
@@ -46,10 +46,10 @@ public class WaveSystem : MonoBehaviour
 	void Update()
 	{
 		int day = TimeManager.Instance.dayInGame;
-		//float time = DayNightSystem.Instance.currentTimeOfDay;
+		float time = DayNightSystem.Instance.currentTimeOfDay;
 
 		// 日付が変更されていたら召喚（要検討）
-		if (day > m_WaveCount/* && time >= 0.50f*/)
+		if (day > m_WaveCount && time >= 0.50f)
 		{
 			m_WaveCount = day;
 
