@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,7 +54,7 @@ public class Animal : MonoBehaviour
             {
                 PlayDyingSound();
 
-
+                Log.Instance.TriggerPickupPop(animalName);
                 animator.SetTrigger("Die");
                 GetComponent<AI_Movement>().enabled = false;
                 StartCoroutine(puddleDelay());
@@ -65,8 +66,9 @@ public class Animal : MonoBehaviour
 
             }
         }
-       
+
     }
+
     IEnumerator puddleDelay()
     {
         yield return new WaitForSeconds(1);
@@ -83,7 +85,7 @@ public class Animal : MonoBehaviour
             default:
                 break;
         }
-       
+
     }
 
     private void PlayHitSound()
@@ -96,11 +98,11 @@ public class Animal : MonoBehaviour
             default:
                 break;
         }
-       
+
     }
 
-    
-    //TODO:‹——£‚É•Ï‚¦‚½‚Ù‚¤‚ª—Ç‚¢‚©‚à
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
