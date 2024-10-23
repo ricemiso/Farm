@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyList:
-  - {fileID: 7195800805537036185, guid: 4d32be48a6ff35044966d4a7b0b5a08c, type: 3}
   - {fileID: 555078712326535635, guid: 40be63fb7ef1da54991036270b7eb442, type: 3}
   m_Range: {x: 5, y: 2, z: 5}
   SummonTime: 100
