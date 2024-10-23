@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public class DayNightSystem : MonoBehaviour
 {
+    public static DayNightSystem Instance { get; set; }
+
     public Light directionalLight;
 
     public float dayDurationInSecounds = 24.0f;
     public int currentHour;
-    float currentTimeOfDay = 0.35f;
+    public float currentTimeOfDay = 0.35f;
 
     public Text timeUI;
     
@@ -21,7 +23,18 @@ public class DayNightSystem : MonoBehaviour
 
     bool lockNextDayTrigger = false;
 
-   
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
