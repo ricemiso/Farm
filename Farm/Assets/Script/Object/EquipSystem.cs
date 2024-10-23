@@ -178,6 +178,24 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    internal bool IsPlayerHooldingMana()
+    {
+        if (selecteditemModel != null)
+        {
+            switch (selecteditemModel.gameObject.name)
+            {
+                case "Mana_model(Clone)":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     internal bool IsHoldingWeapon()
     {
         if (selectedItem != null)
@@ -241,6 +259,8 @@ public class EquipSystem : MonoBehaviour
             case "WateringCan":
                 return "WateringCan_model";
 
+            case "Mana":
+                return "Mana_model";
             default:
                 return null;
 

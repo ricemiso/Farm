@@ -46,9 +46,9 @@ public class PlayerState : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentCalories = maxCalories;
-        currentHydrationPercent = maxHydrationPercent;
+        currentHydrationPercent = 0;
 
-        StartCoroutine(decreaseHydration());
+        //StartCoroutine(decreaseHydration());
     }
 
     IEnumerator decreaseHydration()
@@ -77,6 +77,13 @@ public class PlayerState : MonoBehaviour
         {
             currentHealth -= 10;
         }
+
+
+        if(currentHydrationPercent >= 100)
+        {
+            Debug.Log("GameClear");
+        }
+
     }
 
     public void setHealth(float newHealth)

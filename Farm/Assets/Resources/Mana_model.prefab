@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3803609020908604596}
   - component: {fileID: 1394838276543025900}
   m_Layer: 0
-  m_Name: Mana_model 1
+  m_Name: Mana_model
   m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -45,6 +45,8 @@ public class EquiableItem : MonoBehaviour
             wasWatering = false;
         }
 
+
+
     }
 
     IEnumerator SwingAction()
@@ -100,6 +102,22 @@ public class EquiableItem : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
     }
+
+    public void GetManaCharge()
+    {
+        GameObject selectedCrystal = SelectionManager.Instance.selectedCrystal;
+
+        if (selectedCrystal != null)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
+            StartCoroutine(HitStoneSoundDelay());
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
+        }
+    }
+
 
     IEnumerator SwingSoundDelay()
     {
