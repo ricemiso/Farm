@@ -85,7 +85,7 @@ public class AI_Movement : MonoBehaviour
 
 
         onGround = false;
-        Debug.Log("フレーム経過");
+        //Debug.Log("フレーム経過");
 
         //time += Time.deltaTime;
         //Debug.Log((time - Time.time) + " , " + time);
@@ -122,7 +122,7 @@ public class AI_Movement : MonoBehaviour
     {
         animator.SetBool("isRunning", true);
         time += Time.deltaTime;
-        Debug.Log((time - walkCounter) + " , " + time);
+        //Debug.Log((time - walkCounter) + " , " + time);
 
         switch (WalkDirection)
         {
@@ -180,7 +180,7 @@ public class AI_Movement : MonoBehaviour
             if (Vector3.Angle(Vector3.up, collision.GetContact(i).normal)
                 < maxAngleToTreatAsGround)
             {
-                Debug.Log("接地");
+                //Debug.Log("接地");
                 onGround = true;
                 break;
             }
