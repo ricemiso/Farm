@@ -258,6 +258,7 @@ public class ConstructionManager : MonoBehaviour
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
+
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "Chestmodel")
             {
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
