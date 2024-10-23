@@ -5030,6 +5030,7 @@ MonoBehaviour:
   ItemToBeDestroy: {fileID: 0}
   ConstructionUI: {fileID: 458247034}
   player: {fileID: 1686317345}
+  placementHoldingSpot: {fileID: 0}
 --- !u!1 &291905020
 GameObject:
   m_ObjectHideFlags: 0
@@ -6606,6 +6607,7 @@ MonoBehaviour:
   selectedTree: {fileID: 0}
   selectedCraft: {fileID: 0}
   selectedStone: {fileID: 0}
+  selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
 --- !u!4 &484624253
 Transform:
@@ -20941,6 +20943,7 @@ GameObject:
   - component: {fileID: 1686317346}
   - component: {fileID: 1686317349}
   - component: {fileID: 1686317348}
+  - component: {fileID: 1686317350}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -21015,7 +21018,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686317345}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1522c0b4bc057954d9d1021e584b511f, type: 3}
   m_Name: 
@@ -21026,6 +21029,30 @@ MonoBehaviour:
   speed: 12
   gravity: -19.62
   jumpHeight: 4
+  groundCheck: {fileID: 1790098038}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  isGrounded: 0
+  isMoving: 0
+--- !u!114 &1686317350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686317345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05a11080299a734e991d4ae0193e9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1686317346}
+  terrain: {fileID: 302434190}
+  speed: 12
+  gravity: -19.62
+  jumpHeight: 3
   groundCheck: {fileID: 1790098038}
   groundDistance: 0.4
   groundMask:
