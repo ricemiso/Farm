@@ -5633,12 +5633,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibilities:
-  - item: {fileID: 7354959038218525618, guid: c591fe7140cc2ea438af9f10a922a71a, type: 3}
+  - item: {fileID: 1722597568480135006, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
     amountMin: 1
-    amountMax: 1
-  - item: {fileID: 1722597568480135006, guid: 642fc2ab93a625548aef3b06af05bdcd, type: 3}
-    amountMin: 0
-    amountMax: 2
+    amountMax: 3
   finalLoot: []
   wasLootCalulated: 0
 --- !u!114 &1830026702440311596
@@ -5663,6 +5660,7 @@ MonoBehaviour:
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  onGround: 0
 --- !u!114 &6868006363749424123
 MonoBehaviour:
   m_ObjectHideFlags: 0

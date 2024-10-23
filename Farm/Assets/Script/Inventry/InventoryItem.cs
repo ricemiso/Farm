@@ -150,10 +150,24 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
                 break;
             case "Stairs":
-               
                 ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
                 break;
             case "Chest":
+                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
+                break;
+            case "Foundation(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
+                break;
+            case "Wall(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
+                break;
+            case "ƒ~ƒjƒIƒ“(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
+                break;
+            case "Stairs(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
+                break;
+            case "Chest(Clone)":
                 ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
                 break;
             default:
@@ -250,6 +264,4 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
     }
-
-
 }

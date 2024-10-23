@@ -287,6 +287,7 @@ public class CraftingSystem : MonoBehaviour
         int stick_count = 0;
         int log_count = 0;
         int plank_count = 0;
+        int mana_count = 0;
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
@@ -307,6 +308,9 @@ public class CraftingSystem : MonoBehaviour
                 case "Plank":
                     plank_count += 1;
                     break;
+                case "Mana":
+                    mana_count += 1;
+                    break;
             }
         }
 
@@ -314,6 +318,7 @@ public class CraftingSystem : MonoBehaviour
         int quickStickCount = 0;
         int quickLogCount = 0;
         int quickPlankCount = 0;
+        int quickManaCount = 0;
 
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
@@ -335,6 +340,10 @@ public class CraftingSystem : MonoBehaviour
                 else if (itemName == "Plank")
                 {
                     quickPlankCount++;
+                }
+                else if (itemName == "Mana")
+                {
+                    quickManaCount++;
                 }
             }
         }
@@ -371,7 +380,7 @@ public class CraftingSystem : MonoBehaviour
 
 
         // ----Plank x2---- //
-        PlankReq1.text = "1 Log [" + (log_count + quickLogCount) + "]";
+        PlankReq1.text = "1 丸太 [" + (log_count + quickLogCount) + "]";
 
         if ((log_count + quickLogCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(2))
         {
@@ -383,7 +392,7 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Foundation---- //
-        foundationReq1.text = "4 Plank [" + (plank_count + quickPlankCount) + "]";
+        foundationReq1.text = "4 板 [" + (plank_count + quickPlankCount) + "]";
 
         if ((plank_count + quickPlankCount) >= 4 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
@@ -395,9 +404,9 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Wall---- //
-        WallReq1.text = "2 Plank [" + (plank_count + quickPlankCount) + "]";
+        WallReq1.text = "2 板 [" + (plank_count + quickPlankCount) + "]";
 
-        if ((plank_count + quickPlankCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(1))
+        if ((plank_count + quickPlankCount) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftWallBTN.gameObject.SetActive(true);
         }

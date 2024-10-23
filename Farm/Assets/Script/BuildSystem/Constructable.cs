@@ -49,21 +49,41 @@ public class Constructable : MonoBehaviour
         {
             isValidToBeBuilt = false;
         }
-    }
 
-    //TODO : PlacebleItemの配置スクリプトのアルゴリズムを使いたい
+        // Raycast from the box's position towards its center
+        var boxHeight = transform.lossyScale.y;
+        RaycastHit groundHit;
+        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, boxHeight * 2f, LayerMask.GetMask("Ground", "placedFoundation")))
+        {
+            isGrounded = true;
+
+            // Align the box's rotation with the ground normal
+            Quaternion newRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) * transform.rotation;
+            transform.rotation = newRotation;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        //TODO:配置アイテムが増えたらここに追加していく(タグ)
-        if ((other.CompareTag("Ground")|| other.CompareTag("placedFoundation")) && gameObject.CompareTag("activeConstructable"))
+        if ((other.CompareTag("Ground") || other.CompareTag("placedFoundation")) && gameObject.CompareTag("activeConstructable"))
         {
             isGrounded = true;
+
+            // Align the box's rotation with the ground normal
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                Quaternion newRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+                transform.rotation = newRotation;
+            }
         }
 
         if (other.CompareTag("Tree") || other.CompareTag("Pickable") && gameObject.CompareTag("activeConstructable"))
         {
-
             isOverlappingItems = true;
         }
 
@@ -73,9 +93,10 @@ public class Constructable : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ground") && gameObject.CompareTag("activeConstructable"))
+        if (other.CompareTag("Ground") || other.CompareTag("placedFoundation") && gameObject.CompareTag("activeConstructable"))
         {
             isGrounded = false;
         }
@@ -90,6 +111,7 @@ public class Constructable : MonoBehaviour
             detectedGhostMemeber = false;
         }
     }
+
 
     public void SetInvalidColor()
     {
