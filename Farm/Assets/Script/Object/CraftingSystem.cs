@@ -15,9 +15,9 @@ public class CraftingSystem : MonoBehaviour
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
-    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN;
 
-    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1;
 
     public bool isOpen;
     public bool islevelUp;
@@ -30,6 +30,7 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint foundationBLP;
     [HideInInspector] public BluePrint WallBLP;
     [HideInInspector] public BluePrint MinionBLP;
+    [HideInInspector] public BluePrint StairBLP;
 
 
     private void Awake()
@@ -55,6 +56,7 @@ public class CraftingSystem : MonoBehaviour
         foundationBLP = new BluePrint("Foundation", 1, 1, "Plank", 4, "", 0);
         WallBLP = new BluePrint("Wall", 1, 1, "Plank", 2, "", 0);
         MinionBLP = new BluePrint("ミニオン", 1, 2, "Mana", 1, "ミニオン", 1);
+        StairBLP = new BluePrint("Stairs", 1, 1, "Plank", 4, "", 0);
 
         isOpen = false;
 
@@ -129,6 +131,12 @@ public class CraftingSystem : MonoBehaviour
 
         MinionBTN = survivalScreenUI.transform.Find("Minion").transform.Find("MinionButton").GetComponent<Button>();
         MinionBTN.onClick.AddListener(delegate { CraftAnyItem(MinionBLP); });
+
+        //Stair
+        StairReq1 = constractionScreenUI.transform.Find("Stair").transform.Find("rec1").GetComponent<Text>();
+
+        craftStairBTN = constractionScreenUI.transform.Find("Stair").transform.Find("StairButton").GetComponent<Button>();
+        craftStairBTN.onClick.AddListener(delegate { CraftAnyItem(StairBLP); });
 
     }
 
@@ -440,6 +448,18 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             craftWallBTN.gameObject.SetActive(false);
+        }
+
+        // ----Stair---- //
+        StairReq1.text = "4 板 [" + (plank_count + quickPlankCount) + "]";
+
+        if ((plank_count + quickPlankCount) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftStairBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftStairBTN.gameObject.SetActive(false);
         }
 
 
