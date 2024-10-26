@@ -22,16 +22,18 @@ public class Animal : MonoBehaviour
     [SerializeField] AudioClip rabbithitAndScreem;
     [SerializeField] AudioClip rabitHitAndDie;
 
-    enum AnimalType
+    public enum AnimalType
     {
         Rabbit,
-        PlantEnemy
+        PlantEnemy,
+        Union
     }
 
     [SerializeField] AnimalType thisAnimalType;
 
 
     private Animator animator;
+    private new Animation animation;
     public bool isDead;
     [SerializeField] ParticleSystem bloodparticle;
     public GameObject bloodPaddle;
@@ -63,8 +65,15 @@ public class Animal : MonoBehaviour
             
         }
 
-
-        animator = GetComponent<Animator>();
+        if (thisAnimalType ==AnimalType.Union)
+        {
+            animation = GetComponent<Animation>();
+        }
+        else
+        {
+            animator = GetComponent<Animator>();
+        }
+       
     }
 
 
@@ -81,7 +90,19 @@ public class Animal : MonoBehaviour
                 PlayDyingSound();
 
                 Log.Instance.TriggerPickupPop(animalName);
-                animator.SetTrigger("Die");
+
+
+                if(thisAnimalType == AnimalType.Union)
+                {
+                    animation.Play("Death");
+                }
+                else
+                {
+                    animator.SetTrigger("Die");
+                }
+               
+
+
                 GetComponent<AI_Movement>().enabled = false;
                 StartCoroutine(puddleDelay());
                 isDead = true;
