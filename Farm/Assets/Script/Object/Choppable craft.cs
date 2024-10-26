@@ -13,7 +13,7 @@ public class Choppablecraft : MonoBehaviour
 
     public string craftName;
 
-    [SerializeField] float dis = 10f;
+    [SerializeField] float dis = 50f;
 
     public float caloriesSpendChoppingWood;
 
@@ -38,13 +38,31 @@ public class Choppablecraft : MonoBehaviour
 
         }
 
-        float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+        //float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
-        if (distance < dis)
+        //if (distance < dis)
+        //{
+        //    playerRange = true;
+        //}
+        //else
+        //{
+        //    playerRange = false;
+        //}
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
+        if (other.CompareTag("Player"))
         {
             playerRange = true;
         }
-        else
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             playerRange = false;
         }

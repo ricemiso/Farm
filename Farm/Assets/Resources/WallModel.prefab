@@ -130,7 +130,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1.0000002, z: 2.5}
+  m_Size: {x: 10.24, y: 1.0000002, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2425831739918356755
 Rigidbody:
@@ -198,6 +198,7 @@ MonoBehaviour:
   MaxHealth: 10
   Health: 0
   craftName: "\u6728\u306E\u58C1"
+  dis: 50
   caloriesSpendChoppingWood: 10
 --- !u!1 &2309784439947736750
 GameObject:
