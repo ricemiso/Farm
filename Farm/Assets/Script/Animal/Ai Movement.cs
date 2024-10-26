@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class AI_Movement : MonoBehaviour
 {
     public Animator animator;
+    public new Animation animation;
 
     public float moveSpeed = 0.2f;
 
@@ -17,6 +18,8 @@ public class AI_Movement : MonoBehaviour
     public float waitCounter;
 
     int WalkDirection;
+
+
 
 
     // 状態リスト
@@ -51,6 +54,13 @@ public class AI_Movement : MonoBehaviour
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+
+       if(animator == null)
+        {
+            animation = GetComponent<Animation>();
+        }
+      
+        
 
         // プレイヤーを自動的に取得する
         if (player == null)
@@ -108,7 +118,15 @@ public class AI_Movement : MonoBehaviour
         if (distance < stopDistance && isStopTooClose)
         {
             // プレイヤーの後ろに十分近づいたら停止
-            animator.SetBool("isRunning", false);
+            if(animator != null)
+            {
+                animator.SetBool("isRunning", false);
+            }
+            else
+            {
+                animation.Stop("Run");
+            }
+           
         }
         else
         {
@@ -120,7 +138,18 @@ public class AI_Movement : MonoBehaviour
     // ランダムに歩行するメソッド
     protected void Walk()
     {
-        animator.SetBool("isRunning", true);
+
+        if (animator != null)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animation.Play("Run");
+        }
+           
+
+
         time += Time.deltaTime;
         //Debug.Log((time - walkCounter) + " , " + time);
 
@@ -150,7 +179,16 @@ public class AI_Movement : MonoBehaviour
             stopPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             state = MoveState.WAITING;
             transform.position = stopPosition;
-            animator.SetBool("isRunning", false);
+
+            if (animator != null)
+            {
+                animator.SetBool("isRunning", false);
+            }
+            else
+            {
+                animation.Stop("Run");
+            }
+
             waitCounter = waitTime;
         }
     }

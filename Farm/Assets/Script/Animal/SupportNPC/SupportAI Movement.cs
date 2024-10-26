@@ -24,7 +24,8 @@ public class SupportAI_Movement : AI_Movement
 			isStopped = !isStopped;  // Eキーで動作を停止/再開
 			if (isStopped)
 			{
-				animator.SetBool("isRunning", false);  // アニメーションを停止
+				animation.Stop("Run");
+				//animator.SetBool("isRunning", false);  // アニメーションを停止
 			}
 		}
 
@@ -54,7 +55,8 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
 	{
-		animator.SetBool("isRunning", true);
+		animation.Play("Run");
+		//animator.SetBool("isRunning", true);
 
 		//// プレイヤーの進行方向を取得し、後ろの位置を計算
 		//Vector3 directionBehindPlayer = -player.transform.forward;  // プレイヤーの後ろ側
@@ -67,7 +69,8 @@ public class SupportAI_Movement : AI_Movement
 
 	void ChaseEnemy()
 	{
-		animator.SetBool("isRunning", true);
+		animation.Play("Run");
+		//animator.SetBool("isRunning", true);
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
 		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
@@ -82,7 +85,8 @@ public class SupportAI_Movement : AI_Movement
 			state != MoveState.CHASE)  // プレイヤーが入って、まだ追従していない場合
 		{
 			state = MoveState.FOLLOWING;
-			animator.SetBool("isRunning", true);
+			animation.Play("Run");
+			//animator.SetBool("isRunning", true);
 
 			target = other.gameObject;
 		}
@@ -91,7 +95,8 @@ public class SupportAI_Movement : AI_Movement
 			state != MoveState.CHASE)  // 敵が入って、まだ追従していない場合
 		{
 			state = MoveState.CHASE;
-			animator.SetBool("isRunning", true);
+			animation.Play("Run");
+			//animator.SetBool("isRunning", true);
 
 			target = other.gameObject;
 		}
