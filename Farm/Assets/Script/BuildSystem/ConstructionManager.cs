@@ -29,6 +29,7 @@ public class ConstructionManager : MonoBehaviour
 
     public GameObject player;
     public GameObject placementHoldingSpot;
+    public GameObject placeStorageHoldingSpot;
 
     private void Awake()
     {
@@ -60,15 +61,17 @@ public class ConstructionManager : MonoBehaviour
         inConstructionMode = true;
     }
 
-    private void GetAllGhosts(GameObject itemToBeConstructed)
+    public void GetAllGhosts(GameObject itemToBeConstructed)
     {
         List<GameObject> ghostlist = itemToBeConstructed.gameObject.GetComponent<Constructable>().ghostList;
 
         foreach (GameObject ghost in ghostlist)
         {
-            Debug.Log(ghost);
+            Debug.Log($"Found ghost: {ghost.name}");
             allGhostsInExistence.Add(ghost);
         }
+
+        Debug.Log($"Total ghosts in existence: {allGhostsInExistence.Count}");
     }
 
     private void PerformGhostDeletionScan()
@@ -171,10 +174,10 @@ public class ConstructionManager : MonoBehaviour
         if (itemToBeConstructed != null && inConstructionMode)
         {
             //TODO:配置する物の条件の追加
-            if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI" 
+            if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI2" 
                 || itemToBeConstructed.name == "StairsWoodemodel" || itemToBeConstructed.name == "Chestmodel")
             {
-                if(itemToBeConstructed.name == "ConstractAI")
+                if(itemToBeConstructed.name == "ConstractAI2")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
@@ -206,6 +209,7 @@ public class ConstructionManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.Log($"Hit: {hit.transform.name}");
                 var selectionTransform = hit.transform;
                 if (selectionTransform.gameObject.CompareTag("ghost") && itemToBeConstructed.name == "FoundationModel")
                 {
@@ -243,7 +247,7 @@ public class ConstructionManager : MonoBehaviour
                 DestroyItem(ItemToBeDestroy);
 
 
-            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI")
+            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
             {
                 //TODO:修正する
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
@@ -283,7 +287,7 @@ public class ConstructionManager : MonoBehaviour
 
             DestroyItem(itemToBeConstructed);
             itemToBeConstructed = null;
-
+            selectedGhost = null;
             inConstructionMode = false;
 
         }
@@ -299,11 +303,10 @@ public class ConstructionManager : MonoBehaviour
 
         itemToBeConstructed.gameObject.SetActive(true);
 
-        itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
+        itemToBeConstructed.transform.SetParent(placementHoldingSpot.transform, true);
 
 
         var randomOffset = UnityEngine.Random.Range(0.01f, 0.03f);
-
 
 
         itemToBeConstructed.transform.position = new Vector3(ghostPosition.x,ghostPosition.y,ghostPosition.z+randomOffset);
@@ -350,12 +353,21 @@ public class ConstructionManager : MonoBehaviour
     private void PlaceItemFreeStyle()
     {
 
-        itemToBeConstructed.transform.SetParent(transform.parent.transform.parent, true);
+        itemToBeConstructed.transform.SetParent(placementHoldingSpot.transform, true);
 
         itemToBeConstructed.GetComponent<Constructable>().ExtractGhostMembers();
 
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
-        itemToBeConstructed.tag = "placedFoundation";
+
+        if(itemToBeConstructed.name == "FoundationModel")
+        {
+            itemToBeConstructed.tag = "placedFoundation";
+        }
+        else
+        {
+            itemToBeConstructed.tag = "placeStairs";
+        }
+        
         itemToBeConstructed.GetComponent<Constructable>().enabled = false;
 
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
@@ -371,20 +383,23 @@ public class ConstructionManager : MonoBehaviour
 
     private void AIPlaceItemFreeStyle()
     {
-        // アイテムを親の下に移動
-        itemToBeConstructed.transform.SetParent(placementHoldingSpot.transform, true);
+       
 
         // デフォルトの色に設定
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
         // タグを設定
-        if(itemToBeConstructed.name == "ConstractAI")
+        if(itemToBeConstructed.name == "ConstractAI2")
         {
-            itemToBeConstructed.tag = "Minion1";
+            itemToBeConstructed.tag = "SupportUnit";
+            // アイテムを親の下に移動
+            itemToBeConstructed.transform.SetParent(placementHoldingSpot.transform, true);
         }
         else
         {
             itemToBeConstructed.tag = "Strage";
+            // アイテムを親の下に移動
+            itemToBeConstructed.transform.SetParent(placeStorageHoldingSpot.transform, true);
         }
         
 

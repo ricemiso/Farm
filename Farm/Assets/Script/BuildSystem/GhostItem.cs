@@ -16,6 +16,11 @@ public class GhostItem : MonoBehaviour
    
     public bool hasSamePosition = false;
 
+    private void Awake()
+    {
+        // 初期状態で有効なオブジェクトをリストに追加
+        ConstructionManager.Instance.allGhostsInExistence.Add(this.gameObject);
+    }
 
 
     private void Start()

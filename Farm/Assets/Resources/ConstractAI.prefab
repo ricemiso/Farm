@@ -5382,8 +5382,7 @@ GameObject:
   - component: {fileID: 8446402970950498804}
   - component: {fileID: 2710428140813291052}
   - component: {fileID: 5065931816046800050}
-  - component: {fileID: 1830026702440311596}
-  - component: {fileID: 6868006363749424123}
+  - component: {fileID: 8584771206506656766}
   m_Layer: 0
   m_Name: ConstractAI
   m_TagString: Untagged
@@ -5643,7 +5642,7 @@ MonoBehaviour:
     amountMax: 3
   finalLoot: []
   wasLootCalulated: 0
---- !u!114 &1830026702440311596
+--- !u!114 &8584771206506656766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5652,10 +5651,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5447362327422923096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795d129e2fb9e52498baa1634b6722c1, type: 3}
+  m_Script: {fileID: 11500000, guid: fc8d9321a7af010488348645ed1e56e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  animation: {fileID: 0}
   moveSpeed: 0.2
   walkCounter: 0
   waitCounter: 0
@@ -5666,27 +5666,6 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
---- !u!114 &6868006363749424123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5447362327422923096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b62fdf204c572c43bf2621bd18a9500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
-  isOverlappingItems: 0
-  isValidToBeBuilt: 0
-  detectedGhostMemeber: 0
-  redMaterial: {fileID: 2100000, guid: 3532dc94976cc354f88588371c99fe73, type: 2}
-  greenMaterial: {fileID: 2100000, guid: 0bc7b179d76200b4bb19108f882cc6ba, type: 2}
-  defaultMaterial: {fileID: 2100000, guid: 11f39b2ab10a2184d84e62f1906a4a05, type: 2}
-  ghostList: []
-  solidCollider: {fileID: 1002354545007044409}
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0

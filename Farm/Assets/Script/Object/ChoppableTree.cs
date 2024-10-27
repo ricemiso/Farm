@@ -81,6 +81,8 @@ public class ChoppableTree : MonoBehaviour
             new Vector3(treePosition.x, treePosition.y + 1, treePosition.z), Quaternion.Euler(0, 0, 0));
 
 
+
+        brokenTree.transform.SetParent(transform.parent.transform.parent.transform.parent);
         Destroy(brokenTree, 60f);
 
     }

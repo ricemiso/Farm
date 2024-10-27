@@ -60,12 +60,109 @@ public class MainMenuSaveManager : MonoBehaviour
         SelectSavingType(data, sloaNumber);
     }
 
+
+    //TODO : セーブする種類を追加
     private EnviromentData GetEnviromentData()
     {
         List<string> itemsPickedup = InventorySystem.Instance.itemsPickedup;
-        print(InventorySystem.Instance.itemsPickedup);
-        print(itemsPickedup);
-        return new EnviromentData(itemsPickedup);
+
+        List<TreeData> TreeToSave = new List<TreeData>();
+       
+
+        foreach (Transform TreeObject in EnviromentManager.Instance.allTrees.transform)
+        {
+            if (TreeObject.CompareTag("Tree"))
+            {
+                var td = new TreeData();
+                td.name = "Tree";
+                td.position = TreeObject.position;
+                td.rotation = new Vector3(TreeObject.rotation.x, TreeObject.rotation.y, TreeObject.rotation.z);
+
+                TreeToSave.Add(td);
+
+            }
+            else
+            {
+                var td = new TreeData();
+                td.name = "Stump";
+                td.position = TreeObject.position;
+                td.rotation = new Vector3(TreeObject.rotation.x, TreeObject.rotation.y, TreeObject.rotation.z);
+
+                TreeToSave.Add(td);
+            }
+        }
+
+        List<StoneData> StoneToSave = new List<StoneData>();
+
+        foreach (Transform StoneObject in EnviromentManager.Instance.allStones.transform)
+        {
+            if (StoneObject.CompareTag("Stone"))
+            {
+                var td = new StoneData();
+                td.name = "Rock";
+                td.position = StoneObject.position;
+                td.rotation = new Vector3(StoneObject.rotation.x, StoneObject.rotation.y, StoneObject.rotation.z);
+
+                StoneToSave.Add(td);
+
+            }
+        }
+
+
+        List<StorageData> allStorage = new List<StorageData>();
+
+        foreach(Transform strage in EnviromentManager.Instance.Storage.transform)
+        {
+            if (strage.gameObject.GetComponent<StrageBox>())
+            {
+                var st = new StorageData();
+                st.itemsname = strage.gameObject.GetComponent<StrageBox>().items;
+                st.position = strage.position;
+                st.rotation = new Vector3(strage.rotation.x, strage.rotation.y, strage.rotation.z);
+
+                allStorage.Add(st);
+            }
+        }
+
+
+        List<ConstructionData> constructionToSave = new List<ConstructionData>();
+
+        foreach (Transform placeItems in EnviromentManager.Instance.allPlaceItem.transform)
+        {
+            var td = new ConstructionData();
+            td.position = placeItems.position;
+            td.rotation = placeItems.rotation.eulerAngles;
+
+            switch (placeItems.tag)
+            {
+                case "placedFoundation":
+                    td.name = "FoundationModel";
+                    break;
+                case "SupportUnit":
+                    td.name = "ConstractAI2";
+                    break;
+                case "placeWall":
+                    td.name = "WallModel";
+                    break;
+                case "placeStairs":
+                    td.name = "StairsWoodemodel";
+                    break;
+                case "ghost":
+                    td.name = "ghost";
+                    break;
+                case "wallghost":
+                    td.name = "Wallghost";
+                    break;
+                default:
+                    Debug.LogWarning($"Unknown tag: {placeItems.tag}");
+                    continue;
+            }
+
+            constructionToSave.Add(td);
+        }
+
+
+        return new EnviromentData(itemsPickedup, TreeToSave, constructionToSave,StoneToSave, allStorage);
     }
 
     private PlayerData GetPlayerData()
@@ -136,7 +233,7 @@ public class MainMenuSaveManager : MonoBehaviour
         DisableLoadingScene();
     }
 
-
+    //TODO:ロードするアイテムの追加
     private void SetEnviromentData(EnviromentData enviromentData)
     {
 
@@ -152,8 +249,93 @@ public class MainMenuSaveManager : MonoBehaviour
         }
 
         InventorySystem.Instance.itemsPickedup = enviromentData.pickedupItems;
-    }
 
+
+        foreach(Transform treeObject in EnviromentManager.Instance.allTrees.transform)
+        {
+            Destroy(treeObject.gameObject);
+        }
+
+        foreach (TreeData treeObject in enviromentData.TreeData)
+        {
+            var treePrefab = Instantiate(Resources.Load<GameObject>(treeObject.name),
+                new Vector3(treeObject.position.x, treeObject.position.y, treeObject.position.z),
+                Quaternion.Euler(treeObject.rotation.x, treeObject.rotation.y, treeObject.rotation.z));
+
+            treePrefab.transform.SetParent(EnviromentManager.Instance.allTrees.transform);
+        }
+
+        foreach (Transform stoneObject in EnviromentManager.Instance.allStones.transform)
+        {
+            Destroy(stoneObject.gameObject);
+        }
+
+        foreach (StoneData stoneObject in enviromentData.StoneData)
+        {
+            var stonePrefab = Instantiate(Resources.Load<GameObject>(stoneObject.name),
+                new Vector3(stoneObject.position.x, stoneObject.position.y, stoneObject.position.z),
+                Quaternion.Euler(stoneObject.rotation.x, stoneObject.rotation.y, stoneObject.rotation.z));
+
+            stonePrefab.transform.SetParent(EnviromentManager.Instance.allStones.transform);
+        }
+
+
+        //建築物、味方AI
+        foreach (ConstructionData placed in enviromentData.PlaceItems)
+        {
+            GameObject prefab = Resources.Load<GameObject>(placed.name);
+            if (prefab == null)
+            {
+                Debug.LogError($"Prefab with name {placed.name} not found!");
+                continue;
+            }
+
+            var instantiatedPrefab = Instantiate(
+                prefab,
+                placed.position,
+                Quaternion.Euler(placed.rotation)
+            );
+
+            if (placed.name == "FoundationModel" || placed.name == "WallModel" || placed.name == "StairsWoodemodel")
+            {
+                // 子オブジェクトを削除
+                foreach (Transform child in instantiatedPrefab.transform)
+                {
+                    Destroy(child.gameObject); // 子オブジェクトを削除
+                }
+            }
+
+            instantiatedPrefab.transform.SetParent(EnviromentManager.Instance.allPlaceItem.transform);
+
+            if (placed.name == "ghost" || placed.name == "Wallghost")
+            {
+                ConstructionManager.Instance.allGhostsInExistence.Add(instantiatedPrefab);
+
+
+
+                foreach (GameObject item in ConstructionManager.Instance.allGhostsInExistence)
+                {
+                    item.gameObject.GetComponent<GhostItem>().solidCollider.enabled = false;
+                    item.gameObject.GetComponent<GhostItem>().isPlaced = true;
+                }
+
+            }
+
+        }
+
+
+
+        foreach(StorageData storage in enviromentData.storages)
+        {
+            var storagePrefab = Instantiate(Resources.Load<GameObject>("Chestmodel"),
+               new Vector3(storage.position.x, storage.position.y, storage.position.z),
+               Quaternion.Euler(storage.rotation.x, storage.rotation.y, storage.rotation.z));
+
+            storagePrefab.GetComponent<StrageBox>().items = storage.itemsname;
+
+            storagePrefab.transform.SetParent(EnviromentManager.Instance.Storage.transform);
+        }
+    }
 
 
     public AllGameData SelectedLoadingType(int slotNumber)
