@@ -147,7 +147,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
                 break;
             case "ミニオン":
-                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
                 break;
             case "Stairs":
                 ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
@@ -162,7 +162,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
                 break;
             case "ミニオン(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI");
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
                 break;
             case "Stairs(Clone)":
                 ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");

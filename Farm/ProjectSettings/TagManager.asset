@@ -20,6 +20,7 @@ TagManager:
   - SupportUnit
   - Stone
   - Strage
+  - placeStairs
   layers:
   - Default
   - TransparentFX

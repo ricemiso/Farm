@@ -13,6 +13,7 @@ public class Constructable : MonoBehaviour
 
     // Material related
     private Renderer mRenderer;
+    private Material fullTransparentnMat;
     public Material redMaterial;
     public Material greenMaterial;
     public Material defaultMaterial;
@@ -31,6 +32,7 @@ public class Constructable : MonoBehaviour
         }
 
         mRenderer.material = defaultMaterial;
+        fullTransparentnMat = ConstructionManager.Instance.ghostFullTransparentMat;
 
 
         foreach (Transform child in transform)
@@ -101,7 +103,7 @@ public class Constructable : MonoBehaviour
             isGrounded = false;
         }
 
-        if (other.CompareTag("Tree") || other.CompareTag("Pickable") && gameObject.CompareTag("activeConstructable"))
+        if (other.CompareTag("Stone") || other.CompareTag("Tree") || other.CompareTag("Pickable") && gameObject.CompareTag("activeConstructable"))
         {
             isOverlappingItems = false;
         }
@@ -124,6 +126,11 @@ public class Constructable : MonoBehaviour
     public void SetValidColor()
     {
         mRenderer.material = greenMaterial;
+    }
+
+    public void SetfullTransparentnColor()
+    {
+        mRenderer.material = fullTransparentnMat;
     }
 
     public void SetDefaultColor()
