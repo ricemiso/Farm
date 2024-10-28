@@ -175,6 +175,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7195800805537036185, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       insertIndex: 5
       addedObject: {fileID: -2178900908181236083}
+    - targetCorrespondingSourceObject: {fileID: 7195800805537036185, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2303544704176358251}
   m_SourcePrefab: {fileID: 100100000, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
 --- !u!1 &555078712326535635 stripped
 GameObject:
@@ -194,16 +197,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  animation: {fileID: 0}
   moveSpeed: 0.2
   walkCounter: 0
   waitCounter: 0
   state: 0
   player: {fileID: 0}
   followSpeed: 5
+  rotateSpeed: 10
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
+  attackRange: 5
+  timeToFoundEnemy: 0
+  currentAttackCooltime: 0
+--- !u!114 &-2303544704176358251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555078712326535635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc027ae2902b5eb428b07ebac4ec273e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7394406495591411670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 213536252963234204, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
