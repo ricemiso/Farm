@@ -56,10 +56,15 @@ public class StorageManager : MonoBehaviour
             {
                 if (slot.transform.childCount < 1)
                 {
-                    var itemToAdd = Instantiate(Resources.Load<GameObject>(name), slot.transform.position, slot.transform.rotation);
+                    var resource = Resources.Load<GameObject>(name);
+                    if (resource == null)
+                    {
+                        Debug.Log($"Failed to load resource: {name}");
+                        continue;  // ŽŸ‚ÌƒAƒCƒeƒ€‚Ö
+                    }
 
+                    var itemToAdd = Instantiate(resource, slot.transform.position, slot.transform.rotation);
                     itemToAdd.name = name;
-                    
                     itemToAdd.transform.SetParent(slot.transform);
                     break;
                 }

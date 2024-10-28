@@ -281,7 +281,6 @@ public class EquipSystem : MonoBehaviour
         else
         {
             return false;
-            Debug.Log("SwingWait in IsThereSwingLock: false");
         }
     }
 
