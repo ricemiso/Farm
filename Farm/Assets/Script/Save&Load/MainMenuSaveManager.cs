@@ -66,6 +66,8 @@ public class MainMenuSaveManager : MonoBehaviour
     {
         List<string> itemsPickedup = InventorySystem.Instance.itemsPickedup;
 
+
+
         List<TreeData> TreeToSave = new List<TreeData>();
        
 
@@ -111,7 +113,13 @@ public class MainMenuSaveManager : MonoBehaviour
 
         List<StorageData> allStorage = new List<StorageData>();
 
-        foreach(Transform strage in EnviromentManager.Instance.Storage.transform)
+        //foreach (Transform child in EnviromentManager.Instance.Storage.transform)
+        //{
+        //    DestroyImmediate(child.gameObject);
+        //    Debug.Log(child.gameObject);
+        //}
+
+        foreach (Transform strage in EnviromentManager.Instance.Storage.transform)
         {
             if (strage.gameObject.GetComponent<StrageBox>())
             {
