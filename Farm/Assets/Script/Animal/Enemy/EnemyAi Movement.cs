@@ -7,6 +7,12 @@ using UnityEngine.AI;
 public class EnemyAI_Movement : AI_Movement
 {
 
+	// 追跡を諦めるまでの時間
+	public const float timeToGiveUpChase = 5.0f;
+	// 敵を見つけてからの時間（再認識するたびにリセット）
+	[SerializeField] float timeToFoundEnemy;
+
+
     protected override void Start()
     {
         base.Start();
@@ -15,6 +21,8 @@ public class EnemyAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
+		// カウンタを進める
+		timeToFoundEnemy += Time.deltaTime;
 
 		if (!isStopped && onGround)
 		{
@@ -33,25 +41,18 @@ public class EnemyAI_Movement : AI_Movement
             }
         }
 
-
         base.Update();
     }
-
-	// プレイヤーに後ろから追従するメソッド
-	//void FollowPlayer()
-	//{
-	//	animator.SetBool("isRunning", true);
-
-	//	// プレイヤーの進行方向を取得し、後ろの位置を計算
-	//	Vector3 directionBehindPlayer = -player.forward;  // プレイヤーの後ろ側
-	//	Vector3 followPosition = player.position + directionBehindPlayer * 2f;  // プレイヤーから2ユニット後ろ
-
-	//	Chase(followPosition);
-	//}
 
 	void ChaseEnemy()
 	{
 		animator.SetBool("isRunning", true);
+
+		// 長い時間対象を認識していない場合諦める
+		if(timeToFoundEnemy >= timeToGiveUpChase)
+		{
+			ChangeStateWait();
+		}
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
 		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
@@ -62,24 +63,22 @@ public class EnemyAI_Movement : AI_Movement
 
 
 	// プレイヤーがコライダーに入ったとき
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerStay(Collider other)
 	{
-		//if (other.CompareTag("Player") && !isFollowing)  // プレイヤーが入って、まだ追従していない場合
-		//{
-		//	isFollowing = true;
-		//	animator.SetBool("isRunning", true);
 
-		//	target = other.gameObject;
-		//}
-
-		if ((other.CompareTag("Player") || other.CompareTag("SupportUnit")) &&
-			state != MoveState.CHASE)  // 敵が入って、まだ追従していない場合
+		if ((other.CompareTag("Player") || other.CompareTag("SupportUnit")))  // 敵が入って、まだ追従していない場合
 		{
-			state = MoveState.CHASE;
-			animator.SetBool("isRunning", true);
-
-			target = other.gameObject;
+			FoundTarget(other);
 		}
+	}
+
+	// 敵を発見したときの処理
+	void FoundTarget(Collider other)
+	{
+		state = MoveState.CHASE;
+
+		timeToFoundEnemy = 0.0f;
+		target = other.gameObject;
 	}
 
 	// プレイヤーがコライダーから出たとき（追従を停止しない）
