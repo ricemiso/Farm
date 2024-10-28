@@ -13,6 +13,7 @@ public class CrystalGrowth : MonoBehaviour
 
 	public bool playerRange;
 	public float CrystalMaxHealth;
+	public bool canBeChopped;
 	public float CrystalHealth;
 	public bool canBeCharge;
 
@@ -37,6 +38,14 @@ public class CrystalGrowth : MonoBehaviour
 
 		rotAngle.y += 0.3f;
 		transform.eulerAngles = rotAngle;
+
+
+		if (canBeChopped)
+		{
+			GrobalState.Instance.resourceHelth = CrystalHealth;
+			GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
+
+		}
 
 		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 

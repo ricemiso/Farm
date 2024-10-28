@@ -21,7 +21,11 @@ public class ChoppableStone : MonoBehaviour
 
     private void Start()
     {
-        stoneHealth = stoneMaxHealth;
+        if (stoneHealth == 0)
+        {
+            stoneHealth = stoneMaxHealth;
+        }
+
         caloriesSpendChoppingWood = 20;
        // Animator = transform.parent.GetComponent<Animator>();
     }
