@@ -184,7 +184,7 @@ public class EquipSystem : MonoBehaviour
         {
             switch (selecteditemModel.gameObject.name)
             {
-                case "Mana_model(Clone)":
+                case "Mana_Handmodel(Clone)":
                     return true;
                 default:
                     return false;
@@ -261,7 +261,8 @@ public class EquipSystem : MonoBehaviour
                 return "WateringCan_model";
 
             case "Mana":
-                return "Mana_model";
+                return "Mana_Handmodel";
+
             default:
                 return null;
 
