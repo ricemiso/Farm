@@ -204,10 +204,14 @@ MonoBehaviour:
   state: 0
   player: {fileID: 0}
   followSpeed: 5
+  rotateSpeed: 10
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
+  attackRange: 5
+  timeToFoundEnemy: 0
+  currentAttackCooltime: 0
 --- !u!114 &-2303544704176358251
 MonoBehaviour:
   m_ObjectHideFlags: 0

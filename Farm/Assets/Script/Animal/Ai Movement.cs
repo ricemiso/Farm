@@ -46,10 +46,10 @@ public class AI_Movement : MonoBehaviour
 
 	const float stopDistance = 10.0f;   // 停止する距離
 
-	public bool onGround;    // 設置しているか
+	public bool onGround;    // 接地しているか
 	public const float maxAngleToTreatAsGround = 20.0f; // 地面と判定する傾き
 
-	float time;
+	public float attackRange = 0.9f;	// 攻撃範囲
 
 	// Start is called before the first frame update
 	protected virtual void Start()
@@ -83,8 +83,6 @@ public class AI_Movement : MonoBehaviour
 		ChooseDirection();  // 初回の方向を選択
 
 		onGround = false;
-
-		time = 0.0f;
 	}
 
 	protected virtual void Update()
@@ -96,10 +94,6 @@ public class AI_Movement : MonoBehaviour
 
 
 		onGround = false;
-		//Debug.Log("フレーム経過");
-
-		//time += Time.deltaTime;
-		//Debug.Log((time - Time.time) + " , " + time);
 	}
 
 	// 追いかけるメソッド
@@ -151,11 +145,6 @@ public class AI_Movement : MonoBehaviour
 		{
 			animation.Play("Run");
 		}
-
-
-
-		time += Time.deltaTime;
-		//Debug.Log((time - walkCounter) + " , " + time);
 
 		switch (WalkDirection)
 		{
@@ -217,6 +206,22 @@ public class AI_Movement : MonoBehaviour
 		WalkDirection = Random.Range(0, 4);
 		state = MoveState.WALKING;
 		walkCounter = walkTime;
+	}
+
+	// 対象に攻撃
+	protected void Attack(float num)
+	{
+		// TODO : 体力管理を一つのクラスに統合させたい
+
+		// タグごとに処理を分岐
+		switch (target.tag)
+		{
+			case "Player":
+				PlayerState.Instance.AddHealth(-num);
+				break;
+			default:
+				break;
+		}
 	}
 
 	protected void OnCollisionStay(Collision collision)

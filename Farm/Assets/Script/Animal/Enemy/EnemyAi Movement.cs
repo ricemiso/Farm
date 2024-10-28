@@ -12,17 +12,20 @@ public class EnemyAI_Movement : AI_Movement
 	// 敵を見つけてからの時間（再認識するたびにリセット）
 	[SerializeField] float timeToFoundEnemy;
 
+	// 次攻撃可能になるまでのクールタイム
+	[SerializeField] float currentAttackCooltime;
+	public const float attackCooltime = 1.0f;
+
 
     protected override void Start()
     {
+		currentAttackCooltime = 0.0f;
         base.Start();
     }
 
     // Update is called once per frame
     protected override void Update()
 	{
-		// カウンタを進める
-		timeToFoundEnemy += Time.deltaTime;
 
 		if (!isStopped && onGround)
 		{
@@ -39,12 +42,15 @@ public class EnemyAI_Movement : AI_Movement
 					Wait();
 					break;
             }
-        }
+		}
 
-        base.Update();
+		timeToFoundEnemy += Time.deltaTime;
+		currentAttackCooltime -= Time.deltaTime;
+
+		base.Update();
     }
 
-	void ChaseEnemy()
+	protected void ChaseEnemy()
 	{
 		animator.SetBool("isRunning", true);
 
@@ -58,6 +64,18 @@ public class EnemyAI_Movement : AI_Movement
 		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
 
 		Chase(followPosition);
+
+		// 近くにターゲットがいたら攻撃処理
+		float distance = Vector3.Distance(followPosition, transform.position);
+		if(distance <= attackRange &&
+			timeToFoundEnemy <= 0.1f && 
+			currentAttackCooltime <= 0.0f) 
+		{
+			float damage = GetComponent<Animal>().damage;
+			Attack(damage);
+
+			currentAttackCooltime = attackCooltime;
+		}
 	}
 
 
