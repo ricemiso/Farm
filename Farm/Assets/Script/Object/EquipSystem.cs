@@ -225,6 +225,7 @@ public class EquipSystem : MonoBehaviour
         }
 
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
+        Debug.Log("Selected Item Name: " + selectedItemName);
 
         selecteditemModel = Instantiate(Resources.Load<GameObject>(CaculateItemModel(selectedItemName)));
 
@@ -250,7 +251,7 @@ public class EquipSystem : MonoBehaviour
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 return "Pickaxe_model";
 
-            case "TomatoSeed":
+            case "MinionSeed":
                 return "Hand_model";
 
             case "Minion2Seed":

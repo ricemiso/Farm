@@ -23,7 +23,11 @@ public class ChoppableTree : MonoBehaviour
 
     private void Start()
     {
-        treeHealth = treeMaxHealth;
+        if (treeHealth == 0)
+        {
+            treeHealth = treeMaxHealth;
+        }
+
         caloriesSpendChoppingWood = 20;
         Animator = transform.parent.transform.parent.GetComponent<Animator>();
     }

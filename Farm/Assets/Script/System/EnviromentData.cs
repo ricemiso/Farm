@@ -37,6 +37,7 @@ public class TreeData
     public string name;
     public Vector3 position;
     public Vector3 rotation;
+    public float currentHP;
 }
 
 [System.Serializable]
@@ -45,6 +46,7 @@ public class StoneData
     public string name;
     public Vector3 position;
     public Vector3 rotation;
+    public float currentHP;
 }
 
 [System.Serializable]
@@ -53,6 +55,7 @@ public class ConstructionData
     public string name;
     public Vector3 position;
     public Vector3 rotation;
+    public float currentHP;
 }
 
 [System.Serializable]

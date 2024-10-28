@@ -66,8 +66,6 @@ public class MainMenuSaveManager : MonoBehaviour
     {
         List<string> itemsPickedup = InventorySystem.Instance.itemsPickedup;
 
-
-
         List<TreeData> TreeToSave = new List<TreeData>();
        
 
@@ -79,6 +77,8 @@ public class MainMenuSaveManager : MonoBehaviour
                 td.name = "Tree";
                 td.position = TreeObject.position;
                 td.rotation = new Vector3(TreeObject.rotation.x, TreeObject.rotation.y, TreeObject.rotation.z);
+
+                td.currentHP = TreeObject.GetComponentInChildren<ChoppableTree>().treeHealth;
 
                 TreeToSave.Add(td);
 
@@ -104,6 +104,7 @@ public class MainMenuSaveManager : MonoBehaviour
                 td.name = "Rock";
                 td.position = StoneObject.position;
                 td.rotation = new Vector3(StoneObject.rotation.x, StoneObject.rotation.y, StoneObject.rotation.z);
+                td.currentHP = StoneObject.GetComponentInChildren<ChoppableStone>().stoneHealth;
 
                 StoneToSave.Add(td);
 
@@ -113,12 +114,6 @@ public class MainMenuSaveManager : MonoBehaviour
 
         List<StorageData> allStorage = new List<StorageData>();
 
-        //foreach (Transform child in EnviromentManager.Instance.Storage.transform)
-        //{
-        //    DestroyImmediate(child.gameObject);
-        //    Debug.Log(child.gameObject);
-        //}
-
         foreach (Transform strage in EnviromentManager.Instance.Storage.transform)
         {
             if (strage.gameObject.GetComponent<StrageBox>())
@@ -127,6 +122,7 @@ public class MainMenuSaveManager : MonoBehaviour
                 st.itemsname = strage.gameObject.GetComponent<StrageBox>().items;
                 st.position = strage.position;
                 st.rotation = new Vector3(strage.rotation.x, strage.rotation.y, strage.rotation.z);
+                
 
                 allStorage.Add(st);
             }
@@ -270,6 +266,11 @@ public class MainMenuSaveManager : MonoBehaviour
                 new Vector3(treeObject.position.x, treeObject.position.y, treeObject.position.z),
                 Quaternion.Euler(treeObject.rotation.x, treeObject.rotation.y, treeObject.rotation.z));
 
+            if (treePrefab.GetComponentInChildren<ChoppableTree>())
+            {
+                treePrefab.GetComponentInChildren<ChoppableTree>().treeHealth = treeObject.currentHP;
+            }
+           
             treePrefab.transform.SetParent(EnviromentManager.Instance.allTrees.transform);
         }
 
@@ -283,6 +284,12 @@ public class MainMenuSaveManager : MonoBehaviour
             var stonePrefab = Instantiate(Resources.Load<GameObject>(stoneObject.name),
                 new Vector3(stoneObject.position.x, stoneObject.position.y, stoneObject.position.z),
                 Quaternion.Euler(stoneObject.rotation.x, stoneObject.rotation.y, stoneObject.rotation.z));
+
+
+            if (stonePrefab.GetComponentInChildren<ChoppableStone>())
+            {
+                stonePrefab.GetComponentInChildren<ChoppableStone>().stoneHealth = stoneObject.currentHP;
+            }
 
             stonePrefab.transform.SetParent(EnviromentManager.Instance.allStones.transform);
         }
