@@ -21,6 +21,7 @@ TagManager:
   - Stone
   - Strage
   - placeStairs
+  - Crystal
   layers:
   - Default
   - TransparentFX

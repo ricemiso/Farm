@@ -18,14 +18,17 @@ public class EnviromentData
 
     public List<StorageData> storages;
 
+    public List<CrystalData> crystalData;
+
     public EnviromentData(List<string> _PickedupItems, List<TreeData> _TreeData, List<ConstructionData> _PlaceItems, List<StoneData> _StoneData
-        , List<StorageData> _storages)
+        , List<StorageData> _storages, List<CrystalData> _crystalData)
     {
         pickedupItems = _PickedupItems;
         TreeData = _TreeData;
         PlaceItems = _PlaceItems;
         StoneData = _StoneData;
         storages = _storages;
+        crystalData = _crystalData;
     }
 
 
@@ -33,6 +36,15 @@ public class EnviromentData
 
 [System.Serializable]
 public class TreeData
+{
+    public string name;
+    public Vector3 position;
+    public Vector3 rotation;
+    public float currentHP;
+}
+
+[System.Serializable]
+public class CrystalData
 {
     public string name;
     public Vector3 position;

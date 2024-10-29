@@ -40,12 +40,10 @@ public class CrystalGrowth : MonoBehaviour
 		transform.eulerAngles = rotAngle;
 
 
-		if (canBeChopped)
-		{
-			GrobalState.Instance.resourceHelth = CrystalHealth;
-			GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
+		GrobalState.Instance.resourceHelth = CrystalHealth;
+		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 
-		}
+		
 
 		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
@@ -59,7 +57,7 @@ public class CrystalGrowth : MonoBehaviour
 		}
 		
 
-		if (GrobalState.Instance.resourceMana>=3000)
+		if (GrobalState.Instance.resourceMana>=100)
 		{
 			Debug.Log("GameClear");
 

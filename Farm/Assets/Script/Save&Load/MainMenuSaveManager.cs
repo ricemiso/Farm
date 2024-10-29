@@ -112,6 +112,23 @@ public class MainMenuSaveManager : MonoBehaviour
         }
 
 
+        List<CrystalData> crystalToSave = new List<CrystalData>();
+        foreach (Transform CrystalObject in EnviromentManager.Instance.Crystal.transform)
+        {
+            if (CrystalObject.CompareTag("Crystal"))
+            {
+                var cy = new CrystalData();
+                cy.name = "Crystal";
+                cy.position = CrystalObject.position;
+                cy.rotation = new Vector3(CrystalObject.rotation.x, CrystalObject.rotation.y, CrystalObject.rotation.z);
+                cy.currentHP = CrystalObject.GetComponentInChildren<CrystalGrowth>().CrystalHealth;
+
+                crystalToSave.Add(cy);
+
+            }
+        }
+
+
         List<StorageData> allStorage = new List<StorageData>();
 
         foreach (Transform strage in EnviromentManager.Instance.Storage.transform)
@@ -166,7 +183,7 @@ public class MainMenuSaveManager : MonoBehaviour
         }
 
 
-        return new EnviromentData(itemsPickedup, TreeToSave, constructionToSave,StoneToSave, allStorage);
+        return new EnviromentData(itemsPickedup, TreeToSave, constructionToSave,StoneToSave, allStorage, crystalToSave);
     }
 
     private PlayerData GetPlayerData()
@@ -293,6 +310,28 @@ public class MainMenuSaveManager : MonoBehaviour
 
             stonePrefab.transform.SetParent(EnviromentManager.Instance.allStones.transform);
         }
+
+
+        foreach (Transform crystalObject in EnviromentManager.Instance.Crystal.transform)
+        {
+            Destroy(crystalObject.gameObject);
+        }
+
+        foreach (CrystalData crystalObject in enviromentData.crystalData)
+        {
+            var crystalPrefab = Instantiate(Resources.Load<GameObject>(crystalObject.name),
+                new Vector3(crystalObject.position.x, crystalObject.position.y, crystalObject.position.z),
+                Quaternion.Euler(crystalObject.rotation.x, crystalObject.rotation.y, crystalObject.rotation.z));
+
+
+            if (crystalPrefab.GetComponentInChildren<CrystalGrowth>())
+            {
+                crystalPrefab.GetComponentInChildren<CrystalGrowth>().CrystalHealth = crystalObject.currentHP;
+            }
+
+            crystalPrefab.transform.SetParent(EnviromentManager.Instance.Crystal.transform);
+        }
+
 
 
         //åöízï®ÅAñ°ï˚AI

@@ -14,6 +14,8 @@ public class EnviromentManager : MonoBehaviour
 
     public GameObject allStones;
 
+    public GameObject Crystal;
+
     public GameObject Storage;
 
     private void Awake()
