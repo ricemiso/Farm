@@ -184,7 +184,7 @@ public class SelectionManager : MonoBehaviour
                 }
                 else
                 {
-                    if (EquipSystem.Instance.IsPlayerHooldingWateringCan())
+                    if (EquipSystem.Instance.IsPlayerHooldingMana())
                     {
                         if (soil.currentplant.isWatered)
                         {
@@ -193,7 +193,7 @@ public class SelectionManager : MonoBehaviour
                         }
                         else
                         {
-                            interaction_text.text = "êÖÇÇ†Ç∞ÇƒÇ≠ÇæÇ≥Ç¢";
+                            interaction_text.text = "É}ÉiÇÇ†Ç∞ÇƒÇ≠ÇæÇ≥Ç¢";
                             interaction_Info_UI.SetActive(true);
 
                             if (Input.GetMouseButtonDown(0) && !Watering)
@@ -205,10 +205,15 @@ public class SelectionManager : MonoBehaviour
                                 //SoundManager.Instance.wateringCannel.PlayoneShot(SoundManager.Instance.wateringChannel);
                                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
 
-                                StartCoroutine(DelayWatering());
+                                
 
                                 soil.currentplant.isWatered = true;
+
                                 soil.MakeSoilWatered();
+                                StartCoroutine(DelayWatering());
+
+                                
+
                             }
                         }
                     }
@@ -344,7 +349,10 @@ public class SelectionManager : MonoBehaviour
 
     IEnumerator DelayWatering()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
+        Destroy(EquipSystem.Instance.selectedItem);
+        Destroy(EquipSystem.Instance.selecteditemModel);
+
         Watering = false;
     }
 
