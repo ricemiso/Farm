@@ -1,6 +1,7 @@
  using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,8 +17,12 @@ public class EnemyAI_Movement : AI_Movement
 	[SerializeField] float currentAttackCooltime;
 	public const float attackCooltime = 1.0f;
 
+	// クリスタルへの参照
+	public GameObject Crystal;
+	// ミニクリスタルへの参照
+	public GameObject CrystalMini;
 
-    protected override void Start()
+	protected override void Start()
     {
 		currentAttackCooltime = 0.0f;
         base.Start();
@@ -42,6 +47,21 @@ public class EnemyAI_Movement : AI_Movement
 					Wait();
 					break;
             }
+			// 目標がいない時にクリスタルなどの攻撃対象に向かう
+			if(state != MoveState.CHASE)
+			{
+				if(CrystalMini.GetComponent<MiniCrystal>().IsAlive())
+				{
+					// ミニクリスタルが生きているなら
+					FoundTarget(CrystalMini);
+				}
+				else
+				{
+					// ミニクリスタルが死んでいたら
+					FoundTarget(Crystal);
+				}
+				
+			}
 		}
 
 		timeToFoundEnemy += Time.deltaTime;
@@ -86,17 +106,17 @@ public class EnemyAI_Movement : AI_Movement
 
 		if ((other.CompareTag("Player") || other.CompareTag("SupportUnit")))  // 敵が入って、まだ追従していない場合
 		{
-			FoundTarget(other);
+			FoundTarget(other.GameObject());
 		}
 	}
 
 	// 敵を発見したときの処理
-	void FoundTarget(Collider other)
+	void FoundTarget(GameObject other)
 	{
 		state = MoveState.CHASE;
 
 		timeToFoundEnemy = 0.0f;
-		target = other.gameObject;
+		target = other;
 	}
 
 	// プレイヤーがコライダーから出たとき（追従を停止しない）
