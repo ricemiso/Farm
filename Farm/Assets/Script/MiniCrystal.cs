@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class MiniCrystal : MonoBehaviour
 {
+	// ƒŠƒXƒg
+	[SerializeField] List<GameObject> soils = new List<GameObject>();
 
 	public float maxEnergy;
 	public float currentEnergy;
@@ -80,6 +82,12 @@ public class MiniCrystal : MonoBehaviour
 		if (CrystalHealth <= 0)
 		{
 			Log.Instance.OnFarmDeath(gameObject.name);
+
+            foreach(GameObject soil in soils)
+            {
+				// ”j‰óˆ—
+				Destroy(soil.gameObject);
+            }
 		}
 
 	}
