@@ -21,6 +21,7 @@ public class SelectionManager : MonoBehaviour
     public bool HandIsVisible;
     public bool Watering;
     public bool Chargeing;
+    public bool leveling;
 
     public GameObject chopHolder;
 
@@ -270,6 +271,18 @@ public class SelectionManager : MonoBehaviour
 
             if (animal && animal.playerISRange)
             {
+                if (EquipSystem.Instance.IsPlayerHooldingMana() )
+                {
+                    if (Input.GetMouseButtonDown(0) && !leveling)
+                    {
+                        leveling = true;
+
+                        animal.LevelUp(1);
+
+                        StartCoroutine(DelayWatering());
+                    }
+                }
+
 
                 if (animal.isDead)
                 {
@@ -359,6 +372,7 @@ public class SelectionManager : MonoBehaviour
 
         Watering = false;
         Chargeing = false;
+        leveling = false;
     }
 
     IEnumerator DelayedAttribute()
