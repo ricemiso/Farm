@@ -37,7 +37,7 @@ public class AI_Movement : MonoBehaviour
 	public GameObject player;  // 追従するプレイヤーのTransform
 	public float followSpeed = 5f;  // 追従速度
 	public float rotateSpeed = 10.0f;   // 回転速度
-	protected GameObject target; // ターゲット中の敵
+	public GameObject target; // ターゲット中の敵
 
 	public bool isStopped = false; // 動きを停止しているかどうかのフラグ
 
@@ -227,6 +227,9 @@ public class AI_Movement : MonoBehaviour
 				break;
 			case "Crystal":
 				target.GetComponent<CrystalGrowth>().GetHit();
+				break;
+			case "MiniCrystal":
+				target.GetComponent<MiniCrystal>().GetHit();
 				break;
 			default:
 				break;
