@@ -96,10 +96,7 @@ public class Animal : MonoBehaviour
                 if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
-                }
-                else if(this.gameObject.CompareTag("SupportUnit"))
-                {
-                    Destroy(this.gameObject);
+                    DestroyImmediate(gameObject);
                 }
                 else
                 {
