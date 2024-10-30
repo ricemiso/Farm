@@ -284,7 +284,7 @@ public class SelectionManager : MonoBehaviour
                 }
 
 
-                if (animal.isDead && animal.CompareTag("Enemy"))
+                if (animal.isDead)
                 {
                     
                     interaction_text.text = "’D‚¤";

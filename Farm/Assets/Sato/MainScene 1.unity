@@ -414,10 +414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabbit 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5447362327422923096, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1249,7 +1245,6 @@ MonoBehaviour:
   PutSeSound: {fileID: 61512412}
   gravelWalkSound: {fileID: 61512413}
   foundationWalkSound: {fileID: 61512414}
-  rabbitCrySound: {fileID: 0}
   startingZoneBGMMusic: {fileID: 61512410}
 --- !u!82 &61512404
 AudioSource:
@@ -5036,7 +5031,6 @@ MonoBehaviour:
   ConstructionUI: {fileID: 458247034}
   player: {fileID: 1686317345}
   placementHoldingSpot: {fileID: 0}
-  placeStorageHoldingSpot: {fileID: 0}
 --- !u!1 &291905020
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,71 +5888,6 @@ Transform:
   - {fileID: 1736151391}
   m_Father: {fileID: 1941672519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &383249704
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 512.4994
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.000008583069
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 412.07095
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.06260928
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.009966388
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9918983
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.11008497
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 12.541
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 187.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 723832171663836928, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 5447362327422923096, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_Name
-      value: ConstractAI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5447362327422923096, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5945723152925002242, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1686317345}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 745fe016a6604c34bad6dd6bb5446245, type: 3}
 --- !u!1 &408604413
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,7 +6105,6 @@ MonoBehaviour:
   settingmenu: {fileID: 195627161}
   menu: {fileID: 1964749046}
   isMenuOpen: 0
-  isCrystalMove: 0
 --- !u!1 &427410165
 GameObject:
   m_ObjectHideFlags: 0
@@ -6675,13 +6603,10 @@ MonoBehaviour:
   handIcon: {fileID: 1575943114}
   HandIsVisible: 0
   Watering: 0
-  Chargeing: 0
-  leveling: 0
   chopHolder: {fileID: 922331393}
   selectedTree: {fileID: 0}
   selectedCraft: {fileID: 0}
   selectedStone: {fileID: 0}
-  selectedCrystal: {fileID: 0}
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
 --- !u!4 &484624253
@@ -10021,17 +9946,11 @@ MonoBehaviour:
   constractionScreenUI: {fileID: 1952526500}
   inventryitemList: []
   isOpen: 0
-  islevelUp: 0
   AxeBLP: {fileID: 0}
   PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
   foundationBLP: {fileID: 0}
   WallBLP: {fileID: 0}
-  MinionBLP: {fileID: 0}
-  StairBLP: {fileID: 0}
-  NormalMinionBLP: {fileID: 0}
-  TankMinionBLP: {fileID: 0}
-  MagicMinionBLP: {fileID: 0}
 --- !u!1 &743446728
 GameObject:
   m_ObjectHideFlags: 0
@@ -13044,11 +12963,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allItems: {fileID: 1941672518}
-  allTrees: {fileID: 0}
-  allPlaceItem: {fileID: 0}
-  allStones: {fileID: 0}
-  Crystal: {fileID: 0}
-  Storage: {fileID: 0}
 --- !u!1 &1001533626
 GameObject:
   m_ObjectHideFlags: 0
@@ -16224,7 +16138,6 @@ MonoBehaviour:
   directionalLight: {fileID: 705507994}
   dayDurationInSecounds: 24
   currentHour: 0
-  currentTimeOfDay: 0.35
   timeUI: {fileID: 408884985}
   timeMappings:
   - phaseName: "\u591C"
@@ -17272,10 +17185,6 @@ PrefabInstance:
     - target: {fileID: 5447362327422923096, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_Name
       value: Rabbit 1 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5447362327422923096, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20322,9 +20231,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceHelth: 0
   resourceMaxHelth: 0
-  resourceMana: 0
-  level: 0
-  damage: 0
 --- !u!1 &1626534545
 GameObject:
   m_ObjectHideFlags: 0
@@ -21080,7 +20986,7 @@ Transform:
   m_GameObject: {fileID: 1686317345}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 511.83496, y: 2.05, z: 403.15326}
+  m_LocalPosition: {x: 566.1, y: 2.05, z: 335.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24903,10 +24809,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabbit 1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5447362327422923096, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 5538193397348003508, guid: 347cca99a15337f4ab23adbc52eb43a4, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.21328491
@@ -26930,71 +26832,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a455d543e8687d41b5e849b0d4ae799, type: 3}
---- !u!1001 &9213290829136524698
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1522425592210347359, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_Name
-      value: LongRangeMinion
-      objectReference: {fileID: 0}
-    - target: {fileID: 1522425592210347359, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_TagString
-      value: SupportUnit
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 521.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0000042915344
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 408.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.06260928
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.009966388
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9918983
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.11008497
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 12.541
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 187.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829281492017950068, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322292645872173344, guid: 8117e038ea0ad3445a69192592828857, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1686317345}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8117e038ea0ad3445a69192592828857, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -27006,5 +26843,3 @@ SceneRoots:
   - {fileID: 1686317347}
   - {fileID: 649194181}
   - {fileID: 705507995}
-  - {fileID: 9213290829136524698}
-  - {fileID: 383249704}

@@ -77,8 +77,7 @@ public class Animal : MonoBehaviour
 
     }
 
-
-	public void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         if (isDead == false)
         {
@@ -90,23 +89,21 @@ public class Animal : MonoBehaviour
             {
                 PlayDyingSound();
 
-                //Log.Instance.TriggerPickupPop(animalName);
+                Log.Instance.TriggerPickupPop(animalName);
 
 
                 if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
                 }
-                else if(this.gameObject.CompareTag("SupportUnit"))
-                {
-                    Destroy(this.gameObject);
-                }
                 else
                 {
-					GetComponent<Rabbit>().enabled = false;
-					animator.SetTrigger("Die");
+                    animator.SetTrigger("Die");
                 }
 
+
+
+                GetComponent<AI_Movement>().enabled = false;
                 StartCoroutine(puddleDelay());
                 isDead = true;
 

@@ -14,10 +14,4 @@ public class NormalMinion : SupportAI_Movement
 	{
 		base.Update();
 	}
-
-	protected override void checkAttack()
-	{
-		float damage = GetComponent<Animal>().damage;
-		Attack(damage);
-	}
 }
