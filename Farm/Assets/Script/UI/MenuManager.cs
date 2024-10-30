@@ -34,6 +34,7 @@ public class MenuManager : MonoBehaviour
         {
             UICanvas.SetActive(false);
             menuCanvas.SetActive(true);
+            savemenu.SetActive(false);
 
             isMenuOpen = true;
 

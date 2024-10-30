@@ -16,8 +16,10 @@ public class CraftingSystem : MonoBehaviour
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
     Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN;
+    Button normalMinionBTN, TankMinionBTN, MagicMinionBTN;
 
     Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1;
+    Text normalMinionReq1, TankMinionReq1, TankMinionReq2, MagicMinionReq1, MagicMinionReq2;
 
     public bool isOpen;
     public bool islevelUp;
@@ -31,6 +33,9 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint WallBLP;
     [HideInInspector] public BluePrint MinionBLP;
     [HideInInspector] public BluePrint StairBLP;
+    [HideInInspector] public BluePrint NormalMinionBLP;
+    [HideInInspector] public BluePrint TankMinionBLP;
+    [HideInInspector] public BluePrint MagicMinionBLP;
 
 
     private void Awake()
@@ -57,6 +62,10 @@ public class CraftingSystem : MonoBehaviour
         WallBLP = new BluePrint("Wall", 1, 1, "Plank", 2, "", 0);
         MinionBLP = new BluePrint("ミニオン", 1, 2, "Mana", 1, "ミニオン", 1);
         StairBLP = new BluePrint("Stairs", 1, 1, "Plank", 4, "", 0);
+        NormalMinionBLP = new BluePrint("MinionSeed", 1, 1, "Mana", 1, "", 0);
+        TankMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Stone", 1);
+        MagicMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Log", 1);
+
 
         isOpen = false;
 
@@ -137,6 +146,27 @@ public class CraftingSystem : MonoBehaviour
 
         craftStairBTN = constractionScreenUI.transform.Find("Stair").transform.Find("StairButton").GetComponent<Button>();
         craftStairBTN.onClick.AddListener(delegate { CraftAnyItem(StairBLP); });
+
+
+        //normalMinionReq1
+        normalMinionReq1 = refineScreenUI.transform.Find("NormalMinion").transform.Find("rec1").GetComponent<Text>();
+
+        normalMinionBTN = refineScreenUI.transform.Find("NormalMinion").transform.Find("NormalMinionButton").GetComponent<Button>();
+        normalMinionBTN.onClick.AddListener(delegate { CraftAnyItem(NormalMinionBLP); });
+
+        //TankMinionReq1
+        TankMinionReq1 = refineScreenUI.transform.Find("TankMinion").transform.Find("rec1").GetComponent<Text>();
+        TankMinionReq2 = refineScreenUI.transform.Find("TankMinion").transform.Find("rec2").GetComponent<Text>();
+
+        TankMinionBTN = refineScreenUI.transform.Find("TankMinion").transform.Find("TankMinionButton").GetComponent<Button>();
+        TankMinionBTN.onClick.AddListener(delegate { CraftAnyItem(TankMinionBLP); });
+
+        //normalMinionReq1
+        MagicMinionReq1 = refineScreenUI.transform.Find("MagicMinion").transform.Find("rec1").GetComponent<Text>();
+        MagicMinionReq2 = refineScreenUI.transform.Find("MagicMinion").transform.Find("rec2").GetComponent<Text>();
+
+        MagicMinionBTN = refineScreenUI.transform.Find("MagicMinion").transform.Find("MagicMinionButton").GetComponent<Button>();
+        MagicMinionBTN.onClick.AddListener(delegate { CraftAnyItem(MagicMinionBLP); });
 
     }
 
@@ -475,6 +505,48 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             MinionBTN.gameObject.SetActive(false);
+        }
+
+        // ---normalMinionReq1---- //
+        normalMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
+
+        if ((mana_count + quickManaCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            normalMinionBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            normalMinionBTN.gameObject.SetActive(false);
+        }
+
+
+        // ---TankMinion---- //
+        TankMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
+        TankMinionReq2.text = "石 1 [" + (stone_count + quickStoneCount) + "]";
+
+        if ((mana_count + quickManaCount) >= 1 && (stone_count + quickStoneCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            TankMinionBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            TankMinionBTN.gameObject.SetActive(false);
+        }
+
+        // ---MagicMinion---- //
+        MagicMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
+        MagicMinionReq2.text = "木 1 [" + (log_count + quickLogCount) + "]";
+
+        if ((mana_count + quickManaCount) >= 1 && (log_count + quickLogCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            MagicMinionBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            MagicMinionBTN.gameObject.SetActive(false);
         }
 
     }
