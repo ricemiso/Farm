@@ -50,7 +50,7 @@ public class EnemyAI_Movement : AI_Movement
 			// 目標がいない時にクリスタルなどの攻撃対象に向かう
 			if(state != MoveState.CHASE)
 			{
-				if(CrystalMini.GetComponent<MiniCrystal>().IsAlive())
+				if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
 				{
 					// ミニクリスタルが生きているなら
 					FoundTarget(CrystalMini);

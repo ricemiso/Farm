@@ -91,4 +91,12 @@ public class MiniCrystal : MonoBehaviour
 		}
 
 	}
+
+	// ミニクリスタルが生きているか
+	public bool IsAlive()
+	{
+		if (CrystalHealth <= 0) return false;
+		else return true;
+	}
+
 }

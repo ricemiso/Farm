@@ -19,12 +19,12 @@ public class Spawner : MonoBehaviour
 
 
 	// 召喚した敵に渡すクリスタルへの参照
-	public GameObject Crystal;
+	[SerializeField] GameObject Crystal;
 	// 召喚した敵に渡すミニクリスタルへの参照
-	public GameObject CrystalMini;
+	[SerializeField] GameObject CrystalMini;
 
-    // 敵リストへの参照
-	public GameObject EnemyParent;
+	// 敵リストへの参照
+	[SerializeField] GameObject EnemyParent;
 
 
 	// Start is called before the first frame update
