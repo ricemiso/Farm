@@ -22,7 +22,6 @@ TagManager:
   - Strage
   - placeStairs
   - Crystal
-  - Bullet
   layers:
   - Default
   - TransparentFX
