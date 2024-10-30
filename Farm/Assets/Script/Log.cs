@@ -56,10 +56,28 @@ public class Log : MonoBehaviour
         AddLogMessage("味方 " + allyName + " が死亡しました。");
     }
 
+    // クリスタルが攻撃された時のメソッド
+    public void OnCrystalAttack()
+    {
+        AddLogMessage(" クリスタルが攻撃されました。");
+    }
+
     // 敵が出現した時のメソッド
     public void OnEnemySpawn(string enemyName)
     {
         AddLogMessage("敵 " + enemyName + " が出現しました。");
+    }
+
+    // 畑　攻撃された時のメソッド
+    public void OnFarmAttack(string FarmName)
+    {
+        AddLogMessage(FarmName + " が攻撃されました。");
+    }
+
+    // 畑　死んだ時のメソッド
+    public void OnFarmDeath(string FarmName)
+    {
+        AddLogMessage(FarmName + " が破壊されました。");
     }
 
     // ログを追加し、Text UIに表示するメソッド

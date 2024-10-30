@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class CrystalGrowth : MonoBehaviour
+public class MiniCrystal : MonoBehaviour
 {
 
 	public float maxEnergy;
@@ -40,11 +40,11 @@ public class CrystalGrowth : MonoBehaviour
 		rotAngle.y += 0.3f;
 		transform.eulerAngles = rotAngle;
 
-
+		// HP
 		GrobalState.Instance.resourceHelth = CrystalHealth;
 		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 
-		
+
 
 		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
@@ -56,15 +56,7 @@ public class CrystalGrowth : MonoBehaviour
 		{
 			playerRange = false;
 		}
-		
 
-		if (GrobalState.Instance.resourceMana>=100)
-		{
-			Debug.Log("GameClear");
-
-			//Todo 実際のクリアシーンを入れる
-			//SceneManager.LoadScene("ClearScene");
-		}
 
 	}
 
@@ -76,7 +68,8 @@ public class CrystalGrowth : MonoBehaviour
 
 	public void GetHit()
 	{
-		Log.Instance.OnCrystalAttack();
+		
+		Log.Instance.OnFarmAttack(gameObject.name);
 
 		CrystalHealth -= 1;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
@@ -86,10 +79,7 @@ public class CrystalGrowth : MonoBehaviour
 
 		if (CrystalHealth <= 0)
 		{
-			SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
-			//TODO:ゲームオーバー処理を作る
-			//CrystalIsDead();
-
+			Log.Instance.OnFarmDeath(gameObject.name);
 		}
 
 	}
