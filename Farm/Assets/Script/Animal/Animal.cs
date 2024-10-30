@@ -77,7 +77,7 @@ public class Animal : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (isDead == false)
         {
