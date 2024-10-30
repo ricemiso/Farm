@@ -36,6 +36,7 @@ public class Animal : MonoBehaviour
     private new Animation animation;
     public bool isDead;
     [SerializeField] ParticleSystem bloodparticle;
+    [SerializeField] ParticleSystem levelupparticle;
     public GameObject bloodPaddle;
 
     public string GetAnimalName()
@@ -62,10 +63,10 @@ public class Animal : MonoBehaviour
             currentHealth = maxHealth;
             damage = 10;
             level = 0;
-            
+
         }
 
-        if (thisAnimalType ==AnimalType.Union)
+        if (thisAnimalType == AnimalType.Union)
         {
             animation = GetComponent<Animation>();
         }
@@ -73,11 +74,10 @@ public class Animal : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
-       
+
     }
 
-
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (isDead == false)
         {
@@ -92,7 +92,7 @@ public class Animal : MonoBehaviour
                 Log.Instance.TriggerPickupPop(animalName);
 
 
-                if(thisAnimalType == AnimalType.Union)
+                if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
                 }
@@ -100,7 +100,7 @@ public class Animal : MonoBehaviour
                 {
                     animator.SetTrigger("Die");
                 }
-               
+
 
 
                 GetComponent<AI_Movement>().enabled = false;
@@ -184,6 +184,14 @@ public class Animal : MonoBehaviour
         damage += damageIncrease;
 
         CraftingSystem.Instance.islevelUp = false;
-        // Debug.Log($"{animalName} のレベルが {level} に上がりました！ 体力: {maxHealth}, ダメージ: { GrobalState.Instance.Damage}");
+        levelupparticle.Play();
+
+        Vector3 currentScale = gameObject.transform.localScale;
+
+        // 1.6倍のスケールを計算
+        Vector3 newScale = currentScale * 1.5f;
+
+        // スケールを更新
+        gameObject.transform.localScale = newScale;
     }
 }

@@ -12,17 +12,23 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     // 敵のリスト
-    [SerializeField] List<GameObject> m_EnemyList;
+    [SerializeField] List<GameObject> EnemyList;
 
     // 召喚範囲（中心から範囲を示す直方体までの距離）
-    [SerializeField] Vector3 m_Range;
+    [SerializeField] Vector3 Range;
 
-    // テスト用
-    int counter = 0;
-    [SerializeField] int SummonTime;
 
-    // Start is called before the first frame update
-    void Start()
+	// 召喚した敵に渡すクリスタルへの参照
+	[SerializeField] GameObject Crystal;
+	// 召喚した敵に渡すミニクリスタルへの参照
+	[SerializeField] GameObject CrystalMini;
+
+	// 敵リストへの参照
+	[SerializeField] GameObject EnemyParent;
+
+
+	// Start is called before the first frame update
+	void Start()
     {
 
     }
@@ -48,16 +54,19 @@ public class Spawner : MonoBehaviour
         {
             // 座標の決定
             Vector3 gap;
-            gap.x = Random.Range(-m_Range.x, m_Range.x);
-            gap.y = Random.Range(-m_Range.y, m_Range.y);
-            gap.z = Random.Range(-m_Range.z, m_Range.z);
+            gap.x = Random.Range(-Range.x, Range.x);
+            gap.y = Random.Range(-Range.y, Range.y);
+            gap.z = Random.Range(-Range.z, Range.z);
             // 召喚
-            GameObject obj = Instantiate(m_EnemyList[Random.Range(0, m_EnemyList.Count)],
+            GameObject obj = Instantiate(EnemyList[Random.Range(0, EnemyList.Count)],
                 gap + this.transform.position, Quaternion.identity);
-            obj.GetComponent<Animal>().maxHealth = (int)(obj.GetComponent<Animal>().maxHealth * health);
+			obj.transform.SetParent(EnemyParent.transform); // 敵リストに登録
+			obj.GetComponent<Animal>().maxHealth = (int)(obj.GetComponent<Animal>().maxHealth * health);
             obj.transform.localScale *= size;
 
-
+            EnemyAI_Movement ai = obj.GetComponent<EnemyAI_Movement>();
+            ai.Crystal = Crystal;
+            ai.CrystalMini = CrystalMini;
 		}
     }
 }

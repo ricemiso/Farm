@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class CrystalGrowth : MonoBehaviour
 {
+
 	public float maxEnergy;
 	public float currentEnergy;
 
@@ -75,7 +76,7 @@ public class CrystalGrowth : MonoBehaviour
 
 	public void GetHit()
 	{
-
+		Log.Instance.OnCrystalAttack();
 
 		CrystalHealth -= 1;
 		GrobalState.Instance.resourceHelth = CrystalHealth;

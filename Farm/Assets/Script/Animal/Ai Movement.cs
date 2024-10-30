@@ -49,7 +49,7 @@ public class AI_Movement : MonoBehaviour
 	public bool onGround;    // Ú’n‚µ‚Ä‚¢‚é‚©
 	public const float maxAngleToTreatAsGround = 20.0f; // ’n–Ê‚Æ”»’è‚·‚éŒX‚«
 
-	public float attackRange = 0.9f;	// UŒ‚”ÍˆÍ
+	public float attackRange = 1.0f;	// UŒ‚”ÍˆÍ
 
 	// Start is called before the first frame update
 	protected virtual void Start()
@@ -218,6 +218,15 @@ public class AI_Movement : MonoBehaviour
 		{
 			case "Player":
 				PlayerState.Instance.AddHealth(-num);
+				break;
+			case "Enemy":
+				target.GetComponent<Animal>().TakeDamage(num);
+				break;
+			case "SupportUnit":
+				target.GetComponent<Animal>().TakeDamage(num);
+				break;
+			case "Crystal":
+				target.GetComponent<CrystalGrowth>().GetHit();
 				break;
 			default:
 				break;

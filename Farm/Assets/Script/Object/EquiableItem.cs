@@ -10,6 +10,8 @@ public class EquiableItem : MonoBehaviour
     public Animator animator;
     public bool SwingWait;
     private bool wasWatering = false;
+    private bool wasChargeing = false;
+    private bool wasleveling = false;
 
     void Start()
     {
@@ -34,14 +36,20 @@ public class EquiableItem : MonoBehaviour
             StartCoroutine(SwingAction());
         }
 
-        if (SelectionManager.Instance.Watering && !wasWatering)
+        if ((SelectionManager.Instance.Watering && !wasWatering) || (SelectionManager.Instance.Chargeing && !wasChargeing)
+            || (SelectionManager.Instance.leveling && !wasleveling)) 
         {
             animator.SetTrigger("Watering");
             wasWatering = true;
+            wasChargeing = true;
+            wasleveling = true;
         }
-        else if (!SelectionManager.Instance.Watering && wasWatering)
+        else if ((!SelectionManager.Instance.Watering && wasWatering)||(!SelectionManager.Instance.Chargeing && wasChargeing)
+            || (!SelectionManager.Instance.leveling && wasleveling))
         {
             wasWatering = false;
+            wasChargeing = false;
+            wasleveling = false;
         }
 
 
