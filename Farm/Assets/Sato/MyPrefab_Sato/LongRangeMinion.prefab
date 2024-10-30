@@ -151,8 +151,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518973231133983254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.025, y: 0.602, z: 0.187}
+  m_LocalRotation: {x: -0.009966388, y: -0.9918983, z: 0.11008497, w: -0.06260928}
+  m_LocalPosition: {x: 0, y: 0.919, z: 0}
   m_LocalScale: {x: 0.62499946, y: 0.62499994, z: 0.62499964}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5150,7 +5150,7 @@ GameObject:
   - component: {fileID: 5322292645872173344}
   m_Layer: 0
   m_Name: LongRangeMinion
-  m_TagString: SupportUnit
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5164,7 +5164,7 @@ Transform:
   m_GameObject: {fileID: 1522425592210347359}
   serializedVersion: 2
   m_LocalRotation: {x: 0.009966388, y: 0.9918983, z: -0.11008497, w: -0.06260928}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.66, y: 1.88, z: 8.52}
   m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5250,7 +5250,6 @@ MonoBehaviour:
   thisAnimalType: 2
   isDead: 0
   bloodparticle: {fileID: 8396051554211694687}
-  levelupparticle: {fileID: 0}
   bloodPaddle: {fileID: 6288677722811547862}
 --- !u!65 &8559359141524731401
 BoxCollider:

@@ -6,14 +6,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SupportAI_Movement : AI_Movement
 {
-	// 次攻撃可能になるまでのクールタイム
-	[SerializeField] float currentAttackCooltime;
-	public const float attackCooltime = 2.0f;
 
-	protected override void Start()
+    protected override void Start()
     {
-		currentAttackCooltime = 0.0f;
-		base.Start();
+        base.Start();
     }
 
     // Update is called once per frame
@@ -30,10 +26,6 @@ public class SupportAI_Movement : AI_Movement
 			{
 				animation.Stop("Run");
 				//animator.SetBool("isRunning", false);  // アニメーションを停止
-			}
-			else
-			{
-				animation.Play("Run");
 			}
 		}
 
@@ -57,8 +49,7 @@ public class SupportAI_Movement : AI_Movement
 			}
 		}
 
-		currentAttackCooltime -= Time.deltaTime;
-		base.Update();
+        base.Update();
     }
 
 	// プレイヤーに後ろから追従するメソッド
@@ -85,27 +76,13 @@ public class SupportAI_Movement : AI_Movement
 		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
 
 		Chase(followPosition);
-
-		float distance = Vector3.Distance(followPosition, transform.position);
-		if (distance <= attackRange &&
-			currentAttackCooltime <= 0.0f)
-		{
-			checkAttack();
-			currentAttackCooltime = attackCooltime;
-		}
 	}
-
-	virtual protected void checkAttack()
-	{}
-
 	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerEnter(Collider other)
 	{
-
 		if (other.CompareTag("Player") &&
 			state != MoveState.FOLLOWING &&
-			state != MoveState.CHASE &&
-			!isStopped)  // プレイヤーが入って、まだ追従していない場合
+			state != MoveState.CHASE)  // プレイヤーが入って、まだ追従していない場合
 		{
 			state = MoveState.FOLLOWING;
 			animation.Play("Run");
@@ -114,35 +91,14 @@ public class SupportAI_Movement : AI_Movement
 			target = other.gameObject;
 		}
 
-	//	if (other.CompareTag("Enemy"))  // 敵が入って、まだ追従していない場合
-	//	{
-	//		state = MoveState.CHASE;
-	//		animation.Play("Run");
-	//		//animator.SetBool("isRunning", true);
-
-	//		target = other.gameObject;
-	//		if (target.gameObject.GetComponent<Animal>().currentHealth <= 0) 
-	//		{
-	//			state = MoveState.WALKING;
-	//			target = null;
-	//		}
-	//	}
-	}
-
-	private void OnTriggerStay(Collider other)
-	{
-		if (other.CompareTag("Enemy"))  // 敵が入って、まだ追従していない場合
+		if (other.CompareTag("Enemy") &&
+			state != MoveState.CHASE)  // 敵が入って、まだ追従していない場合
 		{
 			state = MoveState.CHASE;
 			animation.Play("Run");
 			//animator.SetBool("isRunning", true);
 
 			target = other.gameObject;
-			if (target.gameObject.GetComponent<Animal>().currentHealth <= 0)
-			{
-				state = MoveState.WALKING;
-				target = null;
-			}
 		}
 	}
 
