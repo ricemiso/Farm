@@ -20,6 +20,7 @@ public class SelectionManager : MonoBehaviour
 
     public bool HandIsVisible;
     public bool Watering;
+    public bool Chargeing;
 
     public GameObject chopHolder;
 
@@ -103,11 +104,14 @@ public class SelectionManager : MonoBehaviour
                 chopText.text = "マナクリスタル";
                 chopHolder.gameObject.SetActive(true);
 
-                if (Input.GetMouseButtonDown(0)&&EquipSystem.Instance.IsPlayerHooldingMana())
+                if (Input.GetMouseButtonDown(0)&&EquipSystem.Instance.IsPlayerHooldingMana()&&!Chargeing)
                 {
+
+                    Chargeing = true;
+
                     crystal.GetEnergy(1);
-                    Destroy(EquipSystem.Instance.selectedItem);
-                    Destroy(EquipSystem.Instance.selecteditemModel);
+
+                    StartCoroutine(DelayWatering());
                 }
             }
             else
@@ -354,6 +358,7 @@ public class SelectionManager : MonoBehaviour
         Destroy(EquipSystem.Instance.selecteditemModel);
 
         Watering = false;
+        Chargeing = false;
     }
 
     IEnumerator DelayedAttribute()

@@ -5382,7 +5382,7 @@ GameObject:
   - component: {fileID: 8446402970950498804}
   - component: {fileID: 2710428140813291052}
   - component: {fileID: 5065931816046800050}
-  - component: {fileID: 8584771206506656766}
+  - component: {fileID: 5945723152925002242}
   m_Layer: 0
   m_Name: ConstractAI
   m_TagString: Untagged
@@ -5642,7 +5642,7 @@ MonoBehaviour:
     amountMax: 3
   finalLoot: []
   wasLootCalulated: 0
---- !u!114 &8584771206506656766
+--- !u!114 &5945723152925002242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5651,7 +5651,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5447362327422923096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8d9321a7af010488348645ed1e56e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 554b0993cfcfc734cbdc63455d03fe8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
@@ -5662,10 +5662,14 @@ MonoBehaviour:
   state: 0
   player: {fileID: 0}
   followSpeed: 5
+  rotateSpeed: 10
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
+  attackRange: 1.5
+  timeToFoundEnemy: 0
+  currentAttackCooltime: 0
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0
