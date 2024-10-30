@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource gravelWalkSound;
     public AudioSource foundationWalkSound;
     public AudioSource rabbitCrySound;
+    public AudioSource FarmWalkSound;
 
     //public AudioSource WateringSound;
     //public AudioSource WateringCanSound;

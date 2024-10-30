@@ -149,8 +149,8 @@ public class PlayerMovement : MonoBehaviour
             case 1: // »—˜
                 audioSource = SoundManager.Instance.gravelWalkSound;
                 break;
-            case 2: // ŒÍ‚ê‘
-                audioSource = SoundManager.Instance.grassWalkSound;
+            case 2: // ”¨
+                audioSource = SoundManager.Instance.FarmWalkSound;
                 break;
 
             default:
