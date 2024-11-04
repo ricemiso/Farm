@@ -624,9 +624,9 @@ MonoBehaviour:
   dayOfPlanting: 0
   plantage: 0
   ageForYourModel: 1
-  ageForMatureModel: 3
-  ageForFirstProduceBatch: 4
-  daysForNewProduce: 2
+  ageForMatureModel: 1
+  ageForFirstProduceBatch: 1
+  daysForNewProduce: 1
   daysRemainingForNewProduce: 0
   isOneTimearvest: 0
   isWatered: 0

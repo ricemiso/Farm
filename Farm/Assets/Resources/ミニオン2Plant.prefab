@@ -278,7 +278,7 @@ MonoBehaviour:
   dayOfPlanting: 0
   plantage: 0
   ageForYourModel: 1
-  ageForMatureModel: 2
+  ageForMatureModel: 1
   ageForFirstProduceBatch: 0
   daysForNewProduce: 0
   daysRemainingForNewProduce: 0

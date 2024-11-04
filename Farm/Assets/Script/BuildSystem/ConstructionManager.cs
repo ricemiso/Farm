@@ -257,6 +257,16 @@ public class ConstructionManager : MonoBehaviour
                 
                 DestroyItem(ItemToBeDestroy);
             }
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
+            {
+                //TODO:èCê≥Ç∑ÇÈ
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
+                AIPlaceItemFreeStyle();
+
+                DestroyItem(ItemToBeDestroy);
+            }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "StairsWoodemodel")
             {
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
