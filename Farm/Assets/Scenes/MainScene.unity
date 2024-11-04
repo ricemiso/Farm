@@ -19211,21 +19211,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 350129891}
     m_Modifications:
+    - target: {fileID: 5478193085109567270, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5580020824767269821, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
       propertyPath: m_Name
       value: Mana_model (1)
       objectReference: {fileID: 0}
     - target: {fileID: 9068507053033522269, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -103.73
       objectReference: {fileID: 0}
     - target: {fileID: 9068507053033522269, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.29
       objectReference: {fileID: 0}
     - target: {fileID: 9068507053033522269, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 58.69
       objectReference: {fileID: 0}
     - target: {fileID: 9068507053033522269, guid: 5293919dec0ffd54a949ffeef439c9d9, type: 3}
       propertyPath: m_LocalRotation.w
