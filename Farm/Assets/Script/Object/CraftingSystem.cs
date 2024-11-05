@@ -15,10 +15,10 @@ public class CraftingSystem : MonoBehaviour
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
-    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN,craftChestBTN;
     Button normalMinionBTN, TankMinionBTN, MagicMinionBTN;
 
-    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1,ChestReq1;
     Text normalMinionReq1, TankMinionReq1, TankMinionReq2, MagicMinionReq1, MagicMinionReq2;
 
     public bool isOpen;
@@ -36,6 +36,7 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint NormalMinionBLP;
     [HideInInspector] public BluePrint TankMinionBLP;
     [HideInInspector] public BluePrint MagicMinionBLP;
+    [HideInInspector] public BluePrint ChestBLP;
 
 
     private void Awake()
@@ -65,6 +66,7 @@ public class CraftingSystem : MonoBehaviour
         NormalMinionBLP = new BluePrint("MinionSeed", 1, 1, "Mana", 1, "", 0);
         TankMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Stone", 1);
         MagicMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Log", 1);
+        ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
 
 
         isOpen = false;
@@ -148,25 +150,31 @@ public class CraftingSystem : MonoBehaviour
         craftStairBTN.onClick.AddListener(delegate { CraftAnyItem(StairBLP); });
 
 
-        //normalMinionReq1
+        //normalMinion
         normalMinionReq1 = refineScreenUI.transform.Find("NormalMinion").transform.Find("rec1").GetComponent<Text>();
 
         normalMinionBTN = refineScreenUI.transform.Find("NormalMinion").transform.Find("NormalMinionButton").GetComponent<Button>();
         normalMinionBTN.onClick.AddListener(delegate { CraftAnyItem(NormalMinionBLP); });
 
-        //TankMinionReq1
+        //TankMinion
         TankMinionReq1 = refineScreenUI.transform.Find("TankMinion").transform.Find("rec1").GetComponent<Text>();
         TankMinionReq2 = refineScreenUI.transform.Find("TankMinion").transform.Find("rec2").GetComponent<Text>();
 
         TankMinionBTN = refineScreenUI.transform.Find("TankMinion").transform.Find("TankMinionButton").GetComponent<Button>();
         TankMinionBTN.onClick.AddListener(delegate { CraftAnyItem(TankMinionBLP); });
 
-        //normalMinionReq1
+        //LongMinion
         MagicMinionReq1 = refineScreenUI.transform.Find("MagicMinion").transform.Find("rec1").GetComponent<Text>();
         MagicMinionReq2 = refineScreenUI.transform.Find("MagicMinion").transform.Find("rec2").GetComponent<Text>();
 
         MagicMinionBTN = refineScreenUI.transform.Find("MagicMinion").transform.Find("MagicMinionButton").GetComponent<Button>();
         MagicMinionBTN.onClick.AddListener(delegate { CraftAnyItem(MagicMinionBLP); });
+
+        //Chest1
+        ChestReq1 = toolScreenUI.transform.Find("Chest").transform.Find("rec1").GetComponent<Text>();
+
+        craftChestBTN = toolScreenUI.transform.Find("Chest").transform.Find("ChestButton").GetComponent<Button>();
+        craftChestBTN.onClick.AddListener(delegate { CraftAnyItem(ChestBLP); });
 
     }
 
@@ -547,6 +555,19 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             MagicMinionBTN.gameObject.SetActive(false);
+        }
+
+
+        //Chest
+        ChestReq1.text = "4 ŠÛ‘¾ [" + (log_count + quickLogCount) + "]";
+
+        if ((log_count + quickLogCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftChestBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftChestBTN.gameObject.SetActive(false);
         }
 
     }
