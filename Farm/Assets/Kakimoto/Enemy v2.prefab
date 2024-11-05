@@ -157,6 +157,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6842354187199915839, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842354187199915839, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842354187199915839, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7195800805537036185, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       propertyPath: m_Name
       value: Enemy v2
@@ -208,6 +220,7 @@ MonoBehaviour:
   player: {fileID: 0}
   followSpeed: 5
   rotateSpeed: 10
+  target: {fileID: 0}
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
@@ -215,6 +228,8 @@ MonoBehaviour:
   attackRange: 0.9
   timeToFoundEnemy: 0
   currentAttackCooltime: 0
+  Crystal: {fileID: 0}
+  CrystalMini: {fileID: 0}
 --- !u!114 &-2303544704176358251
 MonoBehaviour:
   m_ObjectHideFlags: 0

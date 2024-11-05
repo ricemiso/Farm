@@ -14,7 +14,7 @@ public class LongRangeMinion : SupportAI_Movement
 
 	[SerializeField]
 	[Tooltip("’e‚Ì‘¬‚³")]
-	private float speed = 30f;
+	private float speed = 30.0f;
 
 	protected override void Start()
 	{

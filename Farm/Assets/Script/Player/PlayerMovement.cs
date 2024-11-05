@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
@@ -9,9 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private TerrainData terrainData;
     private Vector3 terrainPos;
     private AudioSource currentAudioSource; // 現在の足音用のAudioSource
-
-    public GameObject animationModel; // Animationがついているモデル
-    private Animation anim; // Animationコンポーネント
 
     public float speed = 12f;
     public float gravity = -9.81f * 2;
@@ -36,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
         terrainPos = terrain.transform.position;
         controller = GetComponent<CharacterController>();
 
-        // animationModelからAnimationコンポーネントを取得
-        anim = animationModel.GetComponent<Animation>();
     }
 
     void Update()
@@ -73,24 +69,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isMoving = true;
 
-            // Element6のアニメーション（移動アニメーション）を再生
-            if (!anim.IsPlaying("Run")) // すでに再生中でない場合のみ
-            {
-                anim.Play("Run");
-            }
-
             UpdateFootstepSound();
         }
         else
         {
             isMoving = false;
-
-            // アイドル状態では特にアニメーションを再生しない（初期のアニメーションを再生）
-            if (anim.IsPlaying("Run"))
-            {
-                anim.Stop("Run"); // 移動アニメーションを停止
-                anim.Play("Idle");
-            }
 
             // 足音も停止
             if (currentAudioSource != null && currentAudioSource.isPlaying)

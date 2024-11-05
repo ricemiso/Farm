@@ -102,7 +102,7 @@ public class SelectionManager1 : MonoBehaviour
                 onTarget = true;
                 selectgameObject = interactable.gameObject;
 
-                interaction_text.text = interactable.GetItemName();
+                interaction_text.text = interactable.GetItemName(selectgameObject);
                 interaction_Info_UI.SetActive(true);
 
                 if (interactable.CompareTag("Pickable"))

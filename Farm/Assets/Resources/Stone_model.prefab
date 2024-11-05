@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: Stone
+  InventryName: Stone
   playerRange: 0
   ditectionRange: 10
 --- !u!65 &6474770463303851625

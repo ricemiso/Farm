@@ -110,6 +110,8 @@ public class PopupManager : MonoBehaviour
                 return "Î";
             case "Stick":
                 return "–Ø‚Ì–_";
+            case "Mana":
+                return "ƒ}ƒi";
             default:
                 return itemName;
         }

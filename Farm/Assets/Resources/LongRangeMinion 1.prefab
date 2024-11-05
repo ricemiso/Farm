@@ -5144,7 +5144,6 @@ GameObject:
   - component: {fileID: 8559359141524731401}
   - component: {fileID: 2127612127266028338}
   - component: {fileID: 4064163772233434320}
-  - component: {fileID: 3138725651412293809}
   - component: {fileID: 2685701426436218251}
   - component: {fileID: 2007988655042678609}
   - component: {fileID: 5322292645872173344}
@@ -5163,9 +5162,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522425592210347359}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.009966388, y: 0.9918983, z: -0.11008497, w: -0.06260928}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6000001, y: 1.6000001, z: 1.6000001}
+  m_LocalRotation: {x: -0.0010208179, y: 0.99775773, z: 0.01657625, w: -0.06483723}
+  m_LocalPosition: {x: 0.5000123, y: -1.400001, z: 3.910019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3130984884127659191}
@@ -5174,7 +5173,7 @@ Transform:
   - {fileID: 6353094896080536696}
   - {fileID: 8808197078753524027}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 12.541, y: 187.44, z: 1.97}
+  m_LocalEulerAnglesHint: {x: -1.888, y: 187.44, z: -0.24}
 --- !u!54 &5553299472333991714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5387,34 +5386,6 @@ MonoBehaviour:
     amountMax: 3
   finalLoot: []
   wasLootCalulated: 0
---- !u!114 &3138725651412293809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522425592210347359}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795d129e2fb9e52498baa1634b6722c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  animation: {fileID: 0}
-  moveSpeed: 10
-  walkCounter: 0
-  waitCounter: 0
-  state: 0
-  player: {fileID: 0}
-  followSpeed: 15
-  rotateSpeed: 10
-  target: {fileID: 0}
-  isStopped: 0
-  stopRange: 20
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  onGround: 0
-  attackRange: 0.9
-  currentAttackCooltime: 0
 --- !u!114 &2685701426436218251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5473,7 +5444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  animation: {fileID: 0}
+  animation: {fileID: 2007988655042678609}
   moveSpeed: 0.2
   walkCounter: 0
   waitCounter: 0
