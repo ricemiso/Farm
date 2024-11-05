@@ -183,6 +183,18 @@ public class ConstructionManager : MonoBehaviour
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
                 }
 
+                if (itemToBeConstructed.name == "TankAI2")
+                {
+                    itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
+                    itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                }
+
+                if (itemToBeConstructed.name == "LongRangeMinion 1")
+                {
+                    itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
+                    itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = false;
+                }
+
                 if (CheckValidConstructionPosition())
                 {
                     isValidPlacement = true;
@@ -257,12 +269,22 @@ public class ConstructionManager : MonoBehaviour
                 
                 DestroyItem(ItemToBeDestroy);
             }
-            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "LongRangeMinion 1")
             {
                 //TODO:èCê≥Ç∑ÇÈ
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
+                AIPlaceItemFreeStyle();
+
+                DestroyItem(ItemToBeDestroy);
+            }
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "TankAI2")
+            {
+                //TODO:èCê≥Ç∑ÇÈ
+                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
 
                 DestroyItem(ItemToBeDestroy);

@@ -5116,7 +5116,7 @@ GameObject:
   - component: {fileID: 2685701426436218251}
   - component: {fileID: 2007988655042678609}
   m_Layer: 0
-  m_Name: ConstractAI2
+  m_Name: TankAI2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5205,9 +5205,9 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u8FD1\u63A5)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 500
   isCraftedMinion: 0
-  damage: 20
+  damage: 10
   healthIncrease: 20
   damageIncrease: 5
   level: 0
