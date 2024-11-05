@@ -175,7 +175,8 @@ public class ConstructionManager : MonoBehaviour
         {
             //TODO:”z’u‚·‚é•¨‚ÌğŒ‚Ì’Ç‰Á
             if (itemToBeConstructed.name == "FoundationModel" || itemToBeConstructed.name == "ConstractAI2" 
-                || itemToBeConstructed.name == "StairsWoodemodel" || itemToBeConstructed.name == "Chestmodel")
+                || itemToBeConstructed.name == "StairsWoodemodel" || itemToBeConstructed.name == "Chestmodel"
+                || itemToBeConstructed.name == "TankAI2" || itemToBeConstructed.name == "LongRangeMinion 1")
             {
                 if(itemToBeConstructed.name == "ConstractAI2")
                 {

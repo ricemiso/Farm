@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000011505215280}
   - component: {fileID: 23000010346014566}
   - component: {fileID: 64000011310510212}
+  - component: {fileID: -1742353091880842858}
   m_Layer: 0
   m_Name: Minion3_model
   m_TagString: Untagged
@@ -106,3 +107,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: fbd33e75d8d4bf9479c9cb59e83a9e37, type: 3}
+--- !u!114 &-1742353091880842858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011542004260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6af692f748c34740824225ff7937f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: "\u30DF\u30CB\u30AA\u30F33"
+  InventryName: "\u30DF\u30CB\u30AA\u30F33"
+  playerRange: 0
+  ditectionRange: 10

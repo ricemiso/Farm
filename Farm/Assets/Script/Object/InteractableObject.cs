@@ -5,12 +5,36 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public string ItemName;
+    [SerializeField] string InventryName;
     public bool playerRange;
 
     [SerializeField] float ditectionRange = 10f;
 
-    public string GetItemName()
+    public string GetItemName(GameObject objectname)
     {
+        switch (objectname.name)
+        {
+            case "Mana_model":
+                ItemName = "マナ";
+                break;
+            case "Stone_model":
+                ItemName = "石ころ";
+                break;
+            case "Log_model":
+                ItemName = "丸太";
+                break;
+            case "Mana_model(Clone)":
+                ItemName = "マナ";
+                break;
+            case "Stone_model(Clone)":
+                ItemName = "石ころ";
+                break;
+            case "Log_model(Clone)":
+                ItemName = "丸太";
+                break;
+
+        }
+        
         return ItemName;
     }
 
@@ -33,7 +57,7 @@ public class InteractableObject : MonoBehaviour
         {
             if (InventorySystem.Instance.CheckSlotAvailable(1))
             {
-                InventorySystem.Instance.AddToinventry(ItemName);
+                InventorySystem.Instance.AddToinventry(InventryName);
 
                 InventorySystem.Instance.itemsPickedup.Add(gameObject.name);
                 print(gameObject.name);

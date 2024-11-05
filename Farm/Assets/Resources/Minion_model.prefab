@@ -120,5 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemName: "\u30DF\u30CB\u30AA\u30F3"
+  InventryName: "\u30DF\u30CB\u30AA\u30F3"
   playerRange: 0
   ditectionRange: 10

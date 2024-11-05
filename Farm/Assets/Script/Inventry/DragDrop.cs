@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,14 +50,41 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        var termpItemReference = itemBeingDragged;
+        
 
         itemBeingDragged = null;
 
+        Debug.Log(termpItemReference.name);
+        
+
         if (transform.parent == startParent || transform.parent == transform.root)
         {
-            transform.position = startPosition;
-            transform.SetParent(startParent);
+            //TODO:ドロップできるアイテムの追加
+            if(termpItemReference.name == "Mana(Clone)" || termpItemReference.name == "Stone(Clone)" || termpItemReference.name == "Stick(Clone)" || termpItemReference.name == "Log(Clone)")
+            {
+                termpItemReference.SetActive(false);
+                AlertDialogManager dialogManager = FindObjectOfType<AlertDialogManager>();
+                dialogManager.ShowDialog("ドロップしますか？", (responce) =>
+                {
+                    if (responce)
+                    {
+                        DropItemIntoTheWorld(termpItemReference);
+                    }
+                    else
+                    {
+                        transform.position = startPosition;
+                        transform.SetParent(startParent);
+                        termpItemReference.SetActive(true);
+                    }
 
+                });
+            }
+            else
+            {
+                transform.position = startPosition;
+                transform.SetParent(startParent);
+            }
         }
 
         Debug.Log("OnEndDrag");
@@ -64,6 +92,22 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         canvasGroup.blocksRaycasts = true;
     }
 
+    private void DropItemIntoTheWorld(GameObject termpItemReference)
+    {
+        string cleanName = termpItemReference.name.Split(new string[] { "(Clone)" }, StringSplitOptions.None)[0];
 
+        Debug.Log(cleanName);
+        GameObject item = Instantiate(Resources.Load<GameObject>(cleanName + "_model"));
 
+        item.transform.position = Vector3.zero;
+        var dropSpawnPosition = PlayerState.Instance.playerBody.transform.Find("DropSpawn").transform.position;
+        item.transform.localPosition = new Vector3(dropSpawnPosition.x, dropSpawnPosition.y, dropSpawnPosition.z);
+
+        var itemsObject = FindObjectOfType<EnviromentManager>().gameObject.transform.Find("[ITEMS]");
+        item.transform.SetParent(itemsObject.transform);
+
+        DestroyImmediate(termpItemReference.gameObject);
+        InventorySystem.Instance.ReCalculeList();
+        CraftingSystem.Instance.RefreshNeededItems();
+    }
 }

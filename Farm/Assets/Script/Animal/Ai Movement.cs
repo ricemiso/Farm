@@ -61,8 +61,6 @@ public class AI_Movement : MonoBehaviour
 			animation = GetComponent<Animation>();
 		}
 
-
-
 		// プレイヤーを自動的に取得する
 		if (player == null)
 		{

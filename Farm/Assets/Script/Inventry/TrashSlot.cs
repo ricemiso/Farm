@@ -75,7 +75,7 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
     IEnumerator notifyBeforeDeletion()
     {
         trashAlertUI.SetActive(true);
-        textToModify.text = "Throw away this " + itemName + "?";
+        textToModify.text = itemName + "‚ðŽÌ‚Ä‚Ä‚à‚æ‚ë‚µ‚¢‚Å‚·‚©?";
         yield return new WaitForSeconds(1f);
     }
 
