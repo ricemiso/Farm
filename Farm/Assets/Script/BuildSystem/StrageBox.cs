@@ -9,6 +9,14 @@ public class StrageBox : MonoBehaviour
 
     [SerializeField] public List<string> items;
 
+    public Animation animation;
+    private int cnt = 0;
+
+    private void Start()
+    {
+        animation = GetComponent<Animation>();
+    }
+
     public enum BoxType{
         smallBox,
         bigBox
@@ -23,10 +31,32 @@ public class StrageBox : MonoBehaviour
         if (distance < dis)
         {
             playerInRange = true;
+
         }
         else
         {
             playerInRange = false;
+        }
+
+
+        if (StorageManager.Instance.storageUIOpen)
+        {
+            
+            if(cnt == 0)
+            {
+                animation.Play("A_SeaChest_Open");
+                cnt++;
+            }
+           
+        }
+        else if(!StorageManager.Instance.storageUIOpen)
+        {
+            if(cnt == 1)
+            {
+                animation.Play("A_SeaChest_Close");
+                cnt = 0;
+            }
+           
         }
     }
 }
