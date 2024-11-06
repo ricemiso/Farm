@@ -5079,6 +5079,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -3744896374358596687, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      propertyPath: animalName
+      value: "\u30A6\u30B5\u30AE"
+      objectReference: {fileID: 0}
+    - target: {fileID: -3744896374358596687, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       propertyPath: bloodPaddle
       value: 
       objectReference: {fileID: 9185267980576504619}
