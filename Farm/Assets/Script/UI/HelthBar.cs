@@ -43,6 +43,10 @@ public class HelthBar : MonoBehaviour
     {
         //Todo プレイヤーが倒れるアニメーション(仮)
 
+
+        Cursor.lockState = CursorLockMode.None;
+        //Destroy(SoundManager.Instance.gameObject);
+
 		//Todo 実際のゲームオーバーシーンを入れる
 		SceneManager.LoadScene("GameOver");
 	}

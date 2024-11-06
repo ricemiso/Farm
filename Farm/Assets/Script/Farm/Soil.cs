@@ -17,6 +17,8 @@ public class Soil : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerState.Instance.currentHealth <= 0) return;
+
         //Todo:‹——£‚ð“¾‚é•û–@
         float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
