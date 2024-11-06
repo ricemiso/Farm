@@ -11,10 +11,10 @@ public class EnemyAI_Movement : AI_Movement
 	// 追跡を諦めるまでの時間
 	public const float timeToGiveUpChase = 5.0f;
 	// 敵を見つけてからの時間（再認識するたびにリセット）
-	[SerializeField] float timeToFoundEnemy;
+	[SerializeField] public float timeToFoundEnemy;
 
 	// 次攻撃可能になるまでのクールタイム
-	[SerializeField] float currentAttackCooltime;
+	[SerializeField] public  float currentAttackCooltime;
 	public const float attackCooltime = 1.0f;
 
 	// クリスタルへの参照
@@ -70,7 +70,7 @@ public class EnemyAI_Movement : AI_Movement
 		base.Update();
     }
 
-	protected void ChaseEnemy()
+	virtual protected void ChaseEnemy()
 	{
 		animator.SetBool("isRunning", true);
 
@@ -78,23 +78,6 @@ public class EnemyAI_Movement : AI_Movement
 		if(timeToFoundEnemy >= timeToGiveUpChase)
 		{
 			ChangeStateWait();
-		}
-
-		// プレイヤーの進行方向を取得し、後ろの位置を計算
-		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
-
-		Chase(followPosition);
-
-		// 近くにターゲットがいたら攻撃処理
-		float distance = Vector3.Distance(followPosition, transform.position);
-		if(distance <= attackRange &&
-			timeToFoundEnemy <= 0.1f && 
-			currentAttackCooltime <= 0.0f) 
-		{
-			float damage = GetComponent<Animal>().damage;
-			Attack(damage);
-
-			currentAttackCooltime = attackCooltime;
 		}
 	}
 
