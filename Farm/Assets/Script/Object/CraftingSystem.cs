@@ -255,8 +255,6 @@ public class CraftingSystem : MonoBehaviour
 
             isOpen = true;
 
-            RefreshNeededItems();
-
         }
         else if (Input.GetKeyDown(KeyCode.C) && isOpen)
         {
@@ -302,7 +300,7 @@ public class CraftingSystem : MonoBehaviour
             }
             else
             {
-                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName,true);
+                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName);
             }
         }
 

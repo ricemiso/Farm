@@ -8,18 +8,18 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
 
-    //public GameObject Item
-    //{
-    //    get
-    //    {
-    //        if (transform.childCount > 0)
-    //        {
-    //            return transform.GetChild(0).gameObject;
-    //        }
+    public GameObject Item
+    {
+        get
+        {
+            if (transform.childCount > 0)
+            {
+                return transform.GetChild(0).gameObject;
+            }
 
-    //        return null;
-    //    }
-    //}
+            return null;
+        }
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -28,7 +28,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         Debug.Log("OnDrop");
 
         //if there is not item already then set our item.
-        if (transform.childCount <= 1) 
+        if (!Item)
         {
 
             SoundManager.Instance.PlaySound(SoundManager.Instance.dropItemSound);
@@ -49,37 +49,11 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             }
 
         }
-        else
-        {
-            InventoryItem dragedItem = DragDrop.itemBeingDragged.GetComponent<InventoryItem>();
 
-            if(dragedItem.thisName == GetStoredItem().thisName && IsLimitExceded(dragedItem) ==false)
-            {
-                GetStoredItem().amountInventry += dragedItem.amountInventry;
-                DestroyImmediate(DragDrop.itemBeingDragged);
-            }
-            else
-            {
-                DragDrop.itemBeingDragged.transform.SetParent(transform);
-            }
-        }
 
     }
 
-    InventoryItem GetStoredItem()
-    {
-        return transform.GetChild(0).GetComponent<InventoryItem>();
-    }
 
-    bool IsLimitExceded(InventoryItem draggItem)
-    {
-        if ((draggItem.amountInventry + GetStoredItem().amountInventry) > InventorySystem.Instance.stackLimit)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+
+
 }

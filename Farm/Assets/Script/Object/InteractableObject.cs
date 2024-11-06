@@ -57,7 +57,7 @@ public class InteractableObject : MonoBehaviour
         {
             if (InventorySystem.Instance.CheckSlotAvailable(1))
             {
-                InventorySystem.Instance.AddToinventry(InventryName,true);
+                InventorySystem.Instance.AddToinventry(InventryName);
 
                 InventorySystem.Instance.itemsPickedup.Add(gameObject.name);
                 print(gameObject.name);
