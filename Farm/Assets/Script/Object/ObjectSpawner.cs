@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -7,34 +6,13 @@ public class ObjectSpawner : MonoBehaviour
     public int numberOfTrees = 1000; // 生成するTreeの数
     public int numberOfStones = 1000; // 生成するStone_modelの数
 
-    private bool hasSpawned = false; // 一度だけ生成するためのフラグ
     private GameObject itemToAdd;
     public GameObject treeParent;
     public GameObject StoneParent;
 
-    private GameObject spawnedTreesParent;  // 生成されたTreeの親オブジェクト
-    private GameObject spawnedStonesParent; // 生成されたStone_modelの親オブジェクト
-
     void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        // ゲーム開始時に現在のシーンがMainSceneかをチェック
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // シーンがMainSceneで、まだ生成されていない場合のみ生成
-        if (scene.name == "MainScene" && !hasSpawned)
-        {
-            SpawnObjectsOnTerrain();
-            hasSpawned = true; // フラグを立てて以降の生成を防止
-        }
-        // シーンがMainSceneでない場合、オブジェクトを削除
-        else if (scene.name != "MainScene")
-        {
-            DestroyObjects();
-        }
+        SpawnObjectsOnTerrain();
     }
 
     private GameObject SetName(string gameObject)
@@ -57,9 +35,6 @@ public class ObjectSpawner : MonoBehaviour
             return;
         }
 
-        // Treeの親オブジェクトを作成
-        spawnedTreesParent = new GameObject("SpawnedTrees");
-
         // Treeを生成
         for (int i = 0; i < numberOfTrees; i++)
         {
@@ -69,7 +44,12 @@ public class ObjectSpawner : MonoBehaviour
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
                 GameObject newTree = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
                 newTree.name = "Tree_" + (i + 1);  // 名前に連番を追加
-                newTree.transform.SetParent(spawnedTreesParent.transform);  // 生成した木の親を設定
+                newTree.transform.SetParent(treeParent.transform);  // treeParentの子に設定
+               // Debug.Log($"Tree_{i + 1} が生成されました: {spawnPosition}");
+            }
+            else
+            {
+                //Debug.Log("草の層が見つかりません、Tree生成スキップ");
             }
         }
 
@@ -81,9 +61,6 @@ public class ObjectSpawner : MonoBehaviour
             return;
         }
 
-        // Stone_modelの親オブジェクトを作成
-        spawnedStonesParent = new GameObject("SpawnedStones");
-
         // Stone_modelを生成
         for (int i = 0; i < numberOfStones; i++)
         {
@@ -93,7 +70,12 @@ public class ObjectSpawner : MonoBehaviour
                 float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
                 GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
                 newStone.name = "Rock_" + (i + 1);  // 名前に連番を追加
-                newStone.transform.SetParent(spawnedStonesParent.transform);  // 生成した石の親を設定
+                newStone.transform.SetParent(StoneParent.transform);  // StoneParentの子に設定
+                //Debug.Log($"Rock_{i + 1} が生成されました: {spawnPosition}");
+            }
+            else
+            {
+                //Debug.Log("草の層が見つかりません、Rock生成スキップ");
             }
         }
     }
@@ -110,6 +92,7 @@ public class ObjectSpawner : MonoBehaviour
     private bool CheckLayerForObjectSpawn(Vector3 position)
     {
         int layerIndex = GetCurrentTerrainLayer(position);
+       // Debug.Log("現在のテクスチャ層のインデックス: " + layerIndex);
 
         // もしLayer 0（草の層）ならばオブジェクト生成
         if (layerIndex == 0) // 草の層（Layer 0）
@@ -147,23 +130,5 @@ public class ObjectSpawner : MonoBehaviour
         }
 
         return maxTextureIndex; // 最大のアルファ値を持つテクスチャインデックスを返す
-    }
-
-    // シーンが変更された際に生成されたオブジェクトを削除
-    void DestroyObjects()
-    {
-        if (spawnedTreesParent != null)
-        {
-            Destroy(spawnedTreesParent);
-        }
-        if (spawnedStonesParent != null)
-        {
-            Destroy(spawnedStonesParent);
-        }
-    }
-
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTrashable: 1
   thisName: "\u6728\u306E\u571F\u53F0"
-  thisDescription: "\u6728\u6750\u3067\u4F5C\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u571F\u53F0"
+  thisDescription: 
   thisFunctionality: "\u5EFA\u7BC9\u3067\u4F7F\u7528"
   isConsumable: 0
   healthEffect: 0
