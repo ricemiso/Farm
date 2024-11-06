@@ -255,7 +255,8 @@ public class ConstructionManager : MonoBehaviour
         {
             if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "FoundationModel")
             {
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
 
@@ -263,7 +264,8 @@ public class ConstructionManager : MonoBehaviour
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
             {
                 //TODO:èCê≥Ç∑ÇÈ
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+                if(SoundManager.Instance != null)
+                    SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
@@ -272,8 +274,9 @@ public class ConstructionManager : MonoBehaviour
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "LongRangeMinion 1")
             {
-                //TODO:èCê≥Ç∑ÇÈ
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				//TODO:èCê≥Ç∑ÇÈ
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
                 AIPlaceItemFreeStyle();
@@ -282,8 +285,9 @@ public class ConstructionManager : MonoBehaviour
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "TankAI2")
             {
-                //TODO:èCê≥Ç∑ÇÈ
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				//TODO:èCê≥Ç∑ÇÈ
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
@@ -292,13 +296,15 @@ public class ConstructionManager : MonoBehaviour
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "StairsWoodemodel")
             {
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
 
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "Chestmodel")
             {
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 AIPlaceItemFreeStyle();
                 DestroyItem(ItemToBeDestroy);
             }
@@ -306,7 +312,8 @@ public class ConstructionManager : MonoBehaviour
 
             if (selectingAGhost)
             {
-                SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
+				if (SoundManager.Instance != null)
+					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemInGhostPosition(selectedGhost);
                 DestroyItem(ItemToBeDestroy);
             }
