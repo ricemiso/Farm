@@ -5363,7 +5363,6 @@ MonoBehaviour:
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
   attackRange: 0.9
-  isPushEKey: 0
   currentAttackCooltime: 0
 --- !u!114 &2685701426436218251
 MonoBehaviour:
@@ -7224,10 +7223,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2829281492017950068}
     m_Modifications:
-    - target: {fileID: 1426245440731515418, guid: ffdfb7851a968494f8fe76ee88f3791a, type: 3}
-      propertyPath: stopAction
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1426245440731515418, guid: ffdfb7851a968494f8fe76ee88f3791a, type: 3}
       propertyPath: playOnAwake
       value: 0

@@ -30,7 +30,6 @@ public class AI_Movement : MonoBehaviour
 		FOLLOWING,
 		CHASE,
 		WAITING,
-		STOP,
 	}
 
 	public MoveState state;
@@ -205,15 +204,6 @@ public class AI_Movement : MonoBehaviour
 		WalkDirection = Random.Range(0, 4);
 		state = MoveState.WALKING;
 		walkCounter = walkTime;
-
-		if (animator != null)
-		{
-			animator.SetBool("isRunning", true);
-		}
-		else
-		{
-			animation.Play("Run");
-		}
 	}
 
 	// ëŒè€Ç…çUåÇ

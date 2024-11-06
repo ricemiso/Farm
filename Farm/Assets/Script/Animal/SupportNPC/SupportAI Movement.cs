@@ -6,8 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SupportAI_Movement : AI_Movement
 {
-	public bool isPushEKey = false;
-
 	// 次攻撃可能になるまでのクールタイム
 	[SerializeField] float currentAttackCooltime;
 	public const float attackCooltime = 2.0f;
@@ -22,45 +20,41 @@ public class SupportAI_Movement : AI_Movement
     protected override void Update()
 	{
 		// プレイヤーとの距離を計算
-		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+		float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
 		// 一定範囲内かつEキーが押された場合のみ停止・再開を切り替える
-		if (isPushEKey && Input.GetKeyDown(KeyCode.E))  // Eキーで動作を停止/再開
+		if (distanceToPlayer <= stopRange && Input.GetKeyDown(KeyCode.E))  // Eキーで動作を停止/再開
 		{
 			isStopped = !isStopped;  // Eキーで動作を停止/再開
 			if (isStopped)
 			{
-				target = null;
-				state = MoveState.STOP;
+				animation.Stop("Run");
 				//animator.SetBool("isRunning", false);  // アニメーションを停止
 			}
 			else
 			{
 				animation.Play("Run");
-				animator.SetBool("isRunning", true);
-				state = MoveState.FOLLOWING;
-				target = player;
 			}
 		}
 
-		switch (state)
+		if (!isStopped && onGround)
 		{
-			case MoveState.CHASE:
-				ChaseEnemy();
-				break;
-			case MoveState.FOLLOWING:
-				FollowPlayer();
-				break;
-			case MoveState.WALKING:
-				Walk();
-				break;
-			case MoveState.WAITING:
-				Wait();
-				break;
-			case MoveState.STOP:
-			default:
-				animation.Play("Run");
-				break;
+			switch (state)
+			{
+				case MoveState.CHASE:
+					ChaseEnemy();
+					break;
+				case MoveState.FOLLOWING:
+					FollowPlayer();
+					break;
+				case MoveState.WALKING:
+					Walk();
+					break;
+				case MoveState.WAITING:
+				default:
+					Wait();
+					break;
+			}
 		}
 
 		currentAttackCooltime -= Time.deltaTime;
@@ -70,8 +64,7 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
 	{
-		//animation.Play("Run");
-		//animator.SetBool("isRunning", true);
+		animation.Play("Run");
 		//animator.SetBool("isRunning", true);
 
 		//// プレイヤーの進行方向を取得し、後ろの位置を計算
@@ -108,6 +101,7 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerEnter(Collider other)
 	{
+
 		if (other.CompareTag("Player") &&
 			state != MoveState.FOLLOWING &&
 			state != MoveState.CHASE &&
@@ -120,34 +114,24 @@ public class SupportAI_Movement : AI_Movement
 			target = other.gameObject;
 		}
 
-		if (other.CompareTag("Enemy") && target.gameObject.GetComponent<Animal>().currentHealth > 0)  // 敵が入って、まだ追従していない場合
-		{
-			state = MoveState.CHASE;
-			animation.Play("Run");
-			//animator.SetBool("isRunning", true);
+	//	if (other.CompareTag("Enemy"))  // 敵が入って、まだ追従していない場合
+	//	{
+	//		state = MoveState.CHASE;
+	//		animation.Play("Run");
+	//		//animator.SetBool("isRunning", true);
 
-			target = other.gameObject;
-			//if (target.gameObject.GetComponent<Animal>().currentHealth <= 0)
-			//{
-			//	state = MoveState.WALKING;
-			//	target = null;
-			//}
-		}
+	//		target = other.gameObject;
+	//		if (target.gameObject.GetComponent<Animal>().currentHealth <= 0) 
+	//		{
+	//			state = MoveState.WALKING;
+	//			target = null;
+	//		}
+	//	}
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.CompareTag("Player"))
-		{
-			isPushEKey = true;
-			if(!isStopped)
-			{
-				state = MoveState.FOLLOWING;
-			}
-
-		}
-
-		if (other.CompareTag("Enemy") && target.gameObject.GetComponent<Animal>().currentHealth > 0)  // 敵が入って、まだ追従していない場合
+		if (other.CompareTag("Enemy"))  // 敵が入って、まだ追従していない場合
 		{
 			state = MoveState.CHASE;
 			animation.Play("Run");
@@ -165,14 +149,8 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーがコライダーから出たとき（追従を停止しない）
 	private void OnTriggerExit(Collider other)
 	{
-		if(other.CompareTag("Player"))
+		if (other.CompareTag("Player"))
 		{
-			isPushEKey = false;
-		}
-
-		if (other.CompareTag("Enemy"))
-		{
-			state = MoveState.WALKING;
 			// 追従停止のコードは削除。プレイヤーが出ても追従を続ける。
 		}
 	}

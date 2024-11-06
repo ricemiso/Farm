@@ -184,9 +184,7 @@ public class Animal : MonoBehaviour
         damage += damageIncrease;
 
         CraftingSystem.Instance.islevelUp = false;
-
-        ParticleSystem partiSystem = levelupparticle;
-		partiSystem.Play();
+        levelupparticle.Play();
 
         Vector3 currentScale = gameObject.transform.localScale;
 

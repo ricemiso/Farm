@@ -29,10 +29,6 @@ public class Constructable : MonoBehaviour
             if (renderer != null) // Check if the child has a Renderer component
             {
                 renderers.Add(renderer);
-                if (gameObject.GetComponent<Animal>())
-                {
-                    return;
-                }
                 renderer.material = defaultMaterial; // Set default material initially
             }
         }
