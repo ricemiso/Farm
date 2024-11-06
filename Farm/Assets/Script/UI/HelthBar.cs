@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HelthBar : MonoBehaviour
@@ -43,6 +44,6 @@ public class HelthBar : MonoBehaviour
         //Todo プレイヤーが倒れるアニメーション(仮)
 
 		//Todo 実際のゲームオーバーシーンを入れる
-		//SceneManager.LoadScene("GameOverScene");
+		SceneManager.LoadScene("GameOver");
 	}
 }

@@ -57,13 +57,13 @@ public class CrystalGrowth : MonoBehaviour
 			playerRange = false;
 		}
 		
-
-		if (GrobalState.Instance.resourceMana>=100)
+		// 中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
+		if (PlayerState.Instance.currentHydrationPercent >= 10)
 		{
 			Debug.Log("GameClear");
 
-			//Todo 実際のクリアシーンを入れる
-			//SceneManager.LoadScene("ClearScene");
+			// クリアシーン
+			SceneManager.LoadScene("GameClear");
 		}
 
 	}
@@ -88,9 +88,15 @@ public class CrystalGrowth : MonoBehaviour
 		{
 			SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
 			//TODO:ゲームオーバー処理を作る
-			//CrystalIsDead();
+			CrystalIsDead();
 
 		}
 
+	}
+
+	public void CrystalIsDead()
+    {
+		// ゲームオーバーシーンに移動
+		SceneManager.LoadScene("GameOver");
 	}
 }
