@@ -39,8 +39,9 @@ public class SettingManager : MonoBehaviour
     {
         backBTN.onClick.AddListener(() =>
         {
-            MainMenuSaveManager.Instance.SaveVolumeSettings(musicSlider.value, effectSlider.value, masterSlider.value);
-        });
+			//MainMenuSaveManager.Instance.SaveVolumeSettings(musicSlider.value, effectSlider.value, masterSlider.value);
+			MainMenuSaveManager.Instance.SaveVolumeSettings(0.5f, 0.5f, 0.5f);
+		});
 
         StartCoroutine(LoadAndApplySetting());
     }

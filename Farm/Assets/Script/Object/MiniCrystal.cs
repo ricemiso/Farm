@@ -37,6 +37,8 @@ public class MiniCrystal : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (PlayerState.Instance.playerBody == null) return;
+
 		//TODO:~‚ß‚éˆ—‚ğ“ü‚ê‚é
 
 		rotAngle.y += 0.3f;
@@ -79,7 +81,7 @@ public class MiniCrystal : MonoBehaviour
 
 		PlayerState.Instance.currentCalories -= caloriesSpendCarge;
 
-		if (CrystalHealth <= 0)
+		if (CrystalHealth <= 0 || PlayerState.Instance.currentHealth <= 0)
 		{
 			Log.Instance.OnFarmDeath(gameObject.name);
 

@@ -40,8 +40,10 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        //TODO : ‹——£‚Í‚±‚±‚Å”»’è‚·‚é 
-        float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+		if (PlayerState.Instance.currentHealth <= 0) return;
+
+		//TODO : ‹——£‚Í‚±‚±‚Å”»’è‚·‚é 
+		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
         if (distance < ditectionRange)
         {

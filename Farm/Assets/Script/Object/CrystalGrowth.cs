@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+
 public class CrystalGrowth : MonoBehaviour
 {
 
@@ -35,6 +36,8 @@ public class CrystalGrowth : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (PlayerState.Instance.currentHealth <= 0) return;
+
 		//TODO:止める処理を入れる
 
 		rotAngle.y += 0.3f;
@@ -58,10 +61,12 @@ public class CrystalGrowth : MonoBehaviour
 		}
 		
 		// 中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
-		if (PlayerState.Instance.currentHydrationPercent >= 10)
+		if (PlayerState.Instance.currentHydrationPercent >= 1)
 		{
 			Debug.Log("GameClear");
 
+			UnityEngine.Cursor.lockState = CursorLockMode.None;
+			//Destroy(SoundManager.Instance.gameObject);
 			// クリアシーン
 			SceneManager.LoadScene("GameClear");
 		}
@@ -96,6 +101,9 @@ public class CrystalGrowth : MonoBehaviour
 
 	public void CrystalIsDead()
     {
+		//Destroy(SoundManager.Instance.gameObject);
+		UnityEngine.Cursor.lockState = CursorLockMode.None;
+
 		// ゲームオーバーシーンに移動
 		SceneManager.LoadScene("GameOver");
 	}

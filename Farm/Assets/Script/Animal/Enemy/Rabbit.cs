@@ -18,6 +18,8 @@ public class Rabbit : EnemyAI_Movement
 
 	protected override void ChaseEnemy()
 	{
+		if (player == null) return;
+
 		base.ChaseEnemy();
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
