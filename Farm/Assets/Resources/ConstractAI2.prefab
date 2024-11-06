@@ -5354,7 +5354,7 @@ MonoBehaviour:
   walkCounter: 0
   waitCounter: 0
   state: 0
-  player: {fileID: 0}
+  player: {fileID: 943929711212507721, guid: 4d6b0a59bf9f3c242813a73d9c1f9f9d, type: 3}
   followSpeed: 15
   rotateSpeed: 10
   target: {fileID: 0}

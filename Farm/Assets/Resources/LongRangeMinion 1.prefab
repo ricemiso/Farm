@@ -4947,7 +4947,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94a55713ee628a245a74794f36a1b6f7, type: 2}
+  - {fileID: 2100000, guid: c30eeb33c454f234bb79739b431d5dd6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5449,7 +5449,7 @@ MonoBehaviour:
   walkCounter: 0
   waitCounter: 0
   state: 0
-  player: {fileID: 0}
+  player: {fileID: 943929711212507721, guid: 4d6b0a59bf9f3c242813a73d9c1f9f9d, type: 3}
   followSpeed: 5
   rotateSpeed: 10
   target: {fileID: 0}
@@ -5897,7 +5897,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e06ea306b36b4342b501640fa467220, type: 2}
+  - {fileID: 2100000, guid: c30eeb33c454f234bb79739b431d5dd6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -5506,6 +5506,7 @@ MonoBehaviour:
   thisAnimalType: 0
   isDead: 0
   bloodparticle: {fileID: 8147159727512669736}
+  levelupparticle: {fileID: 0}
   bloodPaddle: {fileID: 7922217611739954921}
 --- !u!65 &8446402970950498804
 BoxCollider:
@@ -5660,9 +5661,10 @@ MonoBehaviour:
   walkCounter: 0
   waitCounter: 0
   state: 0
-  player: {fileID: 0}
+  player: {fileID: 943929711212507721, guid: 4d6b0a59bf9f3c242813a73d9c1f9f9d, type: 3}
   followSpeed: 5
   rotateSpeed: 10
+  target: {fileID: 0}
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
@@ -5670,6 +5672,8 @@ MonoBehaviour:
   attackRange: 1.5
   timeToFoundEnemy: 0
   currentAttackCooltime: 0
+  Crystal: {fileID: 0}
+  CrystalMini: {fileID: 0}
 --- !u!1 &5479554880258608090
 GameObject:
   m_ObjectHideFlags: 0
