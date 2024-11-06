@@ -15,7 +15,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public static GameObject itemBeingDragged;
     Vector3 startPosition;
     Transform startParent;
-    public bool isStack = false;
+
 
 
     private void Awake()
@@ -55,10 +55,13 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         itemBeingDragged = null;
 
-        if(termpItemReference.transform.parent == termpItemReference.transform.root)
+        Debug.Log(termpItemReference.name);
+        
+
+        if (transform.parent == startParent || transform.parent == transform.root)
         {
             //TODO:ドロップできるアイテムの追加
-            if (termpItemReference.name == "Mana(Clone)" || termpItemReference.name == "Stone(Clone)" || termpItemReference.name == "Stick(Clone)" || termpItemReference.name == "Log(Clone)")
+            if(termpItemReference.name == "Mana(Clone)" || termpItemReference.name == "Stone(Clone)" || termpItemReference.name == "Stick(Clone)" || termpItemReference.name == "Log(Clone)")
             {
                 termpItemReference.SetActive(false);
                 AlertDialogManager dialogManager = FindObjectOfType<AlertDialogManager>();
@@ -70,72 +73,24 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     }
                     else
                     {
-                        CancelDragging(termpItemReference);
+                        transform.position = startPosition;
+                        transform.SetParent(startParent);
+                        termpItemReference.SetActive(true);
                     }
 
                 });
             }
             else
             {
-                CancelDragging(termpItemReference);
+                transform.position = startPosition;
+                transform.SetParent(startParent);
             }
         }
-
-        if(termpItemReference.transform.parent == startParent)
-        {
-            CancelDragging(termpItemReference);
-        }
-
-
-        if(termpItemReference.transform.parent != termpItemReference.transform.root
-            && termpItemReference.transform.parent != startParent)
-        {
-            if (termpItemReference.transform.parent.childCount > 2)
-            {
-                CancelDragging(termpItemReference);
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    isStack = true;
-                    DivdeStack(termpItemReference);
-                }
-
-                isStack = false;
-            }
-        }
-
-
-        Debug.Log(termpItemReference.name);
 
         Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
-
-    private void DivdeStack(GameObject termpItemReference)
-    {
-       // var value = Slider.value;
-
-
-        InventoryItem item = termpItemReference.GetComponent<InventoryItem>();
-
-        if (item.amountInventry > 1)
-        {
-            item.amountInventry -= 1;
-            InventorySystem.Instance.AddToinventry(item.thisName,false);
-        }
-    }
-
-    void CancelDragging(GameObject termpItemReference)
-    {
-        transform.position = startPosition;
-        transform.SetParent(startParent);
-
-        termpItemReference.SetActive(true);
-    }
-
 
     private void DropItemIntoTheWorld(GameObject termpItemReference)
     {
