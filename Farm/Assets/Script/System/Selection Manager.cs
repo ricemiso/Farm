@@ -22,6 +22,7 @@ public class SelectionManager : MonoBehaviour
     public bool Watering;
     public bool Chargeing;
     public bool leveling;
+    private bool isInteractionOnCooldown = false;
 
     public GameObject chopHolder;
 
@@ -146,8 +147,9 @@ public class SelectionManager : MonoBehaviour
             
             InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
             //TODO:拾う処理
-            if (interactable && interactable.playerRange)
+            if (interactable && interactable.playerRange && !isInteractionOnCooldown)
             {
+                StartCoroutine(HandleInteraction());
                 onTarget = true;
                 selectgameObject = interactable.gameObject;
 
@@ -160,6 +162,7 @@ public class SelectionManager : MonoBehaviour
 
 
                 HandIsVisible = true;
+                
             }
 
 
@@ -272,6 +275,9 @@ public class SelectionManager : MonoBehaviour
 
             if (animal && animal.playerISRange)
             {
+                chopText.text = animal.GetAnimalName();
+                chopHolder.gameObject.SetActive(true);
+
                 if (EquipSystem.Instance.IsPlayerHooldingMana() )
                 {
                     if (Input.GetMouseButtonDown(0) && !leveling)
@@ -306,8 +312,8 @@ public class SelectionManager : MonoBehaviour
                 }
                 else
                 {
-                    interaction_text.text = animal.GetAnimalName();
-                    interaction_Info_UI.SetActive(true);
+                    
+                    //interaction_Info_UI.SetActive(true);
 
                     centerDotimage.gameObject.SetActive(true);
                     handIcon.gameObject.SetActive(false);
@@ -354,16 +360,26 @@ public class SelectionManager : MonoBehaviour
             }
 
 
-            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil && !strageBox)  
+            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil && !strageBox && !crystal)  
             {
                 interaction_text.text = "";
                 handIcon.gameObject.SetActive(false);
+                chopHolder.gameObject.SetActive(false);
             }
 
         }
 
     }
 
+
+    private IEnumerator HandleInteraction()
+    {
+        isInteractionOnCooldown = true; // クールダウン開始
+
+        yield return new WaitForSeconds(0.5f); // 0.5秒の遅延
+
+        isInteractionOnCooldown = false; // クールダウン終了
+    }
 
     IEnumerator DelayWatering()
     {

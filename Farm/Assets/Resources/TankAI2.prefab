@@ -5135,11 +5135,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 3136210430941946032}
   - {fileID: 3130984884127659191}
   - {fileID: 4225174814926936482}
   - {fileID: 6289962865311817113}
   - {fileID: 6353094896080536696}
-  - {fileID: 3136210430941946032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 12.541, y: 187.44, z: 1.97}
 --- !u!54 &5553299472333991714
@@ -5202,7 +5202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08907ec1681d664990b32b240075074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalName: "\u30DF\u30CB\u30AA\u30F3(\u8FD1\u63A5)"
+  animalName: "\u30DF\u30CB\u30AA\u30F3(\u30BF\u30F3\u30AF)"
   playerISRange: 0
   currentHealth: 0
   maxHealth: 500
