@@ -47,17 +47,21 @@ public class CrystalGrowth : MonoBehaviour
 		GrobalState.Instance.resourceHelth = CrystalHealth;
 		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 
-		
 
-		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+		if (PlayerState.Instance.playerBody != null)
+		{
+			float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
-		if (distance < dis)
-		{
-			playerRange = true;
-		}
-		else
-		{
-			playerRange = false;
+
+			if (distance < dis)
+			{
+				playerRange = true;
+			}
+			else
+			{
+				playerRange = false;
+			}
+
 		}
 		
 		// 中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
@@ -68,6 +72,7 @@ public class CrystalGrowth : MonoBehaviour
 			UnityEngine.Cursor.lockState = CursorLockMode.None;
 			//Destroy(SoundManager.Instance.gameObject);
 			// クリアシーン
+
 			SceneManager.LoadScene("GameClear");
 		}
 
@@ -76,6 +81,7 @@ public class CrystalGrowth : MonoBehaviour
 	//
 	public void GetEnergy(float getEnergy)
 	{
+
 		PlayerState.Instance.currentHydrationPercent += getEnergy;
 	}
 

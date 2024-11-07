@@ -17,6 +17,8 @@ public class Animal : MonoBehaviour
     public int healthIncrease = 20;
     public int damageIncrease = 5;
     public int level;
+    public bool canBeChopped;
+
 
     [SerializeField] AudioSource soundChannel;
     [SerializeField] AudioClip rabbithitAndScreem;
@@ -77,12 +79,26 @@ public class Animal : MonoBehaviour
 
     }
 
-
-	public void TakeDamage(float damage)
+    private void Update()
     {
+        if (canBeChopped)
+        {
+            GrobalState.Instance.resourceHelth = currentHealth;
+            GrobalState.Instance.resourceMaxHelth = maxHealth;
+        }
+        
+        
+    }
+
+
+
+    public void TakeDamage(float damage)
+    {
+        canBeChopped = true;
         if (isDead == false)
         {
             currentHealth -= damage;
+            
 
             bloodparticle.Play();
 

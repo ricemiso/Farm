@@ -22,6 +22,7 @@ public class EquipSystem : MonoBehaviour
 
     public GameObject selecteditemModel;
 
+    public int stackcnt;
 
     private void Awake()
     {
@@ -227,10 +228,13 @@ public class EquipSystem : MonoBehaviour
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
         Debug.Log("Selected Item Name: " + selectedItemName);
 
+        // モデルをインスタンス化
         selecteditemModel = Instantiate(Resources.Load<GameObject>(CaculateItemModel(selectedItemName)));
 
+        // モデルをツールホルダーに追加
         selecteditemModel.transform.SetParent(toolHolder.transform, false);
     }
+
 
     //TODO:持つ武器はここで追加する(位置、回転はプレハブの座標で!!)
     //TODO:種が増えるごとにここに追加する
@@ -294,7 +298,7 @@ public class EquipSystem : MonoBehaviour
 
     bool checkIfSlotIsFull(int slotNumber)
     {
-        if (quickSlotsList[slotNumber - 1].transform.childCount > 0)
+        if (quickSlotsList[slotNumber - 1].transform.childCount > 1)
         {
             return true;
         }
@@ -322,9 +326,9 @@ public class EquipSystem : MonoBehaviour
         GameObject availableSlot = FindNextEmptySlot();
 
         itemToEquip.transform.SetParent(availableSlot.transform, false);
-
+        itemToEquip.transform.SetAsFirstSibling();
         InventorySystem.Instance.ReCalculeList();
-
+        CraftingSystem.Instance.RefreshNeededItems();
     }
 
 
@@ -340,47 +344,101 @@ public class EquipSystem : MonoBehaviour
         return new GameObject();
     }
 
-    public bool CheckIfFull()
+    public int GetEquippedItemStackCount(GameObject slot, string itemName)
     {
+        int totalStackCount = 0;
 
-        int counter = 0;
+        // 引数で渡されたスロットにアイテムがあれば
+        if (slot.transform.childCount > 0)
+        {
+            GameObject item = slot.transform.GetChild(0).gameObject;
+            InventoryItem inventoryItem = item.GetComponent<InventoryItem>();
+
+            itemName = InventorySystem.Instance.GetItemName(itemName);
+            if (inventoryItem != null && inventoryItem.thisName == itemName)
+            {
+                totalStackCount += inventoryItem.amountInventry;
+                //itemName = InventorySystem.Instance.GetReturnItemName(itemName);
+
+            }
+        }
+
+        return totalStackCount;
+    }
+
+
+    public int ItemStackCnt(string itemName)
+    {
+        int totalStackCount = 0;
 
         foreach (GameObject slot in quickSlotsList)
         {
             if (slot.transform.childCount > 0)
             {
-                counter += 1;
+                GameObject item = slot.transform.GetChild(0).gameObject;
+                InventoryItem inventoryItem = item.GetComponent<InventoryItem>();
+
+                itemName = InventorySystem.Instance.GetItemName(itemName);
+                if (inventoryItem != null && inventoryItem.thisName == itemName)
+                {
+                    totalStackCount += inventoryItem.amountInventry;
+                }
             }
         }
 
-        if (counter == 7)
+        return totalStackCount;
+    }
+
+    public bool CheckIfFull()
+    {
+        foreach (GameObject slot in quickSlotsList)
         {
-            return true;
+            if (slot.transform.childCount >= 2)  // スロットに2つ以上のアイテムがあるか確認
+            {
+                return true;  // 満杯
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;  // 空きがある
     }
 
     public void RemoveItemFromQuickSlots(string itemName, int amountToRemove)
     {
         int counter = amountToRemove;
 
-        for (var i = quickSlotsList.Count - 1; i >= 0; i--)
+        // quickSlotsListをスキャンしてアイテムを削除
+        foreach (GameObject slot in quickSlotsList)
         {
-            if (quickSlotsList[i].transform.childCount > 0)
+            if (slot.GetComponent<InventrySlot>() != null && counter > 0)
             {
-                if (quickSlotsList[i].transform.GetChild(0).name == itemName + "(Clone)" && counter > 0)
+                InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+                InventoryItem item = inventrySlot.itemInSlot;
+
+                itemName = InventorySystem.Instance.GetItemName(itemName);
+                if (item != null && item.thisName == itemName && item.amountInventry > 0)
                 {
-                    Destroy(quickSlotsList[i].transform.GetChild(0).gameObject);
-                    counter--;
+                    int amountToDeduct = Mathf.Min(item.amountInventry, counter);
+                    item.amountInventry -= amountToDeduct;
+                    counter -= amountToDeduct;
+
+                    // アイテムの残量が0になったら削除
+                    if (item.amountInventry == 0)
+                    {
+                        Destroy(item.gameObject);
+                        inventrySlot.itemInSlot = null;
+                    }
+
+                    itemName = InventorySystem.Instance.GetReturnItemName(itemName);
                 }
             }
 
             // 必要な数だけ削除できた場合はループを抜ける
-            if (counter <= 0)
+            if (counter == 0)
                 break;
         }
+
+        InventorySystem.Instance.ReCalculeList();
+        CraftingSystem.Instance.RefreshNeededItems();
+
+        // アイテム削除後の処理
     }
 }

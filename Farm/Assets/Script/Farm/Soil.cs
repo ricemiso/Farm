@@ -14,13 +14,19 @@ public class Soil : MonoBehaviour
 
     public Material defaltMaterial;
     public Material waterMaterial;
+    float distance = 0;
+
 
     private void Update()
     {
         if (PlayerState.Instance.currentHealth <= 0) return;
 
         //Todo:‹——£‚ð“¾‚é•û–@
-        float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+        if (PlayerState.Instance.playerBody != null)
+        {
+            distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+        }
+       // float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
         if (distance < 10f)
         {

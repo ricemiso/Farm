@@ -6,16 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class GoToMainMenu : MonoBehaviour
 {
+
+
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
+			ShowCursor();
 			SceneManager.LoadScene("MainMenu");
 		}
 	}
 
 	public void Click()
     {
-        SceneManager.LoadScene("MainMenu"); //メインメニューに移行
+		ShowCursor();
+
+		SceneManager.LoadScene("MainMenu"); //メインメニューに移行
     }
+
+	private void ShowCursor()
+	{
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.None; // カーソルをロック解除
+	}
 }

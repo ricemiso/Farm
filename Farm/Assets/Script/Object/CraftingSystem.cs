@@ -152,7 +152,6 @@ public class CraftingSystem : MonoBehaviour
 
         //normalMinion
         normalMinionReq1 = refineScreenUI.transform.Find("NormalMinion").transform.Find("rec1").GetComponent<Text>();
-
         normalMinionBTN = refineScreenUI.transform.Find("NormalMinion").transform.Find("NormalMinionButton").GetComponent<Button>();
         normalMinionBTN.onClick.AddListener(delegate { CraftAnyItem(NormalMinionBLP); });
 
@@ -302,7 +301,7 @@ public class CraftingSystem : MonoBehaviour
             }
             else
             {
-                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName,true);
+                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName,false);
             }
         }
 
@@ -358,6 +357,7 @@ public class CraftingSystem : MonoBehaviour
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
+        Debug.Log(inventryitemList.Count);
 
         foreach (string itemname in inventryitemList)
         {
@@ -369,13 +369,13 @@ public class CraftingSystem : MonoBehaviour
                 case "Stick":
                     stick_count += 1;
                     break;
-                case "Log":
+                case "丸太":
                     log_count += 1;
                     break;
                 case "Plank":
                     plank_count += 1;
                     break;
-                case "Mana":
+                case "マナ":
                     mana_count += 1;
                     break;
                 case "ミニオン":
@@ -391,34 +391,43 @@ public class CraftingSystem : MonoBehaviour
         int quickManaCount = 0;
         int quickMinionCount = 0;
 
+        //TODO:クイックスロットにあるアイテムは現在素材にできない
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
-            if (quickSlot.transform.childCount > 0)
+            if (quickSlot.transform.childCount > 1)
             {
                 string itemName = quickSlot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
-                if (itemName == "Stone")
+                int cnt = EquipSystem.Instance.GetEquippedItemStackCount(quickSlot, itemName);
+
+                // アイテムのスタック数に基づいてループ
+                for (int i = 0; i < cnt; i++)
                 {
-                    quickStoneCount++;
-                }
-                else if (itemName == "Stick")
-                {
-                    quickStickCount++;
-                }
-                else if (itemName == "Log")
-                {
-                    quickLogCount++;
-                }
-                else if (itemName == "Plank")
-                {
-                    quickPlankCount++;
-                }
-                else if (itemName == "Mana")
-                {
-                    quickManaCount++;
-                }
-                else if (itemName == "ミニオン")
-                {
-                    quickMinionCount++;
+
+                    if (itemName == "Stone")
+                    {
+                        quickStoneCount++;
+                    }
+                    else if (itemName == "Stick")
+                    {
+                        quickStickCount++;
+                    }
+                    else if (itemName == "Log")
+                    {
+                        quickLogCount++;
+                    }
+                    else if (itemName == "Plank")
+                    {
+                        quickPlankCount++;
+                    }
+                    else if (itemName == "Mana")
+                    {
+                        quickManaCount++;
+                    }
+                    else if (itemName == "ミニオン")
+                    {
+                        quickMinionCount++;
+                    }
+
                 }
             }
         }

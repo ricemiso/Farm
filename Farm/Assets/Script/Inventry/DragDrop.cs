@@ -51,13 +51,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         var termpItemReference = itemBeingDragged;
-        
-
         itemBeingDragged = null;
 
-        if(termpItemReference.transform.parent == termpItemReference.transform.root)
+        if (termpItemReference.transform.parent == termpItemReference.transform.root)
         {
-            //TODO:ドロップできるアイテムの追加
+            // アイテムのドロップ処理
             if (termpItemReference.name == "Mana(Clone)" || termpItemReference.name == "Stone(Clone)" || termpItemReference.name == "Stick(Clone)" || termpItemReference.name == "Log(Clone)")
             {
                 termpItemReference.SetActive(false);
@@ -67,12 +65,12 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     if (responce)
                     {
                         DropItemIntoTheWorld(termpItemReference);
+
                     }
                     else
                     {
                         CancelDragging(termpItemReference);
                     }
-
                 });
             }
             else
@@ -81,13 +79,12 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
         }
 
-        if(termpItemReference.transform.parent == startParent)
+        if (termpItemReference.transform.parent == startParent)
         {
             CancelDragging(termpItemReference);
         }
 
-
-        if(termpItemReference.transform.parent != termpItemReference.transform.root
+        if (termpItemReference.transform.parent != termpItemReference.transform.root
             && termpItemReference.transform.parent != startParent)
         {
             if (termpItemReference.transform.parent.childCount > 2)
@@ -101,32 +98,36 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     isStack = true;
                     DivdeStack(termpItemReference);
                 }
-
+                else
+                {
+                    CraftingSystem.Instance.RefreshNeededItems();
+                }
                 isStack = false;
             }
         }
 
+        // リストの再計算とアイテムの更新
+        InventorySystem.Instance.ReCalculeList();
+        CraftingSystem.Instance.RefreshNeededItems();
 
-        Debug.Log(termpItemReference.name);
-
-        Debug.Log("OnEndDrag");
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
 
+    // アイテムのスタック分割
     private void DivdeStack(GameObject termpItemReference)
     {
-       // var value = Slider.value;
-
-
         InventoryItem item = termpItemReference.GetComponent<InventoryItem>();
 
         if (item.amountInventry > 1)
         {
-            item.amountInventry -= 1;
-            InventorySystem.Instance.AddToinventry(item.thisName,false);
+            item.amountInventry--;  // 元のスタックの数を減らす
+            InventorySystem.Instance.AddToinventry(item.thisName, false);  // 新しいスタックを追加
+            InventorySystem.Instance.ReCalculeList();  // スタック変更後にリストを再計算
+            CraftingSystem.Instance.RefreshNeededItems();  // 必要なアイテムを更新
         }
     }
+
 
     void CancelDragging(GameObject termpItemReference)
     {
@@ -140,16 +141,21 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private void DropItemIntoTheWorld(GameObject termpItemReference)
     {
         string cleanName = termpItemReference.name.Split(new string[] { "(Clone)" }, StringSplitOptions.None)[0];
-
         Debug.Log(cleanName);
-        GameObject item = Instantiate(Resources.Load<GameObject>(cleanName + "_model"));
 
-        item.transform.position = Vector3.zero;
-        var dropSpawnPosition = PlayerState.Instance.playerBody.transform.Find("DropSpawn").transform.position;
-        item.transform.localPosition = new Vector3(dropSpawnPosition.x, dropSpawnPosition.y, dropSpawnPosition.z);
+        int stackCount = termpItemReference.GetComponent<InventoryItem>().amountInventry;
 
-        var itemsObject = FindObjectOfType<EnviromentManager>().gameObject.transform.Find("[ITEMS]");
-        item.transform.SetParent(itemsObject.transform);
+        for (int i = 0; i < stackCount; i++)
+        {
+            GameObject item = Instantiate(Resources.Load<GameObject>(cleanName + "_model"));
+            item.transform.position = Vector3.zero;
+
+            var dropSpawnPosition = PlayerState.Instance.playerBody.transform.Find("DropSpawn").transform.position;
+            item.transform.localPosition = new Vector3(dropSpawnPosition.x, dropSpawnPosition.y, dropSpawnPosition.z);
+
+            var itemsObject = FindObjectOfType<EnviromentManager>().gameObject.transform.Find("[ITEMS]");
+            item.transform.SetParent(itemsObject.transform);
+        }
 
         DestroyImmediate(termpItemReference.gameObject);
         InventorySystem.Instance.ReCalculeList();

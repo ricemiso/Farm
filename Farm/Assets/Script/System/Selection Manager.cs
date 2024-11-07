@@ -30,6 +30,7 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedCraft;
    [HideInInspector] public GameObject selectedStone;
    [HideInInspector] public GameObject selectedCrystal;
+   [HideInInspector] public GameObject selectedAnimal;
    [HideInInspector] public GameObject selectedStorageBox;
 
 
@@ -110,6 +111,7 @@ public class SelectionManager : MonoBehaviour
                 {
 
                     Chargeing = true;
+
 
                     crystal.GetEnergy(1);
 
@@ -275,6 +277,8 @@ public class SelectionManager : MonoBehaviour
 
             if (animal && animal.playerISRange)
             {
+                animal.canBeChopped = true;
+                selectedAnimal = animal.gameObject;
                 chopText.text = animal.GetAnimalName();
                 chopHolder.gameObject.SetActive(true);
 
@@ -290,13 +294,13 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
 
-
                 if (animal.isDead && animal.CompareTag("Enemy"))
                 {
                     
                     interaction_text.text = "’D‚¤";
                     interaction_Info_UI.SetActive(true);
-
+                    chopText.text = "";
+                    chopHolder.gameObject.SetActive(false);
                     centerDotimage.gameObject.SetActive(false);
                     handIcon.gameObject.SetActive(true);
 
@@ -344,10 +348,16 @@ public class SelectionManager : MonoBehaviour
                 }
 
             }
+            if (selectedAnimal == null)
+            {
+                //selectedAnimal.gameObject.GetComponent<Animal>().canBeChopped = false;
+               // selectedAnimal = null;
+                //chopHolder.gameObject.SetActive(false);
+            }
 
 
 
-           
+
 
 
             if (!interactable && !animal)
@@ -464,11 +474,10 @@ public class SelectionManager : MonoBehaviour
 
     IEnumerator DealDamageTo(Animal animal, float delay, int damage)
     {
-       
-
         yield return new WaitForSeconds(delay);
 
         animal.TakeDamage(damage);
+        animal.canBeChopped = false;
     }
 
     public void DisableSelection()
