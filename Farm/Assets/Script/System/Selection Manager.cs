@@ -336,6 +336,7 @@ public class SelectionManager : MonoBehaviour
                         //}
                         if (isdamageDelay)
                         {
+
                             return;
                         }
                         else
@@ -347,12 +348,6 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
 
-            }
-            if (selectedAnimal == null)
-            {
-                //selectedAnimal.gameObject.GetComponent<Animal>().canBeChopped = false;
-               // selectedAnimal = null;
-                //chopHolder.gameObject.SetActive(false);
             }
 
 
