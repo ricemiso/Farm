@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c91a41bb84565b4fab9b71cf203c4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStack: 0
 --- !u!225 &3466058943259810226
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -124,10 +125,11 @@ MonoBehaviour:
   healthEffect: 0
   caloriesEffect: 0
   hydrationEffect: 0
-  isEquippable: 1
+  isEquippable: 0
   isInsideQuiqSlot: 0
   isSelected: 0
   isUseable: 0
+  amountInventry: 1
 --- !u!114 &3648438180058673522
 MonoBehaviour:
   m_ObjectHideFlags: 0

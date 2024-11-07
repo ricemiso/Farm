@@ -11,18 +11,24 @@ public class InventrySlot : MonoBehaviour
 
     private void Update()
     {
+
         InventoryItem item = CheckInventryItem();
 
-        if(item != null)
+        if (item != null)
         {
+            Debug.Log("Item found and set in slot: " + item.thisName);
             itemInSlot = item;
         }
         else
         {
+            Debug.Log("No item in this slot.");
             itemInSlot = null;
         }
 
-        if(itemInSlot != null)
+
+
+
+        if (itemInSlot != null)
         {
             amountTXT.gameObject.SetActive(true);
             amountTXT.text = $"{itemInSlot.amountInventry}";
@@ -33,18 +39,21 @@ public class InventrySlot : MonoBehaviour
         {
             amountTXT.gameObject.SetActive(false);
         }
+
     }
 
     private InventoryItem CheckInventryItem()
     {
         foreach (Transform child in transform)
         {
-            if (child.GetComponent<InventoryItem>())
+            InventoryItem item = child.GetComponent<InventoryItem>();
+            if (item != null)
             {
-                return child.GetComponent<InventoryItem>();
+                return item;
             }
         }
 
+        Debug.Log("No item found in this slot.");
         return null;
     }
 

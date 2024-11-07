@@ -25,7 +25,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         InventorySystem.Instance.inventoryUpdated = true;
 
-        Debug.Log("OnDrop");
 
         //if there is not item already then set our item.
         if (transform.childCount <= 1) 
@@ -40,12 +39,14 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuiqSlot = false;
                 InventorySystem.Instance.ReCalculeList();
+                CraftingSystem.Instance.RefreshNeededItems();
             }
 
             if (transform.CompareTag("QuickSlot"))
             {
                 DragDrop.itemBeingDragged.GetComponent<InventoryItem>().isInsideQuiqSlot = true;
                 InventorySystem.Instance.ReCalculeList();
+                CraftingSystem.Instance.RefreshNeededItems();
             }
 
         }

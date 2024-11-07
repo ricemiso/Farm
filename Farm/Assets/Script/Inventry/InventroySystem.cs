@@ -13,13 +13,13 @@ public class InventorySystem : MonoBehaviour
 
     public GameObject inventoryScreenUI;
 
-    public List<InventrySlot> slotlist = new List<InventrySlot>();
+    public List<GameObject> slotlist = new List<GameObject>();
 
     public List<string> itemList = new List<string>();
 
     private GameObject itemToAdd;
 
-    private InventrySlot whatSlotToEquip;
+    private GameObject whatSlotToEquip;
 
     public bool isOpen;
 
@@ -61,8 +61,7 @@ public class InventorySystem : MonoBehaviour
         {
             if (child.CompareTag("Slot"))
             {
-                InventrySlot slot = child.GetComponent<InventrySlot>();
-                slotlist.Add(slot);
+                slotlist.Add(child.gameObject);
             }
         }
     }
@@ -70,12 +69,12 @@ public class InventorySystem : MonoBehaviour
     void Update()
     {
 
-        if (inventoryUpdated)
-        {
-            ReCalculeList();
-            CraftingSystem.Instance.RefreshNeededItems();
-            inventoryUpdated = false;
-        }
+        //if (inventoryUpdated)
+        //{
+        ReCalculeList();
+        CraftingSystem.Instance.RefreshNeededItems();
+        inventoryUpdated = false;
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
@@ -90,7 +89,7 @@ public class InventorySystem : MonoBehaviour
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
 
             isOpen = true;
-            ReCalculeList();
+            CraftingSystem.Instance.RefreshNeededItems();
 
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
@@ -112,13 +111,12 @@ public class InventorySystem : MonoBehaviour
 
     public void AddToinventry(string itemName, bool shoodStack)
     {
-
-        InventrySlot stack = CheckIfStackExists(itemName);
+        GameObject stack = CheckIfStackExists(itemName);
 
         if (stack != null && shoodStack)
         {
-            stack.itemInSlot.amountInventry++;
-            stack.SetItemInSlot();
+            stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
+            stack.GetComponent<InventrySlot>().SetItemInSlot();
         }
         else
         {
@@ -128,6 +126,7 @@ public class InventorySystem : MonoBehaviour
             itemName = GetReturnItemName(itemName);
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
+            itemToAdd.transform.SetAsFirstSibling();
             itemName = GetItemName(itemName);
             if (SelectionManager.Instance.onTarget)
             {
@@ -135,42 +134,39 @@ public class InventorySystem : MonoBehaviour
             }
 
 
+            Debug.Log("Adding item: " + itemName + " to itemList");
+            itemName = GetItemName(itemName);
             itemList.Add(itemName);
+            Debug.Log("ItemList count after addition: " + itemList.Count);
         }
-
-
-
 
         if (!SoundManager.Instance.craftingSound.isPlaying)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.PickUpItemSound);
         }
 
-
-        ReCalculeList();
+        // アイテム追加後にリストを更新
+        //ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
-
-
     }
 
-    private InventrySlot CheckIfStackExists(string itemName)
+    private GameObject CheckIfStackExists(string itemName)
     {
-        foreach (InventrySlot inventryslot in slotlist)
+        foreach (GameObject slot in slotlist)
         {
-
+            InventrySlot inventryslot = slot.GetComponent<InventrySlot>();
             inventryslot.SetItemInSlot();
 
             if (inventryslot != null && inventryslot.itemInSlot != null)
             {
-                Debug.Log(itemName);
-                itemName = GetItemName(inventryslot.itemInSlot.thisName);
-                Debug.Log(itemName);
+
+                itemName = GetItemName(itemName);
+
                 if (inventryslot.itemInSlot.thisName == itemName &&
                     inventryslot.itemInSlot.amountInventry < stackLimit)
                 {
                     itemName = GetReturnItemName(itemName);
-                    Debug.Log(itemName);
-                    return inventryslot;
+                    return slot;
                 }
             }
         }
@@ -178,7 +174,7 @@ public class InventorySystem : MonoBehaviour
         return null;
     }
 
-    private string GetItemName(string objectname)
+    public string GetItemName(string objectname)
     {
         switch (objectname)
         {
@@ -191,32 +187,37 @@ public class InventorySystem : MonoBehaviour
             case "Log":
                 objectname = "丸太";
                 break;
+            case "Axe":
+                objectname = "斧";
+                break;
 
         }
 
         return objectname;
     }
 
-    private string GetReturnItemName(string objectname)
+    public string GetReturnItemName(string objectname)
     {
         switch (objectname)
         {
             case "マナ":
                 objectname = "Mana";
                 break;
-            case "Stone":
-                objectname = "石ころ";
+            case "石ころ":
+                objectname = "Stone";
                 break;
-            case "Log":
-                objectname = "丸太";
+            case "丸太":
+                objectname = "Log";
+                break;
+            case "斧":
+                objectname = "Axe";
                 break;
             case "Stone(Clone)":
-                objectname = "石ころ";
+                objectname = "Stone";
                 break;
             case "Log(Clone)":
-                objectname = "丸太";
+                objectname = "Log";
                 break;
-
         }
 
         return objectname;
@@ -246,9 +247,9 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    private InventrySlot FindNextEmptySlot()
+    private GameObject FindNextEmptySlot()
     {
-        foreach (InventrySlot slot in slotlist)
+        foreach (GameObject slot in slotlist)
         {
             if (slot.transform.childCount <= 1)
             {
@@ -256,14 +257,14 @@ public class InventorySystem : MonoBehaviour
             }
         }
 
-        return new InventrySlot();
+        return new GameObject();
     }
 
     public bool CheckSlotAvailable(int emptyNeeded)
     {
         int emptySlot = 0;
 
-        foreach (InventrySlot slot in slotlist)
+        foreach (GameObject slot in slotlist)
         {
             if (slot.transform.childCount <= 1)
             {
@@ -284,17 +285,49 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    public void RemoveItem(string nameToRemove, int amountToRemove)
+    public void RemoveItem(string itemName, int amountToRemove)
     {
         int remainingAmountToRemove = amountToRemove;
 
-        while (remainingAmountToRemove != 0)
+        // Iterate through the slot list and reduce inventory as long as we still have items to remove
+        foreach (GameObject slot in slotlist)
         {
+            if (slot.GetComponent<InventrySlot>() != null && remainingAmountToRemove > 0)
+            {
+                InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+                InventoryItem item = inventrySlot.itemInSlot;
 
+                itemName = GetItemName(itemName);
+                if (item != null && item.thisName == itemName && item.amountInventry > 0)
+                {
+                    int amountToDeduct = Mathf.Min(item.amountInventry, remainingAmountToRemove);
+                    item.amountInventry -= amountToDeduct;
+                    remainingAmountToRemove -= amountToDeduct;
+
+                    // If the amount in the slot becomes 0, destroy the item
+                    if (item.amountInventry == 0)
+                    {
+                        Destroy(item.gameObject);
+                        inventrySlot.itemInSlot = null;
+                    }
+
+                    itemName = GetReturnItemName(itemName);
+                }
+            }
+
+            ReCalculeList();
+            CraftingSystem.Instance.RefreshNeededItems();
+
+            if (remainingAmountToRemove == 0)
+                break; // Exit the loop early if all items are removed
         }
+
+        // After removing items, recalculate the inventory and update crafting
+
     }
 
-    //public void RemoveItem(string nameToRemove, int amountToRemove)
+
+    //public void RemoveItem2(string nameToRemove, int amountToRemove)
     //{
     //    inventoryUpdated = true;
     //    int counter = amountToRemove;
@@ -315,28 +348,29 @@ public class InventorySystem : MonoBehaviour
 
     public void ReCalculeList()
     {
-        itemList.Clear();
+        itemList.Clear();  // リストをクリア
 
-        foreach (InventrySlot inventoryslot in slotlist)
+        foreach (GameObject slot in slotlist)
         {
-
-            InventoryItem item = inventoryslot.GetComponent<InventrySlot>().itemInSlot;
-
-            if (item != null)
+            if (slot.GetComponent<InventrySlot>())
             {
+                InventoryItem item = slot.GetComponent<InventrySlot>().itemInSlot;
 
-                if (item.amountInventry > 0)
+                if (item != null && item.amountInventry > 0)
                 {
+                    // アイテムのスタック分だけリストに追加
                     for (int i = 0; i < item.amountInventry; i++)
                     {
+                        Debug.Log("Adding item: " + item.thisName + " to itemList");
                         itemList.Add(item.thisName);
                     }
                 }
-
             }
-
         }
+
+        Debug.Log("Total Item Count in ItemList: " + itemList.Count);
     }
+
 
     public int GetItemCount(string itemName)
     {
@@ -344,9 +378,11 @@ public class InventorySystem : MonoBehaviour
 
         foreach (var item in itemList)
         {
+            itemName = GetItemName(itemName);
             if (item == itemName)
             {
                 count++;
+                itemName = GetReturnItemName(itemName);
             }
         }
 

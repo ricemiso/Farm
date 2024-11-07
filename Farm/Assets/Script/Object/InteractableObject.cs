@@ -40,18 +40,20 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-		if (PlayerState.Instance.currentHealth <= 0) return;
 
-		//TODO : ‹——£‚Í‚±‚±‚Å”»’è‚·‚é 
-		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
+        //TODO : ‹——£‚Í‚±‚±‚Å”»’è‚·‚é 
+        if (PlayerState.Instance.playerBody != null && PlayerState.Instance.playerBody.gameObject != null)
+        {
+            float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
-        if (distance < ditectionRange)
-        {
-            playerRange = true;
-        }
-        else
-        {
-            playerRange = false;
+            if (distance < ditectionRange)
+            {
+                playerRange = true;
+            }
+            else
+            {
+                playerRange = false;
+            }
         }
 
 
@@ -62,7 +64,9 @@ public class InteractableObject : MonoBehaviour
                 InventorySystem.Instance.AddToinventry(InventryName,true);
 
                 InventorySystem.Instance.itemsPickedup.Add(gameObject.name);
-                print(gameObject.name);
+               // Debug.Log("Adding item: " + gameObject.name + " to itemList");
+
+               // print(gameObject.name);
 
                 Destroy(gameObject);
             }
