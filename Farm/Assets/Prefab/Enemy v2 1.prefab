@@ -5044,6 +5044,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6842354187199915839, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: ec2c086289bc0f548b5fcc5616429dbf, type: 2}
     - target: {fileID: 7195800805537036185, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       propertyPath: m_Name
       value: Enemy v2 1
