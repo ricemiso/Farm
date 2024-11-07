@@ -9039,6 +9039,7 @@ MonoBehaviour:
   selectedCraft: {fileID: 0}
   selectedStone: {fileID: 0}
   selectedCrystal: {fileID: 0}
+  selectedAnimal: {fileID: 0}
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
 --- !u!4 &484624253
@@ -25038,7 +25039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1414343206
 RectTransform:
   m_ObjectHideFlags: 0

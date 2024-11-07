@@ -28,7 +28,7 @@ public class InventrySlot : MonoBehaviour
 
 
 
-        if (itemInSlot != null)
+        if (itemInSlot != null && itemInSlot.amountInventry >= 2)
         {
             amountTXT.gameObject.SetActive(true);
             amountTXT.text = $"{itemInSlot.amountInventry}";
@@ -42,14 +42,14 @@ public class InventrySlot : MonoBehaviour
 
     }
 
-    private InventoryItem CheckInventryItem()
+    public InventoryItem CheckInventryItem()
     {
         foreach (Transform child in transform)
         {
-            InventoryItem item = child.GetComponent<InventoryItem>();
-            if (item != null)
+           // InventoryItem item = child.GetComponent<InventoryItem>();
+            if (child.GetComponent<InventoryItem>())
             {
-                return item;
+                return child.GetComponent<InventoryItem>();
             }
         }
 

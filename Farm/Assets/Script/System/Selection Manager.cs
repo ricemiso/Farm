@@ -112,8 +112,8 @@ public class SelectionManager : MonoBehaviour
 
                     Chargeing = true;
 
-
-                    crystal.GetEnergy(1);
+                    int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                    crystal.GetEnergy(stackCount);
 
                     StartCoroutine(DelayWatering());
                 }
@@ -287,8 +287,8 @@ public class SelectionManager : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && !leveling)
                     {
                         leveling = true;
-
-                        animal.LevelUp(1);
+                        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                        animal.LevelUp(stackCount);
 
                         StartCoroutine(DelayWatering());
                     }
