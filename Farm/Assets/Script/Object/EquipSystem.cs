@@ -367,6 +367,22 @@ public class EquipSystem : MonoBehaviour
     }
 
 
+    public int GetEquippedItemStackCountBySlot(int slotNumber)
+    {
+        if (slotNumber > 0 && slotNumber <= quickSlotsList.Count)
+        {
+            GameObject slot = quickSlotsList[slotNumber - 1];
+            string itemName = selectedItem?.GetComponent<InventoryItem>()?.thisName;
+
+            // スロットとアイテム名が確認できたら、スタック数を取得
+            if (itemName != null)
+            {
+                return GetEquippedItemStackCount(slot, itemName);
+            }
+        }
+        return 0; // 無効なスロット番号やアイテムがない場合は0を返す
+    }
+
     public int ItemStackCnt(string itemName)
     {
         int totalStackCount = 0;

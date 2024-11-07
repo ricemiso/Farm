@@ -31,6 +31,8 @@ public class InventorySystem : MonoBehaviour
 
     public int stackLimit = 64;
 
+    private bool isUpdateRequired = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -77,6 +79,7 @@ public class InventorySystem : MonoBehaviour
         //}
 
 
+
         if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
 
@@ -89,6 +92,7 @@ public class InventorySystem : MonoBehaviour
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
 
             isOpen = true;
+            ReCalculeList();
             CraftingSystem.Instance.RefreshNeededItems();
 
         }
@@ -107,6 +111,40 @@ public class InventorySystem : MonoBehaviour
 
             isOpen = false;
         }
+
+        if (isUpdateRequired)
+        {
+            UpdateInventoryItems();
+            isUpdateRequired = false; // 更新が終わったらフラグをfalseに
+        }
+    }
+
+    private void UpdateInventoryItems()
+    {
+        foreach (GameObject slot in slotlist)
+        {
+            InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+            if (inventrySlot != null)
+            {
+                // スロットからアイテムを取得
+                inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                if (inventrySlot.itemInSlot != null)
+                {
+                    // itemList内のアイテム名とスロット内のアイテム名が一致するか確認
+                    foreach (string itemNameInList in itemList)
+                    {
+                        if (inventrySlot.itemInSlot.thisName == itemNameInList)
+                        {
+                            // アイテムが一致した場合、数量を増やす
+                            inventrySlot.itemInSlot.amountInventry++;
+                            inventrySlot.SetItemInSlot(); // アイテム情報を更新
+                            return; // 同じアイテムが見つかったので処理を終了
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void AddToinventry(string itemName, bool shoodStack)
@@ -115,8 +153,9 @@ public class InventorySystem : MonoBehaviour
 
         if (stack != null && shoodStack)
         {
-            stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
-            stack.GetComponent<InventrySlot>().SetItemInSlot();
+            isUpdateRequired = true;
+            //stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
+            //stack.GetComponent<InventrySlot>().SetItemInSlot();
         }
         else
         {
@@ -155,6 +194,7 @@ public class InventorySystem : MonoBehaviour
         foreach (GameObject slot in slotlist)
         {
             InventrySlot inventryslot = slot.GetComponent<InventrySlot>();
+
             inventryslot.SetItemInSlot();
 
             if (inventryslot != null && inventryslot.itemInSlot != null)

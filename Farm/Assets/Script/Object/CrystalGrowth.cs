@@ -65,7 +65,7 @@ public class CrystalGrowth : MonoBehaviour
 		}
 		
 		// 中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
-		if (PlayerState.Instance.currentHydrationPercent >= 1)
+		if (PlayerState.Instance.currentHydrationPercent >= 30)
 		{
 			Debug.Log("GameClear");
 
