@@ -39,6 +39,7 @@ public class SelectionManager : MonoBehaviour
     private Text chopText;
     private bool isdamageDelay = false;
     private bool islootDelay = false;
+    public bool isDamage = false;
 
     private void Start()
     {
@@ -278,6 +279,7 @@ public class SelectionManager : MonoBehaviour
             if (animal && animal.playerISRange)
             {
                 animal.canBeChopped = true;
+                isDamage = true;
                 selectedAnimal = animal.gameObject;
                 chopText.text = animal.GetAnimalName();
                 chopHolder.gameObject.SetActive(true);
@@ -354,6 +356,7 @@ public class SelectionManager : MonoBehaviour
                 if(selectedAnimal != null)
                 {
                     selectedAnimal.gameObject.GetComponent<Animal>().canBeChopped = false;
+                    isDamage = false;
                     selectedAnimal = null;
                     chopHolder.gameObject.SetActive(false);
                 }
