@@ -349,6 +349,15 @@ public class SelectionManager : MonoBehaviour
                 }
 
             }
+            else
+            {
+                if(selectedAnimal != null)
+                {
+                    selectedAnimal.gameObject.GetComponent<Animal>().canBeChopped = false;
+                    selectedAnimal = null;
+                    chopHolder.gameObject.SetActive(false);
+                }
+            }
 
 
 
