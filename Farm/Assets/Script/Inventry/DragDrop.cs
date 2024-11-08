@@ -9,6 +9,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 {
 
     //[SerializeField] private Canvas canvas;
+
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -106,6 +107,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
         }
 
+        termpItemReference.transform.SetAsFirstSibling();
+
         // リストの再計算とアイテムの更新
         InventorySystem.Instance.ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
@@ -121,10 +124,13 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (item.amountInventry > 1)
         {
+
             item.amountInventry--;  // 元のスタックの数を減らす
             InventorySystem.Instance.AddToinventry(item.thisName, false);  // 新しいスタックを追加
             InventorySystem.Instance.ReCalculeList();  // スタック変更後にリストを再計算
             CraftingSystem.Instance.RefreshNeededItems();  // 必要なアイテムを更新
+
+            InventorySystem.Instance.SetStackState(true);
         }
     }
 

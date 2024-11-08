@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 434148092506619028}
   - component: {fileID: 213926705863133366}
   m_Layer: 0
-  m_Name: "\u30DF\u30CB\u30AA\u30F32Plant"
+  m_Name: "\u30BF\u30F3\u30AF\u30DF\u30CB\u30AA\u30F3Plant"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

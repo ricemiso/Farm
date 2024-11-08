@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask2 : ITutorialTask
+public class LootTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "Šî–{‘€ì UŒ‚(2/2)";
+        return "Šî–{‘€ì û’D";
     }
 
     public string GetText()
     {
-        return "“G‚ğ“|‚µ‚Ä‚İ‚æ‚¤";
+        return "“|‚µ‚½“G‚©‚ç‰EƒNƒŠƒbƒN‚ÅƒAƒCƒeƒ€‚ğ’D‚¨‚¤";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class AttackTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon() && Input.GetMouseButtonDown(0)&&SelectionManager.Instance.isDamage)
+        if (Input.GetMouseButtonDown(0) && SelectionManager.Instance.isloot)
         {
             return true;
         }

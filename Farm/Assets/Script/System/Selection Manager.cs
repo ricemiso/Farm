@@ -39,7 +39,10 @@ public class SelectionManager : MonoBehaviour
     private Text chopText;
     private bool isdamageDelay = false;
     private bool islootDelay = false;
-    public bool isDamage = false;
+
+    //チュートリアル用のフラグなので使用禁止
+    [HideInInspector] public bool isDamage = false;
+    [HideInInspector] public bool isloot = false;
 
     private void Start()
     {
@@ -217,8 +220,6 @@ public class SelectionManager : MonoBehaviour
                                 //SoundManager.Instance.wateringCannel.PlayoneShot(SoundManager.Instance.wateringChannel);
                                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
 
-                                
-
                                 soil.currentplant.isWatered = true;
 
                                 soil.MakeSoilWatered();
@@ -308,8 +309,9 @@ public class SelectionManager : MonoBehaviour
 
                     HandIsVisible = true;
 
+                    isloot = true;
 
-                  
+
                     if (Input.GetMouseButtonDown(0)&& !islootDelay)
                     {
                         StartCoroutine(DelayedLoot(animal));
@@ -401,7 +403,10 @@ public class SelectionManager : MonoBehaviour
     IEnumerator DelayWatering()
     {
         yield return new WaitForSeconds(2.0f);
-        Destroy(EquipSystem.Instance.selectedItem);
+
+
+        ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
+
         Destroy(EquipSystem.Instance.selecteditemModel);
 
         Watering = false;

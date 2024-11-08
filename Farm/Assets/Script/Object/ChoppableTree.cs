@@ -75,7 +75,7 @@ public class ChoppableTree : MonoBehaviour
     void TreeIsDead()
     {
         Vector3 treePosition = transform.position;
-
+        GrobalState.Instance.isTreeChopped = true;
         Destroy(transform.parent.transform.parent.gameObject);
         canBeChopped = false;
         SelectionManager.Instance.selectedTree = null;

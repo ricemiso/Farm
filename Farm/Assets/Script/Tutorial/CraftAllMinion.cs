@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask2 : ITutorialTask
+public class CraftAllMinion : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 攻撃(2/2)";
+        return "基本操作 クラフト(2/2)";
     }
 
     public string GetText()
     {
-        return "敵を倒してみよう";
+        return "素材が足りていれば出てくるクラフトボタンを押して種を手に入れよう";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,8 @@ public class AttackTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon() && Input.GetMouseButtonDown(0)&&SelectionManager.Instance.isDamage)
+        if (CraftingSystem.Instance.isMinionCraft||CraftingSystem.Instance.isTankMinionCraft
+            ||CraftingSystem.Instance.isMagicMinionCraft)
         {
             return true;
         }

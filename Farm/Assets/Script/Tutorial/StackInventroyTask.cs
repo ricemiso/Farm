@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask2 : ITutorialTask
+public class StackInventroyTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 攻撃(2/2)";
+        return "基本操作 インベントリ(2/2)";
     }
 
     public string GetText()
     {
-        return "敵を倒してみよう";
+        return "スタックされたアイテムを左SHIFTキーを押しながらドラッグ&ドロップを行って分割しよう";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class AttackTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon() && Input.GetMouseButtonDown(0)&&SelectionManager.Instance.isDamage)
+        if (InventorySystem.Instance.isStacked)
         {
             return true;
         }

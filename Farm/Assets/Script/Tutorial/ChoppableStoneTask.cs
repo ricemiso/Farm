@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask2 : ITutorialTask
+public class ChoppableStoneTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "Šî–{‘€ì UŒ‚(2/2)";
+        return "Šî–{‘€ì Î‚ğÌŒ@‚·‚é";
     }
 
     public string GetText()
     {
-        return "“G‚ğ“|‚µ‚Ä‚İ‚æ‚¤";
+        return "‚Â‚é‚Í‚µ‚ÅÎ‚ğÌŒ@‚µ‚Ä‚İ‚æ‚¤";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class AttackTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon() && Input.GetMouseButtonDown(0)&&SelectionManager.Instance.isDamage)
+        if (GrobalState.Instance.isStoneChopped)
         {
             return true;
         }

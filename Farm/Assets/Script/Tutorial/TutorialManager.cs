@@ -42,7 +42,13 @@ public class TutorialManager : MonoBehaviour
             new EquipTask(),
             new AttackTask(),
             new AttackTask2(),
-            
+            new LootTask(),
+            new OpenInventroyTask(),
+            new StackInventroyTask(),
+            new ChoppableTreeTask(),
+            new ChoppableStoneTask(),
+            new OpenCraftingScreenOpenTask(),
+            new CraftAllMinion(),
         };
 
         // 最初のチュートリアルを設定
@@ -102,7 +108,7 @@ public class TutorialManager : MonoBehaviour
         TutorialTitle.text = task.GetTitle();
         TutorialText.text = task.GetText();
 
-        // チュートリアルタスク設定時用の関数を実行
+        
         task.OnTaskSetting();
 
         iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(

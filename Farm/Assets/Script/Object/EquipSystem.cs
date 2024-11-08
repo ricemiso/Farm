@@ -261,6 +261,9 @@ public class EquipSystem : MonoBehaviour
             case "Minion2Seed":
                 return "Hand_model";
 
+            case "Minion3Seed":
+                return "Hand_model";
+
             case "WateringCan":
                 return "WateringCan_model";
 

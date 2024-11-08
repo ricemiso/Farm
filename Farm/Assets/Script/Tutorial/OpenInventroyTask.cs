@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask2 : ITutorialTask
+public class OpenInventroyTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 攻撃(2/2)";
+        return "基本操作 インベントリ(1/3)";
     }
 
     public string GetText()
     {
-        return "敵を倒してみよう";
+        return "Iキーを押してインベントリを開こう";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class AttackTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon() && Input.GetMouseButtonDown(0)&&SelectionManager.Instance.isDamage)
+        if (InventorySystem.Instance.isOpen)
         {
             return true;
         }
