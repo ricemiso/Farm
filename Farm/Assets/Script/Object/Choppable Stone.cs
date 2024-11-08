@@ -73,17 +73,29 @@ public class ChoppableStone : MonoBehaviour
     void StoneIsDead()
     {
         Vector3 treePosition = transform.position;
-
+        GrobalState.Instance.isStoneChopped = true;
         Destroy(transform.parent.gameObject);
         canBeChopped = false;
         SelectionManager.Instance.selectedStone = null;
         SelectionManager.Instance.chopHolder.gameObject.SetActive(false);
 
-        GameObject brokenTree = Instantiate(Resources.Load<GameObject>("Stone_model"),
-            new Vector3(treePosition.x, treePosition.y + 1, treePosition.z), Quaternion.Euler(0, 0, 0));
+
+        // オブジェクト1
+        GameObject brokenTree1 = Instantiate(Resources.Load<GameObject>("Stone_model"),
+            treePosition, Quaternion.Euler(0, 0, 0));
+
+        // オブジェクト2 (x 座標を少しずらす)
+        GameObject brokenTree2 = Instantiate(Resources.Load<GameObject>("Stone_model"),
+            new Vector3(treePosition.x + 1.5f, treePosition.y, treePosition.z), Quaternion.Euler(0, 0, 0));
+
+        // オブジェクト3 (z 座標を少しずらす)
+        GameObject brokenTree3 = Instantiate(Resources.Load<GameObject>("Stone_model"),
+            new Vector3(treePosition.x, treePosition.y, treePosition.z + 1.5f), Quaternion.Euler(0, 0, 0));
 
 
-        Destroy(brokenTree, 60f);
+        Destroy(brokenTree1, 60f);
+        Destroy(brokenTree2, 60f);
+        Destroy(brokenTree3, 60f);
 
     }
 

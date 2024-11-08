@@ -23,20 +23,23 @@ public class Rabbit : EnemyAI_Movement
 		base.ChaseEnemy();
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
-		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
-
-		Chase(followPosition);
-
-		// 近くにターゲットがいたら攻撃処理
-		float distance = Vector3.Distance(followPosition, transform.position);
-		if (distance <= attackRange &&
-			timeToFoundEnemy <= 0.1f &&
-			currentAttackCooltime <= 0.0f)
+		if (target != null)
 		{
-			float damage = GetComponent<Animal>().damage;
-			Attack(damage);
+			Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
 
-			currentAttackCooltime = attackCooltime;
+			Chase(followPosition);
+
+			// 近くにターゲットがいたら攻撃処理
+			float distance = Vector3.Distance(followPosition, transform.position);
+			if (distance <= attackRange &&
+				timeToFoundEnemy <= 0.1f &&
+				currentAttackCooltime <= 0.0f)
+			{
+				float damage = GetComponent<Animal>().damage;
+				Attack(damage);
+
+				currentAttackCooltime = attackCooltime;
+			}
 		}
 	}
 

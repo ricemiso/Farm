@@ -33,6 +33,8 @@ public class InventorySystem : MonoBehaviour
 
     private bool isUpdateRequired = false;
 
+    public bool isStacked = false; 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -129,23 +131,26 @@ public class InventorySystem : MonoBehaviour
                 // スロットからアイテムを取得
                 inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
 
+                // スロット内にアイテムがある場合
                 if (inventrySlot.itemInSlot != null)
                 {
-                    // itemList内のアイテム名とスロット内のアイテム名が一致するか確認
+
+                    // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
                     foreach (string itemNameInList in itemList)
                     {
                         if (inventrySlot.itemInSlot.thisName == itemNameInList)
                         {
-                            // アイテムが一致した場合、数量を増やす
-                            inventrySlot.itemInSlot.amountInventry++;
+                            // 一致するアイテムが見つかった場合、数量を増やす
                             inventrySlot.SetItemInSlot(); // アイテム情報を更新
-                            return; // 同じアイテムが見つかったので処理を終了
+                            inventrySlot.itemInSlot.amountInventry++;
+                            break; // 一致するアイテムが見つかったら次のアイテム名へ
                         }
                     }
                 }
             }
         }
     }
+
 
     public void AddToinventry(string itemName, bool shoodStack)
     {
@@ -174,7 +179,7 @@ public class InventorySystem : MonoBehaviour
 
 
             Debug.Log("Adding item: " + itemName + " to itemList");
-            itemName = GetItemName(itemName);
+            
             itemList.Add(itemName);
             Debug.Log("ItemList count after addition: " + itemList.Count);
         }
@@ -188,6 +193,12 @@ public class InventorySystem : MonoBehaviour
         //ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
     }
+
+    public void SetStackState(bool state)
+    {
+        isStacked = state;
+    }
+
 
     private GameObject CheckIfStackExists(string itemName)
     {

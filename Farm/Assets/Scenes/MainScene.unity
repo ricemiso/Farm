@@ -5379,6 +5379,7 @@ MonoBehaviour:
   isPop: 0
   itemsPickedup: []
   stackLimit: 3
+  isStacked: 0
 --- !u!4 &211531091
 Transform:
   m_ObjectHideFlags: 0
@@ -9087,6 +9088,7 @@ MonoBehaviour:
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
   isDamage: 0
+  isloot: 0
 --- !u!4 &484624253
 Transform:
   m_ObjectHideFlags: 0
@@ -13592,6 +13594,9 @@ MonoBehaviour:
   TankMinionBLP: {fileID: 0}
   MagicMinionBLP: {fileID: 0}
   ChestBLP: {fileID: 0}
+  isMinionCraft: 0
+  isTankMinionCraft: 0
+  isMagicMinionCraft: 0
 --- !u!1 &743446728
 GameObject:
   m_ObjectHideFlags: 0
@@ -28708,6 +28713,8 @@ MonoBehaviour:
   resourceMana: 0
   level: 0
   damage: 0
+  isTreeChopped: 0
+  isStoneChopped: 0
 --- !u!1 &1626534545
 GameObject:
   m_ObjectHideFlags: 0

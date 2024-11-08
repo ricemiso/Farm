@@ -16,6 +16,7 @@ public class WaveSystem : MonoBehaviour
 	// 現在のウェーブ
 	public int m_WaveCount;
 
+
 	// スポナーを管理するリスト
 	public List<SpawnerStruct> m_SpawnerList;
 
@@ -66,7 +67,7 @@ public class WaveSystem : MonoBehaviour
 					m_WaveCount > m_SpawnerList[num].WaveLimit)
 				{
 					// スポーン
-					m_SpawnerList[num].Object.GetComponent<Spawner>().SummonEnemy(3, health, size);
+					m_SpawnerList[num].Object.GetComponent<Spawner>().SummonEnemy(1, health, size);
 					break;
 				}
 			}

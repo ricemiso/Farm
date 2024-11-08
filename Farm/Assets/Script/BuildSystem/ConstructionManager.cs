@@ -178,7 +178,7 @@ public class ConstructionManager : MonoBehaviour
                 || itemToBeConstructed.name == "StairsWoodemodel" || itemToBeConstructed.name == "Chestmodel"
                 || itemToBeConstructed.name == "TankAI2" || itemToBeConstructed.name == "LongRangeMinion 1")
             {
-                if(itemToBeConstructed.name == "ConstractAI2")
+                if (itemToBeConstructed.name == "ConstractAI2")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
@@ -258,7 +258,7 @@ public class ConstructionManager : MonoBehaviour
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
-                DestroyItem(ItemToBeDestroy);
+                HandleItemStack2(ItemToBeDestroy);
 
 
             }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
@@ -269,8 +269,8 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
-                
-                DestroyItem(ItemToBeDestroy);
+
+                HandleItemStack2(ItemToBeDestroy);
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "LongRangeMinion 1")
             {
@@ -281,7 +281,7 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
                 AIPlaceItemFreeStyle();
 
-                DestroyItem(ItemToBeDestroy);
+                HandleItemStack2(ItemToBeDestroy);
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "TankAI2")
             {
@@ -292,21 +292,22 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
 
-                DestroyItem(ItemToBeDestroy);
+                HandleItemStack2(ItemToBeDestroy);
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "StairsWoodemodel")
             {
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
-                DestroyItem(ItemToBeDestroy);
+                HandleItemStack2(ItemToBeDestroy);
 
-            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "Chestmodel")
+            }
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "Chestmodel")
             {
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 AIPlaceItemFreeStyle();
-                DestroyItem(ItemToBeDestroy);
+                HandleItemStack2(ItemToBeDestroy);
             }
 
 
@@ -331,6 +332,145 @@ public class ConstructionManager : MonoBehaviour
             inConstructionMode = false;
 
         }
+    }
+
+    // アイテムのスタック数を確認し、処理するメソッド
+    public void HandleItemStack(GameObject item)
+    {
+        var inventoryItem = item.GetComponent<InventoryItem>(); // アイテムのスタック数を持つコンポーネントを取得 
+
+        if (inventoryItem != null)
+        {
+            // スタック数が1より大きい場合は減らす
+            if (inventoryItem.amountInventry > 1)
+            {
+                inventoryItem.amountInventry--; // スタック数を減らす
+                                               
+                InventorySystem.Instance.ReCalculeList();
+            }
+            else
+            {
+                // スタック数が1の場合、アイテムを削除
+                DestroyItem(item);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("InventoryItem コンポーネントが見つかりません");
+        }
+    }
+
+    public void HandleItemStack2(GameObject item)
+    {
+        var itemName = ItemName(item); // アイテム名を取得
+        string selectedItemName = itemName.Replace("(Clone)", "");
+
+        foreach (GameObject slot in InventorySystem.Instance.slotlist)
+        {
+            InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+
+            if (inventrySlot != null)
+            {
+                // スロットの子オブジェクトを取得
+                GameObject childObject = slot.transform.GetChild(0).gameObject; // 子オブジェクトが1つだけだと仮定している場合
+
+                // 子オブジェクトが非アクティブであれば、アクティブにする
+                if (childObject != null && !childObject.activeSelf)
+                {
+                    childObject.SetActive(true);
+                }
+
+                // スロットからアイテムを取得
+                inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                // スロット内にアイテムがある場合
+                if (inventrySlot.itemInSlot != null)
+                {
+                    // スロット内のアイテム名が一致するか確認
+                    if (inventrySlot.itemInSlot.thisName == selectedItemName)
+                    {
+                        // スタック数が1より多ければスタック数を減らす
+                        if (inventrySlot.itemInSlot.amountInventry > 1)
+                        {
+                            inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
+                            InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
+                        }
+                        else
+                        {
+                            // スタック数が1の場合、アイテムを削除
+                            // アイテムの子オブジェクトにアクセスして削除
+                            GameObject itemObject = inventrySlot.itemInSlot.gameObject;
+
+                            // アイテムに関連する子オブジェクト（InventoryItemコンポーネントを持つオブジェクト）を探して削除
+                            if (itemObject != null)
+                            {
+                                // InventoryItemコンポーネントを持つ子オブジェクトを削除
+                                InventoryItem itemComponent = itemObject.GetComponentInChildren<InventoryItem>();
+                                if (itemComponent != null)
+                                {
+                                    Destroy(itemComponent.gameObject); // 子オブジェクトを削除
+                                }
+                            }
+                        }
+
+                        break; // 一致するアイテムが見つかったら処理を終了
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private string ItemName(GameObject itemname)
+    {
+        switch (itemname.name)
+        {
+            case "FoundationModel":
+                itemname.name = "Foundation";
+                break;
+            case "WallModel":
+                itemname.name = "Wall";
+                break;
+            case "ConstractAI2":
+                itemname.name = "ミニオン";
+                break;
+            case "TankAI2":
+                itemname.name = "ミニオン2";
+                break;
+            case "LongRangeMinion 1":
+                itemname.name = "ミニオン3";
+                break;
+            case "StairsWoodemodel":
+                itemname.name = "Stairs";
+                break;
+            case "Chestmodel":
+                itemname.name = "Chest";
+                break;
+            case "Foundation(Clone)":
+                itemname.name = "FoundationModel";
+                break;
+            case "Wall(Clone)":
+                itemname.name = "WallModel";
+                break;
+            case "ConstractAI2(Clone)":
+                itemname.name = "ミニオン";
+                break;
+            case "TankAI2(Clone)":
+                itemname.name = "ミニオン2";
+                break;
+            case "LongRangeMinion 1(Clone)":
+                itemname.name = "ミニオン3";
+                break;
+            case "StairsWoodemodel(Clone)":
+                itemname.name = "Stairs";
+                break;
+            case "Chestmodel(Clone)":
+                itemname.name = "Chest";
+                break;
+        }
+
+        return itemname.name;
     }
 
     private void PlaceItemInGhostPosition(GameObject copyOfGhost)
@@ -384,8 +524,6 @@ public class ConstructionManager : MonoBehaviour
         DestroyImmediate(item);
         InventorySystem.Instance.ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
-
-        DestroyImmediate(item);
 
     }
 

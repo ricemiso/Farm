@@ -40,9 +40,13 @@ public class Plant : MonoBehaviour
 
     private void OnDestroy()
     {
-        GetComponentInParent<Soil>().isEmpty = true;
-        GetComponentInParent<Soil>().plantName = "";
-        GetComponentInParent<Soil>().currentplant = null;
+        Soil soil = GetComponentInParent<Soil>();
+        if (soil != null)
+        {
+            soil.isEmpty = true;
+            soil.plantName = "";
+            soil.currentplant = null;
+        }
     }
 
 

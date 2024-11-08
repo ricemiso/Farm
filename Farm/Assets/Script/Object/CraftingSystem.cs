@@ -39,6 +39,11 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint ChestBLP;
 
 
+    [HideInInspector] public bool isMinionCraft = false;
+    [HideInInspector] public bool isTankMinionCraft = false;
+    [HideInInspector] public bool isMagicMinionCraft = false;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -64,8 +69,8 @@ public class CraftingSystem : MonoBehaviour
         MinionBLP = new BluePrint("ミニオン", 1, 2, "Mana", 1, "ミニオン", 1);
         StairBLP = new BluePrint("Stairs", 1, 1, "Plank", 4, "", 0);
         NormalMinionBLP = new BluePrint("MinionSeed", 1, 1, "Mana", 1, "", 0);
-        TankMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Stone", 1);
-        MagicMinionBLP = new BluePrint("MinionSeed", 1, 2, "Mana", 1, "Log", 1);
+        TankMinionBLP = new BluePrint("Minion2Seed", 1, 2, "Mana", 1, "Stone", 1);
+        MagicMinionBLP = new BluePrint("Minion3Seed", 1, 2, "Mana", 1, "Log", 1);
         ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
 
 
@@ -244,8 +249,11 @@ public class CraftingSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
+            //TODO:一旦妖精の合成しかないため直接合成スクリーンを出す
+            //アルファ版は戻す
+            //craftingScreenUI.SetActive(true);
+            refineScreenUI.SetActive(true);
 
-            craftingScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -533,6 +541,7 @@ public class CraftingSystem : MonoBehaviour
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             normalMinionBTN.gameObject.SetActive(true);
+            isMinionCraft = true;
         }
         else
         {
@@ -548,6 +557,7 @@ public class CraftingSystem : MonoBehaviour
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             TankMinionBTN.gameObject.SetActive(true);
+            isTankMinionCraft = true;
         }
         else
         {
@@ -562,6 +572,7 @@ public class CraftingSystem : MonoBehaviour
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             MagicMinionBTN.gameObject.SetActive(true);
+            isMagicMinionCraft = true;
         }
         else
         {

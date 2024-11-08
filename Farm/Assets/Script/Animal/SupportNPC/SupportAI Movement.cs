@@ -14,6 +14,10 @@ public class SupportAI_Movement : AI_Movement
 
 	protected override void Start()
     {
+		if(animation == null)
+        {
+			animation = GetComponent<Animation>();
+        }
 		currentAttackCooltime = 0.0f;
 		base.Start();
     }
@@ -105,33 +109,28 @@ public class SupportAI_Movement : AI_Movement
 	virtual protected void checkAttack()
 	{}
 
-	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player") &&
-			state != MoveState.FOLLOWING &&
-			state != MoveState.CHASE &&
-			!isStopped)  // プレイヤーが入って、まだ追従していない場合
+		if (other.CompareTag("Player") && state != MoveState.FOLLOWING && state != MoveState.CHASE && !isStopped)
 		{
 			state = MoveState.FOLLOWING;
 			animation.Play("Run");
-			//animator.SetBool("isRunning", true);
-
 			target = other.gameObject;
 		}
 
-		if (other.CompareTag("Enemy") && target.gameObject.GetComponent<Animal>().currentHealth > 0)  // 敵が入って、まだ追従していない場合
+		if (other.CompareTag("Enemy"))
 		{
-			state = MoveState.CHASE;
-			animation.Play("Run");
-			//animator.SetBool("isRunning", true);
-
-			target = other.gameObject;
-			//if (target.gameObject.GetComponent<Animal>().currentHealth <= 0)
-			//{
-			//	state = MoveState.WALKING;
-			//	target = null;
-			//}
+			var animal = other.GetComponent<Animal>();
+			if (animal != null && animal.currentHealth > 0)  // nullチェックとcurrentHealthチェック
+			{
+				state = MoveState.CHASE;
+				if(animation != null)
+                {
+					animation.Play("Run");
+				}
+				
+				target = other.gameObject;
+			}
 		}
 	}
 
@@ -140,40 +139,30 @@ public class SupportAI_Movement : AI_Movement
 		if (other.CompareTag("Player"))
 		{
 			isPushEKey = true;
-			if(!isStopped)
+			if (!isStopped)
 			{
 				state = MoveState.FOLLOWING;
 			}
-
 		}
 
-		if (other.CompareTag("Enemy") && target.gameObject.GetComponent<Animal>().currentHealth > 0)  // 敵が入って、まだ追従していない場合
+		if (other.CompareTag("Enemy") && target != null) // targetのnullチェックを追加
 		{
-			state = MoveState.CHASE;
-			animation.Play("Run");
-			//animator.SetBool("isRunning", true);
-
-			target = other.gameObject;
-			if (target.gameObject.GetComponent<Animal>().currentHealth <= 0)
+			var animal = target.GetComponent<Animal>();
+			if (animal != null && animal.currentHealth > 0) // nullチェックとcurrentHealthチェック
+			{
+				state = MoveState.CHASE;
+				if(animation != null)
+                {
+					animation.Play("Run");
+				}
+				
+				target = other.gameObject;
+			}
+			else
 			{
 				state = MoveState.WALKING;
 				target = null;
 			}
-		}
-	}
-
-	// プレイヤーがコライダーから出たとき（追従を停止しない）
-	private void OnTriggerExit(Collider other)
-	{
-		if(other.CompareTag("Player"))
-		{
-			isPushEKey = false;
-		}
-
-		if (other.CompareTag("Enemy"))
-		{
-			state = MoveState.WALKING;
-			// 追従停止のコードは削除。プレイヤーが出ても追従を続ける。
 		}
 	}
 }
