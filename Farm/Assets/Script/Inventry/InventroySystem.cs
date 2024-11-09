@@ -117,12 +117,15 @@ public class InventorySystem : MonoBehaviour
         if (isUpdateRequired)
         {
             UpdateInventoryItems();
-            isUpdateRequired = false; // 更新が終わったらフラグをfalseに
+            isUpdateRequired = false;
         }
     }
 
-    private void UpdateInventoryItems()
+    public void UpdateInventoryItems()
     {
+        if (!CraftingSystem.Instance.canupdate) return;
+
+
         foreach (GameObject slot in slotlist)
         {
             InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
@@ -140,6 +143,7 @@ public class InventorySystem : MonoBehaviour
                     {
                         if (inventrySlot.itemInSlot.thisName == itemNameInList)
                         {
+
                             // 一致するアイテムが見つかった場合、数量を増やす
                             inventrySlot.SetItemInSlot(); // アイテム情報を更新
                             inventrySlot.itemInSlot.amountInventry++;
@@ -241,6 +245,30 @@ public class InventorySystem : MonoBehaviour
             case "Axe":
                 objectname = "斧";
                 break;
+            case "ミニオン3":
+                objectname = "遠距離ミニオン";
+                break;
+            case "遠距離ミニオン":
+                objectname = "ミニオン(遠距離)";
+                break;
+            case "Minion3Seed":
+                objectname = "遠距離ミニオンの種";
+                break;
+            case "Minion2Seed":
+                objectname = "タンクミニオンの種";
+                break;
+            case "Mana(Clone)":
+                objectname = "マナ";
+                break;
+            case "Stone(Clone)":
+                objectname = "石ころ";
+                break;
+            case "Log(Clone)":
+                objectname = "丸太";
+                break;
+            case "Axe(Clone)":
+                objectname = "斧";
+                break;
 
         }
 
@@ -262,6 +290,18 @@ public class InventorySystem : MonoBehaviour
                 break;
             case "斧":
                 objectname = "Axe";
+                break;
+            case "遠距離ミニオン":
+                objectname = "ミニオン3";
+                break;
+            case "タンクミニオン":
+                objectname = "ミニオン2";
+                break;
+            case "遠距離ミニオンの種":
+                objectname = "Minion3Seed(Clone)";
+                break;
+            case "タンクミニオンの種":
+                objectname = "Minion2Seed(Clone)";
                 break;
             case "Stone(Clone)":
                 objectname = "Stone";

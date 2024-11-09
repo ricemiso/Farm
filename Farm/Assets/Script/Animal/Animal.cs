@@ -136,7 +136,11 @@ public class Animal : MonoBehaviour
     IEnumerator puddleDelay()
     {
         yield return new WaitForSeconds(1);
-        bloodPaddle.SetActive(true);
+        if(bloodPaddle != null)
+        {
+            bloodPaddle.SetActive(true);
+        }
+        
     }
 
     private void PlayDyingSound()

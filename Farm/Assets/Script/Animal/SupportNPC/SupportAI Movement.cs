@@ -114,7 +114,11 @@ public class SupportAI_Movement : AI_Movement
 		if (other.CompareTag("Player") && state != MoveState.FOLLOWING && state != MoveState.CHASE && !isStopped)
 		{
 			state = MoveState.FOLLOWING;
-			animation.Play("Run");
+			if(animation != null)
+            {
+				animation.Play("Run");
+			}
+			
 			target = other.gameObject;
 		}
 

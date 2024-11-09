@@ -296,7 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6af692f748c34740824225ff7937f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemName: "\u30DF\u30CB\u30AA\u30F32"
+  ItemName: "\u30BF\u30F3\u30AF\u30DF\u30CB\u30AA\u30F3"
+  InventryName: "\u30BF\u30F3\u30AF\u30DF\u30CB\u30AA\u30F3"
   playerRange: 0
   ditectionRange: 10
 --- !u!135 &213926705863133366
