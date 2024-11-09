@@ -176,6 +176,7 @@ public class InventorySystem : MonoBehaviour
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
             itemToAdd.transform.SetAsFirstSibling();
             itemName = GetItemName(itemName);
+
             if (SelectionManager.Instance.onTarget)
             {
                 PopupManager.Instance.TriggerPickupPop(itemName, itemToAdd.GetComponent<Image>().sprite);
@@ -257,6 +258,9 @@ public class InventorySystem : MonoBehaviour
             case "Minion2Seed":
                 objectname = "タンクミニオンの種";
                 break;
+            case "MinionSeed":
+                objectname = "ミニオンの種";
+                break;
             case "Mana(Clone)":
                 objectname = "マナ";
                 break;
@@ -298,10 +302,13 @@ public class InventorySystem : MonoBehaviour
                 objectname = "ミニオン2";
                 break;
             case "遠距離ミニオンの種":
-                objectname = "Minion3Seed(Clone)";
+                objectname = "Minion3Seed";
                 break;
             case "タンクミニオンの種":
-                objectname = "Minion2Seed(Clone)";
+                objectname = "Minion2Seed";
+                break;
+            case "ミニオンの種":
+                objectname = "MinionSeed";
                 break;
             case "Stone(Clone)":
                 objectname = "Stone";

@@ -30,6 +30,7 @@ public class SelectionManager : MonoBehaviour
    [HideInInspector] public GameObject selectedCraft;
    [HideInInspector] public GameObject selectedStone;
    [HideInInspector] public GameObject selectedCrystal;
+   [HideInInspector] public GameObject selectedMiniCrystal;
    [HideInInspector] public GameObject selectedAnimal;
    [HideInInspector] public GameObject selectedStorageBox;
 
@@ -43,6 +44,7 @@ public class SelectionManager : MonoBehaviour
     //チュートリアル用のフラグなので使用禁止
     [HideInInspector] public bool isDamage = false;
     [HideInInspector] public bool isloot = false;
+    [HideInInspector] public bool isFarm1 = false;
 
     private void Start()
     {
@@ -80,6 +82,7 @@ public class SelectionManager : MonoBehaviour
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
             ChoppableStone choppableStone = selectionTransform.GetComponent<ChoppableStone>();
             CrystalGrowth crystal = selectionTransform.GetComponent<CrystalGrowth>();
+            MiniCrystal minicrystal = selectionTransform.GetComponent<MiniCrystal>();
 
             //TODO:切り倒す処理
             if (choppableTree && choppableTree.playerRange)
@@ -106,7 +109,7 @@ public class SelectionManager : MonoBehaviour
 
             }else if(crystal && crystal.playerRange)
             {
-                crystal.canBeCharge = true;
+                //crystal.canBeCharge = true;
                 selectedCrystal = crystal.gameObject;
                 chopText.text = "マナクリスタル";
                 chopHolder.gameObject.SetActive(true);
@@ -121,6 +124,13 @@ public class SelectionManager : MonoBehaviour
 
                     StartCoroutine(DelayWatering());
                 }
+            }
+            else if (minicrystal && minicrystal.playerRange)
+            {
+               // minicrystal.canBeCharge = true;
+                selectedCrystal = minicrystal.gameObject;
+                chopText.text = "ミニクリスタル";
+                chopHolder.gameObject.SetActive(true);
             }
             else
             {
@@ -144,8 +154,14 @@ public class SelectionManager : MonoBehaviour
                 }
                 else if (selectedCrystal != null)
                 {
-                    selectedCrystal.gameObject.GetComponent<CrystalGrowth>().canBeCharge = false;
+                    //selectedCrystal.gameObject.GetComponent<CrystalGrowth>().canBeCharge = false;
                     selectedCrystal = null;
+                    chopHolder.gameObject.SetActive(false);
+                }
+                else if (selectedMiniCrystal != null)
+                {
+                    //selectedMiniCrystal.gameObject.GetComponent<MiniCrystal>().canBeCharge = false;
+                    selectedMiniCrystal = null;
                     chopHolder.gameObject.SetActive(false);
                 }
             }
@@ -188,7 +204,7 @@ public class SelectionManager : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         soil.PlantSeed();
-
+                        isFarm1 = true;
                         ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
                         Destroy(EquipSystem.Instance.selecteditemModel);
                     }
@@ -380,7 +396,7 @@ public class SelectionManager : MonoBehaviour
             }
 
 
-            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil && !strageBox && !crystal)  
+            if (!interactable && !animal && !choppableTree && !choppableCraft && !choppableStone && !soil && !strageBox && !crystal && !minicrystal)  
             {
                 interaction_text.text = "";
                 handIcon.gameObject.SetActive(false);
