@@ -73,7 +73,7 @@ public class WaveSystem : MonoBehaviour
 				}
 			}
 
-			if (m_SpawnerList.Count > 0)
+			if (active.Count > 0)
 			{
 				// スポナーが召喚する敵の数を決定
 				for (uint i = 0; i < enemyNum; ++i)
