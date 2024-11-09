@@ -33,7 +33,11 @@ public class InventorySystem : MonoBehaviour
 
     private bool isUpdateRequired = false;
 
-    public bool isStacked = false; 
+    public bool isStacked = false;
+
+    //チュートリアル用の変数
+    [HideInInspector] public bool isMinonget = false;
+    [HideInInspector] public bool isHeal = false;
 
     private void Awake()
     {
@@ -174,6 +178,10 @@ public class InventorySystem : MonoBehaviour
             itemName = GetReturnItemName(itemName);
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
+            if(itemName == "ミニオン3" || itemName == "ミニオン2" || itemName == "ミニオン")
+            {
+                isMinonget = true;
+            }
             itemToAdd.transform.SetAsFirstSibling();
             itemName = GetItemName(itemName);
 

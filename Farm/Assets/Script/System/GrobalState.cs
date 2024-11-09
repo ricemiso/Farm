@@ -12,9 +12,12 @@ public class GrobalState : MonoBehaviour
     public int level;
     public int damage;
 
+
+
     //チュートリアル用の変数
     public bool isTreeChopped = false;
     public bool isStoneChopped = false;
+    public bool isTutorialEnd = false;
 
 
     private void Awake()

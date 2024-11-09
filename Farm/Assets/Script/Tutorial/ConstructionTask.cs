@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTask3 : ITutorialTask
+public class ConstructionTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 農業(3/3)";
+        return "基本操作 ミニオンの配置(1/2)";
     }
 
     public string GetText()
     {
-        return "育て上げた作物を収穫しよう。";
+        return "収穫したミニオンをインベントリから右クリックして配置してみよう。Xキーを押すとキャンセルできるよ";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class FarmTask3 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (InventorySystem.Instance.isMinonget)
+        if (ConstructionManager.Instance.isConstruction)
         {
             return true;
         }

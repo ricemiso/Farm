@@ -45,6 +45,7 @@ public class TutorialManager : MonoBehaviour
             new LootTask(),
             new OpenInventroyTask(),
             new StackInventroyTask(),
+            new HealTask(),
             new ChoppableTreeTask(),
             new ChoppableStoneTask(),
             new OpenCraftingScreenOpenTask(),
@@ -52,6 +53,9 @@ public class TutorialManager : MonoBehaviour
             new FarmTask1(),
             new FarmTask2(),
             new FarmTask3(),
+            new ConstructionTask(),
+            new LevelUpTask(),
+            new ChargeTask(),
         };
 
         // 最初のチュートリアルを設定

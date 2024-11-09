@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTask3 : ITutorialTask
+public class ChargeTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 農業(3/3)";
+        return "基本操作 クリスタルの成長";
     }
 
     public string GetText()
     {
-        return "育て上げた作物を収穫しよう。";
+        return "マナをクリスタルにチャージして成長させよう。100%になるとゲームクリア!";
     }
 
     public void OnTaskSetting()
@@ -20,8 +20,10 @@ public class FarmTask3 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (InventorySystem.Instance.isMinonget)
+        if (SelectionManager.Instance.Chargeing)
         {
+            //TODO:チュートリアル終了変数
+            GrobalState.Instance.isTutorialEnd = true;
             return true;
         }
 
@@ -32,4 +34,6 @@ public class FarmTask3 : ITutorialTask
     {
         return 2f;
     }
+
+    
 }
