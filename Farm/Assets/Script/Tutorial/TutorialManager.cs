@@ -49,6 +49,9 @@ public class TutorialManager : MonoBehaviour
             new ChoppableStoneTask(),
             new OpenCraftingScreenOpenTask(),
             new CraftAllMinion(),
+            new FarmTask1(),
+            new FarmTask2(),
+            new FarmTask3(),
         };
 
         // 最初のチュートリアルを設定

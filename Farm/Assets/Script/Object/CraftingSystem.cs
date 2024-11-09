@@ -26,6 +26,7 @@ public class CraftingSystem : MonoBehaviour
     private bool canCraft = true;
     public bool canupdate = true;
 
+    public bool itemIncreased = false;
 
     [HideInInspector] public BluePrint AxeBLP;
     [HideInInspector] public BluePrint PickaxeBLP;
@@ -43,6 +44,10 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public bool isMinionCraft = false;
     [HideInInspector] public bool isTankMinionCraft = false;
     [HideInInspector] public bool isMagicMinionCraft = false;
+
+
+    //チュートリアル用の変数
+    [HideInInspector] public bool isFarm3 = false;
 
 
     private void Awake()
@@ -348,12 +353,13 @@ public class CraftingSystem : MonoBehaviour
                                 // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
                                 foreach (string itemNameInList in InventorySystem.Instance.itemList)
                                 {
-                                    if (inventrySlot.itemInSlot.thisName == itemName)
+                                    if (inventrySlot.itemInSlot.thisName == itemName && !itemIncreased)
                                     {
 
                                         // 一致するアイテムが見つかった場合、数量を増やす
                                         inventrySlot.SetItemInSlot(); // アイテム情報を更新
                                         inventrySlot.itemInSlot.amountInventry++;
+                                        itemIncreased = true;
                                         break; // 一致するアイテムが見つかったら次のアイテム名へ
                                     }
                                 }
@@ -366,6 +372,7 @@ public class CraftingSystem : MonoBehaviour
 
             }
         }
+        itemIncreased = false;
         canupdate = false;
 
         // 現在のインベントリ内の素材の数を取得

@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 814457386}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &7321905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1891547184}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &52333613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,6 +1765,7 @@ MonoBehaviour:
   foundationWalkSound: {fileID: 61512414}
   rabbitCrySound: {fileID: 0}
   FarmWalkSound: {fileID: 0}
+  EatSound: {fileID: 0}
   startingZoneBGMMusic: {fileID: 61512410}
 --- !u!82 &61512404
 AudioSource:
@@ -3773,6 +3776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 2105605103}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &132428642
 GameObject:
   m_ObjectHideFlags: 0
@@ -5262,6 +5266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1199000638}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &208045528
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,6 +5965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1711142967}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &234010166
 GameObject:
   m_ObjectHideFlags: 0
@@ -6424,6 +6430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1357869446}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &261921311
 GameObject:
   m_ObjectHideFlags: 0
@@ -7269,8 +7276,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0336, y: -52.20002}
-  m_SizeDelta: {x: 317.1942, y: 51.4}
+  m_AnchoredPosition: {x: 3.6897, y: -56.812813}
+  m_SizeDelta: {x: 651.1442, y: 60.6256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &317102303
 MonoBehaviour:
@@ -7433,6 +7440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1022925186}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &336892405
 GameObject:
   m_ObjectHideFlags: 0
@@ -7616,6 +7624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 231961521}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &345011660
 GameObject:
   m_ObjectHideFlags: 0
@@ -8299,6 +8308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 659153383}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &408884983
 GameObject:
   m_ObjectHideFlags: 0
@@ -9479,6 +9489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1008943117}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1001 &499308825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10769,6 +10780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1068636043}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &597507535
 GameObject:
   m_ObjectHideFlags: 0
@@ -11331,6 +11343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 21811930}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &627923960
 GameObject:
   m_ObjectHideFlags: 0
@@ -11703,6 +11716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1968014753}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &659153380
 GameObject:
   m_ObjectHideFlags: 0
@@ -12699,6 +12713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1891168446}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &714801323
 GameObject:
   m_ObjectHideFlags: 0
@@ -13583,6 +13598,7 @@ MonoBehaviour:
   inventryitemList: []
   isOpen: 0
   islevelUp: 0
+  canupdate: 1
   AxeBLP: {fileID: 0}
   PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
@@ -15960,6 +15976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 29924819}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &876304620
 GameObject:
   m_ObjectHideFlags: 0
@@ -16982,6 +16999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 48697755}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &934033128
 GameObject:
   m_ObjectHideFlags: 0
@@ -17086,6 +17104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1126465348}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1001 &935147643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18530,6 +18549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 234671859}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1001678351
 GameObject:
   m_ObjectHideFlags: 0
@@ -19385,6 +19405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 822842875}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1036564931
 GameObject:
   m_ObjectHideFlags: 0
@@ -19489,6 +19510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 2047398489}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1038967541
 GameObject:
   m_ObjectHideFlags: 0
@@ -21324,6 +21346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1825603773}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1170929609
 GameObject:
   m_ObjectHideFlags: 0
@@ -23057,6 +23080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1233472483}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1001 &1272060086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23228,6 +23252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 37767364}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1290288523
 GameObject:
   m_ObjectHideFlags: 0
@@ -24591,6 +24616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 2058116310}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &1362682104
 GameObject:
   m_ObjectHideFlags: 0
@@ -34908,6 +34934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 234010169}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &2039024505
 GameObject:
   m_ObjectHideFlags: 0
@@ -36419,6 +36446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 1812283133}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &2098288310
 GameObject:
   m_ObjectHideFlags: 0
@@ -37197,6 +37225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 823008065}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &2130662680
 GameObject:
   m_ObjectHideFlags: 0
@@ -37353,6 +37382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountTXT: {fileID: 976795666}
   itemInSlot: {fileID: 0}
+  quickSlot: 0
 --- !u!1 &2136151635
 GameObject:
   m_ObjectHideFlags: 0
