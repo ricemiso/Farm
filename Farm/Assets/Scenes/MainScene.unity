@@ -26814,7 +26814,7 @@ MonoBehaviour:
   m_SpawnerList:
   - Object: {fileID: 1630540139}
     IsActive: 1
-    WaveLimit: 0
+    WaveLimit: 3
   m_HealthMultiply: 0.1
   m_SizeMultiply: 0.1
 --- !u!1 &1538169292

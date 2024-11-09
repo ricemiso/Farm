@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -57,20 +58,37 @@ public class WaveSystem : MonoBehaviour
 			// 敵のステータスを決定
 			float health = 1.0f + m_HealthMultiply * m_WaveCount;
 			float size = 1.0f + m_SizeMultiply * m_WaveCount;
+			uint enemyNum = (uint)m_WaveCount;
 
-			// 召喚
-			while (true)
+			// 可動できるスポナーをリスト化
+			List<SpawnerStruct> active = new List<SpawnerStruct>();
+			List<uint> num = new List<uint>();  // スポナーが召喚する敵の数
+			for (int i = 0; i < m_SpawnerList.Count; ++i)
 			{
-				// スポーンさせるスポナーの決定
-				int num = Random.Range(0, m_SpawnerList.Count);
-				if (m_SpawnerList[num].IsActive &&
-					m_WaveCount > m_SpawnerList[num].WaveLimit)
+				if (m_SpawnerList[i].IsActive &&
+					m_WaveCount >= m_SpawnerList[i].WaveLimit)
 				{
-					// スポーン
-					m_SpawnerList[num].Object.GetComponent<Spawner>().SummonEnemy(1, health, size);
-					break;
+					active.Add(m_SpawnerList[i]);
+					num.Add(0);
 				}
 			}
+
+			if (m_SpawnerList.Count > 0)
+			{
+				// スポナーが召喚する敵の数を決定
+				for (uint i = 0; i < enemyNum; ++i)
+				{
+					int index = Random.Range(0, active.Count);
+					num[index]++;
+				}
+
+				// 召喚
+				for (int i = 0; i < active.Count; ++i)
+				{
+					active[i].Object.GetComponent<Spawner>().SummonEnemy(num[i], health, size);
+				}
+			}
+
 		}
 
 
