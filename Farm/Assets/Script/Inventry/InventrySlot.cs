@@ -8,6 +8,7 @@ public class InventrySlot : MonoBehaviour
 {
     public Text amountTXT;
     public InventoryItem itemInSlot;
+    public bool quickSlot;
 
     private void Update()
     {

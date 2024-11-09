@@ -24,6 +24,7 @@ public class CraftingSystem : MonoBehaviour
     public bool isOpen;
     public bool islevelUp;
     private bool canCraft = true;
+    public bool canupdate = true;
 
 
     [HideInInspector] public BluePrint AxeBLP;
@@ -309,9 +310,63 @@ public class CraftingSystem : MonoBehaviour
             }
             else
             {
-                InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName,false);
+                canupdate = true;
+
+                bool itemExists = false;
+                foreach (GameObject slot in InventorySystem.Instance.slotlist)
+                {
+                    InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+                    if (inventrySlot != null && inventrySlot.itemInSlot != null)
+                    {
+                        var itemName = InventorySystem.Instance.GetItemName(blueprintToCraft.itemName);
+                        if (inventrySlot.itemInSlot.thisName == itemName)
+                        {
+                            itemExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!itemExists)
+                {
+                    InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName, false);
+                }
+                else
+                {
+                    foreach (GameObject slot in InventorySystem.Instance.slotlist)
+                    {
+                        InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+                        if (inventrySlot != null)
+                        {
+                            // スロットからアイテムを取得
+                            inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                            // スロット内にアイテムがある場合
+                            if (inventrySlot.itemInSlot != null)
+                            {
+                                var itemName = InventorySystem.Instance.GetItemName(blueprintToCraft.itemName);
+                                // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
+                                foreach (string itemNameInList in InventorySystem.Instance.itemList)
+                                {
+                                    if (inventrySlot.itemInSlot.thisName == itemName)
+                                    {
+
+                                        // 一致するアイテムが見つかった場合、数量を増やす
+                                        inventrySlot.SetItemInSlot(); // アイテム情報を更新
+                                        inventrySlot.itemInSlot.amountInventry++;
+                                        break; // 一致するアイテムが見つかったら次のアイテム名へ
+                                    }
+                                }
+
+
+                            }
+                        }
+                    }
+                }                  
+
             }
         }
+        canupdate = false;
 
         // 現在のインベントリ内の素材の数を取得
         int currentAmountReq1 = InventorySystem.Instance.GetItemCount(blueprintToCraft.Req1);
@@ -346,11 +401,9 @@ public class CraftingSystem : MonoBehaviour
         // 再計算とUIの更新をコルーチンで呼び出し
         yield return StartCoroutine(calulate());
 
-        // 1秒待機
-        yield return new WaitForSeconds(1f);
-
         // クラフト可能に再設定
         canCraft = true;
+        canupdate = true;
     }
 
     //TODO:アイテムを追加した時にここの条件を追加する
@@ -371,7 +424,7 @@ public class CraftingSystem : MonoBehaviour
         {
             switch (itemname)
             {
-                case "Stone":
+                case "石ころ":
                     stone_count += 1;
                     break;
                 case "Stick":

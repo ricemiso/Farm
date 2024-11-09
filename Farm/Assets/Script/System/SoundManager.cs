@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource foundationWalkSound;
     public AudioSource rabbitCrySound;
     public AudioSource FarmWalkSound;
+    public AudioSource EatSound;
 
     //public AudioSource WateringSound;
     //public AudioSource WateringCanSound;
@@ -45,11 +46,11 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 特定のシーン名（例えば "Start"）の場合に SoundManager を破棄
+        
         if (scene.name == "GameOver"|| scene.name == "GameClear")
         {
             Destroy(gameObject);
-            SceneManager.sceneLoaded -= OnSceneLoaded; // イベントを解除
+            SceneManager.sceneLoaded -= OnSceneLoaded; 
         }
     }
 

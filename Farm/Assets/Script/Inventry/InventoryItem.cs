@@ -139,6 +139,11 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         SelectionManager.Instance.EnableSelection();
         SelectionManager.Instance.enabled = true; ;
 
+        if (gameObject != null && !gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+
 
         //TODO:配置オブジェクトの追加
         switch (gameObject.name)
@@ -155,7 +160,13 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             case "ミニオン2":
                 ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
                 break;
+            case "ミニオン(タンク)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
+                break;
             case "ミニオン3":
+                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
+                break;
+            case "ミニオン(遠距離)":
                 ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
                 break;
             case "Stairs":
@@ -198,9 +209,87 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             if (isConsumable && itemPendingConsumption == gameObject)
             {
-                DestroyImmediate(gameObject);
-                InventorySystem.Instance.ReCalculeList();
-                CraftingSystem.Instance.RefreshNeededItems();
+               
+                bool foundInQuickSlot = false;
+
+                foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
+                {
+                    InventrySlot inventrySlot = quickSlot.GetComponent<InventrySlot>();
+                    if (inventrySlot != null && inventrySlot.quickSlot)
+                    {
+                        gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                        if (inventrySlot.itemInSlot != null && inventrySlot.itemInSlot.thisName == gameObject.name)
+                        {
+                            if (inventrySlot.itemInSlot.amountInventry > 1)
+                            {
+                                inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
+                                InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
+                                gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                            }
+                            else
+                            {
+                                gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                                DestroyImmediate(gameObject);
+                                InventorySystem.Instance.ReCalculeList();
+                                CraftingSystem.Instance.RefreshNeededItems();
+                            }
+
+                            InventorySystem.Instance.ReCalculeList(); // UIやリストの更新
+                            CraftingSystem.Instance.RefreshNeededItems();
+
+                            foundInQuickSlot = true;
+                            break; // クイックスロットでアイテムが見つかったら処理を終了
+                        }
+                    }
+                }
+
+
+                if (!foundInQuickSlot)
+                {
+                    foreach (GameObject slot in InventorySystem.Instance.slotlist)
+                    {
+                        InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+
+                        if (inventrySlot != null)
+                        {
+                            // スロットの子オブジェクトを取得
+                            GameObject childObject = slot.transform.GetChild(0).gameObject; // 子オブジェクトが1つだけだと仮定している場合
+
+                            // スロットからアイテムを取得
+                            inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                            // スロット内にアイテムがある場合
+                            if (inventrySlot.itemInSlot != null)
+                            {
+                                // スロット内のアイテム名が一致するか確認
+                                gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                                if (inventrySlot.itemInSlot.thisName == gameObject.name)
+                                {
+                                    // スタック数が1より多ければスタック数を減らす
+                                    if (inventrySlot.itemInSlot.amountInventry > 1)
+                                    {
+                                        inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
+                                        InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
+                                        gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                                    }
+                                    else
+                                    {
+                                        gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                                        DestroyImmediate(gameObject);
+                                        InventorySystem.Instance.ReCalculeList();
+                                        CraftingSystem.Instance.RefreshNeededItems();
+
+                                    }
+
+                                    break; // 一致するアイテムが見つかったら処理を終了
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+              
             }
         }
     }
@@ -215,6 +304,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         hydrationEffectCalculation(hydrationEffect);
 
+        SoundManager.Instance.PlaySound(SoundManager.Instance.EatSound);
     }
 
 

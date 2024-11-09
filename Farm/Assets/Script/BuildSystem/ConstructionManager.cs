@@ -374,11 +374,7 @@ public class ConstructionManager : MonoBehaviour
                 // スロットの子オブジェクトを取得
                 GameObject childObject = slot.transform.GetChild(0).gameObject; // 子オブジェクトが1つだけだと仮定している場合
 
-                // 子オブジェクトが非アクティブであれば、アクティブにする
-                if (childObject != null && !childObject.activeSelf)
-                {
-                    childObject.SetActive(true);
-                }
+              
 
                 // スロットからアイテムを取得
                 inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
@@ -389,6 +385,11 @@ public class ConstructionManager : MonoBehaviour
                     // スロット内のアイテム名が一致するか確認
                     if (inventrySlot.itemInSlot.thisName == selectedItemName)
                     {
+                        // 子オブジェクトが非アクティブであれば、アクティブにする
+                        if (childObject != null && !childObject.activeSelf)
+                        {
+                            childObject.SetActive(true);
+                        }
                         // スタック数が1より多ければスタック数を減らす
                         if (inventrySlot.itemInSlot.amountInventry > 1)
                         {
@@ -412,10 +413,16 @@ public class ConstructionManager : MonoBehaviour
                                 }
                             }
                         }
-
+                        // 子オブジェクトが非アクティブであれば、アクティブにする
+                        if (childObject != null && !childObject.activeSelf)
+                        {
+                            childObject.SetActive(true);
+                        }
                         break; // 一致するアイテムが見つかったら処理を終了
                     }
                 }
+
+                
             }
         }
     }
@@ -428,6 +435,12 @@ public class ConstructionManager : MonoBehaviour
         {
             case "FoundationModel":
                 itemname.name = "Foundation";
+                break;
+            case "ミニオン3(Clone)":
+                itemname.name = "ミニオン(遠距離)";
+                break;
+            case "ミニオン2(Clone)":
+                itemname.name = "ミニオン(タンク)";
                 break;
             case "WallModel":
                 itemname.name = "Wall";
