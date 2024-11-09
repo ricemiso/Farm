@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTask3 : ITutorialTask
+public class LevelUpTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 農業(3/3)";
+        return "基本操作 ミニオンの強化";
     }
 
     public string GetText()
     {
-        return "育て上げた作物を収穫しよう。";
+        return "マナを与えてミニオンを強化しよう。配置したミニオンに近づいて、左クリックで強化できるよ";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class FarmTask3 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (InventorySystem.Instance.isMinonget)
+        if (SelectionManager.Instance.leveling)
         {
             return true;
         }

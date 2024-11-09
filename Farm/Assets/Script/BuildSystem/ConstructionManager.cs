@@ -31,6 +31,9 @@ public class ConstructionManager : MonoBehaviour
     public GameObject placementHoldingSpot;
     public GameObject placeStorageHoldingSpot;
 
+
+    [HideInInspector] public bool isConstruction = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -259,9 +262,11 @@ public class ConstructionManager : MonoBehaviour
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 PlaceItemFreeStyle();
                 HandleItemStack2(ItemToBeDestroy);
+                
 
 
-            }else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
+            }
+            else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "ConstractAI2")
             {
                 //TODO:èCê≥Ç∑ÇÈ
                 if(SoundManager.Instance != null)
@@ -271,6 +276,7 @@ public class ConstructionManager : MonoBehaviour
                 AIPlaceItemFreeStyle();
 
                 HandleItemStack2(ItemToBeDestroy);
+                isConstruction = true;
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "LongRangeMinion 1")
             {
@@ -282,6 +288,7 @@ public class ConstructionManager : MonoBehaviour
                 AIPlaceItemFreeStyle();
 
                 HandleItemStack2(ItemToBeDestroy);
+                isConstruction = true;
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "TankAI2")
             {
@@ -293,6 +300,7 @@ public class ConstructionManager : MonoBehaviour
                 AIPlaceItemFreeStyle();
 
                 HandleItemStack2(ItemToBeDestroy);
+                isConstruction = true;
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "StairsWoodemodel")
             {

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmTask3 : ITutorialTask
+public class HealTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 農業(3/3)";
+        return "基本操作 回復";
     }
 
     public string GetText()
     {
-        return "育て上げた作物を収穫しよう。";
+        return "マナで体力を回復しよう。インベントリのマナを右クリックすると回復できるよ";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class FarmTask3 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (InventorySystem.Instance.isMinonget)
+        if (InventorySystem.Instance.isHeal)
         {
             return true;
         }
