@@ -25,8 +25,6 @@ public class ResourceBar : MonoBehaviour
         currentHealth = globalState.GetComponent<GrobalState>().resourceHelth;
         maxHealth = globalState.GetComponent<GrobalState>().resourceMaxHelth;
 
-        Debug.Log("Current Health: " + currentHealth + ", Max Health: " + maxHealth);
-
         float fillValue = currentHealth / maxHealth;
 
         Slider.value = fillValue;

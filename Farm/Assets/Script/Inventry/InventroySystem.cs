@@ -129,6 +129,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (!CraftingSystem.Instance.canupdate) return;
 
+        bool itemAdded = false;
 
         foreach (GameObject slot in slotlist)
         {
@@ -147,11 +148,15 @@ public class InventorySystem : MonoBehaviour
                     {
                         if (inventrySlot.itemInSlot.thisName == itemNameInList)
                         {
-
-                            // 一致するアイテムが見つかった場合、数量を増やす
-                            inventrySlot.SetItemInSlot(); // アイテム情報を更新
-                            inventrySlot.itemInSlot.amountInventry++;
-                            break; // 一致するアイテムが見つかったら次のアイテム名へ
+                            if (!itemAdded)
+                            {
+                                // 一致するアイテムが見つかった場合、数量を増やす
+                                inventrySlot.SetItemInSlot(); // アイテム情報を更新
+                                inventrySlot.itemInSlot.amountInventry++;
+                                itemAdded = true;
+                                break; // 一致するアイテムが見つかったら次のアイテム名へ
+                            }
+                               
                         }
                     }
                 }
