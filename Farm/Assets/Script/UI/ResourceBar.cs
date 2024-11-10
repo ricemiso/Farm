@@ -13,6 +13,11 @@ public class ResourceBar : MonoBehaviour
     private void Awake()
     {
         Slider = GetComponent<Slider>();
+
+        if (globalState == null)
+        {
+            globalState = GameObject.Find("GrobalState");
+        }
     }
 
     private void Update()

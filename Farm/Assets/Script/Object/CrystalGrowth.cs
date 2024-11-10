@@ -63,18 +63,37 @@ public class CrystalGrowth : MonoBehaviour
 			}
 
 		}
-		
-		// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
-		if (PlayerState.Instance.currentHydrationPercent >= 30)
-		{
-			Debug.Log("GameClear");
 
-			UnityEngine.Cursor.lockState = CursorLockMode.None;
-			//Destroy(SoundManager.Instance.gameObject);
-			// クリアシーン
+        if (!GrobalState.Instance.isTutorialEnd)
+        {
+			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
+			if (PlayerState.Instance.currentHydrationPercent >= 10)
+			{
 
-			SceneManager.LoadScene("GameClear");
+
+				UnityEngine.Cursor.lockState = CursorLockMode.None;
+				//Destroy(SoundManager.Instance.gameObject);
+				// クリアシーン
+
+				SceneManager.LoadScene("MainScene");
+			}
+        }
+        else
+        {
+			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
+			if (PlayerState.Instance.currentHydrationPercent >= 100)
+			{
+
+
+				UnityEngine.Cursor.lockState = CursorLockMode.None;
+				//Destroy(SoundManager.Instance.gameObject);
+				// クリアシーン
+
+				SceneManager.LoadScene("GameClear");
+			}
 		}
+
+		
 
 	}
 

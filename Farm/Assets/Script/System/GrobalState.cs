@@ -30,5 +30,16 @@ public class GrobalState : MonoBehaviour
         {
             Instance = this;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
+
+
+    public void initiarize()
+    {
+        resourceHelth = 0;
+        resourceMaxHelth = 0;
+        resourceMana = 0;
+        level = 0;
+}
 }
