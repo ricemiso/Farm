@@ -467,14 +467,14 @@ public class InventorySystem : MonoBehaviour
                     // アイテムのスタック分だけリストに追加
                     for (int i = 0; i < item.amountInventry; i++)
                     {
-                        Debug.Log("Adding item: " + item.thisName + " to itemList");
+                        
                         itemList.Add(item.thisName);
                     }
                 }
             }
         }
 
-        Debug.Log("Total Item Count in ItemList: " + itemList.Count);
+       
     }
 
 

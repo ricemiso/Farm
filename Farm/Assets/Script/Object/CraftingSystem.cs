@@ -425,7 +425,6 @@ public class CraftingSystem : MonoBehaviour
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;
-        Debug.Log(inventryitemList.Count);
 
         foreach (string itemname in inventryitemList)
         {
