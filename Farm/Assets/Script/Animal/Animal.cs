@@ -20,6 +20,7 @@ public class Animal : MonoBehaviour
     public bool canBeChopped;
 
 
+
     [SerializeField] AudioSource soundChannel;
     [SerializeField] AudioClip rabbithitAndScreem;
     [SerializeField] AudioClip rabitHitAndDie;

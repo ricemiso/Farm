@@ -76,7 +76,7 @@ public class SelectionManager : MonoBehaviour
         {
             var selectionTransform = hit.transform;
 
-
+            Debug.Log("Hit Object: " + hit.collider.name);
             //TODO : ”j‰ó‚Í‚±‚±‚É’Ç‰Á‚µ‚Ä‚¢‚­
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();
@@ -302,37 +302,51 @@ public class SelectionManager : MonoBehaviour
                 chopText.text = animal.GetAnimalName();
                 chopHolder.gameObject.SetActive(true);
 
-                //if (EquipSystem.Instance.IsPlayerHooldingMana() )
-                //{
-                //    if (Input.GetMouseButtonDown(0) && !leveling)
-                //    {
-                //        leveling = true;
-                //        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
-                //        animal.LevelUp(stackCount);
-
-                //        StartCoroutine(DelayWatering());
-                //    }
-                //}
-
-                if (animal.isDead && animal.CompareTag("Enemy"))
+                if (animal.CompareTag("Enemy"))
                 {
-                    
-                    interaction_text.text = "’D‚¤";
-                    interaction_Info_UI.SetActive(true);
-                    chopText.text = "";
-                    chopHolder.gameObject.SetActive(false);
-                    centerDotimage.gameObject.SetActive(false);
-                    handIcon.gameObject.SetActive(true);
-
-                    HandIsVisible = true;
-
-                    isloot = true;
-
-
-                    if (Input.GetMouseButtonDown(0)&& !islootDelay)
+                    if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
                     {
-                        StartCoroutine(DelayedLoot(animal));
+
+                        //‚È‚º‚©‚¤‚Ü‚­‚¢‚©‚È‚¢
+                        //Debug.Log("Calling IsThereSwingLock()");
+                        //if (EquipSystem.Instance.IsThereSwingLock() == false)
+                        //{
+
+                        //    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                        //}
+                        if (isdamageDelay)
+                        {
+
+                            return;
+                        }
+                        else
+                        {
+                            StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+                            StartCoroutine(DelayedAttribute());
+                        }
+
                     }
+
+                    if (animal.isDead)
+                    {
+                        interaction_text.text = "’D‚¤";
+                        interaction_Info_UI.SetActive(true);
+                        chopText.text = "";
+                        chopHolder.gameObject.SetActive(false);
+                        centerDotimage.gameObject.SetActive(false);
+                        handIcon.gameObject.SetActive(true);
+
+                        HandIsVisible = true;
+
+                        isloot = true;
+
+
+                        if (Input.GetMouseButtonDown(0) && !islootDelay)
+                        {
+                            StartCoroutine(DelayedLoot(animal));
+                        }
+                    }
+                   
 
                 }else if (EquipSystem.Instance.IsPlayerHooldingMana())
                 {
@@ -355,28 +369,7 @@ public class SelectionManager : MonoBehaviour
 
                     HandIsVisible = false;
 
-                    if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
-                    {
-
-                        //‚È‚º‚©‚¤‚Ü‚­‚¢‚©‚È‚¢
-                        //Debug.Log("Calling IsThereSwingLock()");
-                        //if (EquipSystem.Instance.IsThereSwingLock() == false)
-                        //{
-
-                        //    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
-                        //}
-                        if (isdamageDelay)
-                        {
-
-                            return;
-                        }
-                        else
-                        {
-                            StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
-                            StartCoroutine(DelayedAttribute());
-                        }
-                       
-                    }
+                    
                 }
 
             }
