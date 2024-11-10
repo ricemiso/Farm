@@ -302,17 +302,17 @@ public class SelectionManager : MonoBehaviour
                 chopText.text = animal.GetAnimalName();
                 chopHolder.gameObject.SetActive(true);
 
-                if (EquipSystem.Instance.IsPlayerHooldingMana() )
-                {
-                    if (Input.GetMouseButtonDown(0) && !leveling)
-                    {
-                        leveling = true;
-                        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
-                        animal.LevelUp(stackCount);
+                //if (EquipSystem.Instance.IsPlayerHooldingMana() )
+                //{
+                //    if (Input.GetMouseButtonDown(0) && !leveling)
+                //    {
+                //        leveling = true;
+                //        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                //        animal.LevelUp(stackCount);
 
-                        StartCoroutine(DelayWatering());
-                    }
-                }
+                //        StartCoroutine(DelayWatering());
+                //    }
+                //}
 
                 if (animal.isDead && animal.CompareTag("Enemy"))
                 {
@@ -334,6 +334,16 @@ public class SelectionManager : MonoBehaviour
                         StartCoroutine(DelayedLoot(animal));
                     }
 
+                }else if (EquipSystem.Instance.IsPlayerHooldingMana())
+                {
+                    if (Input.GetMouseButtonDown(0) && !leveling)
+                    {
+                        leveling = true;
+                        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                        animal.LevelUp(stackCount);
+
+                        StartCoroutine(DelayWatering());
+                    }
                 }
                 else
                 {
@@ -421,8 +431,14 @@ public class SelectionManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
-
-        ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
+        if (Chargeing)
+        {
+            Destroy(EquipSystem.Instance.selectedItem);
+        }
+        else
+        {
+            ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
+        }
 
         Destroy(EquipSystem.Instance.selecteditemModel);
 
