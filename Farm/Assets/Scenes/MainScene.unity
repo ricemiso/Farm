@@ -365,7 +365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Place Item
+  m_Text: "\u914D\u7F6E\n"
 --- !u!222 &11689748
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29960,9 +29960,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cancel
-
-'
+  m_Text: "\u30AD\u30E3\u30F3\u30BB\u30EB\n"
 --- !u!222 &1691258399
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33680,9 +33678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Construction Mode
-
-'
+  m_Text: "\u30DF\u30CB\u30AA\u30F3\u914D\u7F6E\u30E2\u30FC\u30C9\n"
 --- !u!222 &1931012082
 CanvasRenderer:
   m_ObjectHideFlags: 0
