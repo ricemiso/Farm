@@ -11,7 +11,7 @@ public class ChargeTask : ITutorialTask
 
     public string GetText()
     {
-        return "マナをクリスタルにチャージして成長させよう。100%になるとゲームクリア!";
+        return "マナをクリスタルにチャージして成長させよう。100%になるとゲームクリア!(チュートリアルは30%)";
     }
 
     public void OnTaskSetting()
@@ -22,8 +22,6 @@ public class ChargeTask : ITutorialTask
     {
         if (SelectionManager.Instance.Chargeing)
         {
-            //TODO:チュートリアル終了変数
-            GrobalState.Instance.isTutorialEnd = true;
             return true;
         }
 
