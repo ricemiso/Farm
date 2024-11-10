@@ -124,7 +124,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (item.amountInventry > 1)
         {
-
+            //TODO:スタックを一つだけ分割しているが変更する？
             item.amountInventry--;  // 元のスタックの数を減らす
             InventorySystem.Instance.AddToinventry(item.thisName, false);  // 新しいスタックを追加
             InventorySystem.Instance.ReCalculeList();  // スタック変更後にリストを再計算

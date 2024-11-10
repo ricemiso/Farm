@@ -214,7 +214,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
                 {
                     InventrySlot inventrySlot = quickSlot.GetComponent<InventrySlot>();
-                    if (inventrySlot != null && inventrySlot.quickSlot)
+                    if (inventrySlot != null)
                     {
                         gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
                         if (inventrySlot.itemInSlot != null && inventrySlot.itemInSlot.thisName == gameObject.name)
@@ -222,6 +222,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                             if (inventrySlot.itemInSlot.amountInventry > 1)
                             {
                                 inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
+
                                 InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
                                 gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
                             }
