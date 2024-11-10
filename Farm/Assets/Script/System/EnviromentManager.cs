@@ -24,7 +24,6 @@ public class EnviromentManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -32,23 +31,23 @@ public class EnviromentManager : MonoBehaviour
         }
 
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // 特定のシーン名（例えば "Start"）の場合に SoundManager を破棄
-        if (scene.name == "GameOver" || scene.name == "GameClear")
-        {
-            Destroy(gameObject);
-            SceneManager.sceneLoaded -= OnSceneLoaded; // イベントを解除
-        }
-    }
+    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    // 特定のシーン名（例えば "Start"）の場合に SoundManager を破棄
+    //    if (scene.name == "GameOver" || scene.name == "GameClear")
+    //    {
+    //        Destroy(gameObject);
+    //        SceneManager.sceneLoaded -= OnSceneLoaded; // イベントを解除
+    //    }
+    //}
 
-    private void OnDestroy()
-    {
-        // オブジェクトが破棄されるときにイベントを解除
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    //private void OnDestroy()
+    //{
+    //    // オブジェクトが破棄されるときにイベントを解除
+    //    SceneManager.sceneLoaded -= OnSceneLoaded;
+    //}
 }
 

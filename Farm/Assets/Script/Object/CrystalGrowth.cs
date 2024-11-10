@@ -79,6 +79,8 @@ public class CrystalGrowth : MonoBehaviour
 				//Destroy(SoundManager.Instance.gameObject);
 				// クリアシーン
 
+				Destroy(gameObject.transform.parent.parent.gameObject);
+				Debug.Log(gameObject.transform.parent.parent.gameObject.name);
 				SceneManager.LoadScene("GameClear");
 			}
         }
@@ -94,6 +96,7 @@ public class CrystalGrowth : MonoBehaviour
 				// クリアシーン
 				//TODO:チュートリアル終了変数
 				GrobalState.Instance.isTutorialEnd = true;
+				Destroy(gameObject.transform.parent.parent.gameObject);
 				SceneManager.LoadScene("MainScene");
             }
         }
