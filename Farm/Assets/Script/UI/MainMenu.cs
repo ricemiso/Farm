@@ -11,8 +11,18 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("MainScene");
+        if (GrobalState.Instance.isTutorialEnd)
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("TutorialScene");
+        }
+       
     }
+
+
 
     public void ExitGame()
     {

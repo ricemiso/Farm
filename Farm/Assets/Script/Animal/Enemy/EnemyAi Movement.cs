@@ -26,7 +26,7 @@ public class EnemyAI_Movement : AI_Movement
     {
 		currentAttackCooltime = 0.0f;
         base.Start();
-    }
+	}
 
     // Update is called once per frame
     protected override void Update()
@@ -50,17 +50,19 @@ public class EnemyAI_Movement : AI_Movement
 			// 目標がいない時にクリスタルなどの攻撃対象に向かう
 			if(state != MoveState.CHASE)
 			{
-				if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
-				{
-					// ミニクリスタルが生きているなら
-					FoundTarget(CrystalMini);
+				if(CrystalMini != null && Crystal != null)
+                {
+					if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
+					{
+						// ミニクリスタルが生きているなら
+						FoundTarget(CrystalMini);
+					}
+					else
+					{
+						// ミニクリスタルが死んでいたら
+						FoundTarget(Crystal);
+					}
 				}
-				else
-				{
-					// ミニクリスタルが死んでいたら
-					FoundTarget(Crystal);
-				}
-				
 			}
 		}
 

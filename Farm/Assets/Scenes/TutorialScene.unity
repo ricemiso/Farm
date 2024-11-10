@@ -4798,7 +4798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &183218884
 Transform:
   m_ObjectHideFlags: 0
@@ -10562,7 +10562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2478386106024769802, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -3.3
       objectReference: {fileID: 0}
     - target: {fileID: 2478386106024769802, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22134,7 +22134,7 @@ MonoBehaviour:
   terrain: {fileID: 302434190}
   numberOfTrees: 1000
   numberOfStones: 1000
-  numberOfEnemy: 500
+  numberOfEnemy: 200
   treeParent: {fileID: 1747301791}
   StoneParent: {fileID: 1860667722}
   EnemyParent: {fileID: 1671064501}
@@ -23956,7 +23956,7 @@ Transform:
   m_GameObject: {fileID: 1314727152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9, z: 1.71}
+  m_LocalPosition: {x: 0, y: 12, z: 1.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23975,7 +23975,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 10
-  m_Range: 11.45
+  m_Range: 11.69
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -26968,7 +26968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1534377271
 Transform:
   m_ObjectHideFlags: 0

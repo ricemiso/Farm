@@ -269,6 +269,8 @@ public class EquipSystem : MonoBehaviour
 
             case "Mana":
                 return "Mana_Handmodel";
+            case "ƒ}ƒi":
+                return "Mana_Handmodel";
 
             default:
                 return null;

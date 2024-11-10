@@ -6,14 +6,17 @@ public class ObjectSpawner : MonoBehaviour
     public Terrain terrain; // Terrainオブジェクト
     public int numberOfTrees = 1000; // 生成するTreeの数
     public int numberOfStones = 1000; // 生成するStone_modelの数
+    [SerializeField] int numberOfEnemy = 500;
 
     private bool hasSpawned = false; // 一度だけ生成するためのフラグ
     private GameObject itemToAdd;
     public GameObject treeParent;
     public GameObject StoneParent;
+    public GameObject EnemyParent;
 
     private GameObject spawnedTreesParent;  // 生成されたTreeの親オブジェクト
     private GameObject spawnedStonesParent; // 生成されたStone_modelの親オブジェクト
+    private GameObject spawnedEnemiesParent;
 
     void Start()
     {
@@ -25,13 +28,13 @@ public class ObjectSpawner : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // シーンがMainSceneで、まだ生成されていない場合のみ生成
-        if (scene.name == "MainScene" && !hasSpawned)
+        if ((scene.name == "MainScene" || scene.name== "TutorialScene") && !hasSpawned)
         {
             SpawnObjectsOnTerrain();
             hasSpawned = true; // フラグを立てて以降の生成を防止
         }
         // シーンがMainSceneでない場合、オブジェクトを削除
-        else if (scene.name != "MainScene")
+        else if (scene.name != "MainScene" || scene.name == "TutorialScene")
         {
             DestroyObjects();
         }
@@ -96,6 +99,36 @@ public class ObjectSpawner : MonoBehaviour
                 newStone.transform.SetParent(spawnedStonesParent.transform);  // 生成した石の親を設定
             }
         }
+
+
+        if (!GrobalState.Instance.isTutorialEnd)
+        {
+            // Stone_modelのリソースをロード
+            SetName("Enemy v2 2");
+            if (itemToAdd == null)
+            {
+                Debug.LogError("Rockのリソースが見つかりません！");
+                return;
+            }
+
+            // Stone_modelの親オブジェクトを作成
+            spawnedEnemiesParent = new GameObject("spawnedEnemies");
+
+            // Stone_modelを生成
+            for (int i = 0; i < numberOfEnemy; i++)
+            {
+                Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
+                if (CheckLayerForObjectSpawn(spawnPosition))
+                {
+                    float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
+                    GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+                    newStone.name = "Enemy_" + (i + 1);  // 名前に連番を追加
+                    newStone.transform.SetParent(spawnedEnemiesParent.transform);  // 生成した石の親を設定
+                }
+            }
+        }
+
+       
     }
 
     // Terrainの範囲内でランダムなX,Z座標を取得するメソッド
