@@ -17,12 +17,10 @@ public class InventrySlot : MonoBehaviour
 
         if (item != null)
         {
-            Debug.Log("Item found and set in slot: " + item.thisName);
             itemInSlot = item;
         }
         else
         {
-            Debug.Log("No item in this slot.");
             itemInSlot = null;
         }
 
@@ -53,8 +51,6 @@ public class InventrySlot : MonoBehaviour
                 return child.GetComponent<InventoryItem>();
             }
         }
-
-        Debug.Log("No item found in this slot.");
         return null;
     }
 
