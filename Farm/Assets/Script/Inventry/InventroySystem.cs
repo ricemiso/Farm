@@ -118,20 +118,30 @@ public class InventorySystem : MonoBehaviour
             isOpen = false;
         }
 
-        if (isUpdateRequired)
+        foreach (GameObject slot in slotlist)
         {
-            UpdateInventoryItems();
-            isUpdateRequired = false;
+            InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+            if (inventrySlot != null)
+            {
+                // スロットからアイテムを取得
+                inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                // スロット内にアイテムがある場合
+                if (inventrySlot.itemInSlot != null)
+                {
+                    inventrySlot.SetItemInSlot();
+                }
+            }
         }
     }
 
-    public void UpdateInventoryItems()
+    public void UpdateInventoryItems(string itemName)
     {
         if (!CraftingSystem.Instance.canupdate) return;
 
 
         bool itemAdded = false; // アイテムが追加されたかどうかを記録するフラグ
-        string lastAddedItemName = itemList.Count > 0 ? itemList[itemList.Count - 1] : null;
+       // string lastAddedItemName = itemList.Count > 0 ? itemList[itemList.Count - 1] : null;
 
 
         foreach (GameObject slot in slotlist)
@@ -148,8 +158,9 @@ public class InventorySystem : MonoBehaviour
                     // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
                     foreach (string itemNameInList in itemList)
                     {
-                        if (inventrySlot.itemInSlot.thisName == itemNameInList && !itemAdded && inventrySlot.itemInSlot.thisName == lastAddedItemName)
+                        if (inventrySlot.itemInSlot.thisName == itemNameInList && !itemAdded && inventrySlot.itemInSlot.thisName == itemName)
                         {
+
                             // 一致するアイテムが見つかった場合、数量を増やす
                             inventrySlot.SetItemInSlot(); // アイテム情報を更新
                             inventrySlot.itemInSlot.amountInventry++;
@@ -179,7 +190,8 @@ public class InventorySystem : MonoBehaviour
         if (stack != null && shoodStack)
         {
             isUpdateRequired = true;
-
+            itemName = GetItemName(itemName);
+            UpdateInventoryItems(itemName);
             //stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
             //stack.GetComponent<InventrySlot>().SetItemInSlot();
         }
@@ -203,11 +215,8 @@ public class InventorySystem : MonoBehaviour
                 PopupManager.Instance.TriggerPickupPop(itemName, itemToAdd.GetComponent<Image>().sprite);
             }
 
-
-            Debug.Log("Adding item: " + itemName + " to itemList");
-
             itemList.Add(itemName);
-            Debug.Log("ItemList count after addition: " + itemList.Count);
+           
         }
 
         if (!SoundManager.Instance.craftingSound.isPlaying)
