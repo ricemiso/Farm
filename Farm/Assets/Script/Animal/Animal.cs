@@ -90,11 +90,32 @@ public class Animal : MonoBehaviour
             GrobalState.Instance.resourceHelth = currentHealth;
             GrobalState.Instance.resourceMaxHelth = maxHealth;
         }
-        
-        
+
+
     }
 
 
+    public void Force()
+    {
+
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            Vector3 forceDirection = -transform.forward + transform.up * 0.08f;
+            float forceStrength = 4000f;
+
+            // 力を加える
+            rb.AddForce(forceDirection * forceStrength);
+        }
+        else
+        {
+            Debug.LogWarning("Rigidbody コンポーネントが見つかりません");
+        }
+    }
 
     public void TakeDamage(float damage)
     {
@@ -102,7 +123,7 @@ public class Animal : MonoBehaviour
         if (isDead == false)
         {
             currentHealth -= damage;
-            
+            Force();
 
             bloodparticle.Play();
 
@@ -120,8 +141,8 @@ public class Animal : MonoBehaviour
                 }
                 else
                 {
-					GetComponent<Rabbit>().enabled = false;
-					animator.SetTrigger("Die");
+                    GetComponent<Rabbit>().enabled = false;
+                    animator.SetTrigger("Die");
                 }
 
                 StartCoroutine(puddleDelay());
@@ -140,11 +161,11 @@ public class Animal : MonoBehaviour
     IEnumerator puddleDelay()
     {
         yield return new WaitForSeconds(1);
-        if(bloodPaddle != null)
+        if (bloodPaddle != null)
         {
             bloodPaddle.SetActive(true);
         }
-        
+
     }
 
     private void PlayDyingSound()
@@ -210,7 +231,7 @@ public class Animal : MonoBehaviour
         CraftingSystem.Instance.islevelUp = false;
 
         ParticleSystem partiSystem = levelupparticle;
-		partiSystem.Play();
+        partiSystem.Play();
 
         Vector3 currentScale = gameObject.transform.localScale;
 
