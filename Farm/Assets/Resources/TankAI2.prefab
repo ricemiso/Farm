@@ -4932,8 +4932,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.47, y: 1.61, z: 0.74}
-  m_Center: {x: -0.01, y: 0.72, z: -0.31}
+  m_Size: {x: 0.47, y: 5, z: 0.74}
+  m_Center: {x: -0.01, y: 2.06, z: -0.31}
 --- !u!114 &2473072749452675079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4956,6 +4956,8 @@ MonoBehaviour:
   damageIncrease: 5
   level: 0
   canBeChopped: 0
+  unionForceStrength: 0
+  enemyForceStrength: 0
   soundChannel: {fileID: 2127612127266028338}
   rabbithitAndScreem: {fileID: 8300000, guid: a518b76513a06e54895367b10fa4d067, type: 3}
   rabitHitAndDie: {fileID: 8300000, guid: 88c28dd83f9855a429e14c6185a524f1, type: 3}
@@ -4983,8 +4985,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 1, z: 8}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 8, y: 3.91, z: 8}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!82 &2127612127266028338
 AudioSource:
   m_ObjectHideFlags: 0
