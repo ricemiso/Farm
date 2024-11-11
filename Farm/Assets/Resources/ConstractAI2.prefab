@@ -5112,7 +5112,7 @@ GameObject:
   - component: {fileID: 2473072749452675079}
   - component: {fileID: 8559359141524731401}
   - component: {fileID: 2127612127266028338}
-  - component: {fileID: 3138725651412293809}
+  - component: {fileID: 7326902238231949987}
   - component: {fileID: 2685701426436218251}
   - component: {fileID: 2007988655042678609}
   m_Layer: 0
@@ -5337,7 +5337,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3138725651412293809
+--- !u!114 &7326902238231949987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5346,7 +5346,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1522425592210347359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 795d129e2fb9e52498baa1634b6722c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e3710b0684a42643b331125dfa5f58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
@@ -5355,7 +5355,7 @@ MonoBehaviour:
   walkCounter: 0
   waitCounter: 0
   state: 0
-  player: {fileID: 943929711212507721, guid: 4d6b0a59bf9f3c242813a73d9c1f9f9d, type: 3}
+  player: {fileID: 0}
   followSpeed: 15
   rotateSpeed: 10
   target: {fileID: 0}
@@ -5363,7 +5363,7 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   onGround: 0
-  attackRange: 0.9
+  attackRange: 1
   isPushEKey: 0
   currentAttackCooltime: 0
 --- !u!114 &2685701426436218251

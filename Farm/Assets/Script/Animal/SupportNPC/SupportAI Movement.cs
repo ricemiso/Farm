@@ -56,10 +56,10 @@ public class SupportAI_Movement : AI_Movement
 				FollowPlayer();
 				break;
 			case MoveState.WALKING:
-				Walk();
+				//Walk();
 				break;
 			case MoveState.WAITING:
-				Wait();
+				//Wait();
 				break;
 			case MoveState.STOP:
 			default:
