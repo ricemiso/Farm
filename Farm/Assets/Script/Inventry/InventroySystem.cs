@@ -129,7 +129,7 @@ public class InventorySystem : MonoBehaviour
     {
         if (!CraftingSystem.Instance.canupdate) return;
 
-        bool itemAdded = false;
+
 
         foreach (GameObject slot in slotlist)
         {
@@ -148,15 +148,14 @@ public class InventorySystem : MonoBehaviour
                     {
                         if (inventrySlot.itemInSlot.thisName == itemNameInList)
                         {
-                            if (!itemAdded)
-                            {
-                                // 一致するアイテムが見つかった場合、数量を増やす
-                                inventrySlot.SetItemInSlot(); // アイテム情報を更新
-                                inventrySlot.itemInSlot.amountInventry++;
-                                itemAdded = true;
-                                break; // 一致するアイテムが見つかったら次のアイテム名へ
-                            }
-                               
+
+                            // 一致するアイテムが見つかった場合、数量を増やす
+                            inventrySlot.SetItemInSlot(); // アイテム情報を更新
+                            inventrySlot.itemInSlot.amountInventry++;
+                            itemAdded = true;
+                            return;
+
+
                         }
                     }
                 }
@@ -183,7 +182,7 @@ public class InventorySystem : MonoBehaviour
             itemName = GetReturnItemName(itemName);
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
-            if(itemName == "ミニオン3" || itemName == "ミニオン2" || itemName == "ミニオン")
+            if (itemName == "ミニオン3" || itemName == "ミニオン2" || itemName == "ミニオン")
             {
                 isMinonget = true;
             }
@@ -197,7 +196,7 @@ public class InventorySystem : MonoBehaviour
 
 
             Debug.Log("Adding item: " + itemName + " to itemList");
-            
+
             itemList.Add(itemName);
             Debug.Log("ItemList count after addition: " + itemList.Count);
         }
@@ -472,14 +471,14 @@ public class InventorySystem : MonoBehaviour
                     // アイテムのスタック分だけリストに追加
                     for (int i = 0; i < item.amountInventry; i++)
                     {
-                        
+
                         itemList.Add(item.thisName);
                     }
                 }
             }
         }
 
-       
+
     }
 
 
