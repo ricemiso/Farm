@@ -5211,6 +5211,7 @@ MonoBehaviour:
   healthIncrease: 20
   damageIncrease: 5
   level: 0
+  canBeChopped: 0
   soundChannel: {fileID: 2127612127266028338}
   rabbithitAndScreem: {fileID: 8300000, guid: a518b76513a06e54895367b10fa4d067, type: 3}
   rabitHitAndDie: {fileID: 8300000, guid: 88c28dd83f9855a429e14c6185a524f1, type: 3}
@@ -5238,7 +5239,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 1, z: 8}
+  m_Size: {x: 8, y: 10, z: 8}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &2127612127266028338
 AudioSource:
