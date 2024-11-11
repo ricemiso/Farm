@@ -20,8 +20,9 @@ public class Animal : MonoBehaviour
     public bool canBeChopped;
 
 
-
-    [SerializeField] AudioSource soundChannel;
+    [SerializeField] float unionForceStrength;
+	[SerializeField] float enemyForceStrength;
+	[SerializeField] AudioSource soundChannel;
     [SerializeField] AudioClip rabbithitAndScreem;
     [SerializeField] AudioClip rabitHitAndDie;
 
@@ -49,6 +50,8 @@ public class Animal : MonoBehaviour
 
     private void Start()
     {
+        unionForceStrength = 1500;
+        enemyForceStrength = 4000;
 
         if (CraftingSystem.Instance.islevelUp)
         {
@@ -97,6 +100,7 @@ public class Animal : MonoBehaviour
 
     public void Force()
     {
+        float force;
 
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
 
@@ -106,10 +110,17 @@ public class Animal : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
 
             Vector3 forceDirection = -transform.forward + transform.up * 0.08f;
-            float forceStrength = 4000f;
+            if (thisAnimalType == AnimalType.Union)
+            {
+				 force = unionForceStrength;
+            }
+            else
+            {
+				force = enemyForceStrength;
+			}
 
             // —Í‚ð‰Á‚¦‚é
-            rb.AddForce(forceDirection * forceStrength);
+            rb.AddForce(forceDirection * force);
         }
         else
         {
