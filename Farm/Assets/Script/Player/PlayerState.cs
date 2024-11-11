@@ -73,16 +73,6 @@ public class PlayerState : MonoBehaviour
 			currentCalories -= 1;
 		}
 
-		if (Input.GetKeyDown(KeyCode.N))
-		{
-			currentHealth -= 10;
-		}
-
-
-		if (currentHydrationPercent >= 100)
-		{
-			Debug.Log("GameClear");
-		}
 
 	}
 
@@ -98,7 +88,6 @@ public class PlayerState : MonoBehaviour
 		else if (currentHealth < 0)
 		{
 			currentHealth = 0;
-			Debug.Log("GameOver");
 		}
 	}
 
