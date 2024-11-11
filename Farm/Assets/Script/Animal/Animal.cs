@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
     public float maxHealth;
 
     public bool isCraftedMinion = false;
-    public int damage = 10;
+    public int damage;
 
     public int healthIncrease = 20;
     public int damageIncrease = 5;
@@ -64,8 +64,11 @@ public class Animal : MonoBehaviour
         {
             // ‰Šúó‘Ô‚ğİ’è
             currentHealth = maxHealth;
-            damage = 10;
             level = 0;
+            if(damage == 0)
+            {
+                damage = 10;
+            }
 
         }
 
