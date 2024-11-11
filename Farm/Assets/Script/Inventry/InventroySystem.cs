@@ -130,6 +130,9 @@ public class InventorySystem : MonoBehaviour
         if (!CraftingSystem.Instance.canupdate) return;
 
 
+        bool itemAdded = false; // アイテムが追加されたかどうかを記録するフラグ
+        string lastAddedItemName = itemList.Count > 0 ? itemList[itemList.Count - 1] : null;
+
 
         foreach (GameObject slot in slotlist)
         {
@@ -142,21 +145,26 @@ public class InventorySystem : MonoBehaviour
                 // スロット内にアイテムがある場合
                 if (inventrySlot.itemInSlot != null)
                 {
-
                     // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
                     foreach (string itemNameInList in itemList)
                     {
-                        if (inventrySlot.itemInSlot.thisName == itemNameInList)
+                        if (inventrySlot.itemInSlot.thisName == itemNameInList && !itemAdded && inventrySlot.itemInSlot.thisName == lastAddedItemName)
                         {
-
                             // 一致するアイテムが見つかった場合、数量を増やす
                             inventrySlot.SetItemInSlot(); // アイテム情報を更新
                             inventrySlot.itemInSlot.amountInventry++;
-                            itemAdded = true;
-                            return;
 
+                            // アイテムが追加されたことを記録し、処理を終了
+                            itemAdded = true;
+                            break; // 次のアイテム名に進む
 
                         }
+                    }
+
+                    // アイテムが追加された場合はループを終了
+                    if (itemAdded)
+                    {
+                        return;
                     }
                 }
             }
@@ -171,6 +179,7 @@ public class InventorySystem : MonoBehaviour
         if (stack != null && shoodStack)
         {
             isUpdateRequired = true;
+
             //stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
             //stack.GetComponent<InventrySlot>().SetItemInSlot();
         }
