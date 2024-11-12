@@ -23,6 +23,8 @@ public class WaveSystem : MonoBehaviour
 
 	// 1Waveあたりの体力の上昇値
 	public float m_HealthMultiply = 0.0f;
+	// 1Waveあたりの攻撃力の上昇値
+	public float m_DamageMultiply = 0.0f;
 	// 1Waveあたりのサイズの上昇値
 	public float m_SizeMultiply = 0.0f;
 
@@ -53,10 +55,11 @@ public class WaveSystem : MonoBehaviour
 		// 日付が変更されていたら召喚（判定方法は要検討）
 		if (day > m_WaveCount && time >= 0.50f)
 		{
-			m_WaveCount = day;
+			m_WaveCount = day - 2;
 
 			// 敵のステータスを決定
 			float health = 1.0f + m_HealthMultiply * m_WaveCount;
+			float damage = 1.0f + m_DamageMultiply * m_WaveCount;
 			float size = 1.0f + m_SizeMultiply * m_WaveCount;
 			uint enemyNum = (uint)m_WaveCount;
 
@@ -85,7 +88,7 @@ public class WaveSystem : MonoBehaviour
 				// 召喚
 				for (int i = 0; i < active.Count; ++i)
 				{
-					active[i].Object.GetComponent<Spawner>().SummonEnemy(num[i], health, size);
+					active[i].Object.GetComponent<Spawner>().SummonEnemy(num[i], health, damage, size);
 				}
 			}
 

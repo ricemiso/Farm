@@ -48,7 +48,7 @@ public class Spawner : MonoBehaviour
     // num = “G‚Ì”
     // health = æZ‚·‚é‘Ì—Í
     // size = ‘å‚«‚³
-    public void SummonEnemy(uint num, float health = 1.0f, float size = 1.0f)
+    public void SummonEnemy(uint num, float health = 1.0f, float damageRate = 1.0f, float size = 1.0f)
     {
         for (uint cnt = 0; cnt < num; cnt++)
         {
@@ -62,7 +62,8 @@ public class Spawner : MonoBehaviour
                 gap + this.transform.position, Quaternion.identity);
 			obj.transform.SetParent(EnemyParent.transform); // “GƒŠƒXƒg‚É“o˜^
 			obj.GetComponent<Animal>().maxHealth = (int)(obj.GetComponent<Animal>().maxHealth * health);
-            obj.transform.localScale *= size;
+			obj.GetComponent<Animal>().damage = (int)(obj.GetComponent<Animal>().damage * damageRate);
+			obj.transform.localScale *= size;
 
             EnemyAI_Movement ai = obj.GetComponent<EnemyAI_Movement>();
             ai.Crystal = Crystal;

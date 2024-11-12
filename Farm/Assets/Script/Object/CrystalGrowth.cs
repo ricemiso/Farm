@@ -21,6 +21,8 @@ public class CrystalGrowth : MonoBehaviour
 
 	public float caloriesSpendCarge;
 
+	public Canvas loadScreen;
+
 	[SerializeField] float dis = 10f;
 
 	// Start is called before the first frame update
@@ -89,22 +91,51 @@ public class CrystalGrowth : MonoBehaviour
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア(仮で10)
 			if (PlayerState.Instance.currentHydrationPercent >= 10)
 			{
-
-
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				//Destroy(SoundManager.Instance.gameObject);
 				// クリアシーン
 				//TODO:チュートリアル終了変数
 				GrobalState.Instance.isTutorialEnd = true;
 				Destroy(gameObject.transform.parent.parent.gameObject);
-				SceneManager.LoadScene("MainScene");
-            }
+				//SceneManager.LoadScene("MainScene");
+				StartLoadedGame("MainScene");
+
+			}
         }
-			
-		
+	}
 
-		
+	public void ActivateLoadingScene()
+	{
+		if (loadScreen != null)
+		{
+			loadScreen.gameObject.SetActive(true);
+		}
 
+		//Todo::ロードアニメーション、Tipsなどはここで
+	}
+	public void DisableLoadingScene()
+	{
+		if (loadScreen != null)
+		{
+			loadScreen.gameObject.SetActive(false);
+		}
+	}
+
+	public void StartLoadedGame(string sceneName)
+	{
+		ActivateLoadingScene();
+
+		SceneManager.LoadScene(sceneName);
+
+		StartCoroutine(DelayerLoading());
+
+
+	}
+
+	IEnumerator DelayerLoading()
+	{
+		yield return new WaitForSeconds(1);
+		DisableLoadingScene();
 	}
 
 	//
