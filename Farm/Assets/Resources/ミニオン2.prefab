@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf6478ef684ce7f4c830edba147c7607, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8da1aabe02294bd429319e1232a51024, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c91a41bb84565b4fab9b71cf203c4c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStack: 0
 --- !u!225 &8207571098024218765
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -126,3 +127,4 @@ MonoBehaviour:
   isInsideQuiqSlot: 0
   isSelected: 0
   isUseable: 1
+  amountInventry: 1
