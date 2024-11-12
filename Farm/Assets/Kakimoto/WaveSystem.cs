@@ -55,11 +55,11 @@ public class WaveSystem : MonoBehaviour
 		// 日付が変更されていたら召喚（判定方法は要検討）
 		if (day > m_WaveCount && time >= 0.50f)
 		{
-			m_WaveCount = day - 2;
+			m_WaveCount = day;
 
 			// 敵のステータスを決定
 			float health = 1.0f + m_HealthMultiply * m_WaveCount;
-			float damage = 1.0f + m_DamageMultiply * m_WaveCount;
+			float damage = 1.0f + m_DamageMultiply * (m_WaveCount - 1);
 			float size = 1.0f + m_SizeMultiply * m_WaveCount;
 			uint enemyNum = (uint)m_WaveCount;
 

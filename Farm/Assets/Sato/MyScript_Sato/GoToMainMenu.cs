@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +26,7 @@ public class GoToMainMenu : MonoBehaviour
 
 	private void ShowCursor()
 	{
-		Cursor.visible = true;
-		Cursor.lockState = CursorLockMode.None; // カーソルをロック解除
+		UnityEngine.Cursor.visible = true;
+		UnityEngine.Cursor.lockState = CursorLockMode.None; // カーソルをロック解除
 	}
 }

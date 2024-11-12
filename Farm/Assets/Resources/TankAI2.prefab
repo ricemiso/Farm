@@ -4946,7 +4946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08907ec1681d664990b32b240075074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalName: "\u30DF\u30CB\u30AA\u30F3()"
+  animalName: "\u30DF\u30CB\u30AA\u30F3(\u30BF\u30F3\u30AF)"
   playerISRange: 0
   currentHealth: 0
   maxHealth: 500
