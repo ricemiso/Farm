@@ -50,8 +50,8 @@ public class Animal : MonoBehaviour
 
     private void Start()
     {
-        unionForceStrength = 1500;
-        enemyForceStrength = 4000;
+        unionForceStrength = 200;
+        enemyForceStrength = 300;
 
         if (CraftingSystem.Instance.islevelUp)
         {
@@ -109,7 +109,7 @@ public class Animal : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-            Vector3 forceDirection = -transform.forward + transform.up * 0.08f;
+            Vector3 forceDirection = -transform.forward + transform.up * 0.001f;
             if (thisAnimalType == AnimalType.Union)
             {
 				 force = unionForceStrength;
@@ -120,7 +120,7 @@ public class Animal : MonoBehaviour
 			}
 
             // —Í‚ð‰Á‚¦‚é
-            rb.AddForce(forceDirection * force);
+            rb.AddForce(forceDirection * force, ForceMode.Impulse);
         }
         else
         {

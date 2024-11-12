@@ -4962,7 +4962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3744896374358596687, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       propertyPath: maxHealth
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: -3744896374358596687, guid: 9b201aef6487f5f4596a30ec6d6aef86, type: 3}
       propertyPath: animalName

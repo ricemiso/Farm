@@ -225,7 +225,12 @@ public class AI_Movement : MonoBehaviour
 		switch (target.tag)
 		{
 			case "Player":
+				if(num >= 30)
+				{
+					num = 30;
+				}
 				PlayerState.Instance.AddHealth(-num);
+				SoundManager.Instance.PlaySound(SoundManager.Instance.DamageSound);
 				break;
 			case "Enemy":
 				target.GetComponent<Animal>().TakeDamage(num);

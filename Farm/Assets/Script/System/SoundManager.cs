@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource rabbitCrySound;
     public AudioSource FarmWalkSound;
     public AudioSource EatSound;
+    public AudioSource DamageSound;
 
     //public AudioSource WateringSound;
     //public AudioSource WateringCanSound;

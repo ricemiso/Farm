@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3588131460345256473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -97,10 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a655dc9c0487c41955e46ffaaff541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyList:
-  - {fileID: 555078712326535635, guid: 40be63fb7ef1da54991036270b7eb442, type: 3}
-  m_Range: {x: 5, y: 2, z: 5}
-  SummonTime: 100
+  EnemyList: []
+  Range: {x: 0, y: 0, z: 0}
+  Crystal: {fileID: 0}
+  CrystalMini: {fileID: 0}
+  EnemyParent: {fileID: 0}
 --- !u!65 &130733935938592577
 BoxCollider:
   m_ObjectHideFlags: 0

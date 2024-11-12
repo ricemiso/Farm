@@ -164,7 +164,7 @@ public class SupportAI_Movement : AI_Movement
 			}
 			else
 			{
-				state = MoveState.WALKING;
+				state = MoveState.FOLLOWING;
 				target = null;
 			}
 		}
