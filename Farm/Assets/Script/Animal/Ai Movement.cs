@@ -121,14 +121,19 @@ public class AI_Movement : MonoBehaviour
 			}
 			else
 			{
-				animation.Stop("Run");
+				animation.Stop("run");
 			}
-
 		}
 		else
 		{
 			// 近づく
 			transform.position += direction * followSpeed * Time.deltaTime;
+
+			// アニメーション
+			if (animator != null)
+			{
+				animator.SetBool("isRunning", true);
+			}
 		}
 	}
 
@@ -142,7 +147,7 @@ public class AI_Movement : MonoBehaviour
 		}
 		else
 		{
-			animation.Play("Run");
+			animation.Play("run");
 		}
 
 		switch (WalkDirection)
@@ -184,7 +189,7 @@ public class AI_Movement : MonoBehaviour
 		}
 		else
 		{
-			animation.Stop("Run");
+			animation.Stop("run");
 		}
 
 		waitCounter = waitTime;
@@ -212,7 +217,7 @@ public class AI_Movement : MonoBehaviour
 		}
 		else
 		{
-			animation.Play("Run");
+			animation.Play("run");
 		}
 	}
 
