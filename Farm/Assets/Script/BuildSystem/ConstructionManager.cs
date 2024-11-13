@@ -360,6 +360,7 @@ public class ConstructionManager : MonoBehaviour
             {
                 // スタック数が1の場合、アイテムを削除
                 DestroyItem(item);
+                Destroy(EquipSystem.Instance.selecteditemModel);
             }
         }
         else

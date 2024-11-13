@@ -17,9 +17,11 @@ public class CraftingSystem : MonoBehaviour
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
     Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN,craftChestBTN;
     Button normalMinionBTN, TankMinionBTN, MagicMinionBTN;
+    Button craftLogManaBTN, craftStoneManaBTN;
 
-    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1,ChestReq1;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1,ChestReq1,LogReq1, StoneReq1;
     Text normalMinionReq1, TankMinionReq1, TankMinionReq2, MagicMinionReq1, MagicMinionReq2;
+   
 
     public bool isOpen;
     public bool islevelUp;
@@ -39,6 +41,8 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint TankMinionBLP;
     [HideInInspector] public BluePrint MagicMinionBLP;
     [HideInInspector] public BluePrint ChestBLP;
+    [HideInInspector] public BluePrint LogManaBLP;
+    [HideInInspector] public BluePrint StoneManaBLP;
 
 
     [HideInInspector] public bool isMinionCraft = false;
@@ -78,7 +82,8 @@ public class CraftingSystem : MonoBehaviour
         TankMinionBLP = new BluePrint("Minion2Seed", 1, 2, "Mana", 1, "Stone", 1);
         MagicMinionBLP = new BluePrint("Minion3Seed", 1, 2, "Mana", 1, "Log", 1);
         ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
-
+        LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 4, "", 0);
+        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 6, "", 0);
 
         isOpen = false;
 
@@ -186,6 +191,18 @@ public class CraftingSystem : MonoBehaviour
         craftChestBTN = toolScreenUI.transform.Find("Chest").transform.Find("ChestButton").GetComponent<Button>();
         craftChestBTN.onClick.AddListener(delegate { CraftAnyItem(ChestBLP); });
 
+        //LogMana
+        LogReq1 = craftingScreenUI.transform.Find("LogMana").transform.Find("rec1").GetComponent<Text>();
+
+        craftLogManaBTN = craftingScreenUI.transform.Find("LogMana").transform.Find("LogManaButton").GetComponent<Button>();
+        craftLogManaBTN.onClick.AddListener(delegate { CraftAnyItem(LogManaBLP); });
+
+
+        //StoneMana
+        StoneReq1 = craftingScreenUI.transform.Find("StoneMana").transform.Find("rec1").GetComponent<Text>();
+
+        craftStoneManaBTN = craftingScreenUI.transform.Find("StoneMana").transform.Find("StoneManaButton").GetComponent<Button>();
+        craftStoneManaBTN.onClick.AddListener(delegate { CraftAnyItem(StoneManaBLP); });
     }
 
 
@@ -253,12 +270,14 @@ public class CraftingSystem : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.C) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
+        if (Input.GetKeyDown(KeyCode.E) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
             //TODO:一旦妖精の合成しかないため直接合成スクリーンを出す
             //アルファ版は戻す
-            //craftingScreenUI.SetActive(true);
-            refineScreenUI.SetActive(true);
+            craftingScreenUI.SetActive(true);
+            //refineScreenUI.SetActive(true);
+
+
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -271,7 +290,7 @@ public class CraftingSystem : MonoBehaviour
             RefreshNeededItems();
 
         }
-        else if (Input.GetKeyDown(KeyCode.C) && isOpen)
+        else if (Input.GetKeyDown(KeyCode.E) && isOpen)
         {
             craftingScreenUI.SetActive(false);
             toolScreenUI.SetActive(false);
@@ -649,6 +668,34 @@ public class CraftingSystem : MonoBehaviour
         else
         {
             craftChestBTN.gameObject.SetActive(false);
+        }
+
+
+        // ---LogMana---- //
+        LogReq1.text = "丸太 4 [" + (log_count + quickLogCount) + "]";
+
+        if ((log_count + quickLogCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            LogManaBLP.gameObject.SetActive(true);
+        }
+        else
+        {
+            LogManaBLP.gameObject.SetActive(false);
+        }
+
+
+        // ---normalMinionReq1---- //
+        normalMinionReq1.text = "石ころ 6 [" + (stone_count + quickStoneCount) + "]";
+
+        if ((stone_count + quickStoneCount) >= 1
+            && InventorySystem.Instance.CheckSlotAvailable(1))
+        {
+            craftStoneManaBTN.gameObject.SetActive(true);
+        }
+        else
+        {
+            craftStoneManaBTN.gameObject.SetActive(false);
         }
 
     }

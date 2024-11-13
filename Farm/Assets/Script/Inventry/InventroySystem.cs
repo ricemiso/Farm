@@ -29,7 +29,7 @@ public class InventorySystem : MonoBehaviour
 
     public List<string> itemsPickedup = new List<string>();
 
-    public int stackLimit = 64;
+    public int stackLimit = 10;
 
     private bool isUpdateRequired = false;
 
@@ -86,7 +86,7 @@ public class InventorySystem : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
+        if (Input.GetKeyDown(KeyCode.E) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
 
             Debug.Log("i is pressed");
@@ -102,7 +102,7 @@ public class InventorySystem : MonoBehaviour
             CraftingSystem.Instance.RefreshNeededItems();
 
         }
-        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
+        else if (Input.GetKeyDown(KeyCode.E) && isOpen)
         {
             inventoryScreenUI.SetActive(false);
 
