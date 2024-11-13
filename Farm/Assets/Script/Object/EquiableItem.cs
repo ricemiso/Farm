@@ -12,6 +12,7 @@ public class EquiableItem : MonoBehaviour
     private bool wasWatering = false;
     private bool wasChargeing = false;
     private bool wasleveling = false;
+    private bool isTriggered = false;
 
     void Start()
     {
@@ -19,42 +20,36 @@ public class EquiableItem : MonoBehaviour
         SwingWait = false;
     }
 
-    
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)
-            && InventorySystem.Instance.isOpen == false
-            && CraftingSystem.Instance.isOpen == false
-            && SelectionManager.Instance.HandIsVisible == false
-            && !ConstructionManager.Instance.inConstructionMode
-            && MenuManager.Instance.isMenuOpen == false
-            && SwingWait ==false
-            && EquipSystem.Instance.IsPlayerHooldingWateringCan()== false) 
+        // トリガーを呼び出す条件
+        if ((SelectionManager.Instance.Watering && !wasWatering)
+            || (SelectionManager.Instance.Chargeing && !wasChargeing)
+            || (SelectionManager.Instance.leveling && !wasleveling && !isTriggered))
         {
-            SwingWait = true;
-           
-            StartCoroutine(SwingAction());
-        }
-
-        if ((SelectionManager.Instance.Watering && !wasWatering) || (SelectionManager.Instance.Chargeing && !wasChargeing)
-            || (SelectionManager.Instance.leveling && !wasleveling)) 
-        {
+            isTriggered = true; // トリガーが発動したことを記録
             animator.SetTrigger("Watering");
+
             wasWatering = true;
             wasChargeing = true;
             wasleveling = true;
         }
-        else if ((!SelectionManager.Instance.Watering && wasWatering)||(!SelectionManager.Instance.Chargeing && wasChargeing)
+        else if ((!SelectionManager.Instance.Watering && wasWatering)
+            || (!SelectionManager.Instance.Chargeing && wasChargeing)
             || (!SelectionManager.Instance.leveling && wasleveling))
         {
+            // 条件が満たされなくなったときにフラグをリセット
+            animator.ResetTrigger("Watering");
+            isTriggered = false; // トリガー再発動を許可する
+
             wasWatering = false;
             wasChargeing = false;
             wasleveling = false;
         }
-
-
-
     }
+
+
 
     IEnumerator SwingAction()
     {
