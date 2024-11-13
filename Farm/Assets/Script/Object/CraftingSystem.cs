@@ -685,8 +685,8 @@ public class CraftingSystem : MonoBehaviour
         }
 
 
-        // ---normalMinionReq1---- //
-        normalMinionReq1.text = "Î‚±‚ë 6 [" + (stone_count + quickStoneCount) + "]";
+		// ---StoneMana---- //
+		StoneReq1.text = "Î‚±‚ë 6 [" + (stone_count + quickStoneCount) + "]";
 
         if ((stone_count + quickStoneCount) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
