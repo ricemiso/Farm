@@ -433,7 +433,7 @@ public class SelectionManager : MonoBehaviour
             ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
         }
 
-       // Destroy(EquipSystem.Instance.selecteditemModel);
+        Destroy(EquipSystem.Instance.selecteditemModel);
 
         Watering = false;
         Chargeing = false;
