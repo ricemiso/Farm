@@ -192,16 +192,16 @@ public class CraftingSystem : MonoBehaviour
         craftChestBTN.onClick.AddListener(delegate { CraftAnyItem(ChestBLP); });
 
         //LogMana
-        LogReq1 = craftingScreenUI.transform.Find("LogMana").transform.Find("rec1").GetComponent<Text>();
+        LogReq1 = toolScreenUI.transform.Find("LogMana").transform.Find("rec1").GetComponent<Text>();
 
-        craftLogManaBTN = craftingScreenUI.transform.Find("LogMana").transform.Find("LogManaButton").GetComponent<Button>();
+        craftLogManaBTN = toolScreenUI.transform.Find("LogMana").transform.Find("LogManaButton").GetComponent<Button>();
         craftLogManaBTN.onClick.AddListener(delegate { CraftAnyItem(LogManaBLP); });
 
 
         //StoneMana
-        StoneReq1 = craftingScreenUI.transform.Find("StoneMana").transform.Find("rec1").GetComponent<Text>();
+        StoneReq1 = toolScreenUI.transform.Find("StoneMana").transform.Find("rec1").GetComponent<Text>();
 
-        craftStoneManaBTN = craftingScreenUI.transform.Find("StoneMana").transform.Find("StoneManaButton").GetComponent<Button>();
+        craftStoneManaBTN = toolScreenUI.transform.Find("StoneMana").transform.Find("StoneManaButton").GetComponent<Button>();
         craftStoneManaBTN.onClick.AddListener(delegate { CraftAnyItem(StoneManaBLP); });
     }
 
@@ -677,11 +677,11 @@ public class CraftingSystem : MonoBehaviour
         if ((log_count + quickLogCount) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
-            LogManaBLP.gameObject.SetActive(true);
+            craftLogManaBTN.gameObject.SetActive(true);
         }
         else
         {
-            LogManaBLP.gameObject.SetActive(false);
+            craftLogManaBTN.gameObject.SetActive(false);
         }
 
 
