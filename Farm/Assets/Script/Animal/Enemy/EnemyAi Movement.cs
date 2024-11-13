@@ -74,7 +74,17 @@ public class EnemyAI_Movement : AI_Movement
 
 	virtual protected void ChaseEnemy()
 	{
-		animator.SetBool("isRunning", true);
+		if(animator != null)
+        {
+			animator.SetBool("isRunning", true);
+		}
+        else
+        {
+			if(!animation.isPlaying)
+			{
+				animation.Play("run");
+			}
+		}
 
 		// ’·‚¢ŽžŠÔ‘ÎÛ‚ð”FŽ¯‚µ‚Ä‚¢‚È‚¢ê‡’ú‚ß‚é
 		if(timeToFoundEnemy >= timeToGiveUpChase)

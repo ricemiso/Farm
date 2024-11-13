@@ -5,55 +5,100 @@ using UnityEngine;
 
 public class Rabbit : EnemyAI_Movement
 {
+    protected override void Start()
+    {
+        base.Start();
 
-	protected override void Start()
-	{
-		base.Start();
-	}
+        if (player == null)
+        {
+            Debug.LogError("Player object is not assigned or cannot be found!");
+        }
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+        if (target == null)
+        {
+            Debug.LogWarning("Target is not assigned. Rabbit won't chase!");
+        }
+    }
 
-	protected override void ChaseEnemy()
-	{
-		if (player == null) return;
+    protected override void Update()
+    {
+        base.Update();
 
-		base.ChaseEnemy();
+        switch (state)
+        {
+            case MoveState.WALKING:
+                Walk();
+                break;
 
-		// プレイヤーの進行方向を取得し、後ろの位置を計算
-		if (target != null)
-		{
-			Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
+            case MoveState.CHASE:
+                if (target != null)
+                {
+                    ChaseEnemy();
+                }
+                break;
 
-			Chase(followPosition);
+            case MoveState.WAITING:
+                Wait();
+                break;
 
-			// 近くにターゲットがいたら攻撃処理
-			float distance = Vector3.Distance(followPosition, transform.position);
-			if (distance <= attackRange &&
-				timeToFoundEnemy <= 0.1f &&
-				currentAttackCooltime <= 0.0f)
-			{
-				float damage = GetComponent<Animal>().damage;
-				Attack(damage);
+            default:
+                // 停止中など他の状態の処理
+                break;
+        }
+    }
 
-				currentAttackCooltime = attackCooltime;
-			}
-		}
-	}
+    protected override void ChaseEnemy()
+    {
+        if (player == null || target == null) return;
 
-	// 攻撃範囲を指定しているコリジョンが攻撃対象を検知した際に動作
-	public void CheckAttack(GameObject obj)
-	{
-		if (obj != target) return;
+        base.ChaseEnemy();
 
-		if (currentAttackCooltime <= 0.0f)
-		{
-			float damage = GetComponent<Animal>().damage;
-			Attack(damage);
+        // プレイヤーの進行方向を取得し、追尾処理
+        if (target != null)
+        {
+            Vector3 followPosition = target.transform.position;
 
-			currentAttackCooltime = attackCooltime;
-		}
-	}
+            // 移動処理
+            Chase(followPosition);
+
+            // 近くにターゲットがいたら攻撃処理
+            float distance = Vector3.Distance(followPosition, transform.position);
+            if (distance <= attackRange &&
+                timeToFoundEnemy <= 0.1f &&
+                currentAttackCooltime <= 0.0f)
+            {
+                float damage = GetComponent<Animal>().damage;
+                Attack(damage);
+
+                currentAttackCooltime = attackCooltime;
+            }
+
+            // アニメーションの切り替え
+            if (animator != null)
+            {
+                animator.SetBool("isRunning", distance > attackRange);
+            }
+        }
+    }
+
+    public void CheckAttack(GameObject obj)
+    {
+        //animation.Play("attack01");
+        if (obj != target) return;
+
+       
+
+        if (currentAttackCooltime <= 0.0f)
+        {
+            if(animator == null)
+            {
+                animation.Play("attack01");
+            }
+            
+            float damage = GetComponent<Animal>().damage;
+            Attack(damage);
+
+            currentAttackCooltime = attackCooltime;
+        }
+    }
 }
