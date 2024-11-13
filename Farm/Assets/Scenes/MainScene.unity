@@ -13743,6 +13743,8 @@ MonoBehaviour:
   TankMinionBLP: {fileID: 0}
   MagicMinionBLP: {fileID: 0}
   ChestBLP: {fileID: 0}
+  LogManaBLP: {fileID: 0}
+  StoneManaBLP: {fileID: 0}
   isMinionCraft: 0
   isTankMinionCraft: 0
   isMagicMinionCraft: 0
@@ -13879,7 +13881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6fed87466a70f14d8648cfd7d102878, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20147,7 +20149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1076467539
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20641,7 +20643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1095079560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26646,7 +26648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1511590551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28129,7 +28131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b54b94da5cee5c046bf327246ac181e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6fed87466a70f14d8648cfd7d102878, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
