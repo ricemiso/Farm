@@ -206,7 +206,7 @@ public class SelectionManager : MonoBehaviour
                         soil.PlantSeed();
                         isFarm1 = true;
                         ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
-                        Destroy(EquipSystem.Instance.selecteditemModel);
+                        //Destroy(EquipSystem.Instance.selecteditemModel);
                     }
                 }
                 else if (soil.isEmpty)

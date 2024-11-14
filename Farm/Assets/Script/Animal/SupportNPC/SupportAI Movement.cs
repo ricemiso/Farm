@@ -41,7 +41,7 @@ public class SupportAI_Movement : AI_Movement
 			else
 			{
 				animation.Play("Run");
-				animator.SetBool("isRunning", true);
+				//animator.SetBool("isRunning", true);
 				state = MoveState.FOLLOWING;
 				target = player;
 			}

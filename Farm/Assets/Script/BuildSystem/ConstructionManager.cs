@@ -374,67 +374,88 @@ public class ConstructionManager : MonoBehaviour
         var itemName = ItemName(item); // アイテム名を取得
         string selectedItemName = itemName.Replace("(Clone)", "");
 
+        bool itemFoundInInventory = false;
+
+        // InventorySystemのスロットを確認
         foreach (GameObject slot in InventorySystem.Instance.slotlist)
         {
             InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
 
             if (inventrySlot != null)
             {
-                // スロットの子オブジェクトを取得
-                GameObject childObject = slot.transform.GetChild(0).gameObject; // 子オブジェクトが1つだけだと仮定している場合
+                GameObject childObject = slot.transform.GetChild(0).gameObject; // スロットの子オブジェクト
 
-              
-
-                // スロットからアイテムを取得
                 inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
 
-                // スロット内にアイテムがある場合
-                if (inventrySlot.itemInSlot != null)
+                if (inventrySlot.itemInSlot != null && inventrySlot.itemInSlot.thisName == selectedItemName)
                 {
-                    // スロット内のアイテム名が一致するか確認
-                    if (inventrySlot.itemInSlot.thisName == selectedItemName)
-                    {
-                        // 子オブジェクトが非アクティブであれば、アクティブにする
-                        if (childObject != null && !childObject.activeSelf)
-                        {
-                            childObject.SetActive(true);
-                        }
-                        // スタック数が1より多ければスタック数を減らす
-                        if (inventrySlot.itemInSlot.amountInventry > 1)
-                        {
-                            inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
-                            InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
-                        }
-                        else
-                        {
-                            // スタック数が1の場合、アイテムを削除
-                            // アイテムの子オブジェクトにアクセスして削除
-                            GameObject itemObject = inventrySlot.itemInSlot.gameObject;
+                    itemFoundInInventory = true; // インベントリにアイテムが見つかった
 
-                            // アイテムに関連する子オブジェクト（InventoryItemコンポーネントを持つオブジェクト）を探して削除
-                            if (itemObject != null)
+                    if (childObject != null && !childObject.activeSelf)
+                    {
+                        childObject.SetActive(true);
+                    }
+
+                    if (inventrySlot.itemInSlot.amountInventry > 1)
+                    {
+                        inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
+                        InventorySystem.Instance.ReCalculeList(); // UIやリストを更新
+                    }
+                    else
+                    {
+                        GameObject itemObject = inventrySlot.itemInSlot.gameObject;
+                        if (itemObject != null)
+                        {
+                            InventoryItem itemComponent = itemObject.GetComponentInChildren<InventoryItem>();
+                            if (itemComponent != null)
                             {
-                                // InventoryItemコンポーネントを持つ子オブジェクトを削除
-                                InventoryItem itemComponent = itemObject.GetComponentInChildren<InventoryItem>();
-                                if (itemComponent != null)
-                                {
-                                    Destroy(itemComponent.gameObject); // 子オブジェクトを削除
-                                }
+                                Destroy(itemComponent.gameObject); // 子オブジェクトを削除
                             }
                         }
-                        // 子オブジェクトが非アクティブであれば、アクティブにする
-                        if (childObject != null && !childObject.activeSelf)
-                        {
-                            childObject.SetActive(true);
-                        }
-                        break; // 一致するアイテムが見つかったら処理を終了
                     }
-                }
 
-                
+                    if (childObject != null && !childObject.activeSelf)
+                    {
+                        childObject.SetActive(true);
+                    }
+                    break; // 一致するアイテムが見つかったら処理を終了
+                }
+            }
+        }
+
+        // インベントリにアイテムがない場合、quickSlotsListを確認
+        if (!itemFoundInInventory)
+        {
+            foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
+            {
+                InventrySlot quickSlot = slot.GetComponent<InventrySlot>();
+
+                if (quickSlot != null && quickSlot.itemInSlot != null && quickSlot.itemInSlot.thisName == selectedItemName)
+                {
+                    // quickSlotsListのスロット内のアイテムを削除
+                    if (quickSlot.itemInSlot.amountInventry > 1)
+                    {
+                        quickSlot.itemInSlot.amountInventry--;
+                        InventorySystem.Instance.ReCalculeList(); // quickSlotsListのUIやリストの更新
+                    }
+                    else
+                    {
+                        GameObject itemObject = quickSlot.itemInSlot.gameObject;
+                        if (itemObject != null)
+                        {
+                            InventoryItem itemComponent = itemObject.GetComponentInChildren<InventoryItem>();
+                            if (itemComponent != null)
+                            {
+                                Destroy(itemComponent.gameObject);
+                            }
+                        }
+                    }
+                    break;
+                }
             }
         }
     }
+
 
 
 
@@ -446,6 +467,9 @@ public class ConstructionManager : MonoBehaviour
                 itemname.name = "Foundation";
                 break;
             case "ミニオン3(Clone)":
+                itemname.name = "ミニオン(遠距離)";
+                break;
+            case "ミニオン3":
                 itemname.name = "ミニオン(遠距離)";
                 break;
             case "ミニオン2(Clone)":

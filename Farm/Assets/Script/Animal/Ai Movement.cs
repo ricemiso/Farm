@@ -217,7 +217,14 @@ public class AI_Movement : MonoBehaviour
 		}
 		else
 		{
-			animation.Play("run");
+			if (animation.GetClip("Run") != null)
+			{
+				animation.Play("Run");
+			}
+			else if (animation.GetClip("run") != null)
+			{
+				animation.Play("run");
+			}
 		}
 	}
 
