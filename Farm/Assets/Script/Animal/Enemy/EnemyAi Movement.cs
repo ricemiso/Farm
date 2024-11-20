@@ -82,8 +82,11 @@ public class EnemyAI_Movement : AI_Movement
         {
 			if(!animation.isPlaying)
 			{
+				//animation.Stop("run");
 				animation.Play("run");
 			}
+
+
 		}
 
 		// ’·‚¢ŠÔ‘ÎÛ‚ğ”F¯‚µ‚Ä‚¢‚È‚¢ê‡’ú‚ß‚é
