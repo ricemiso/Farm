@@ -454,8 +454,13 @@ public class MainMenuSaveManager : MonoBehaviour
         {
             GameObject availableSlot = EquipSystem.Instance.FindNextEmptySlot();
 
-            var itemToAdd = Instantiate(Resources.Load<GameObject>(item));
-            itemToAdd.transform.SetParent(availableSlot.transform, false);
+            var loadedItem = Resources.Load<GameObject>(item);
+            if (loadedItem != null)
+            {
+                var itemToAdd = Instantiate(loadedItem);
+                itemToAdd.transform.SetParent(availableSlot.transform, false);
+            }
+            
         }
     }
 
