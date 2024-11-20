@@ -28,7 +28,7 @@ public class AttackBoxRabbit : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-        if(other != null)
+        if(other.CompareTag("Player"))
         {
             RabbitScript.CheckAttack(other.GameObject());
         }
