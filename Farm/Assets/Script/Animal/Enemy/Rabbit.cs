@@ -83,6 +83,7 @@ public class Rabbit : EnemyAI_Movement
 
     public void CheckAttack(GameObject obj)
     {
+
         //animation.Play("attack01");
         if (obj != target) return;
 
@@ -108,10 +109,16 @@ public class Rabbit : EnemyAI_Movement
                 }
             }
             
-            float damage = GetComponent<Animal>().damage;
-            Attack(damage);
+
+           
 
             currentAttackCooltime = attackCooltime;
         }
+    }
+
+    void attackwait()
+    {
+        float damage = GetComponent<Animal>().damage;
+        Attack(damage);
     }
 }
