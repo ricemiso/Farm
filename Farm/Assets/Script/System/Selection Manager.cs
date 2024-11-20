@@ -324,7 +324,7 @@ public class SelectionManager : MonoBehaviour
 						}
 						else
 						{
-							StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
+							StartCoroutine(DealDamageTo(animal, 1.2f, EquipSystem.Instance.GetWeaPonDamage()));
 							StartCoroutine(DelayedAttribute());
 						}
 

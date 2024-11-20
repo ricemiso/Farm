@@ -28,10 +28,9 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.Instance.HandIsVisible == false
             && !ConstructionManager.Instance.inConstructionMode
             && MenuManager.Instance.isMenuOpen == false
-            && EquipSystem.Instance.SwingWait ==false
             && EquipSystem.Instance.IsPlayerHooldingWateringCan()== false) 
         {
-            EquipSystem.Instance.SwingWait = true;
+            //EquipSystem.Instance.SwingWait = true;
             Swinging = true;
             StartCoroutine(SwingAction());
         }
@@ -67,7 +66,7 @@ public class EquiableItem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);  // 1•b‚Ì’x‰„‚ð’Ç‰Á
 
-        EquipSystem.Instance.SwingWait = false;
+        //EquipSystem.Instance.SwingWait = false;
         Swinging = false;
     }
 
