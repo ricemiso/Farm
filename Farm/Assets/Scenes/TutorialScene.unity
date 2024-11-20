@@ -5007,6 +5007,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa46f3130f31be64191adf4689840138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tree: {fileID: 0}
+  stone: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &189877948
 GameObject:
   m_ObjectHideFlags: 0
@@ -5228,7 +5231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &198350115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10864,6 +10867,10 @@ PrefabInstance:
     - target: {fileID: 7164334286499985402, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Name
       value: "\u30E1\u30A4\u30F3\u30AF\u30EA\u30B9\u30BF\u30EB"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7164334286499985402, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28118,7 +28125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1539562519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35106,7 +35113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1964749048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38550,6 +38557,7 @@ MonoBehaviour:
   toolHolder: {fileID: 2103019920}
   selecteditemModel: {fileID: 0}
   stackcnt: 0
+  SwingWait: 0
 --- !u!1 &2131424797
 GameObject:
   m_ObjectHideFlags: 0

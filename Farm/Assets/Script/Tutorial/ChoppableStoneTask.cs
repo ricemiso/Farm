@@ -16,6 +16,7 @@ public class ChoppableStoneTask : ITutorialTask
 
     public void OnTaskSetting()
     {
+        TutorialManager.Instance.stone.SetActive(true);
     }
 
     public bool CheckTask()
