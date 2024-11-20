@@ -480,38 +480,43 @@ public class SelectionManager : MonoBehaviour
 				}
 			}
 
-
 			lootable.finalLoot = lootRecieveds;
 			lootable.wasLootCalulated = true;
-
 		}
 
-
-
 		Vector3 lootSpawnPosition = lootable.gameObject.transform.position;
+		float scatterRange = 2.0f; // 散らばりの範囲を設定
 
 		foreach (LootRecieved lootRecieved in lootable.finalLoot)
 		{
 			for (int i = 0; i < lootRecieved.amount; i++)
 			{
-				GameObject lootSpawn = Instantiate(Resources.Load<GameObject>(lootRecieved.item.name + "_model"),
-					new Vector3(lootSpawnPosition.x, lootSpawnPosition.y + 0.2f, lootSpawnPosition.z),
-					Quaternion.Euler(0, 0, 0));
+				// ランダムな位置を生成 (X-Zのみ散らばり、Yは固定)
+				Vector3 randomOffset = new Vector3(
+					UnityEngine.Random.Range(-scatterRange, scatterRange), // X方向
+					0,                                         // Y方向はそのまま
+					UnityEngine.Random.Range(-scatterRange, scatterRange)  // Z方向
+				);
+
+				Vector3 spawnPosition = lootSpawnPosition + randomOffset;
+
+				// アイテムをスポーン
+				GameObject lootSpawn = Instantiate(
+					Resources.Load<GameObject>(lootRecieved.item.name + "_model"),
+					spawnPosition,
+					Quaternion.identity
+				);
 
 				Debug.Log(lootRecieved.item.name);
-
 			}
 		}
-
 
 		if (lootable.GetComponent<Animal>())
 		{
 			lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
 		}
 
-
 		Destroy(lootable.gameObject);
-
 	}
 
 	IEnumerator DealDamageTo(Animal animal, float delay, int damage)

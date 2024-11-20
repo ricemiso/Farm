@@ -109,9 +109,6 @@ public class Rabbit : EnemyAI_Movement
                 }
             }
             
-
-           
-
             currentAttackCooltime = attackCooltime;
         }
     }

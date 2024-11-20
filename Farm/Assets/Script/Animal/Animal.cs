@@ -131,9 +131,10 @@ public class Animal : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (!canBeChopped) return;
        // if (!EquipSystem.Instance.SwingWait) return;
 
-        canBeChopped = true;
+        //canBeChopped = true;
         if (isDead == false)
         {
             currentHealth -= damage;
@@ -161,7 +162,9 @@ public class Animal : MonoBehaviour
                         if (animation.GetClip("dead") != null)
                         {
                             GetComponent<Rabbit>().enabled = false;
+                            //GetComponentInChildren<AttackBoxRabbit>().enabled = false;
                             animation.Play("dead");
+                            
                         }
 
                     }
@@ -175,7 +178,9 @@ public class Animal : MonoBehaviour
                         if (animation.GetClip("dead") != null)
                         {
                             GetComponent<Rabbit>().enabled = false;
+                            //GetComponentInChildren<AttackBoxRabbit>().enabled = false;
                             animation.Play("dead");
+                            //animation.enabled = false;
                         }
 
                     }
@@ -184,10 +189,12 @@ public class Animal : MonoBehaviour
                 {
                     GetComponent<Rabbit>().enabled = false;
                     animator.SetTrigger("Die");
+                    GetComponentInChildren<AttackBoxRabbit>().enabled = false;
                 }
 
                 StartCoroutine(puddleDelay());
                 isDead = true;
+               
             }
             else
             {
@@ -204,9 +211,22 @@ public class Animal : MonoBehaviour
         if (bloodPaddle != null)
         {
             bloodPaddle.SetActive(true);
+            //yield return new WaitForSeconds(3);
+            //Destroy(bloodPaddle);
+            //StartCoroutine(puddleDelay2());
         }
 
     }
+
+    //IEnumerator puddleDelay2()
+    //{
+    //    yield return new WaitForSeconds(10);
+    //    if (bloodPaddle != null)
+    //    {
+    //        bloodPaddle.SetActive(false);
+    //    }
+
+    //}
 
     private void PlayDyingSound()
     {
