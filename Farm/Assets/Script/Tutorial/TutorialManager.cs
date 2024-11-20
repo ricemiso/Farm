@@ -42,13 +42,13 @@ public class TutorialManager : MonoBehaviour
             new EquipTask(),
             new AttackTask(),
             new AttackTask2(),
-            new LootTask(),
+            new LootTask(), //いらなくなる予定
             new OpenInventroyTask(),
             new HealTask(),
             new StackInventroyTask(),
             new ChoppableTreeTask(),
             new ChoppableStoneTask(),
-            new OpenCraftingScreenOpenTask(),
+            //new OpenCraftingScreenOpenTask(), //いらないチュートリアル
             new CraftAllMinion(),
             new FarmTask1(),
             new FarmTask2(),

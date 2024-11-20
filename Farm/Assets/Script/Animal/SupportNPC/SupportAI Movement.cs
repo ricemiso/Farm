@@ -29,7 +29,7 @@ public class SupportAI_Movement : AI_Movement
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
 		// 一定範囲内かつEキーが押された場合のみ停止・再開を切り替える
-		if (isPushEKey && Input.GetKeyDown(KeyCode.E))  // Eキーで動作を停止/再開
+		if (isPushEKey && Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
 		{
 			isStopped = !isStopped;  // Eキーで動作を停止/再開
 			if (isStopped)
