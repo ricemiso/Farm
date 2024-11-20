@@ -8,7 +8,7 @@ public class EquiableItem : MonoBehaviour
 {
 
     public Animator animator;
-    public bool SwingWait;
+    public bool Swinging = false;
     private bool wasWatering = false;
     private bool wasChargeing = false;
     private bool wasleveling = false;
@@ -16,7 +16,7 @@ public class EquiableItem : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        SwingWait = false;
+        Swinging = false;
     }
 
     
@@ -28,11 +28,11 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.Instance.HandIsVisible == false
             && !ConstructionManager.Instance.inConstructionMode
             && MenuManager.Instance.isMenuOpen == false
-            && SwingWait ==false
+            && EquipSystem.Instance.SwingWait ==false
             && EquipSystem.Instance.IsPlayerHooldingWateringCan()== false) 
         {
-            SwingWait = true;
-           
+            EquipSystem.Instance.SwingWait = true;
+            Swinging = true;
             StartCoroutine(SwingAction());
         }
 
@@ -47,6 +47,7 @@ public class EquiableItem : MonoBehaviour
         else if ((!SelectionManager.Instance.Watering && wasWatering)||(!SelectionManager.Instance.Chargeing && wasChargeing)
             || (!SelectionManager.Instance.leveling && wasleveling))
         {
+            animator.ResetTrigger("Watering");
             wasWatering = false;
             wasChargeing = false;
             wasleveling = false;
@@ -65,8 +66,9 @@ public class EquiableItem : MonoBehaviour
         StartCoroutine(SwingSoundDelay());
 
         yield return new WaitForSeconds(1f);  // 1ïbÇÃíxâÑÇí«â¡
-       
-        SwingWait = false;
+
+        EquipSystem.Instance.SwingWait = false;
+        Swinging = false;
     }
 
     //Todo: âΩÇ©ÇêÿÇËì|Ç∑Ç∆Ç´ÇÕÇ±Ç±Ç…í«â¡Ç∑ÇÈ

@@ -139,11 +139,9 @@ public class InventorySystem : MonoBehaviour
     {
         if (!CraftingSystem.Instance.canupdate) return;
 
-
         bool itemAdded = false; // アイテムが追加されたかどうかを記録するフラグ
-       // string lastAddedItemName = itemList.Count > 0 ? itemList[itemList.Count - 1] : null;
 
-
+        // インベントリスロットリストを検索
         foreach (GameObject slot in slotlist)
         {
             InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
@@ -158,17 +156,55 @@ public class InventorySystem : MonoBehaviour
                     // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
                     foreach (string itemNameInList in itemList)
                     {
-                        if (inventrySlot.itemInSlot.thisName == itemNameInList && !itemAdded && inventrySlot.itemInSlot.thisName == itemName)
+                        if (inventrySlot.itemInSlot.thisName == itemNameInList &&
+                            !itemAdded &&
+                            inventrySlot.itemInSlot.thisName == itemName)
                         {
-
                             // 一致するアイテムが見つかった場合、数量を増やす
                             inventrySlot.SetItemInSlot(); // アイテム情報を更新
                             inventrySlot.itemInSlot.amountInventry++;
 
                             // アイテムが追加されたことを記録し、処理を終了
                             itemAdded = true;
-                            break; // 次のアイテム名に進む
+                            break;
+                        }
+                    }
 
+                    // アイテムが追加された場合はループを終了
+                    if (itemAdded)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+        // クイックスロットリストを検索
+        foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
+        {
+            InventrySlot inventrySlot = quickSlot.GetComponent<InventrySlot>();
+            if (inventrySlot != null)
+            {
+                // スロットからアイテムを取得
+                inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
+
+                // スロット内にアイテムがある場合
+                if (inventrySlot.itemInSlot != null)
+                {
+                    // itemList 内の各アイテム名とスロット内のアイテム名が一致するか確認
+                    foreach (string itemNameInList in itemList)
+                    {
+                        if (inventrySlot.itemInSlot.thisName == itemNameInList &&
+                            !itemAdded &&
+                            inventrySlot.itemInSlot.thisName == itemName)
+                        {
+                            // 一致するアイテムが見つかった場合、数量を増やす
+                            inventrySlot.SetItemInSlot(); // アイテム情報を更新
+                            inventrySlot.itemInSlot.amountInventry++;
+
+                            // アイテムが追加されたことを記録し、処理を終了
+                            itemAdded = true;
+                            break;
                         }
                     }
 
@@ -183,8 +219,11 @@ public class InventorySystem : MonoBehaviour
     }
 
 
+
     public void AddToinventry(string itemName, bool shoodStack)
     {
+
+
         GameObject stack = CheckIfStackExists(itemName);
 
         if (stack != null && shoodStack)
@@ -198,9 +237,19 @@ public class InventorySystem : MonoBehaviour
         else
         {
             inventoryUpdated = true;
-            whatSlotToEquip = FindNextEmptySlot();
-
             itemName = GetReturnItemName(itemName);
+
+            if(itemName == "Mana")
+            {
+                whatSlotToEquip = FindLastEmptySlot();
+            }
+            else
+            {
+                whatSlotToEquip = FindNextEmptySlot();
+            }
+           
+
+            
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
             if (itemName == "ミニオン3" || itemName == "ミニオン2" || itemName == "ミニオン")
@@ -237,7 +286,52 @@ public class InventorySystem : MonoBehaviour
 
     private GameObject CheckIfStackExists(string itemName)
     {
+        // クイックスロットリストを検索
+        foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
+        {
+            InventrySlot inventryslot = quickSlot.GetComponent<InventrySlot>();
+
+            inventryslot.SetItemInSlot();
+
+            if (inventryslot != null && inventryslot.itemInSlot != null)
+            {
+                itemName = GetItemName(itemName);
+
+                if (inventryslot.itemInSlot.thisName == itemName &&
+                    inventryslot.itemInSlot.amountInventry < stackLimit)
+                {
+                    itemName = GetReturnItemName(itemName);
+                    return quickSlot; // 条件を満たしたらすぐに返す
+                }
+            }
+        }
+
+        // インベントリスロットリストを検索
         foreach (GameObject slot in slotlist)
+        {
+            InventrySlot inventryslot = slot.GetComponent<InventrySlot>();
+
+            inventryslot.SetItemInSlot();
+
+            if (inventryslot != null && inventryslot.itemInSlot != null)
+            {
+                itemName = GetItemName(itemName);
+
+                if (inventryslot.itemInSlot.thisName == itemName &&
+                    inventryslot.itemInSlot.amountInventry < stackLimit)
+                {
+                    itemName = GetReturnItemName(itemName);
+                    return slot; // 条件を満たしたらすぐに返す
+                }
+            }
+        }
+        // 条件を満たすスロットが見つからなかった場合
+        return null;
+    }
+
+    private GameObject CheckIfStackMana(string itemName)
+    {
+        foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
         {
             InventrySlot inventryslot = slot.GetComponent<InventrySlot>();
 
@@ -387,6 +481,32 @@ public class InventorySystem : MonoBehaviour
         return new GameObject();
     }
 
+
+    private GameObject FindLastEmptySlot()
+    {
+        // クイックスロットリストが空またはnullの場合はnullを返す
+        if (EquipSystem.Instance.quickSlotsList == null || EquipSystem.Instance.quickSlotsList.Count == 0)
+        {
+            return null;
+        }
+
+        // リストの逆順で空のスロットを探す
+        for (int i = EquipSystem.Instance.quickSlotsList.Count - 1; i >= 0; i--)
+        {
+            GameObject slot = EquipSystem.Instance.quickSlotsList[i];
+            InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
+
+            // スロットが空の場合
+            if (inventrySlot != null && inventrySlot.itemInSlot == null)
+            {
+                return slot; // 空のスロットを返す
+            }
+        }
+
+        // 空のスロットが見つからない場合
+        return null;
+    }
+
     public bool CheckSlotAvailable(int emptyNeeded)
     {
         int emptySlot = 0;
@@ -477,6 +597,7 @@ public class InventorySystem : MonoBehaviour
     {
         itemList.Clear();  // リストをクリア
 
+        // インベントリスロットを更新
         foreach (GameObject slot in slotlist)
         {
             if (slot.GetComponent<InventrySlot>())
@@ -488,14 +609,29 @@ public class InventorySystem : MonoBehaviour
                     // アイテムのスタック分だけリストに追加
                     for (int i = 0; i < item.amountInventry; i++)
                     {
-
                         itemList.Add(item.thisName);
                     }
                 }
             }
         }
 
+        // クイックスロットも更新
+        foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
+        {
+            if (quickSlot.GetComponent<InventrySlot>())
+            {
+                InventoryItem item = quickSlot.GetComponent<InventrySlot>().itemInSlot;
 
+                if (item != null && item.amountInventry > 0)
+                {
+                    // アイテムのスタック分だけリストに追加
+                    for (int i = 0; i < item.amountInventry; i++)
+                    {
+                        itemList.Add(item.thisName);
+                    }
+                }
+            }
+        }
     }
 
 

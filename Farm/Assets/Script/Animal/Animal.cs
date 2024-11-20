@@ -136,6 +136,7 @@ public class Animal : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+
         canBeChopped = true;
         if (isDead == false)
         {
