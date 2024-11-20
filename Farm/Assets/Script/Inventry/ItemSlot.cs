@@ -54,7 +54,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             InventoryItem dragedItem = DragDrop.itemBeingDragged.GetComponent<InventoryItem>();
 
-            if(dragedItem.thisName == GetStoredItem().thisName && IsLimitExceded(dragedItem) ==false)
+            var itemName = InventorySystem.Instance.GetItemName(dragedItem.thisName);
+            if (dragedItem.thisName == GetStoredItem().thisName && IsLimitExceded(dragedItem) ==false)
             {
                 GetStoredItem().amountInventry += dragedItem.amountInventry;
                 DestroyImmediate(DragDrop.itemBeingDragged);

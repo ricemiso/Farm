@@ -362,12 +362,11 @@ public class InventorySystem : MonoBehaviour
         {
             itemName = "MinionSeed";
         }
+        itemName = GetReturnItemName(itemName);
         itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
         itemList.Add(itemName);
-
-
 
         ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
