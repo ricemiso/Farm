@@ -6,12 +6,12 @@ public class OpenInventroyTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 インベントリ(1/3)";
+        return "基本操作 インベントリ(1/2)";
     }
 
     public string GetText()
     {
-        return "Iキーを押してインベントリを開こう";
+        return "Eキーを押してインベントリを開こう";
     }
 
     public void OnTaskSetting()

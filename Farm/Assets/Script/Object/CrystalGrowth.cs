@@ -89,7 +89,7 @@ public class CrystalGrowth : MonoBehaviour
         else
         {
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
-			if (PlayerState.Instance.currentHydrationPercent >= 5)
+			if (PlayerState.Instance.currentHydrationPercent >= 1)
 			{
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				//Destroy(SoundManager.Instance.gameObject);
