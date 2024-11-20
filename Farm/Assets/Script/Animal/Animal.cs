@@ -131,7 +131,7 @@ public class Animal : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!EquipSystem.Instance.SwingWait) return;
+       // if (!EquipSystem.Instance.SwingWait) return;
 
         canBeChopped = true;
         if (isDead == false)

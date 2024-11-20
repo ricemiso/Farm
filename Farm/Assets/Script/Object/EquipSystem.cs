@@ -76,6 +76,49 @@ public class EquipSystem : MonoBehaviour
         {
             SelectQuickSlot(7);
         }
+
+       
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll > 0f)  
+        {
+            CycleQuickSlot(1);  
+        }
+        else if (scroll < 0f)  
+        {
+            CycleQuickSlot(-1);  
+        }
+    }
+
+    // クイックスロットを切り替える
+    private void CycleQuickSlot(int direction)
+    {
+        int currentSlot = GetCurrentQuickSlot();
+        int newSlot = currentSlot + direction;
+
+       
+        if (newSlot < 1)
+        {
+            newSlot = 7; 
+        }
+        else if (newSlot > 7)
+        {
+            newSlot = 1;
+        }
+
+        SelectQuickSlot(newSlot);
+    }
+
+    // 現在選択されているクイックスロットを取得する
+    private int GetCurrentQuickSlot()
+    {
+        if(selectedNumber <=1)
+        {
+            selectedNumber = 1;
+        }
+
+        return selectedNumber;
+
     }
 
 
