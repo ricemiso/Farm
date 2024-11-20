@@ -77,7 +77,7 @@ public class Animal : MonoBehaviour
 
         }
 
-        if (thisAnimalType == AnimalType.Union || thisAnimalType == AnimalType.Goblin || thisAnimalType == AnimalType.Wolf)
+        if (thisAnimalType == AnimalType.Union)
         {
             animation = GetComponent<Animation>();
         }
@@ -85,6 +85,17 @@ public class Animal : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+
+        if(thisAnimalType == AnimalType.Goblin)
+        {
+            GetComponent<Animation>().Play("walk");
+        }
+
+        if (thisAnimalType == AnimalType.Wolf)
+        {
+            GetComponent<Animation>().Play("walk");
+        }
+
     }
 
     private void Update()
@@ -131,7 +142,6 @@ public class Animal : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!EquipSystem.Instance.SwingWait) return;
 
         canBeChopped = true;
         if (isDead == false)
@@ -147,38 +157,11 @@ public class Animal : MonoBehaviour
 
                 //Log.Instance.TriggerPickupPop(animalName);
 
+
                 if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
                     DestroyImmediate(gameObject);
-                }
-
-                // ƒSƒuƒŠƒ“
-                else if (thisAnimalType == AnimalType.Goblin)
-                {
-                    if (animator == null)
-                    {
-                        if (animation.GetClip("dead") != null)
-                        {
-                            GetComponent<Rabbit>().enabled = false;
-                            animation.Play("dead");
-                        }
-
-                    }
-                }
-
-                // ƒEƒ‹ƒt
-                else if (thisAnimalType == AnimalType.Wolf)
-                {
-                    if (animator == null)
-                    {
-                        if (animation.GetClip("dead") != null)
-                        {
-                            GetComponent<Rabbit>().enabled = false;
-                            animation.Play("dead");
-                        }
-
-                    }
                 }
                 else
                 {
@@ -188,6 +171,7 @@ public class Animal : MonoBehaviour
 
                 StartCoroutine(puddleDelay());
                 isDead = true;
+
             }
             else
             {
