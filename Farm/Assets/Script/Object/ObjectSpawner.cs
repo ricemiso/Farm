@@ -47,64 +47,42 @@ public class ObjectSpawner : MonoBehaviour
 
     void SpawnObjectsOnTerrain()
     {
-        // Terrainのサイズを取得
-        TerrainData terrainData = terrain.terrainData;
-        Vector3 terrainSize = terrainData.size;
-        Vector3 terrainPosition = terrain.transform.position;
+        
 
-        // Treeのリソースをロード
-        SetName("Tree");
-        if (itemToAdd == null)
+
+        if (GrobalState.Instance.isTutorialEnd)
         {
-            Debug.LogError("Treeのリソースが見つかりません！");
-            return;
-        }
+            // Terrainのサイズを取得
+            TerrainData terrainData = terrain.terrainData;
+            Vector3 terrainSize = terrainData.size;
+            Vector3 terrainPosition = terrain.transform.position;
 
-        // Treeの親オブジェクトを作成
-        spawnedTreesParent = new GameObject("SpawnedTrees");
-
-        // Treeを生成
-        for (int i = 0; i < numberOfTrees; i++)
-        {
-            Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
-            if (CheckLayerForObjectSpawn(spawnPosition))
+            // Treeのリソースをロード
+            SetName("Tree");
+            if (itemToAdd == null)
             {
-                float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
-                GameObject newTree = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                newTree.name = "Tree_" + (i + 1);  // 名前に連番を追加
-                newTree.transform.SetParent(spawnedTreesParent.transform);  // 生成した木の親を設定
+                Debug.LogError("Treeのリソースが見つかりません！");
+                return;
             }
-        }
 
-        // Stone_modelのリソースをロード
-        SetName("Rock");
-        if (itemToAdd == null)
-        {
-            Debug.LogError("Rockのリソースが見つかりません！");
-            return;
-        }
+            // Treeの親オブジェクトを作成
+            spawnedTreesParent = new GameObject("SpawnedTrees");
 
-        // Stone_modelの親オブジェクトを作成
-        spawnedStonesParent = new GameObject("SpawnedStones");
-
-        // Stone_modelを生成
-        for (int i = 0; i < numberOfStones; i++)
-        {
-            Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
-            if (CheckLayerForObjectSpawn(spawnPosition))
+            // Treeを生成
+            for (int i = 0; i < numberOfTrees; i++)
             {
-                float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
-                GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                newStone.name = "Rock_" + (i + 1);  // 名前に連番を追加
-                newStone.transform.SetParent(spawnedStonesParent.transform);  // 生成した石の親を設定
+                Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
+                if (CheckLayerForObjectSpawn(spawnPosition))
+                {
+                    float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
+                    GameObject newTree = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+                    newTree.name = "Tree_" + (i + 1);  // 名前に連番を追加
+                    newTree.transform.SetParent(spawnedTreesParent.transform);  // 生成した木の親を設定
+                }
             }
-        }
 
-
-        if (!GrobalState.Instance.isTutorialEnd)
-        {
             // Stone_modelのリソースをロード
-            SetName("goblin");
+            SetName("Rock");
             if (itemToAdd == null)
             {
                 Debug.LogError("Rockのリソースが見つかりません！");
@@ -112,20 +90,44 @@ public class ObjectSpawner : MonoBehaviour
             }
 
             // Stone_modelの親オブジェクトを作成
-            spawnedEnemiesParent = new GameObject("spawnedEnemies");
+            spawnedStonesParent = new GameObject("SpawnedStones");
 
             // Stone_modelを生成
-            for (int i = 0; i < numberOfEnemy; i++)
+            for (int i = 0; i < numberOfStones; i++)
             {
                 Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
                 if (CheckLayerForObjectSpawn(spawnPosition))
                 {
                     float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
                     GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
-                    newStone.name = "Enemy_" + (i + 1);  // 名前に連番を追加
-                    newStone.transform.SetParent(spawnedEnemiesParent.transform);  // 生成した石の親を設定
+                    newStone.name = "Rock_" + (i + 1);  // 名前に連番を追加
+                    newStone.transform.SetParent(spawnedStonesParent.transform);  // 生成した石の親を設定
                 }
             }
+
+            //// Stone_modelのリソースをロード
+            //SetName("goblin");
+            //if (itemToAdd == null)
+            //{
+            //    Debug.LogError("Rockのリソースが見つかりません！");
+            //    return;
+            //}
+
+            //// Stone_modelの親オブジェクトを作成
+            //spawnedEnemiesParent = new GameObject("spawnedEnemies");
+
+            //// Stone_modelを生成
+            //for (int i = 0; i < numberOfEnemy; i++)
+            //{
+            //    Vector3 spawnPosition = GetRandomPositionOnTerrain(terrainPosition, terrainSize);
+            //    if (CheckLayerForObjectSpawn(spawnPosition))
+            //    {
+            //        float yPosition = terrain.SampleHeight(spawnPosition) + terrainPosition.y;
+            //        GameObject newStone = Instantiate(itemToAdd, new Vector3(spawnPosition.x, yPosition, spawnPosition.z), Quaternion.identity);
+            //        newStone.name = "Enemy_" + (i + 1);  // 名前に連番を追加
+            //        newStone.transform.SetParent(spawnedEnemiesParent.transform);  // 生成した石の親を設定
+            //    }
+            //}
         }
 
        
