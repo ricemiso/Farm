@@ -24,6 +24,8 @@ public class EquipSystem : MonoBehaviour
 
     public int stackcnt;
 
+    public bool SwingWait;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,6 +43,7 @@ public class EquipSystem : MonoBehaviour
     {
 
         PopulateSlotList();
+        SwingWait = false;
     }
 
     private void Update()
@@ -286,8 +289,8 @@ public class EquipSystem : MonoBehaviour
 
         if (selecteditemModel && selecteditemModel.GetComponent<EquiableItem>())
         {
-            Debug.Log("SwingWait in IsThereSwingLock: " + selecteditemModel.GetComponent<EquiableItem>().SwingWait);
-            return selecteditemModel.GetComponent<EquiableItem>().SwingWait;
+            Debug.Log("SwingWait in IsThereSwingLock: " + selecteditemModel.GetComponent<EquiableItem>().Swinging);
+            return selecteditemModel.GetComponent<EquiableItem>().Swinging;
         }
         else
         {
