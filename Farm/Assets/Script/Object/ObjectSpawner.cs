@@ -104,7 +104,7 @@ public class ObjectSpawner : MonoBehaviour
         if (!GrobalState.Instance.isTutorialEnd)
         {
             // Stone_modelのリソースをロード
-            SetName("Enemy v2 2");
+            SetName("goblin");
             if (itemToAdd == null)
             {
                 Debug.LogError("Rockのリソースが見つかりません！");
