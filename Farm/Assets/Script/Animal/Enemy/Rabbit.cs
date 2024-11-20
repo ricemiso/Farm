@@ -92,7 +92,20 @@ public class Rabbit : EnemyAI_Movement
         {
             if(animator == null)
             {
-                animation.Play("attack01");
+                if (animation.GetClip("attack01") != null)
+                {
+                    animation.Play("attack01");
+                }
+
+                if (animation.GetClip("attack02") != null)
+                {
+                    animation.Play("attack02");
+                }
+
+                if (animation.GetClip("attack03") != null)
+                {
+                    animation.Play("attack03");
+                }
             }
             
             float damage = GetComponent<Animal>().damage;

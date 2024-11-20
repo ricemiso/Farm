@@ -31,7 +31,8 @@ public class Animal : MonoBehaviour
         Rabbit,
         PlantEnemy,
         Union,
-        Goblin
+        Goblin,
+        Wolf
     }
 
     [SerializeField] AnimalType thisAnimalType;
@@ -86,6 +87,11 @@ public class Animal : MonoBehaviour
         }
 
         if(thisAnimalType == AnimalType.Goblin)
+        {
+            GetComponent<Animation>().Play("walk");
+        }
+
+        if (thisAnimalType == AnimalType.Wolf)
         {
             GetComponent<Animation>().Play("walk");
         }
