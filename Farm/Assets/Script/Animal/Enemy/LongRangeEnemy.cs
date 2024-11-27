@@ -20,6 +20,8 @@ public class LongRange : EnemyAI_Movement
 	[Tooltip("弾の生存時間")]
 	private float lifeTime = 2.0f;
 
+	bool wait = false;
+
 	protected override void Start()
 	{
 		attackRange = 20.0f;
@@ -29,27 +31,93 @@ public class LongRange : EnemyAI_Movement
 	protected override void Update()
 	{
 		base.Update();
+
+		switch (state)
+		{
+			case MoveState.WALKING:
+				Walk();
+				break;
+
+			case MoveState.CHASE:
+				if (target != null)
+				{
+					ChaseEnemy();
+				}
+				break;
+
+			case MoveState.WAITING:
+				Wait();
+				break;
+
+			default:
+				// 停止中など他の状態の処理
+				break;
+		}
+	}
+
+	protected override void ChaseEnemy()
+	{
+		if (player == null || target == null) return;
+
+		base.ChaseEnemy();
+
+		// プレイヤーの進行方向を取得し、追尾処理
+		if (target != null)
+		{
+			Vector3 followPosition = target.transform.position;
+
+			// 移動処理
+			Chase(followPosition, true);
+
+			// アニメーションの切り替え
+			if (animator != null)
+			{  // 近くにターゲットがいたら攻撃処理
+				float distance = Vector3.Distance(followPosition, transform.position);
+				animator.SetBool("isRunning", distance > attackRange);
+			}
+		}
 	}
 
 	public void CheckAttack(GameObject obj)
 	{
-		if (obj != target) return;
+		//if (obj != target) return;
 		//TODO:anim-syonnotukeru
 		animator.SetTrigger("Fire");
+		StartCoroutine(Fire());
+
 	}
+
+	IEnumerator Fire()
+    {
+		yield return new WaitForSeconds(0.2f);
+		InstanceFire();
+    }
 
 	public void InstanceFire()
     {
-		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
-		Quaternion spawnRotation = shootPos.transform.rotation;
+		
+		if (wait == false)
+		{
+			wait = true;
 
-		GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
+			Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
+			Quaternion spawnRotation = shootPos.transform.rotation;
 
-		Vector3 direction = newBullet.transform.forward;
-		newBullet.GetComponent<Rigidbody>().AddForce(direction * 10.0f, ForceMode.Impulse);
-		newBullet.name = bullet.name;
-		Destroy(newBullet, lifeTime);
-		float damage = GetComponent<Animal>().damage;
-		newBullet.GetComponent<Magic>().SetDamage(damage);
+			GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
+
+			Vector3 direction = newBullet.transform.forward;
+			newBullet.GetComponent<Rigidbody>().AddForce(direction * 10.0f, ForceMode.Impulse);
+			newBullet.name = bullet.name;
+			Destroy(newBullet, lifeTime);
+			float damage = GetComponent<Animal>().damage;
+			newBullet.GetComponent<EnemyMagic>().SetDamage(damage);
+			StartCoroutine(Fire2());
+		}
+
+	}
+	IEnumerator Fire2()
+	{
+		yield return new WaitForSeconds(0.5f);
+		wait = false;
 	}
 }

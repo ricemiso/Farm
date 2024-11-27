@@ -76,7 +76,7 @@ public class EnemyAI_Movement : AI_Movement
 	{
 		if(animator != null)
         {
-			animator.SetBool("isRunning", true);
+			animator.SetTrigger("Run");
 		}
         else
         {
