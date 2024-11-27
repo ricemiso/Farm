@@ -32,7 +32,8 @@ public class Animal : MonoBehaviour
         PlantEnemy,
         Union,
         Goblin,
-        Wolf
+        Wolf,
+        Dragon
     }
 
     [SerializeField] AnimalType thisAnimalType;
