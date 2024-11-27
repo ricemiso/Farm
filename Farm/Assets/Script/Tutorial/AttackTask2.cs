@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class AttackTask2 : ITutorialTask
 
     public void OnTaskSetting()
     {
-        //TutorialManager.Instance.enemy.SetActive(true);
-    }
+		//TutorialManager.Instantiate(resource);
+	}
 
     public bool CheckTask()
     {

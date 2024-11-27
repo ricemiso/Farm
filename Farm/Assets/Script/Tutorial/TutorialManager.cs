@@ -11,157 +11,181 @@ using UnityEngine.UI;
 /// </summary>
 public class TutorialManager : MonoBehaviour
 {
-    //public static TutorialManager Instance { get; set; }
+	//public static TutorialManager Instance { get; set; }
 
-    // チュートリアル用UI
-    protected RectTransform tutorialTextArea;
-    protected Text TutorialTitle;
-    protected Text TutorialText;
+	// チュートリアル用UI
+	protected RectTransform tutorialTextArea;
+	protected Text TutorialTitle;
+	protected Text TutorialText;
 
-    //public GameObject tree;
-    //public GameObject stone;
-    //public GameObject enemy;
+	//public GameObject tree;
+	//public GameObject stone;
+	//public GameObject enemy;
 
-    // チュートリアルタスク
-    protected ITutorialTask currentTask;
-    protected List<ITutorialTask> tutorialTask;
+	// チュートリアルタスク
+	protected ITutorialTask currentTask;
+	protected List<ITutorialTask> tutorialTask;
 
-    // チュートリアル表示フラグ
-    private bool isEnabled;
+	// チュートリアル表示フラグ
+	private bool isEnabled;
 
-    // チュートリアルタスクの条件を満たした際の遷移用フラグ
-    private bool task_executed = false;
+	// チュートリアルタスクの条件を満たした際の遷移用フラグ
+	private bool task_executed = false;
 
-    // チュートリアル表示時のUI移動距離
-    private float fade_pos_x = 900;
+	// チュートリアル表示時のUI移動距離
+	private float fade_pos_x = 900;
 
-   //// private void Awake()
-   // {
-   //     if (Instance != null && Instance != this)
-   //     {
-   //         Destroy(gameObject);
-   //     }
-   //     else
-   //     {
-   //         Instance = this;
-   //     }
-   // }
+	//チュートリアル用エネミー
+	public GameObject enemy;
+	public GameObject enemy2;
+	//public bool isSpawn = false;
 
-    void Start()
-    {
-        // チュートリアル表示用UIのインスタンス取得
-        tutorialTextArea = GameObject.Find("TutorialArea").GetComponent<RectTransform>();
-        TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
-        TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
+	//// private void Awake()
+	// {
+	//     if (Instance != null && Instance != this)
+	//     {
+	//         Destroy(gameObject);
+	//     }
+	//     else
+	//     {
+	//         Instance = this;
+	//     }
+	// }
 
-        //tree.SetActive(false);
-        //stone.SetActive(false);
-        //enemy.SetActive(false);
+	void Start()
+	{
+		// チュートリアル表示用UIのインスタンス取得
+		tutorialTextArea = GameObject.Find("TutorialArea").GetComponent<RectTransform>();
+		TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
+		TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
 
-        // チュートリアルの一覧
-        tutorialTask = new List<ITutorialTask>()
-        {
-            new MovementTask(),
-            new EquipTask(),
-            new AttackTask(),
-            new AttackTask2(),
-            new LootTask(), //いらなくなる予定
-            new OpenInventroyTask(),
-            new HealTask(),
-            new StackInventroyTask(),
-            new ChoppableTreeTask(),
-            new ChoppableStoneTask(),
-            //new OpenCraftingScreenOpenTask(), //いらないチュートリアル
-            new CraftAllMinion(),
-            new FarmTask1(),
-            new FarmTask2(),
-            new FarmTask3(),
-            new ConstructionTask(),
-            new LevelUpTask(),
-            new ChargeTask(),
-        };
+		//tree.SetActive(false);
+		//stone.SetActive(false);
+		//enemy.SetActive(false);
 
-        // 最初のチュートリアルを設定
-        StartCoroutine(SetCurrentTask(tutorialTask.First()));
+		// チュートリアルの一覧
+		tutorialTask = new List<ITutorialTask>()
+		{
+			new MovementTask(),
+			new EquipTask(),
+			new AttackTask(),
+			new AttackTask2(),
+			new LootTask(), //いらなくなる予定
+			new OpenInventroyTask(),
+			new HealTask(),
+			new StackInventroyTask(),
+			new ChoppableTreeTask(),
+			new ChoppableStoneTask(),
+			//new OpenCraftingScreenOpenTask(), //いらないチュートリアル
+			new CraftAllMinion(),
+			new FarmTask1(),
+			new FarmTask2(),
+			new FarmTask3(),
+			new ConstructionTask(),
+			new LevelUpTask(),
+			new ChargeTask(),
+		};
 
-        isEnabled = true;
-    }
+		// 最初のチュートリアルを設定
+		StartCoroutine(SetCurrentTask(tutorialTask.First()));
 
-    void Update()
-    {
-        // チュートリアルが存在し実行されていない場合に処理
-        if (currentTask != null && !task_executed)
-        {
-            // 現在のチュートリアルが実行されたか判定
-            if (currentTask.CheckTask())
-            {
-                task_executed = true;
+		isEnabled = true;
 
-                DOVirtual.DelayedCall(currentTask.GetTransitionTime(), () => {
-                    iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
-                        "position", tutorialTextArea.transform.position - new Vector3(fade_pos_x, 0, 0),
-                        "time", 1f
-                    ));
+	}
 
-                    tutorialTask.RemoveAt(0);
+	void Update()
+	
+	{
+		// チュートリアルが存在し実行されていない場合に処理
+		if (currentTask != null && !task_executed)
+		{
+			// 現在のチュートリアルが実行されたか判定
+			if (currentTask.CheckTask())
+			{
+				task_executed = true;
 
-                    var nextTask = tutorialTask.FirstOrDefault();
-                    if (nextTask != null)
-                    {
-                        StartCoroutine(SetCurrentTask(nextTask, 1f));
-                    }
-                });
-            }
-        }
+				DOVirtual.DelayedCall(currentTask.GetTransitionTime(), () => {
+					iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
+						"position", tutorialTextArea.transform.position - new Vector3(fade_pos_x, 0, 0),
+						"time", 1f
+					));
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            SwitchEnabled();
-        }
+					tutorialTask.RemoveAt(0);
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            SceneManager.LoadScene("MainScene");
-            GrobalState.Instance.isSkip = true;
-        }
-    }
+					var nextTask = tutorialTask.FirstOrDefault();
+					if (nextTask != null)
+					{
+						StartCoroutine(SetCurrentTask(nextTask, 1f));
+					}
+				});
+			}
+		}
 
-    /// <summary>
-    /// 新しいチュートリアルタスクを設定する
-    /// </summary>
-    /// <param name="task"></param>
-    /// <param name="time"></param>
-    /// <returns></returns>
-    protected IEnumerator SetCurrentTask(ITutorialTask task, float time = 0)
-    {
-        // timeが指定されている場合は待機
-        yield return new WaitForSeconds(time);
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			SwitchEnabled();
+		}
 
-        currentTask = task;
-        task_executed = false;
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			SceneManager.LoadScene("MainScene");
+			GrobalState.Instance.isSkip = true;
+		}
 
-        // UIにタイトルと説明文を設定
-        TutorialTitle.text = task.GetTitle();
-        TutorialText.text = task.GetText();
+		//if (isSpawn)
+		//{
+		//	enemy.SetActive(true);
+		//	isSpawn = false;
+		//}
+	}
 
-        
-        task.OnTaskSetting();
+	/// <summary>
+	/// 新しいチュートリアルタスクを設定する
+	/// </summary>
+	/// <param name="task"></param>
+	/// <param name="time"></param>
+	/// <returns></returns>
+	protected IEnumerator SetCurrentTask(ITutorialTask task, float time = 0)
+	{
+		// timeが指定されている場合は待機
+		yield return new WaitForSeconds(time);
 
-        iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
-            "position", tutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
-            "time", 1f
-        ));
-    }
+		currentTask = task;
+		task_executed = false;
 
-    /// <summary>
-    /// チュートリアルの有効・無効の切り替え
-    /// </summary>
-    protected void SwitchEnabled()
-    {
-        isEnabled = !isEnabled;
+		// UIにタイトルと説明文を設定
+		TutorialTitle.text = task.GetTitle();
+		TutorialText.text = task.GetText();
 
-        // UIの表示切り替え
-        float alpha = isEnabled ? 1f : 0;
-        tutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
-    }
+
+		task.OnTaskSetting();
+
+		iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
+			"position", tutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
+			"time", 1f
+		));
+
+		if (task.GetTitle() == "基本操作 攻撃(2/2)")
+		{
+			enemy.SetActive(true);
+			//isSpawn = true;
+		}
+		if(task.GetTitle() == "基本操作 クリスタルの成長")
+		{
+			enemy2.SetActive(true);
+		}
+
+	}
+
+	/// <summary>
+	/// チュートリアルの有効・無効の切り替え
+	/// </summary>
+	protected void SwitchEnabled()
+	{
+		isEnabled = !isEnabled;
+
+		// UIの表示切り替え
+		float alpha = isEnabled ? 1f : 0;
+		tutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+	}
 }
