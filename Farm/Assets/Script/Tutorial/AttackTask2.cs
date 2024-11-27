@@ -16,7 +16,7 @@ public class AttackTask2 : ITutorialTask
 
     public void OnTaskSetting()
     {
-        TutorialManager.Instance.enemy.SetActive(true);
+        //TutorialManager.Instance.enemy.SetActive(true);
     }
 
     public bool CheckTask()

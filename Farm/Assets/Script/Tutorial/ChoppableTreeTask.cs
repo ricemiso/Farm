@@ -16,7 +16,7 @@ public class ChoppableTreeTask : ITutorialTask
 
     public void OnTaskSetting()
     {
-        TutorialManager.Instance.tree.SetActive(true);
+        //TutorialManager.Instance.tree.SetActive(true);
     }
 
     public bool CheckTask()
