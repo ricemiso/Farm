@@ -18,6 +18,7 @@ public class GrobalState : MonoBehaviour
     public bool isTreeChopped = false;
     public bool isStoneChopped = false;
     public bool isTutorialEnd = false;
+    public bool isSkip = false;
 
 
     private void Awake()
