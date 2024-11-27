@@ -1602,6 +1602,8 @@ MonoBehaviour:
   foundationWalkSound: {fileID: 61512414}
   rabbitCrySound: {fileID: 0}
   FarmWalkSound: {fileID: 0}
+  EatSound: {fileID: 0}
+  DamageSound: {fileID: 0}
   startingZoneBGMMusic: {fileID: 61512410}
 --- !u!82 &61512404
 AudioSource:
@@ -3382,6 +3384,8 @@ MonoBehaviour:
   inventryitemList: []
   isOpen: 0
   islevelUp: 0
+  canupdate: 1
+  itemIncreased: 0
   AxeBLP: {fileID: 0}
   PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
@@ -3393,6 +3397,12 @@ MonoBehaviour:
   TankMinionBLP: {fileID: 0}
   MagicMinionBLP: {fileID: 0}
   ChestBLP: {fileID: 0}
+  LogManaBLP: {fileID: 0}
+  StoneManaBLP: {fileID: 0}
+  isMinionCraft: 0
+  isTankMinionCraft: 0
+  isMagicMinionCraft: 0
+  isFarm3: 0
 --- !u!1 &99776116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,6 +5522,10 @@ MonoBehaviour:
   inventoryUpdated: 0
   isPop: 0
   itemsPickedup: []
+  stackLimit: 10
+  isStacked: 0
+  isMinonget: 0
+  isHeal: 0
 --- !u!4 &211531091
 Transform:
   m_ObjectHideFlags: 0
@@ -5969,6 +5983,7 @@ MonoBehaviour:
   player: {fileID: 0}
   placementHoldingSpot: {fileID: 1288155330}
   placeStorageHoldingSpot: {fileID: 937603853}
+  isConstruction: 0
 --- !u!1 &248250474
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,6 +6382,7 @@ MonoBehaviour:
   player: {fileID: 1686317345}
   placementHoldingSpot: {fileID: 0}
   placeStorageHoldingSpot: {fileID: 0}
+  isConstruction: 0
 --- !u!1001 &267610732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8828,8 +8844,13 @@ MonoBehaviour:
   selectedCraft: {fileID: 0}
   selectedStone: {fileID: 0}
   selectedCrystal: {fileID: 0}
+  selectedMiniCrystal: {fileID: 0}
+  selectedAnimal: {fileID: 0}
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
+  isDamage: 0
+  isloot: 0
+  isFarm1: 0
 --- !u!4 &484624253
 Transform:
   m_ObjectHideFlags: 0
@@ -9783,6 +9804,10 @@ MonoBehaviour:
   inventoryUpdated: 0
   isPop: 0
   itemsPickedup: []
+  stackLimit: 10
+  isStacked: 0
+  isMinonget: 0
+  isHeal: 0
 --- !u!1 &551811481
 GameObject:
   m_ObjectHideFlags: 0
@@ -11637,6 +11662,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693165008}
   m_CullTransparentMesh: 1
+--- !u!1001 &698234708
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 130964, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_Name
+      value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 507.17105
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 345.55746
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 411342, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c644a2181ac22e740968a7ece97e8f36, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -13024,6 +13106,8 @@ MonoBehaviour:
   inventryitemList: []
   isOpen: 0
   islevelUp: 0
+  canupdate: 1
+  itemIncreased: 0
   AxeBLP: {fileID: 0}
   PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
@@ -13035,6 +13119,12 @@ MonoBehaviour:
   TankMinionBLP: {fileID: 0}
   MagicMinionBLP: {fileID: 0}
   ChestBLP: {fileID: 0}
+  LogManaBLP: {fileID: 0}
+  StoneManaBLP: {fileID: 0}
+  isMinionCraft: 0
+  isTankMinionCraft: 0
+  isMagicMinionCraft: 0
+  isFarm3: 0
 --- !u!1 &743446728
 GameObject:
   m_ObjectHideFlags: 0
@@ -14665,6 +14755,8 @@ MonoBehaviour:
   selectedItem: {fileID: 0}
   toolHolder: {fileID: 0}
   selecteditemModel: {fileID: 0}
+  stackcnt: 0
+  SwingWait: 0
 --- !u!1001 &865319417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16323,6 +16415,8 @@ MonoBehaviour:
   foundationWalkSound: {fileID: 920805004}
   rabbitCrySound: {fileID: 0}
   FarmWalkSound: {fileID: 0}
+  EatSound: {fileID: 0}
+  DamageSound: {fileID: 0}
   startingZoneBGMMusic: {fileID: 920805005}
 --- !u!1 &922331393
 GameObject:
@@ -18828,6 +18922,7 @@ MonoBehaviour:
   isHydrationActive: 0
   isPosition: {x: 0, y: 0, z: 0}
   playerSpeedRate: 1
+  bloodPannl: {fileID: 0}
 --- !u!1 &1049366976
 GameObject:
   m_ObjectHideFlags: 0
@@ -18913,6 +19008,10 @@ MonoBehaviour:
   resourceMana: 0
   level: 0
   damage: 0
+  isTreeChopped: 0
+  isStoneChopped: 0
+  isTutorialEnd: 0
+  isSkip: 0
 --- !u!1001 &1058269030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19673,6 +19772,7 @@ MonoBehaviour:
     IsActive: 1
     WaveLimit: 2
   m_HealthMultiply: 1
+  m_DamageMultiply: 0
   m_SizeMultiply: 0
 --- !u!1001 &1148441829
 PrefabInstance:
@@ -20546,8 +20646,10 @@ MonoBehaviour:
   terrain: {fileID: 0}
   numberOfTrees: 1000
   numberOfStones: 1000
+  numberOfEnemy: 500
   treeParent: {fileID: 0}
   StoneParent: {fileID: 0}
+  EnemyParent: {fileID: 0}
 --- !u!1 &1226492245
 GameObject:
   m_ObjectHideFlags: 0
@@ -23013,6 +23115,7 @@ MonoBehaviour:
   isHydrationActive: 0
   isPosition: {x: 0, y: 0, z: 0}
   playerSpeedRate: 1
+  bloodPannl: {fileID: 0}
 --- !u!1 &1388487429
 GameObject:
   m_ObjectHideFlags: 0
@@ -23816,6 +23919,7 @@ MonoBehaviour:
     IsActive: 1
     WaveLimit: 0
   m_HealthMultiply: 0.1
+  m_DamageMultiply: 0
   m_SizeMultiply: 0.1
 --- !u!1 &1457498119
 GameObject:
@@ -24032,8 +24136,13 @@ MonoBehaviour:
   selectedCraft: {fileID: 0}
   selectedStone: {fileID: 0}
   selectedCrystal: {fileID: 0}
+  selectedMiniCrystal: {fileID: 0}
+  selectedAnimal: {fileID: 0}
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
+  isDamage: 0
+  isloot: 0
+  isFarm1: 0
 --- !u!1 &1475132106
 GameObject:
   m_ObjectHideFlags: 0
@@ -26604,6 +26713,10 @@ MonoBehaviour:
   resourceMana: 0
   level: 0
   damage: 0
+  isTreeChopped: 0
+  isStoneChopped: 0
+  isTutorialEnd: 0
+  isSkip: 0
 --- !u!1 &1626534545
 GameObject:
   m_ObjectHideFlags: 0
@@ -30992,6 +31105,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8558697898680544710, guid: 749b7d4efa873e74ab090ccc57c7bce3, type: 3}
   m_PrefabInstance: {fileID: 1936017541}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1936019161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_Name
+      value: goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 501.07224
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000010967255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 343.0406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836054347422599698, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
 --- !u!1001 &1939046700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34006,6 +34176,8 @@ MonoBehaviour:
   selectedItem: {fileID: 0}
   toolHolder: {fileID: 2103019920}
   selecteditemModel: {fileID: 0}
+  stackcnt: 0
+  SwingWait: 0
 --- !u!1 &2131424797
 GameObject:
   m_ObjectHideFlags: 0
@@ -34341,8 +34513,10 @@ MonoBehaviour:
   terrain: {fileID: 0}
   numberOfTrees: 1000
   numberOfStones: 1000
+  numberOfEnemy: 500
   treeParent: {fileID: 1847531660}
   StoneParent: {fileID: 21247442}
+  EnemyParent: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -34358,3 +34532,5 @@ SceneRoots:
   - {fileID: 743564622}
   - {fileID: 2109536954}
   - {fileID: 1129432037}
+  - {fileID: 698234708}
+  - {fileID: 1936019161}
