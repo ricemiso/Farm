@@ -524,6 +524,7 @@ public class SelectionManager : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 
 		animal.TakeDamage(damage);
+		yield return new WaitForSeconds(0.5f);
 		animal.canBeChopped = false;
 	}
 
