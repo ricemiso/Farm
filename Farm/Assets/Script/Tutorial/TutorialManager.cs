@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -116,6 +117,11 @@ public class TutorialManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             SwitchEnabled();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("MainScene");
         }
     }
 
