@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
+  m_IndirectSpecularColor: {r: 0.549069, g: 0.7945378, b: 0.9727815, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -28295,7 +28295,7 @@ MonoBehaviour:
   m_SpawnerList:
   - Object: {fileID: 1630540139}
     IsActive: 1
-    WaveLimit: 1
+    WaveLimit: 2
   - Object: {fileID: 806349926}
     IsActive: 1
     WaveLimit: 6
@@ -28307,7 +28307,7 @@ MonoBehaviour:
     WaveLimit: 12
   m_HealthMultiply: 0.1
   m_DamageMultiply: 0.4
-  m_SizeMultiply: 0.1
+  m_SizeMultiply: 0.05
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
