@@ -5648,7 +5648,7 @@ MonoBehaviour:
   minDst: 100
   maxAlpha: 100
   minAlpha: 0
-  distanceToPlayer: 0
+  isCheckXDst: 0
 --- !u!1 &208045528
 GameObject:
   m_ObjectHideFlags: 0
@@ -7896,7 +7896,7 @@ MonoBehaviour:
   minDst: 100
   maxAlpha: 100
   minAlpha: 0
-  distanceToPlayer: 0
+  isCheckXDst: 0
 --- !u!1 &380608644
 GameObject:
   m_ObjectHideFlags: 0
@@ -16424,7 +16424,7 @@ MonoBehaviour:
   minDst: 100
   maxAlpha: 100
   minAlpha: 0
-  distanceToPlayer: 0
+  isCheckXDst: 0
 --- !u!1 &881255769
 GameObject:
   m_ObjectHideFlags: 0
@@ -20710,7 +20710,7 @@ MonoBehaviour:
   minDst: 100
   maxAlpha: 100
   minAlpha: 0
-  distanceToPlayer: 0
+  isCheckXDst: 0
 --- !u!1 &1068163996
 GameObject:
   m_ObjectHideFlags: 0
@@ -28295,7 +28295,7 @@ MonoBehaviour:
   m_SpawnerList:
   - Object: {fileID: 1630540139}
     IsActive: 1
-    WaveLimit: 4
+    WaveLimit: 1
   - Object: {fileID: 806349926}
     IsActive: 1
     WaveLimit: 6

@@ -59,7 +59,7 @@ public class Rabbit : EnemyAI_Movement
             Vector3 followPosition = target.transform.position;
 
             // 移動処理
-            Chase(followPosition);
+            Chase(followPosition,true);
 
             // アニメーションの切り替え
             if (animator != null)

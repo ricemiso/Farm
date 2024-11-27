@@ -5467,6 +5467,7 @@ MonoBehaviour:
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  stopDistance: 30
   onGround: 0
   attackRange: 1
   timeToFoundEnemy: 0
