@@ -186,12 +186,28 @@ public class Animal : MonoBehaviour
 
                     }
                 }
+
+                // ÉhÉâÉSÉì
+                else if (thisAnimalType == AnimalType.Dragon)
+                {
+                    if (animator != null)
+                    {
+                        animator.SetTrigger("Die"); // "Die"ÇÕAnimatorì‡Ç≈ê›íËÇµÇΩTriggerñº
+                    }
+                    else
+                    {
+                        Debug.LogWarning("AnimatorÇ™å©Ç¬Ç©ÇËÇ‹ÇπÇÒ");
+                    }
+                }
+
                 else
                 {
                     GetComponent<Rabbit>().enabled = false;
                     animator.SetTrigger("Die");
                     GetComponentInChildren<AttackBoxRabbit>().enabled = false;
                 }
+
+
 
                 StartCoroutine(puddleDelay());
                 isDead = true;

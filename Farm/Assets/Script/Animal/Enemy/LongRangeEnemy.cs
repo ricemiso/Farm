@@ -35,6 +35,7 @@ public class LongRange : EnemyAI_Movement
 	{
 		if (obj != target) return;
 		//TODO:anim-syonnotukeru
+		animator.SetTrigger("Fire");
 	}
 
 	public void InstanceFire()
