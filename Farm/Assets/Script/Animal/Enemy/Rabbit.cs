@@ -61,21 +61,10 @@ public class Rabbit : EnemyAI_Movement
             // 移動処理
             Chase(followPosition);
 
-            // 近くにターゲットがいたら攻撃処理
-            float distance = Vector3.Distance(followPosition, transform.position);
-            if (distance <= attackRange &&
-                timeToFoundEnemy <= 0.1f &&
-                currentAttackCooltime <= 0.0f)
-            {
-                float damage = GetComponent<Animal>().damage;
-                Attack(damage);
-
-                currentAttackCooltime = attackCooltime;
-            }
-
             // アニメーションの切り替え
             if (animator != null)
-            {
+            {  // 近くにターゲットがいたら攻撃処理
+                float distance = Vector3.Distance(followPosition, transform.position);
                 animator.SetBool("isRunning", distance > attackRange);
             }
         }
