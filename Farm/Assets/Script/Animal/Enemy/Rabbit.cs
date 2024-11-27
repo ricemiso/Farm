@@ -98,7 +98,7 @@ public class Rabbit : EnemyAI_Movement
         }
     }
 
-    void attackwait()
+    public void attackwait()
     {
         float damage = GetComponent<Animal>().damage;
         Attack(damage);

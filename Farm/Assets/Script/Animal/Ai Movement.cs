@@ -229,12 +229,13 @@ public class AI_Movement : MonoBehaviour
 	}
 
 	// 対象に攻撃
-	protected void Attack(float num)
+	public void Attack(float num, GameObject obj = null)
 	{
 		// TODO : 体力管理を一つのクラスに統合させたい
 
 		// タグごとに処理を分岐
-		switch (target.tag)
+		if (obj == null) obj = target;
+		switch (obj.tag)
 		{
 			case "Player":
 				if(num >= 30)

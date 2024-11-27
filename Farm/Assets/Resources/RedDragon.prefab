@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 2787318833127778466}
   - component: {fileID: 3277741249445419951}
   - component: {fileID: 357774363324021415}
-  - component: {fileID: 80938482086982961}
+  - component: {fileID: 8943067416846633810}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -543,7 +543,7 @@ Transform:
   m_GameObject: {fileID: 1567660830425542039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 12.52}
+  m_LocalPosition: {x: 0, y: 5, z: 43.4}
   m_LocalScale: {x: 10, y: 10, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -618,9 +618,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &80938482086982961
+--- !u!114 &8943067416846633810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -629,9 +629,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1567660830425542039}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf52a1aba6e7a34bb60de1fe8878c4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 73dc453f36cf21b479389f92488ea467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RabbitScript: {fileID: 5624160981380968612}
 --- !u!1 &1590090122699650191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,9 +1552,9 @@ GameObject:
   - component: {fileID: 6705608019559264404}
   - component: {fileID: 4852612546754519850}
   - component: {fileID: 870685951426797252}
-  - component: {fileID: 114715163748081342}
   - component: {fileID: 5755381046612839952}
   - component: {fileID: 3716325295883651336}
+  - component: {fileID: 1305247036356283741}
   m_Layer: 0
   m_Name: RedDragon
   m_TagString: Enemy
@@ -1570,13 +1571,14 @@ Transform:
   m_GameObject: {fileID: 5624160981380968612}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 407.72278, y: -0.000020980835, z: 569.78894}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5182165781298133102}
   - {fileID: 6150914385886728134}
   - {fileID: 620137789667178275}
+  - {fileID: 8151254235211141427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3259745873948422794
@@ -1688,7 +1690,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 8, z: 15}
+  m_Size: {x: 5, y: 8, z: 10}
   m_Center: {x: 0, y: 4, z: 0}
 --- !u!114 &870685951426797252
 MonoBehaviour:
@@ -1705,15 +1707,15 @@ MonoBehaviour:
   animalName: "\u30C9\u30E9\u30B4\u30F3"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 0
+  maxHealth: 200
   isCraftedMinion: 0
-  damage: 0
+  damage: 5
   healthIncrease: 20
   damageIncrease: 5
   level: 0
   canBeChopped: 0
-  unionForceStrength: 0
-  enemyForceStrength: 0
+  unionForceStrength: 100
+  enemyForceStrength: 100
   soundChannel: {fileID: 5755381046612839952}
   rabbithitAndScreem: {fileID: 8300000, guid: a518b76513a06e54895367b10fa4d067, type: 3}
   rabitHitAndDie: {fileID: 8300000, guid: dd0e2b6d5535b1146ba2f67a40c84fdf, type: 3}
@@ -1722,37 +1724,6 @@ MonoBehaviour:
   bloodparticle: {fileID: 0}
   levelupparticle: {fileID: 0}
   bloodPaddle: {fileID: 0}
---- !u!114 &114715163748081342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5624160981380968612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 554b0993cfcfc734cbdc63455d03fe8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  animation: {fileID: 0}
-  moveSpeed: 0.2
-  walkCounter: 0
-  waitCounter: 0
-  state: 0
-  player: {fileID: 0}
-  followSpeed: 5
-  rotateSpeed: 10
-  target: {fileID: 0}
-  isStopped: 0
-  stopRange: 20
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  onGround: 0
-  attackRange: 1
-  timeToFoundEnemy: 0
-  currentAttackCooltime: 0
-  Crystal: {fileID: 0}
-  CrystalMini: {fileID: 0}
 --- !u!82 &5755381046612839952
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1867,6 +1838,42 @@ MonoBehaviour:
     amountMax: 5
   finalLoot: []
   wasLootCalulated: 0
+--- !u!114 &1305247036356283741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624160981380968612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5c5fb3cf6510b428b41bb60540dabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  animation: {fileID: 0}
+  moveSpeed: 0.2
+  walkCounter: 0
+  waitCounter: 0
+  state: 0
+  player: {fileID: 0}
+  followSpeed: 5
+  rotateSpeed: 10
+  target: {fileID: 0}
+  isStopped: 0
+  stopRange: 20
+  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  stopDistance: 10
+  onGround: 0
+  attackRange: 1
+  timeToFoundEnemy: 0
+  currentAttackCooltime: 0
+  Crystal: {fileID: 0}
+  CrystalMini: {fileID: 0}
+  shootPos: {fileID: 6305274865487535689}
+  bullet: {fileID: 3071435129641118245, guid: 74aafbbff84c9144a8dc21a8eb2af748, type: 3}
+  speed: 30
+  lifeTime: 2
 --- !u!1 &5636592727212729624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +2004,37 @@ Transform:
   - {fileID: 5299770604861562419}
   - {fileID: 4607835595716141934}
   m_Father: {fileID: 3102469299447137922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6305274865487535689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8151254235211141427}
+  m_Layer: 0
+  m_Name: BulletPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8151254235211141427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305274865487535689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.86, z: 7.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2447546203975670158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6490523755211773430
 GameObject:
