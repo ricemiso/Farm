@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Magic : MonoBehaviour
 {
+    // íeÇÃÉ_ÉÅÅ[ÉW
+    private float Damage;
 
+    public void SetDamage(float damage)
+    {
+        Damage = damage;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<Animal>().TakeDamage(10);
+            collision.gameObject.GetComponent<Animal>().TakeDamage(Damage);
             Destroy(this.gameObject);
 		}
     }

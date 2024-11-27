@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LongRangeMinion : SupportAI_Movement
+public class LongRange : EnemyAI_Movement
 {
 	[SerializeField]
 	[Tooltip("íeÇÃî≠éÀèÍèä")]
@@ -31,8 +31,9 @@ public class LongRangeMinion : SupportAI_Movement
 		base.Update();
 	}
 
-	protected override void checkAttack()
+	public void CheckAttack(GameObject obj)
 	{
+		if (obj != target) return;
 
 
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
