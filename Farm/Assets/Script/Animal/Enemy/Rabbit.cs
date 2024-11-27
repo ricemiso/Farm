@@ -72,11 +72,7 @@ public class Rabbit : EnemyAI_Movement
 
     public void CheckAttack(GameObject obj)
     {
-
-        //animation.Play("attack01");
         if (obj != target) return;
-
-       
 
         if (currentAttackCooltime <= 0.0f)
         {
