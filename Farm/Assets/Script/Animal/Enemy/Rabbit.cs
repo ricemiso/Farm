@@ -63,9 +63,9 @@ public class Rabbit : EnemyAI_Movement
 
             // アニメーションの切り替え
             if (animator != null)
-			{
-				float distance = Vector3.Distance(followPosition, transform.position);
-				animator.SetBool("isRunning", distance > attackRange);
+            {  // 近くにターゲットがいたら攻撃処理
+                float distance = Vector3.Distance(followPosition, transform.position);
+                animator.SetBool("isRunning", distance > attackRange);
             }
         }
     }
