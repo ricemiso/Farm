@@ -50,7 +50,7 @@ public class ObjectSpawner : MonoBehaviour
         
 
 
-        if (GrobalState.Instance.isTutorialEnd)
+        if (GrobalState.Instance.isTutorialEnd || GrobalState.Instance.isSkip)
         {
             // Terrain‚ÌƒTƒCƒY‚ğæ“¾
             TerrainData terrainData = terrain.terrainData;

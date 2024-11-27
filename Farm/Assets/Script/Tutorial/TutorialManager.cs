@@ -122,6 +122,7 @@ public class TutorialManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             SceneManager.LoadScene("MainScene");
+            GrobalState.Instance.isSkip = true;
         }
     }
 
