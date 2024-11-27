@@ -34,8 +34,11 @@ public class LongRange : EnemyAI_Movement
 	public void CheckAttack(GameObject obj)
 	{
 		if (obj != target) return;
+		//TODO:anim-syonnotukeru
+	}
 
-
+	public void InstanceFire()
+    {
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
 		Quaternion spawnRotation = shootPos.transform.rotation;
 
