@@ -111,13 +111,14 @@ public class LongRange : EnemyAI_Movement
 			Destroy(newBullet, lifeTime);
 			float damage = GetComponent<Animal>().damage;
 			newBullet.GetComponent<EnemyMagic>().SetDamage(damage);
-			StartCoroutine(Fire2());
+			//StartCoroutine(Fire2());
+			wait = false;
 		}
 
 	}
 	IEnumerator Fire2()
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(3.0f);
 		wait = false;
 	}
 }
