@@ -30,6 +30,8 @@ public class PlayerState : MonoBehaviour
 
 	public float playerSpeedRate;
 
+	public GameObject bloodPannl;
+
 	private void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -79,6 +81,7 @@ public class PlayerState : MonoBehaviour
 	// ‘Ì—Í‚ð‘Œ¸‚³‚¹‚é
 	public void AddHealth(float num)
 	{
+
 		currentHealth += num;
 
 		if (currentHealth > maxHealth)
@@ -89,6 +92,17 @@ public class PlayerState : MonoBehaviour
 		{
 			currentHealth = 0;
 		}
+
+		StartCoroutine(delayPanel());
+		
+	}
+
+	IEnumerator delayPanel()
+    {
+		yield return new WaitForSeconds(0.5f);
+		bloodPannl.SetActive(false);
+
+
 	}
 
 	public void setHealth(float newHealth)

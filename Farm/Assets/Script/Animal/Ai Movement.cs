@@ -241,6 +241,7 @@ public class AI_Movement : MonoBehaviour
 				{
 					num = 30;
 				}
+				PlayerState.Instance.bloodPannl.SetActive(true);
 				PlayerState.Instance.AddHealth(-num);
 				SoundManager.Instance.PlaySound(SoundManager.Instance.DamageSound);
 				break;
