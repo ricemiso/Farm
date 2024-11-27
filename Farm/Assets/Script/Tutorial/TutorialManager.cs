@@ -11,16 +11,16 @@ using UnityEngine.UI;
 /// </summary>
 public class TutorialManager : MonoBehaviour
 {
-    public static TutorialManager Instance { get; set; }
+    //public static TutorialManager Instance { get; set; }
 
     // チュートリアル用UI
     protected RectTransform tutorialTextArea;
     protected Text TutorialTitle;
     protected Text TutorialText;
 
-    public GameObject tree;
-    public GameObject stone;
-    public GameObject enemy;
+    //public GameObject tree;
+    //public GameObject stone;
+    //public GameObject enemy;
 
     // チュートリアルタスク
     protected ITutorialTask currentTask;
@@ -35,17 +35,17 @@ public class TutorialManager : MonoBehaviour
     // チュートリアル表示時のUI移動距離
     private float fade_pos_x = 900;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
+   //// private void Awake()
+   // {
+   //     if (Instance != null && Instance != this)
+   //     {
+   //         Destroy(gameObject);
+   //     }
+   //     else
+   //     {
+   //         Instance = this;
+   //     }
+   // }
 
     void Start()
     {
@@ -54,9 +54,9 @@ public class TutorialManager : MonoBehaviour
         TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
         TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
 
-        tree.SetActive(false);
-        stone.SetActive(false);
-        enemy.SetActive(false);
+        //tree.SetActive(false);
+        //stone.SetActive(false);
+        //enemy.SetActive(false);
 
         // チュートリアルの一覧
         tutorialTask = new List<ITutorialTask>()
