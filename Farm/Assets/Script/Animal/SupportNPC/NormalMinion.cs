@@ -25,9 +25,9 @@ public class NormalMinion : SupportAI_Movement
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isCheckingAttack)
+        if (other.CompareTag("Enemy"))
         {
-			StartCoroutine(CheckAttackWithDelay());
+			checkAttack();
 		}
     }
 
