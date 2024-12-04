@@ -402,6 +402,8 @@ public class CraftingSystem : MonoBehaviour
         int req1Shortage = Mathf.Max(0, blueprintToCraft.Req1amount - currentAmountReq1);
         int req2Shortage = blueprintToCraft.numOfRequirement == 2 ? Mathf.Max(0, blueprintToCraft.Req2amount - currentAmountReq2) : 0;
 
+
+
         // クイックスロットのアイテム削除処理
         if (req1Shortage > 0)
         {
@@ -480,6 +482,13 @@ public class CraftingSystem : MonoBehaviour
         //TODO:クイックスロットにあるアイテムは現在素材にできない
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
+            quickStoneCount = 0;
+            quickStickCount = 0;
+            quickLogCount = 0;
+            quickPlankCount = 0;
+            quickManaCount = 0;
+            quickMinionCount = 0;
+
             if (quickSlot.transform.childCount > 1)
             {
                 string itemName = quickSlot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
@@ -521,10 +530,10 @@ public class CraftingSystem : MonoBehaviour
 
         //TODO: クラフトアイテムはここで追加
         // ----Axe---- //
-        AxeReq1.text = "マナ 3 [" + (stone_count + quickStoneCount) + "]";
-        AxeReq2.text = "枝 3 [" + (stick_count + quickStickCount) + "]";
+        AxeReq1.text = "マナ 3 [" + (stone_count/* + quickStoneCount*/) + "]";
+        AxeReq2.text = "枝 3 [" + (stick_count/* + quickStickCount*/) + "]";
 
-        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
+        if ((stone_count/* + quickStoneCount*/) >= 3 && (stick_count /*+ quickStickCount*/) >= 3
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftAxeBTN.gameObject.SetActive(true);
@@ -535,10 +544,10 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Pickaxe---- //
-        PickaxeReq1.text = "石 3 [" + (stone_count + quickStoneCount) + "]";
-        PickaxeReq2.text = "枝 3 [" + (stick_count + quickStickCount) + "]";
+        PickaxeReq1.text = "石 3 [" + (stone_count/* + quickStoneCount*/) + "]";
+        PickaxeReq2.text = "枝 3 [" + (stick_count /*+ quickStickCount*/) + "]";
 
-        if ((stone_count + quickStoneCount) >= 3 && (stick_count + quickStickCount) >= 3
+        if ((stone_count/* + quickStoneCount*/) >= 3 && (stick_count /*+ quickStickCount*/) >= 3
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftPickaxeBTN.gameObject.SetActive(true);
@@ -550,9 +559,9 @@ public class CraftingSystem : MonoBehaviour
 
 
         // ----Plank x2---- //
-        PlankReq1.text = "1 丸太 [" + (log_count + quickLogCount) + "]";
+        PlankReq1.text = "1 丸太 [" + (log_count/* + quickLogCount*/) + "]";
 
-        if ((log_count + quickLogCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(2))
+        if ((log_count/* + quickLogCount*/) >= 1 && InventorySystem.Instance.CheckSlotAvailable(2))
         {
             craftPlankBTN.gameObject.SetActive(true);
         }
@@ -562,9 +571,9 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Foundation---- //
-        foundationReq1.text = "4 板 [" + (plank_count + quickPlankCount) + "]";
+        foundationReq1.text = "4 板 [" + (plank_count/* + quickPlankCount*/) + "]";
 
-        if ((plank_count + quickPlankCount) >= 4 && InventorySystem.Instance.CheckSlotAvailable(1))
+        if ((plank_count /*+ quickPlankCount*/) >= 4 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftfoundationBTN.gameObject.SetActive(true);
         }
@@ -574,9 +583,9 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Wall---- //
-        WallReq1.text = "2 板 [" + (plank_count + quickPlankCount) + "]";
+        WallReq1.text = "2 板 [" + (plank_count /*+ quickPlankCount*/) + "]";
 
-        if ((plank_count + quickPlankCount) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
+        if ((plank_count/* + quickPlankCount*/) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftWallBTN.gameObject.SetActive(true);
         }
@@ -586,9 +595,9 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ----Stair---- //
-        StairReq1.text = "4 板 [" + (plank_count + quickPlankCount) + "]";
+        StairReq1.text = "4 板 [" + (plank_count /*+ quickPlankCount*/) + "]";
 
-        if ((plank_count + quickPlankCount) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
+        if ((plank_count/* + quickPlankCount*/) >= 2 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftStairBTN.gameObject.SetActive(true);
         }
@@ -599,10 +608,10 @@ public class CraftingSystem : MonoBehaviour
 
 
         // ---Minion---- //
-        MinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
-        MinionReq2.text = "ミニオン 1 [" + (minion_count + quickMinionCount) + "]";
+        MinionReq1.text = "マナ 1 [" + (mana_count /*+ quickManaCount*/) + "]";
+        MinionReq2.text = "ミニオン 1 [" + (minion_count /*+ quickMinionCount*/) + "]";
 
-        if ((mana_count + quickManaCount) >= 1 && (minion_count + quickMinionCount) >= 1
+        if ((mana_count /*+ quickManaCount*/) >= 1 && (minion_count/* + quickMinionCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             MinionBTN.gameObject.SetActive(true);
@@ -613,9 +622,9 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ---normalMinionReq1---- //
-        normalMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
+        normalMinionReq1.text = "マナ 1 [" + (mana_count /*+ quickManaCount*/) + "]";
 
-        if ((mana_count + quickManaCount) >= 1
+        if ((mana_count /*+ quickManaCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             normalMinionBTN.gameObject.SetActive(true);
@@ -628,10 +637,10 @@ public class CraftingSystem : MonoBehaviour
 
 
         // ---TankMinion---- //
-        TankMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
-        TankMinionReq2.text = "石 1 [" + (stone_count + quickStoneCount) + "]";
+        TankMinionReq1.text = "マナ 1 [" + (mana_count/* + quickManaCount*/) + "]";
+        TankMinionReq2.text = "石 1 [" + (stone_count /*+ quickStoneCount*/) + "]";
 
-        if ((mana_count + quickManaCount) >= 1 && (stone_count + quickStoneCount) >= 1
+        if ((mana_count/* + quickManaCount*/) >= 1 && (stone_count /*+ quickStoneCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             TankMinionBTN.gameObject.SetActive(true);
@@ -643,10 +652,10 @@ public class CraftingSystem : MonoBehaviour
         }
 
         // ---MagicMinion---- //
-        MagicMinionReq1.text = "マナ 1 [" + (mana_count + quickManaCount) + "]";
-        MagicMinionReq2.text = "木 1 [" + (log_count + quickLogCount) + "]";
+        MagicMinionReq1.text = "マナ 1 [" + (mana_count /*+ quickManaCount*/) + "]";
+        MagicMinionReq2.text = "木 1 [" + (log_count /*+ quickLogCount*/) + "]";
 
-        if ((mana_count + quickManaCount) >= 1 && (log_count + quickLogCount) >= 1
+        if ((mana_count /*+ quickManaCount*/) >= 1 && (log_count /*+ quickLogCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             MagicMinionBTN.gameObject.SetActive(true);
@@ -659,9 +668,9 @@ public class CraftingSystem : MonoBehaviour
 
 
         //Chest
-        ChestReq1.text = "4 丸太 [" + (log_count + quickLogCount) + "]";
+        ChestReq1.text = "4 丸太 [" + (log_count/* + quickLogCount*/) + "]";
 
-        if ((log_count + quickLogCount) >= 1 && InventorySystem.Instance.CheckSlotAvailable(1))
+        if ((log_count /*+ quickLogCount*/) >= 1 && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftChestBTN.gameObject.SetActive(true);
         }
@@ -672,9 +681,9 @@ public class CraftingSystem : MonoBehaviour
 
 
         // ---LogMana---- //
-        LogReq1.text = "丸太 4 [" + (log_count + quickLogCount) + "]";
+        LogReq1.text = "丸太 4 [" + (log_count/* + quickLogCount*/) + "]";
 
-        if ((log_count + quickLogCount) >= 1
+        if ((log_count/* + quickLogCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftLogManaBTN.gameObject.SetActive(true);
@@ -686,9 +695,9 @@ public class CraftingSystem : MonoBehaviour
 
 
 		// ---StoneMana---- //
-		StoneReq1.text = "石ころ 6 [" + (stone_count + quickStoneCount) + "]";
+		StoneReq1.text = "石ころ 6 [" + (stone_count /*+ quickStoneCount*/) + "]";
 
-        if ((stone_count + quickStoneCount) >= 1
+        if ((stone_count/* + quickStoneCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftStoneManaBTN.gameObject.SetActive(true);

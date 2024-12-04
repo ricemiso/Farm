@@ -143,6 +143,13 @@ public class Animal : MonoBehaviour
             GrobalState.Instance.resourceMaxHelth = maxHealth;
             Force();
 
+            Rabbit ai = gameObject.GetComponent<Rabbit>();
+            if (ai != null)
+            {
+                ai.IsChaseSupportUnit = true;
+                ai.IsChasePlayer = true;
+            }
+
             bloodparticle.Play();
 
             if (currentHealth <= 0)
@@ -154,7 +161,8 @@ public class Animal : MonoBehaviour
                 if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
-                    DestroyImmediate(gameObject);
+                    DestroyImmediate(this.gameObject);
+                    gameObject.SetActive(false);
                 }
 
                 // ƒSƒuƒŠƒ“
