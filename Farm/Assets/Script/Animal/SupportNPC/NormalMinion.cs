@@ -20,4 +20,13 @@ public class NormalMinion : SupportAI_Movement
 		float damage = GetComponent<Animal>().damage;
 		Attack(damage);
 	}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+			checkAttack();
+
+		}
+    }
 }
