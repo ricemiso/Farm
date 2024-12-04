@@ -79,6 +79,10 @@ public class Plant : MonoBehaviour
             {
 				Grow();
 			}
+        }
+        else
+        {
+			GetComponentInParent<Soil>().MakeSoilNotWatered();
 		}
 	}
 
