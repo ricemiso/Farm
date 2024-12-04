@@ -5646,8 +5646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1686317345}
   wallMat: {fileID: 2100000, guid: 5b71151b50b2db140883ebe05b5d580f, type: 2}
-  maxDst: 200
-  minDst: 100
+  maxDst: 130
+  minDst: 30
   maxAlpha: 100
   minAlpha: 0
   isCheckXDst: 0
@@ -7894,11 +7894,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1686317345}
   wallMat: {fileID: 2100000, guid: fa85d37ccba7cad40adddcae12aa55d7, type: 2}
-  maxDst: 200
-  minDst: 100
+  maxDst: 130
+  minDst: 30
   maxAlpha: 100
   minAlpha: 0
-  isCheckXDst: 0
+  isCheckXDst: 1
 --- !u!1 &380608644
 GameObject:
   m_ObjectHideFlags: 0
@@ -16422,8 +16422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1686317345}
   wallMat: {fileID: 2100000, guid: 74369adbd5bb6474d809ac8783a3c53d, type: 2}
-  maxDst: 200
-  minDst: 100
+  maxDst: 130
+  minDst: 30
   maxAlpha: 100
   minAlpha: 0
   isCheckXDst: 0
@@ -20708,11 +20708,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1686317345}
   wallMat: {fileID: 2100000, guid: 33d81c6de4bd0f44fbaf5ca2f1b602b5, type: 2}
-  maxDst: 200
-  minDst: 100
+  maxDst: 130
+  minDst: 30
   maxAlpha: 100
   minAlpha: 0
-  isCheckXDst: 0
+  isCheckXDst: 1
 --- !u!1 &1068163996
 GameObject:
   m_ObjectHideFlags: 0
