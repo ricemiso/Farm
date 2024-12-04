@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
@@ -25,6 +26,7 @@ public class SupportAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
+		GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
 		// プレイヤーとの距離を計算
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
