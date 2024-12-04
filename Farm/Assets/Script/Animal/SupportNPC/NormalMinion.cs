@@ -5,6 +5,8 @@ using UnityEngine;
 public class NormalMinion : SupportAI_Movement
 {
 
+	private bool isCheckingAttack = false;
+
 	protected override void Start()
 	{
 		base.Start();
@@ -23,10 +25,20 @@ public class NormalMinion : SupportAI_Movement
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") && !isCheckingAttack)
         {
-			checkAttack();
-
+			StartCoroutine(CheckAttackWithDelay());
 		}
     }
+
+	private IEnumerator CheckAttackWithDelay()
+	{
+		isCheckingAttack = true;
+		
+		yield return new WaitForSeconds(2.0f);
+		
+		checkAttack();
+
+		isCheckingAttack = false;
+	}
 }
