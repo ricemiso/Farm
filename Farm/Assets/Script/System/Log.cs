@@ -82,16 +82,16 @@ public class Log : MonoBehaviour
 
     private void AddLogMessage(string message)
     {
-        // 既存のログメッセージと同じ内容があるか確認
-        foreach (LogMessage log in logMessages)
-        {
-            if (log.logText.text == message)
-            {
-                // 同じ内容のログがある場合はタイマーをリセット
-                log.timer = displayDuration;
-                return; // 新しいログは追加しない
-            }
-        }
+        //// 既存のログメッセージと同じ内容があるか確認
+        //foreach (LogMessage log in logMessages)
+        //{
+        //    if (log.logText.text == message)
+        //    {
+        //        // 同じ内容のログがある場合はタイマーをリセット
+        //        log.timer = displayDuration;
+        //        return; // 新しいログは追加しない
+        //    }
+        //}
 
         // プレハブから新しいログオブジェクトを生成
         GameObject newLogObject = Instantiate(logTextPrefab, logContainer);
