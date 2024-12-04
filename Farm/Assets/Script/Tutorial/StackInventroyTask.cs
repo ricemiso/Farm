@@ -6,7 +6,7 @@ public class StackInventroyTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 インベントリ(2/2)";
+        return "基本操作 スタック分割";
     }
 
     public string GetText()

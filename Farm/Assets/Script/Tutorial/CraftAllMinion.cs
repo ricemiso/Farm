@@ -11,7 +11,7 @@ public class CraftAllMinion : ITutorialTask
 
     public string GetText()
     {
-        return "素材が足りていれば出てくるクラフトから種を手に入れよう";
+        return "クラフトから種を手に入れよう";
     }
 
     public void OnTaskSetting()

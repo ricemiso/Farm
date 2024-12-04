@@ -68,21 +68,21 @@ public class TutorialManager : MonoBehaviour
 		{
 			new MovementTask(),
 			new EquipTask(),
-			new AttackTask(),
-			new AttackTask2(),
-			new LootTask(), //いらなくなる予定
 			new OpenInventroyTask(),
-			new HealTask(),
-			new StackInventroyTask(),
-			new ChoppableTreeTask(),
-			new ChoppableStoneTask(),
-			//new OpenCraftingScreenOpenTask(), //いらないチュートリアル
 			new CraftAllMinion(),
 			new FarmTask1(),
 			new FarmTask2(),
 			new FarmTask3(),
 			new ConstructionTask(),
+			new DefeatEnemy(),
+			new LootTask(), //いらなくなる予定
 			new LevelUpTask(),
+			new AttackTask(),
+			new AttackTask2(),
+			new HealTask(),
+			new StackInventroyTask(),
+			new ChoppableTreeTask(),
+			new ChoppableStoneTask(),
 			new ChargeTask(),
 		};
 
@@ -170,7 +170,7 @@ public class TutorialManager : MonoBehaviour
 			enemy.SetActive(true);
 			//isSpawn = true;
 		}
-		if(task.GetTitle() == "基本操作 クリスタルの成長")
+		if(task.GetTitle() == "倒せ")
 		{
 			enemy2.SetActive(true);
 		}
