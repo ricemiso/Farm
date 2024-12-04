@@ -89,6 +89,8 @@ public class SupportAI_Movement : AI_Movement
 
 	void ChaseEnemy()
 	{
+		if (target == null) return;
+
 		animation.Play("Run");
 		//animator.SetBool("isRunning", true);
 
