@@ -139,8 +139,8 @@ public class Animal : MonoBehaviour
         if (isDead == false)
         {
             currentHealth -= damage;
-            //GrobalState.Instance.resourceHelth = currentHealth;
-            //GrobalState.Instance.resourceMaxHelth = maxHealth;
+            GrobalState.Instance.resourceHelth = currentHealth;
+            GrobalState.Instance.resourceMaxHelth = maxHealth;
             Force();
 
             bloodparticle.Play();
