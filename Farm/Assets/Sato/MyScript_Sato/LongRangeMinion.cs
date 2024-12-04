@@ -20,6 +20,9 @@ public class LongRangeMinion : SupportAI_Movement
 	[Tooltip("íeÇÃê∂ë∂éûä‘")]
 	private float lifeTime = 2.0f;
 
+
+	private bool isCheckingAttack = false;
+
 	protected override void Start()
 	{
 		attackRange = 20.0f;
@@ -32,8 +35,7 @@ public class LongRangeMinion : SupportAI_Movement
 	}
 
 	protected override void checkAttack()
-	{
-
+	{ 
 
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
 		Quaternion spawnRotation = shootPos.transform.rotation;
@@ -46,5 +48,25 @@ public class LongRangeMinion : SupportAI_Movement
 		Destroy(newBullet, lifeTime);
 		float damage = GetComponent<Animal>().damage;
 		newBullet.GetComponent<Magic>().SetDamage(damage);
+	}
+
+
+    private void OnTriggerStay(Collider other)
+    {
+		if (other.CompareTag("Enemy") && !isCheckingAttack)
+		{
+			StartCoroutine(CheckAttackWithDelay());
+		}
+	}
+
+	private IEnumerator CheckAttackWithDelay()
+	{
+		isCheckingAttack = true;
+
+		yield return new WaitForSeconds(2.0f);
+
+		checkAttack();
+
+		isCheckingAttack = false;
 	}
 }

@@ -5018,7 +5018,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 11.7, z: 15}
+  m_Size: {x: 62.32, y: 107.5, z: 174.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &2127612127266028338
 AudioSource:
@@ -5204,6 +5204,7 @@ MonoBehaviour:
   isStopped: 0
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+  stopDistance: 10
   onGround: 0
   attackRange: 0.9
   isPushEKey: 0
@@ -5211,6 +5212,7 @@ MonoBehaviour:
   shootPos: {fileID: 518973231133983254}
   bullet: {fileID: 7590026145775744859, guid: b97e6c0409eb23f40a5d837298224808, type: 3}
   speed: 30
+  lifeTime: 2
 --- !u!1 &5893304841787217920
 GameObject:
   m_ObjectHideFlags: 0
