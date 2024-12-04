@@ -511,10 +511,10 @@ public class SelectionManager : MonoBehaviour
 			}
 		}
 
-		if (lootable.GetComponent<Animal>())
-		{
-			lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
-		}
+		//if (lootable.GetComponent<Animal>())
+		//{
+		//	lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
+		//}
 
 		Destroy(lootable.gameObject);
 	}
