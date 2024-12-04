@@ -9455,7 +9455,7 @@ PrefabInstance:
     - target: {fileID: 4716246544512607926, guid: f3fb9001dcbed3e4aa04b4a8da672582, type: 3}
       propertyPath: logTextPrefab
       value: 
-      objectReference: {fileID: 1724745271}
+      objectReference: {fileID: 8980582067990437976, guid: 6ad0a853cee7ce9408134c42c8c08171, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31525,11 +31525,6 @@ PrefabInstance:
 --- !u!224 &1724745270 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4955831975249054086, guid: 28dff3947bdb783418dcc6bc766940a2, type: 3}
-  m_PrefabInstance: {fileID: 1724745269}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1724745271 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2807769551440176658, guid: 28dff3947bdb783418dcc6bc766940a2, type: 3}
   m_PrefabInstance: {fileID: 1724745269}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1724745272 stripped
