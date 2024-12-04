@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Rabbit : EnemyAI_Movement
 {
+
+
+
     protected override void Start()
     {
         base.Start();
@@ -24,27 +27,27 @@ public class Rabbit : EnemyAI_Movement
     {
         base.Update();
 
-        switch (state)
-        {
-            case MoveState.WALKING:
-                Walk();
-                break;
+        //switch (state)
+        //{
+        //    case MoveState.WALKING:
+        //        Walk();
+        //        break;
 
-            case MoveState.CHASE:
-                if (target != null)
-                {
-                    ChaseEnemy();
-                }
-                break;
+        //    case MoveState.CHASE:
+        //        if (target != null)
+        //        {
+        //            ChaseEnemy();
+        //        }
+        //        break;
 
-            case MoveState.WAITING:
-                Wait();
-                break;
+        //    case MoveState.WAITING:
+        //        Wait();
+        //        break;
 
-            default:
-                // ’â~’†‚È‚Ç‘¼‚Ìó‘Ô‚Ìˆ—
-                break;
-        }
+        //    default:
+        //        // ’â~’†‚È‚Ç‘¼‚Ìó‘Ô‚Ìˆ—
+        //        break;
+        //}
     }
 
     protected override void ChaseEnemy()
@@ -103,4 +106,5 @@ public class Rabbit : EnemyAI_Movement
         float damage = GetComponent<Animal>().damage;
         Attack(damage);
     }
+
 }
