@@ -29,7 +29,7 @@ public class LongRangeAttackBox : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
+        if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal") || other.CompareTag("SupportUnit"))
         {
             longrange.CheckAttack(other.GameObject());
         }

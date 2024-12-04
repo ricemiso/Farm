@@ -35,7 +35,7 @@ public class NormalMinion : SupportAI_Movement
 	{
 		isCheckingAttack = true;
 		
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(0.2f);
 		
 		checkAttack();
 
