@@ -237,15 +237,6 @@ public class Animal : MonoBehaviour
 
     }
 
-    //IEnumerator puddleDelay2()
-    //{
-    //    yield return new WaitForSeconds(10);
-    //    if (bloodPaddle != null)
-    //    {
-    //        bloodPaddle.SetActive(false);
-    //    }
-
-    //}
 
     private void PlayDyingSound()
     {

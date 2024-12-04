@@ -94,12 +94,12 @@ public class LongRange : EnemyAI_Movement
     }
 
 	public void InstanceFire()
-    {
-		
-		if (wait == false)
+	{
+		if (!wait)
 		{
 			wait = true;
 
+			// 弾を生成して発射
 			Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
 			Quaternion spawnRotation = shootPos.transform.rotation;
 
@@ -108,17 +108,23 @@ public class LongRange : EnemyAI_Movement
 			Vector3 direction = newBullet.transform.forward;
 			newBullet.GetComponent<Rigidbody>().AddForce(direction * 10.0f, ForceMode.Impulse);
 			newBullet.name = bullet.name;
+
 			Destroy(newBullet, lifeTime);
+
 			float damage = GetComponent<Animal>().damage;
 			newBullet.GetComponent<EnemyMagic>().SetDamage(damage);
-			//StartCoroutine(Fire2());
-			wait = false;
-		}
 
+			// クールダウンを開始
+			StartCoroutine(FireCooldown());
+		}
 	}
-	IEnumerator Fire2()
+
+	private IEnumerator FireCooldown()
 	{
-		yield return new WaitForSeconds(3.0f);
+		// 指定されたクールダウン時間待機
+		yield return new WaitForSeconds(2.0f);
+
+		// waitを解除
 		wait = false;
 	}
 }
