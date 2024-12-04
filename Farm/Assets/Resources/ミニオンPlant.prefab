@@ -628,8 +628,7 @@ MonoBehaviour:
   ageForFirstProduceBatch: 3
   daysForNewProduce: 1000
   daysRemainingForNewProduce: 1000
-  isOneTimearvest: 0
-  isWatered: 0
+  isOneTimearvest: 1
 --- !u!1 &7469460084484141575
 GameObject:
   m_ObjectHideFlags: 0
