@@ -26,6 +26,7 @@ public class Plant : MonoBehaviour
 	[SerializeField] bool isOneTimearvest;
 	//public bool isWatered = false;
 
+	private bool hasGeneratedProduce = false;
 
 	private void OnEnable()
 	{
@@ -88,11 +89,15 @@ public class Plant : MonoBehaviour
 
     private void Update()
     {
-        if (CheckGrows())
-        {
-			GenerateProduceForEmptySpawn();
+		private void Update()
+		{
+			if (CheckGrows() && !hasGeneratedProduce)
+			{
+				GenerateProduceForEmptySpawn();
+				hasGeneratedProduce = true; // ˆ—Ï‚İƒtƒ‰ƒO‚ğİ’è
+			}
 		}
-    }
+	}
 
     private void CheckRroduce()
 	{
