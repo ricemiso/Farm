@@ -74,7 +74,7 @@ public class Plant : MonoBehaviour
         {
             if (CheckGrows())
             {
-                GenerateProduceForEmptySpawn();
+                //GenerateProduceForEmptySpawn();
             }
             else
             {
