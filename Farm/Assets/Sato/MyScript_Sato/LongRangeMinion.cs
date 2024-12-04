@@ -43,7 +43,7 @@ public class LongRangeMinion : SupportAI_Movement
 		GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
 
 		Vector3 direction = newBullet.transform.forward;
-		newBullet.GetComponent<Rigidbody>().AddForce(direction * 10.0f, ForceMode.Impulse);
+		newBullet.GetComponent<Rigidbody>().AddForce(direction * 500.0f, ForceMode.Impulse);
 		newBullet.name = bullet.name;
 		Destroy(newBullet, lifeTime);
 		float damage = GetComponent<Animal>().damage;

@@ -27,7 +27,6 @@ public class NormalMinion : SupportAI_Movement
     {
         if (other.CompareTag("Enemy") && !isCheckingAttack)
         {
-			checkAttack();
 			StartCoroutine(CheckAttackWithDelay());
 		}
     }
@@ -35,8 +34,10 @@ public class NormalMinion : SupportAI_Movement
 	private IEnumerator CheckAttackWithDelay()
 	{
 		isCheckingAttack = true;
-		
-		yield return new WaitForSeconds(0.5f);
+
+		yield return new WaitForSeconds(2.0f);
+
+		checkAttack();
 
 		isCheckingAttack = false;
 	}
