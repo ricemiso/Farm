@@ -18,6 +18,8 @@ public class Log : MonoBehaviour
     private Queue<string> pickupQueue = new Queue<string>();
     private bool isProcessing = false;
 
+    public bool isDamaged = false;
+
     // ログメッセージを保持するクラス
     private class LogMessage
     {
@@ -57,10 +59,17 @@ public class Log : MonoBehaviour
     }
 
     // クリスタルが攻撃された時のメソッド
-    public void OnCrystalAttack()
+    public IEnumerator OnCrystalAttack()
     {
-        AddLogMessage(" クリスタルが攻撃されました。");
-    }
+        if (!isDamaged)
+        {
+            isDamaged = true;
+            AddLogMessage(" クリスタルが攻撃されました。");
+        }
+		yield return new WaitForSeconds(5.0f);
+
+        isDamaged = false;
+	}
 
     // 敵が出現した時のメソッド
     public void OnEnemySpawn(string enemyName)
