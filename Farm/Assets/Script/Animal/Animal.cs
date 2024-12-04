@@ -54,7 +54,7 @@ public class Animal : MonoBehaviour
     private void Start()
     {
         unionForceStrength = 200;
-        enemyForceStrength = 300;
+        enemyForceStrength = 600;
 
         if (CraftingSystem.Instance.islevelUp)
         {
