@@ -73,7 +73,7 @@ public class Plant : MonoBehaviour
 		{
 			if (CheckGrows())
 			{
-				GenerateProduceForEmptySpawn();
+				//GenerateProduceForEmptySpawn();
 			}
 		}
 	}
@@ -88,6 +88,7 @@ public class Plant : MonoBehaviour
 		if (plantage >= ageForMatureModel && isOneTimearvest)
 		{
 			MakePlantPickable();
+			GenerateProduceForEmptySpawn();
 		}
 	}
 
