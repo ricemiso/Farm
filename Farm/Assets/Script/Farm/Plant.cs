@@ -82,7 +82,15 @@ public class Plant : MonoBehaviour
 		}
 	}
 
-	private void CheckRroduce()
+    private void Update()
+    {
+        if (CheckGrows())
+        {
+			GenerateProduceForEmptySpawn();
+		}
+    }
+
+    private void CheckRroduce()
 	{
 		seedModel.SetActive(plantage < ageForFirstProduceBatch);
 		youngPlantModel.SetActive(plantage >= ageForYourModel && plantage < ageForMatureModel);
@@ -92,7 +100,6 @@ public class Plant : MonoBehaviour
 		if (plantage >= ageForMatureModel && isOneTimearvest)
 		{
 			MakePlantPickable();
-			GenerateProduceForEmptySpawn();
 		}
 	}
 
