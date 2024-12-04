@@ -1870,6 +1870,8 @@ MonoBehaviour:
   currentAttackCooltime: 0
   Crystal: {fileID: 0}
   CrystalMini: {fileID: 0}
+  IsChaseSupportUnit: 1
+  IsChasePlayer: 0
   shootPos: {fileID: 6305274865487535689}
   bullet: {fileID: 3071435129641118245, guid: 74aafbbff84c9144a8dc21a8eb2af748, type: 3}
   speed: 30

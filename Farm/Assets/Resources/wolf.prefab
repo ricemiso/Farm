@@ -5474,6 +5474,8 @@ MonoBehaviour:
   currentAttackCooltime: 0
   Crystal: {fileID: 0}
   CrystalMini: {fileID: 0}
+  IsChaseSupportUnit: 1
+  IsChasePlayer: 1
 --- !u!114 &6324738823497126971
 MonoBehaviour:
   m_ObjectHideFlags: 0

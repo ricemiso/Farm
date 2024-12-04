@@ -7,7 +7,6 @@ using UnityEngine.AI;
 
 public class EnemyAI_Movement : AI_Movement
 {
-
 	// 追跡を諦めるまでの時間
 	public const float timeToGiveUpChase = 5.0f;
 	// 敵を見つけてからの時間（再認識するたびにリセット）
@@ -18,9 +17,19 @@ public class EnemyAI_Movement : AI_Movement
 	public const float attackCooltime = 1.0f;
 
 	// クリスタルへの参照
+	// nullでよい
 	public GameObject Crystal;
 	// ミニクリスタルへの参照
+	// nullでよい
 	public GameObject CrystalMini;
+
+	// サポートユニットを見つけた際に追いかけるか
+	public bool IsChaseSupportUnit = false;
+	// プレイヤーユニットを見つけた際に追いかけるか
+	public bool IsChasePlayer = false;
+
+
+
 
 	protected override void Start()
     {
@@ -37,8 +46,11 @@ public class EnemyAI_Movement : AI_Movement
             switch (state)
             {
                 case MoveState.CHASE:
-                    ChaseEnemy();
-                    break;
+					if (target != null)
+					{
+						ChaseEnemy();
+					}
+					break;
                 case MoveState.WALKING:
                     Walk();
                     break;
@@ -97,19 +109,24 @@ public class EnemyAI_Movement : AI_Movement
 	}
 
 
-
 	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerStay(Collider other)
 	{
-
-		if ((other.CompareTag("Player") || other.CompareTag("SupportUnit")))  // 敵が入って、まだ追従していない場合
+		if(other.CompareTag("SupportUnit") && IsChaseSupportUnit)
 		{
 			FoundTarget(other.GameObject());
 		}
+
+		if(other.CompareTag("Player") && IsChasePlayer)
+		{
+			FoundTarget(other.GameObject());
+		}
+
 	}
 
+
 	// 敵を発見したときの処理
-	void FoundTarget(GameObject other)
+	protected void FoundTarget(GameObject other)
 	{
 		state = MoveState.CHASE;
 
@@ -117,12 +134,4 @@ public class EnemyAI_Movement : AI_Movement
 		target = other;
 	}
 
-	// プレイヤーがコライダーから出たとき（追従を停止しない）
-	private void OnTriggerExit(Collider other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			// 追従停止のコードは削除。プレイヤーが出ても追従を続ける。
-		}
-	}
 }
