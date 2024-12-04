@@ -53,8 +53,8 @@ public class Animal : MonoBehaviour
 
     private void Start()
     {
-        unionForceStrength = 200;
-        enemyForceStrength = 600;
+        unionForceStrength = 100;
+        enemyForceStrength = 100;
 
         if (CraftingSystem.Instance.islevelUp)
         {
@@ -132,7 +132,7 @@ public class Animal : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!canBeChopped) return;
+       // if (!canBeChopped) return;
        // if (!EquipSystem.Instance.SwingWait) return;
 
         //canBeChopped = true;
