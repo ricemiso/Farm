@@ -134,6 +134,12 @@ public class SupportAI_Movement : AI_Movement
 				}
 				
 				target = other.gameObject;
+
+                if (animal.isDead)
+                {
+					state = MoveState.FOLLOWING;
+
+				}
 			}
 		}
 	}
@@ -161,6 +167,12 @@ public class SupportAI_Movement : AI_Movement
 				}
 				
 				target = other.gameObject;
+
+				if (animal.isDead)
+				{
+					state = MoveState.FOLLOWING;
+
+				}
 			}
 			else
 			{
