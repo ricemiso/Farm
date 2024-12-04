@@ -134,8 +134,8 @@ public class Plant : MonoBehaviour
 			if (spawn.transform.childCount == 0)
 			{
 				GameObject produce = Instantiate(producePrefab);
-				Destroy(this.gameObject, 24 * 10);
-				Destroy(producePrefab, 24 * 10);
+				Destroy(this.gameObject,60);
+				Destroy(producePrefab, 60);
 
 				produce.transform.parent = spawn.transform;
 
