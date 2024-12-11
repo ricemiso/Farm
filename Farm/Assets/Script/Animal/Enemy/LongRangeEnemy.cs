@@ -10,7 +10,7 @@ public class LongRange : EnemyAI_Movement
 
 	[SerializeField]
 	[Tooltip("弾")]
-	private GameObject bullet;
+	GameObject particle;
 
 	[SerializeField]
 	[Tooltip("弾の速さ")]
@@ -25,6 +25,7 @@ public class LongRange : EnemyAI_Movement
 	protected override void Start()
 	{
 		attackRange = 20.0f;
+		particle.SetActive(false);
 		base.Start();
 	}
 
@@ -99,20 +100,7 @@ public class LongRange : EnemyAI_Movement
 		{
 			wait = true;
 
-			// 弾を生成して発射
-			Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
-			Quaternion spawnRotation = shootPos.transform.rotation;
-
-			GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
-
-			Vector3 direction = newBullet.transform.forward;
-			newBullet.GetComponent<Rigidbody>().AddForce(direction * 10.0f, ForceMode.Impulse);
-			newBullet.name = bullet.name;
-
-			Destroy(newBullet, lifeTime);
-
-			float damage = GetComponent<Animal>().damage;
-			newBullet.GetComponent<EnemyMagic>().SetDamage(damage);
+			particle.SetActive(true);
 
 			// クールダウンを開始
 			StartCoroutine(FireCooldown());
@@ -121,8 +109,10 @@ public class LongRange : EnemyAI_Movement
 
 	private IEnumerator FireCooldown()
 	{
+		yield return new WaitForSeconds(3.0f);
+		particle.SetActive(false);
 		// 指定されたクールダウン時間待機
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(7.0f);
 
 		// waitを解除
 		wait = false;
