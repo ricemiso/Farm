@@ -45,7 +45,7 @@ public class AI_Movement : MonoBehaviour
 	public float stopRange = 20f;  // ’â~‚Å‚«‚é”ÍˆÍ
 	public Color gizmoColor = Color.green;  // Gizmo‚ÌF
 
-	public float stopDistance = 10.0f;   // ’â~‚·‚é‹——£
+	[SerializeField]public float stopDistance = 10.0f;   // ’â~‚·‚é‹——£
 
 	public bool onGround;    // Ú’n‚µ‚Ä‚¢‚é‚©
 	public const float maxAngleToTreatAsGround = 20.0f; // ’n–Ê‚Æ”»’è‚·‚éŒX‚«
