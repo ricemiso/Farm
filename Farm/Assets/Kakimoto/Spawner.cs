@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    
     // “G‚ÌƒŠƒXƒg
     [SerializeField] List<GameObject> EnemyList;
 
