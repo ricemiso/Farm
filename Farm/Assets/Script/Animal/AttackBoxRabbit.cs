@@ -28,9 +28,23 @@ public class AttackBoxRabbit : MonoBehaviour
 
 	private void OnTriggerStay(Collider other)
 	{
-        if(other.gameObject.GetComponent<Animal>().isDead == false && other.CompareTag("Player")||other.CompareTag("Crystal")||other.CompareTag("MiniCrystal")||other.CompareTag("SupportUnit"))
+        if (other.gameObject.GetComponent<Animal>())
         {
-            RabbitScript.CheckAttack(other.GameObject());
+            if (other.gameObject.GetComponent<Animal>().isDead == false && other.CompareTag("SupportUnit"))
+            {
+
+                RabbitScript.CheckAttack(other.GameObject());
+                RabbitScript.target = null;
+            }
         }
+        else
+        {
+            if(other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
+            {
+                RabbitScript.CheckAttack(other.GameObject());
+                RabbitScript.target = null;
+            }
+        }
+       
 	}
 }
