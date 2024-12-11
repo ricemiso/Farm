@@ -11,7 +11,7 @@ public class Animal : MonoBehaviour
 {
     public string animalName;
     public bool playerISRange;
-
+    
     public float currentHealth;
     public float maxHealth;
 
@@ -218,13 +218,19 @@ public class Animal : MonoBehaviour
                 // ドラゴン
                 else if (thisAnimalType == AnimalType.Dragon)
                 {
-                    if (animator != null)
+                    if(animator != null)
                     {
+                        animator.ResetTrigger("Run");
+                        animator.ResetTrigger("Fire");
                         animator.SetTrigger("Die"); // "Die"はAnimator内で設定したTrigger名
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Animatorが見つかりません");
+
+                        // 倒されたら全ての付き物を外す
+                        gameObject.GetComponent<LongRange>().enabled = false;
+
+                        if (gameObject.GetComponentInChildren<LongRangeAttackBox>())
+                        {
+                            Destroy(gameObject.GetComponentInChildren<LongRangeAttackBox>().gameObject);
+                        }
                     }
                 }
 
