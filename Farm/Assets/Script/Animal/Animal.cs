@@ -179,7 +179,7 @@ public class Animal : MonoBehaviour
                 if (thisAnimalType == AnimalType.Union)
                 {
                     animation.Play("Death");
-                    DestroyImmediate(this.gameObject);
+                    Destroy(this.gameObject);
                     gameObject.SetActive(false);
                 }
 

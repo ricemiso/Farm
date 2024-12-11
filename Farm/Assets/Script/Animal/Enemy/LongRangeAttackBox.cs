@@ -32,9 +32,23 @@ public class LongRangeAttackBox : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<Animal>().isDead==false && other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal") || other.CompareTag("SupportUnit"))
+        if (other.gameObject.GetComponent<Animal>())
         {
-            longrange.CheckAttack(other.GameObject());
+            if (other.gameObject.GetComponent<Animal>().isDead == false && other.CompareTag("SupportUnit"))
+            {
+
+                longrange.CheckAttack(other.GameObject());
+                longrange.target = null;
+            }
         }
+        else
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
+            {
+                longrange.CheckAttack(other.GameObject());
+                longrange.target = null;
+            }
+        }
+
     }
 }

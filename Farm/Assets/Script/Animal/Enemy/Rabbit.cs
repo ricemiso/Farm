@@ -6,8 +6,6 @@ using UnityEngine;
 public class Rabbit : EnemyAI_Movement
 {
 
-
-
     protected override void Start()
     {
         base.Start();
@@ -103,8 +101,12 @@ public class Rabbit : EnemyAI_Movement
 
     public void attackwait()
     {
-        float damage = GetComponent<Animal>().damage;
-        Attack(damage);
+        if (GetComponent<Animal>().isDead == false)
+        {
+            float damage = GetComponent<Animal>().damage;
+            Attack(damage);
+        }
+       
     }
 
 }

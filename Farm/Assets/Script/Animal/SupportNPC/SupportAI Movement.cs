@@ -26,7 +26,10 @@ public class SupportAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
-		GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
+		if(target == null)
+        {
+			target = player;
+        }
 		// プレイヤーとの距離を計算
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -71,6 +74,8 @@ public class SupportAI_Movement : AI_Movement
 
 		currentAttackCooltime -= Time.deltaTime;
 		base.Update();
+
+		
     }
 
 	// プレイヤーに後ろから追従するメソッド
@@ -152,6 +157,8 @@ public class SupportAI_Movement : AI_Movement
 
 	private void OnTriggerStay(Collider other)
 	{
+		GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
+
 		if (other.CompareTag("Player"))
 		{
 			isPushEKey = true;
@@ -187,4 +194,6 @@ public class SupportAI_Movement : AI_Movement
 			}
 		}
 	}
+
+
 }
