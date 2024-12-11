@@ -98,44 +98,10 @@ public class CrystalGrowth : MonoBehaviour
 				GrobalState.Instance.isTutorialEnd = true;
 				Destroy(gameObject.transform.parent.parent.gameObject);
 				//SceneManager.LoadScene("MainScene");
-				StartLoadedGame("MainScene");
+				MainMenuSaveManager.Instance.StartLoadedGame("MainScene");
 
 			}
         }
-	}
-
-	public void ActivateLoadingScene()
-	{
-		if (loadScreen != null)
-		{
-			loadScreen.gameObject.SetActive(true);
-		}
-
-		//Todo::ロードアニメーション、Tipsなどはここで
-	}
-	public void DisableLoadingScene()
-	{
-		if (loadScreen != null)
-		{
-			loadScreen.gameObject.SetActive(false);
-		}
-	}
-
-	public void StartLoadedGame(string sceneName)
-	{
-		ActivateLoadingScene();
-
-		SceneManager.LoadScene(sceneName);
-
-		StartCoroutine(DelayerLoading());
-
-
-	}
-
-	IEnumerator DelayerLoading()
-	{
-		yield return new WaitForSeconds(1);
-		DisableLoadingScene();
 	}
 
 	//

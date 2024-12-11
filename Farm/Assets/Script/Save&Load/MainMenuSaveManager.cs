@@ -479,12 +479,31 @@ public class MainMenuSaveManager : MonoBehaviour
     private IEnumerator DelayerLoading(int slotNumber)
     {
         yield return new WaitForSeconds(5f);
-
-
         LoadGame(slotNumber);
 
 
     }
+
+
+
+    public void StartLoadedGame(string sceneName)
+    {
+        ActivateLoadingScene();
+
+        SceneManager.LoadScene(sceneName);
+
+        StartCoroutine(DelayerLoading());
+
+
+    }
+
+    IEnumerator DelayerLoading()
+    {
+        yield return new WaitForSeconds(3);
+        DisableLoadingScene();
+    }
+
+    
     #endregion
     #endregion
 
