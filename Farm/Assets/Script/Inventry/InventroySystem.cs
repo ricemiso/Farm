@@ -239,17 +239,8 @@ public class InventorySystem : MonoBehaviour
             inventoryUpdated = true;
             itemName = GetReturnItemName(itemName);
 
-            if(itemName == "Mana")
-            {
-                whatSlotToEquip = FindLastEmptySlot();
-            }
-            else
-            {
-                whatSlotToEquip = FindNextEmptySlot();
-            }
-           
+            whatSlotToEquip = FindNextEmptySlot();
 
-            
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
             if (itemName == "ミニオン3" || itemName == "ミニオン2" || itemName == "ミニオン")

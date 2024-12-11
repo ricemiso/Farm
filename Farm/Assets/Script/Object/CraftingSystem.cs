@@ -484,33 +484,75 @@ public class CraftingSystem : MonoBehaviour
         int mana_count = 0;
         int minion_count = 0;
 
-        // インベントリ内のアイテム数をカウント
-        inventryitemList = InventorySystem.Instance.itemList;
 
-        foreach (string itemname in inventryitemList)
+        foreach (GameObject Slot in InventorySystem.Instance.slotlist)
         {
-            switch (itemname)
+
+            if (Slot.transform.childCount > 1)
             {
-                case "石ころ":
-                    stone_count += 1;
-                    break;
-                case "Stick":
-                    stick_count += 1;
-                    break;
-                case "丸太":
-                    log_count += 1;
-                    break;
-                case "Plank":
-                    plank_count += 1;
-                    break;
-                case "マナ":
-                    mana_count += 1;
-                    break;
-                case "ミニオン":
-                    minion_count += 1;
-                    break;
+                string itemName = Slot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
+                int cnt = EquipSystem.Instance.GetEquippedItemStackCount(Slot, itemName);
+
+                // アイテムのスタック数に基づいてループ
+                for (int i = 0; i < cnt; i++)
+                {
+
+                    if (itemName == "Stone")
+                    {
+                        stone_count++;
+                    }
+                    else if (itemName == "Stick")
+                    {
+                        stick_count++;
+                    }
+                    else if (itemName == "Log")
+                    {
+                        log_count++;
+                    }
+                    else if (itemName == "Plank")
+                    {
+                        plank_count++;
+                    }
+                    else if (itemName == "Mana")
+                    {
+                        mana_count++;
+                    }
+                    else if (itemName == "ミニオン")
+                    {
+                        minion_count++;
+                    }
+
+                }
             }
         }
+
+        //// インベントリ内のアイテム数をカウント
+        //inventryitemList = InventorySystem.Instance.itemList;
+
+        //foreach (string itemname in inventryitemList)
+        //{
+        //    switch (itemname)
+        //    {
+        //        case "石ころ":
+        //            stone_count += 1;
+        //            break;
+        //        case "Stick":
+        //            stick_count += 1;
+        //            break;
+        //        case "丸太":
+        //            log_count += 1;
+        //            break;
+        //        case "Plank":
+        //            plank_count += 1;
+        //            break;
+        //        case "マナ":
+        //            mana_count += 1;
+        //            break;
+        //        case "ミニオン":
+        //            minion_count += 1;
+        //            break;
+        //    }
+        //}
 
         int quickStoneCount = 0;
         int quickStickCount = 0;
@@ -519,7 +561,7 @@ public class CraftingSystem : MonoBehaviour
         int quickManaCount = 0;
         int quickMinionCount = 0;
 
-        //TODO:クイックスロットにあるアイテムは現在素材にできない
+        ////TODO:クイックスロットにあるアイテムは現在素材にできない
         foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
         {
             quickStoneCount = 0;
