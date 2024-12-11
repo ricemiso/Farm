@@ -44,9 +44,8 @@ public class MiniCrystal : MonoBehaviour
 		rotAngle.y += 0.3f;
 		transform.eulerAngles = rotAngle;
 
-		// HP
-		GrobalState.Instance.resourceHelth = CrystalHealth;
-		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
+        // H
+		
 
 
 
@@ -70,12 +69,12 @@ public class MiniCrystal : MonoBehaviour
 		PlayerState.Instance.currentHydrationPercent += getEnergy;
 	}
 
-	public void GetHit()
+	public void GetHit(float damage)
 	{
 		
 		Log.Instance.OnFarmAttack(gameObject.name);
 
-		CrystalHealth -= 1;
+		CrystalHealth -= damage;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
 		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 
@@ -89,6 +88,8 @@ public class MiniCrystal : MonoBehaviour
             {
 				// îjâÛèàóù
 				Destroy(soil.gameObject);
+				Destroy(gameObject);
+
             }
 		}
 

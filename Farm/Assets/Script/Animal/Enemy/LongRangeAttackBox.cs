@@ -40,7 +40,7 @@ public class LongRangeAttackBox : MonoBehaviour
             {
 
                 longrange.CheckAttack(other.GameObject());
-                longrange.target = null;
+                
             }
         }
         else
@@ -48,7 +48,7 @@ public class LongRangeAttackBox : MonoBehaviour
             if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
             {
                 longrange.CheckAttack(other.GameObject());
-                longrange.target = null;
+               
             }
         }
 
