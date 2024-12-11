@@ -46,10 +46,6 @@ public class CrystalGrowth : MonoBehaviour
 		transform.eulerAngles = rotAngle;
 
 
-		GrobalState.Instance.resourceHelth = CrystalHealth;
-		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
-
-
 		if (PlayerState.Instance.playerBody != null)
 		{
 			float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
@@ -111,11 +107,11 @@ public class CrystalGrowth : MonoBehaviour
 		PlayerState.Instance.currentHydrationPercent += getEnergy;
 	}
 
-	public void GetHit()
+	public void GetHit(float damage)
 	{
 		Log.Instance.OnCrystalAttack();
 
-		CrystalHealth -= 1;
+		CrystalHealth -= damage;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
 		GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 

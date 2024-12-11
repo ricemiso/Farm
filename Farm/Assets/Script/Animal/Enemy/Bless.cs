@@ -30,7 +30,7 @@ public class Bless : MonoBehaviour
             if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
             {
 
-                float damage = GetComponent<Animal>().damage;
+                float damage = GetComponentInParent<Animal>().damage;
                 Long.Attack(damage);
             }
         }

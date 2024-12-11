@@ -238,7 +238,7 @@ public class AI_Movement : MonoBehaviour
 		switch (obj.tag)
 		{
 			case "Player":
-				if (num >= 30)
+				if(num >= 30)
 				{
 					num = 30;
 				}
@@ -247,16 +247,17 @@ public class AI_Movement : MonoBehaviour
 				SoundManager.Instance.PlaySound(SoundManager.Instance.DamageSound);
 				break;
 			case "Enemy":
-				obj.GetComponent<Animal>().TakeDamage(num);
+				target.GetComponent<Animal>().TakeDamage(num);
 				break;
 			case "SupportUnit":
-				obj.GetComponent<Animal>().TakeDamage(num);
+				target.GetComponent<Animal>().TakeDamage(num);
 				break;
 			case "Crystal":
-				obj.GetComponent<CrystalGrowth>().GetHit();
+				target.GetComponent<CrystalGrowth>().GetHit(num);
 				break;
 			case "MiniCrystal":
-				obj.GetComponent<MiniCrystal>().GetHit();
+				target.GetComponent<MiniCrystal>().GetHit(num);
+				
 				break;
 			default:
 				break;
