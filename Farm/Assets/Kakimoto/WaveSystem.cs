@@ -41,6 +41,16 @@ public class WaveSystem : MonoBehaviour
 	// 敵リストへの参照
 	[SerializeField] GameObject EnemyParent;
 
+	// 昼の初期召喚コスト
+	[SerializeField] int NoonBase;
+	// 昼のWave毎に増える召喚コスト
+	[SerializeField] int NoonAdd;
+	// 夜の初期召喚コスト
+	[SerializeField] int NightBase;
+	// 夜のWave毎に増える召喚コスト
+	[SerializeField] int NightAdd;
+
+
 	private void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -70,13 +80,13 @@ public class WaveSystem : MonoBehaviour
 		// 昼
 		if (day * 2 - 1 > m_WaveCount && time > 0.5f)
 		{
-			int cost = 5 + m_WaveCount * 2;
+			int cost = NoonBase + m_WaveCount * NoonAdd;
 			SummonEnemy(cost);
 		}
 		// 夜
 		if (day * 2 - 2 > m_WaveCount)
 		{
-			int cost = 10 + m_WaveCount * 10;
+			int cost = NightBase + m_WaveCount * NightAdd;
 			SummonEnemy(cost);
 		}
 
