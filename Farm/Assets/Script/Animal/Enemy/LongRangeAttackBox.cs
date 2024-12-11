@@ -24,7 +24,10 @@ public class LongRangeAttackBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (longrange.enabled == false)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
