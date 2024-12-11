@@ -109,6 +109,15 @@ public class Animal : MonoBehaviour
             GrobalState.Instance.resourceMaxHelth = maxHealth;
         }
 
+        if (isDead)
+        {
+            if(animator != null)
+            {
+                animator.enabled = false;
+            }
+           
+        }
+
     }
 
     /// <summary>

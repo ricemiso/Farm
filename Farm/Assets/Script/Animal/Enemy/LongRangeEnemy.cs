@@ -10,7 +10,7 @@ public class LongRange : EnemyAI_Movement
 
 	[SerializeField]
 	[Tooltip("弾")]
-	GameObject particle;
+	ParticleSystem particle;
 
 	[SerializeField]
 	[Tooltip("弾の速さ")]
@@ -20,12 +20,12 @@ public class LongRange : EnemyAI_Movement
 	[Tooltip("弾の生存時間")]
 	private float lifeTime = 2.0f;
 
-	bool wait = false;
+	public bool wait = false;
 
 	protected override void Start()
 	{
 		attackRange = 20.0f;
-		particle.SetActive(false);
+		particle.gameObject.SetActive(false);
 		base.Start();
 	}
 
@@ -100,7 +100,9 @@ public class LongRange : EnemyAI_Movement
 		{
 			wait = true;
 
-			particle.SetActive(true);
+			particle.gameObject.SetActive(true);
+			particle.Play();
+			
 
 			// クールダウンを開始
 			StartCoroutine(FireCooldown());
@@ -110,9 +112,11 @@ public class LongRange : EnemyAI_Movement
 	private IEnumerator FireCooldown()
 	{
 		yield return new WaitForSeconds(3.0f);
-		particle.SetActive(false);
+
+		particle.gameObject.SetActive(false);
+		particle.Stop();
 		// 指定されたクールダウン時間待機
-		yield return new WaitForSeconds(7.0f);
+		yield return new WaitForSeconds(1.0f);
 
 		// waitを解除
 		wait = false;
