@@ -4444,8 +4444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 474.38745, y: -72.35552}
-  m_SizeDelta: {x: 586.9407, y: 744.711}
+  m_AnchoredPosition: {x: 474.38745, y: -22}
+  m_SizeDelta: {x: 586.9407, y: 649}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163571832
 MonoBehaviour:
@@ -4675,7 +4675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.4169, y: 62}
+  m_AnchoredPosition: {x: 7.4169, y: -83}
   m_SizeDelta: {x: 518.8336, y: 91.3338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166844486
@@ -8544,6 +8544,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: f63e04110228d034d8e6d973011dcffc, type: 2}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: CrystalMaxHealth
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: soils.Array.data[0]
       value: 
       objectReference: {fileID: 708264503}
@@ -10947,6 +10951,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 999614832}
     m_Modifications:
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: CrystalMaxHealth
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 1988936712882390519, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16207,7 +16215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9862, y: 305}
+  m_AnchoredPosition: {x: 1.9862, y: 191}
   m_SizeDelta: {x: 507.9725, y: 88.158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &827319236
@@ -21666,7 +21674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1095079560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23285,8 +23293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 474.38745, y: -72.35553}
-  m_SizeDelta: {x: 586.9407, y: 744.711}
+  m_AnchoredPosition: {x: 474.38745, y: -3.9008}
+  m_SizeDelta: {x: 586.9407, y: 649}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222315616
 MonoBehaviour:
@@ -24700,7 +24708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 305}
+  m_AnchoredPosition: {x: 4, y: 189}
   m_SizeDelta: {x: 262.4019, y: 88.158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275783105
@@ -25901,7 +25909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.4169, y: 185}
+  m_AnchoredPosition: {x: 7.4169, y: 38}
   m_SizeDelta: {x: 518.8336, y: 91.3338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1343751738
@@ -25982,7 +25990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.4169, y: -76}
+  m_AnchoredPosition: {x: 7.4169, y: -213}
   m_SizeDelta: {x: 518.8336, y: 91.3338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344046439
@@ -27057,6 +27065,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 074a7f7de92bb8c44b433daf289ebafb, type: 2}
+    - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: CrystalMaxHealth
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: soils.Array.data[0]
       value: 
@@ -28594,46 +28606,30 @@ MonoBehaviour:
   - Object: {fileID: 1630540139}
     IsActive: 1
     WaveLimit: 2
-    CrystalMini: {fileID: 1603576235}
+    CrystalMini: {fileID: 0}
   - Object: {fileID: 806349926}
     IsActive: 1
     WaveLimit: 10
-    CrystalMini: {fileID: 1412846703}
+    CrystalMini: {fileID: 0}
   - Object: {fileID: 1244982888}
     IsActive: 1
     WaveLimit: 18
-    CrystalMini: {fileID: 397610559}
+    CrystalMini: {fileID: 0}
   - Object: {fileID: 1672706753}
     IsActive: 1
     WaveLimit: 24
-    CrystalMini: {fileID: 1950362780}
-  m_EnemyList:
-  - EnemyObject: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
-    Cost: 3
-    WaveLimit: 1
-    Ratio: 5
-  - EnemyObject: {fileID: 7403261691875906541, guid: aa74b80754f8d944fa61e20ecb0acbdc, type: 3}
-    Cost: 4
-    WaveLimit: 2
-    Ratio: 3
-  - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
-    Cost: 8
-    WaveLimit: 6
-    Ratio: 2
-  - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
-    Cost: 15
-    WaveLimit: 10
-    Ratio: 2
+    CrystalMini: {fileID: 0}
+  m_EnemyList: []
   m_HealthMultiply: 0.1
   m_DamageMultiply: 0.4
   m_SizeMultiply: 0.05
-  Range: {x: 5, y: 0, z: 5}
-  Crystal: {fileID: 568825487}
-  EnemyParent: {fileID: 1671064501}
-  NoonBase: 5
-  NoonAdd: 2
-  NightBase: 5
-  NightAdd: 10
+  Range: {x: 0, y: 0, z: 0}
+  Crystal: {fileID: 0}
+  EnemyParent: {fileID: 0}
+  NoonBase: 0
+  NoonAdd: 0
+  NightBase: 0
+  NightAdd: 0
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
@@ -29696,7 +29692,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: aa7c0584d991b3d449fce8fef6eff7f5, type: 2}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
-      value: 30
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: soils.Array.data[0]
@@ -32667,7 +32663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: 197.73308}
+  m_AnchoredPosition: {x: 5, y: 14}
   m_SizeDelta: {x: 519, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1754712347
@@ -36222,6 +36218,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: e2b1a7f3cbd62c1409aa3bddb3a2bd9a, type: 2}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: CrystalMaxHealth
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: soils.Array.data[0]
       value: 
       objectReference: {fileID: 1825898193159789017}
@@ -38000,7 +38000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: 70}
+  m_AnchoredPosition: {x: 5, y: -164}
   m_SizeDelta: {x: 519, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058307167
