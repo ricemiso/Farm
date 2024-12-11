@@ -115,6 +115,8 @@ public class SupportAI_Movement : AI_Movement
 
 	private void OnTriggerEnter(Collider other)
 	{
+		GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
+
 		if (other.CompareTag("Player") && state != MoveState.FOLLOWING && state != MoveState.CHASE && !isStopped)
 		{
 			state = MoveState.FOLLOWING;
