@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// AI全般に関わるクラス。レベルアップやダメージの処理
+/// </summary>
+
 public class Animal : MonoBehaviour
 {
     public string animalName;
@@ -26,6 +30,9 @@ public class Animal : MonoBehaviour
     [SerializeField] AudioClip rabbithitAndScreem;
     [SerializeField] AudioClip rabitHitAndDie;
 
+    /// <summary>
+    /// 動物の種類を定義する列挙型
+    /// </summary>
     public enum AnimalType
     {
         Rabbit,
@@ -46,11 +53,16 @@ public class Animal : MonoBehaviour
     [SerializeField] ParticleSystem levelupparticle;
     public GameObject bloodPaddle;
 
+    /// <summary>
+    /// 動物の名前を取得
+    /// </summary>
+    /// <returns>動物の名前</returns>
     public string GetAnimalName()
     {
         return animalName;
     }
 
+   
     private void Start()
     {
         unionForceStrength = 10;
@@ -90,16 +102,18 @@ public class Animal : MonoBehaviour
 
     private void Update()
     {
+        // UIに体力情報を表示
         if (canBeChopped)
         {
             GrobalState.Instance.resourceHelth = currentHealth;
             GrobalState.Instance.resourceMaxHelth = maxHealth;
         }
 
-
     }
 
-
+    /// <summary>
+    /// ノックバック
+    /// </summary>
     public void Force()
     {
         float force;
@@ -130,6 +144,10 @@ public class Animal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ダメージを受ける処理
+    /// </summary>
+    /// <param name="damage">受けるダメージ量</param>
     public void TakeDamage(float damage)
     {
        // if (!canBeChopped) return;
@@ -232,6 +250,9 @@ public class Animal : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 血を表示するまでの遅延処理
+    /// </summary>
     IEnumerator puddleDelay()
     {
         yield return new WaitForSeconds(1);
@@ -246,6 +267,9 @@ public class Animal : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 死亡時のサウンドを再生
+    /// </summary>
     private void PlayDyingSound()
     {
         switch (thisAnimalType)
@@ -259,6 +283,9 @@ public class Animal : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 被弾時のサウンドを再生
+    /// </summary>
     private void PlayHitSound()
     {
         switch (thisAnimalType)
@@ -272,8 +299,9 @@ public class Animal : MonoBehaviour
 
     }
 
-
-
+    /// <summary>
+    /// プレイヤーが範囲内に入った際の処理
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -282,6 +310,9 @@ public class Animal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーが範囲外に出た際の処理
+    /// </summary>
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -290,11 +321,12 @@ public class Animal : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// ミニオンをレベルアップさせる
+    /// </summary>
+    /// <param name="nowlevel">現在のレベル</param>
     public void LevelUp(int nowlevel)
     {
-
-
         nowlevel += 1;
         level = nowlevel;
 

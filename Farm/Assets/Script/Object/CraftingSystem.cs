@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// クラフトメニューの操作を管理
+/// UI要素の表示/非表示切り替え、ボタンのクリックイベント設定、
+/// およびクラフト可能アイテムのBlueprintデータ管理
+/// </summary>
 public class CraftingSystem : MonoBehaviour
 {
     public static CraftingSystem Instance { get; set; }
@@ -66,7 +71,10 @@ public class CraftingSystem : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// クラフティングシステムの初期設定を行います。
+    /// 必要なボタンやUIコンポーネントを取得し、リスナーを追加します。
+    /// </summary>
     void Start()
     {
         inventryitemList = new List<string>();
@@ -205,13 +213,18 @@ public class CraftingSystem : MonoBehaviour
         craftStoneManaBTN.onClick.AddListener(delegate { CraftAnyItem(StoneManaBLP); });
     }
 
-
+    /// <summary>
+    /// ツールカテゴリー画面を閉じ、クラフティング画面を表示します。
+    /// </summary>
     void CloseToolsCategory()
     {
         toolScreenUI.SetActive(false);
         craftingScreenUI.SetActive(true);
     }
 
+    /// <summary>
+    /// ツールカテゴリー画面を開き、他のカテゴリー画面を非表示にします。
+    /// </summary>
     void OpenToolsCategory()
     {
         // craftingScreenUI.SetActive(false);
@@ -227,6 +240,9 @@ public class CraftingSystem : MonoBehaviour
         craftingScreenUI.SetActive(true);
     }
 
+    /// <summary>
+    /// サバイバルカテゴリー画面を開き、他のカテゴリー画面を非表示にします。
+    /// </summary>
     void OpenSurvivalCategory()
     {
         toolScreenUI.SetActive(false);
@@ -236,12 +252,19 @@ public class CraftingSystem : MonoBehaviour
         constractionScreenUI.SetActive(false);
     }
 
+
+    /// <summary>
+    /// 精錬カテゴリー画面を閉じ、クラフティング画面を表示します。
+    /// </summary>
     void CloseRefineCategory()
     {
         refineScreenUI.SetActive(false);
         craftingScreenUI.SetActive(true);
     }
 
+    /// <summary>
+    /// 精錬カテゴリー画面を開き、他のカテゴリー画面を非表示にします。
+    /// </summary>
     void OpenRefineCategory()
     {
         toolScreenUI.SetActive(false);
@@ -251,12 +274,18 @@ public class CraftingSystem : MonoBehaviour
         constractionScreenUI.SetActive(false);
     }
 
+    /// <summary>
+    /// 建築カテゴリー画面を閉じ、クラフティング画面を表示します。
+    /// </summary>
     void CloseConstractionCategory()
     {
         constractionScreenUI.SetActive(false);
         craftingScreenUI.SetActive(true);
     }
 
+    /// <summary>
+    /// 建築カテゴリー画面を開き、他のカテゴリー画面を非表示にします。
+    /// </summary>
     void OpenconstrunctinCategory()
     {
         toolScreenUI.SetActive(false);
@@ -266,7 +295,7 @@ public class CraftingSystem : MonoBehaviour
         constractionScreenUI.SetActive(true);
     }
 
-
+   
     void Update()
     {
 
@@ -311,13 +340,21 @@ public class CraftingSystem : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// クラフト待機する
+    /// </summary>
+    /// <param name="blueprintToCraft">クラフトするブループリント</param>
     private void CraftAnyItem(BluePrint blueprintToCraft)
     {
         if (!canCraft) return;
         StartCoroutine(CraftWithCooldown(blueprintToCraft));
     }
 
+    /// <summary>
+    /// アイテムの生成と消去処理
+    /// </summary>
+    /// <param name="blueprintToCraft">クラフトするブループリント</param>
+    /// <returns></returns>
     private IEnumerator CraftWithCooldown(BluePrint blueprintToCraft)
     {
         canCraft = false;
@@ -434,7 +471,10 @@ public class CraftingSystem : MonoBehaviour
         canupdate = true;
     }
 
-    //TODO:アイテムを追加した時にここの条件を追加する
+    /// <summary>
+    /// // 必要なアイテムの数を更新する
+    /// //TODO:アイテムを追加した時にここの条件を追加する
+    /// </summary>
     public void RefreshNeededItems()
     {
         int stone_count = 0;
@@ -709,7 +749,10 @@ public class CraftingSystem : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// アイテムの再計算を行うコルーチン
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator calulate()
     {
         yield return 0;

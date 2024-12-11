@@ -99,7 +99,7 @@ public class SupportAI_Movement : AI_Movement
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
 		Vector3 followPosition = target.transform.position;  // プレイヤーから2ユニット後ろ
 
-		Chase(followPosition);
+		Chase(followPosition,true);
 
 		float distance = Vector3.Distance(followPosition, transform.position);
 		if (distance <= attackRange &&
