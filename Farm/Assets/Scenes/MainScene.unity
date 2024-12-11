@@ -28284,6 +28284,10 @@ MonoBehaviour:
   Range: {x: 5, y: 0, z: 5}
   Crystal: {fileID: 568825487}
   EnemyParent: {fileID: 1671064501}
+  NoonBase: 5
+  NoonAdd: 2
+  NightBase: 5
+  NightAdd: 10
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
