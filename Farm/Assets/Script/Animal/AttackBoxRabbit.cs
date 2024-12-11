@@ -34,7 +34,7 @@ public class AttackBoxRabbit : MonoBehaviour
             {
 
                 RabbitScript.CheckAttack(other.GameObject());
-                RabbitScript.target = null;
+                
             }
         }
         else
@@ -42,7 +42,7 @@ public class AttackBoxRabbit : MonoBehaviour
             if(other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
             {
                 RabbitScript.CheckAttack(other.GameObject());
-                RabbitScript.target = null;
+                
             }
         }
        

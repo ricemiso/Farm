@@ -32,6 +32,8 @@ public class LongRangeAttackBox : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+       
+
         if (other.gameObject.GetComponent<Animal>())
         {
             if (other.gameObject.GetComponent<Animal>().isDead == false && other.CompareTag("SupportUnit"))

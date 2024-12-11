@@ -49,33 +49,16 @@ public class EnemyAI_Movement : AI_Movement
 					if (target != null)
 					{
 						ChaseEnemy();
+                    }
+                    else
+                    {
+						ChaseCrystal();
 					}
 					break;
-                case MoveState.WALKING:
-                    Walk();
-                    break;
-                case MoveState.WAITING:
-                default:
-					Wait();
+				default:
+					ChaseCrystal();
 					break;
             }
-			// 目標がいない時にクリスタルなどの攻撃対象に向かう
-			if(state != MoveState.CHASE)
-			{
-				if(CrystalMini != null && Crystal != null)
-                {
-					if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
-					{
-						// ミニクリスタルが生きているなら
-						FoundTarget(CrystalMini);
-					}
-					else
-					{
-						// ミニクリスタルが死んでいたら
-						FoundTarget(Crystal);
-					}
-				}
-			}
 		}
 
 		timeToFoundEnemy += Time.deltaTime;
@@ -83,6 +66,23 @@ public class EnemyAI_Movement : AI_Movement
 
 		base.Update();
     }
+
+	protected void ChaseCrystal()
+    {
+		if (CrystalMini != null && Crystal != null)
+		{
+			if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
+			{
+				// ミニクリスタルが生きているなら
+				FoundTarget(CrystalMini);
+			}
+			else
+			{
+				// ミニクリスタルが死んでいたら
+				FoundTarget(Crystal);
+			}
+		}
+	}
 
 	virtual protected void ChaseEnemy()
 	{
