@@ -431,6 +431,7 @@ public class SelectionManager : MonoBehaviour
 		if (Chargeing)
 		{
 			Destroy(EquipSystem.Instance.selectedItem);
+			Destroy(EquipSystem.Instance.selecteditemModel);
 		}
 		else
 		{
