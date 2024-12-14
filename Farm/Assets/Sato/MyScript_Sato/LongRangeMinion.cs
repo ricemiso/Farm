@@ -41,7 +41,7 @@ public class LongRangeMinion : SupportAI_Movement
 	{
 		//if(state != MoveState.CHASE || target.tag == "Player") return;
 
-		animation["Attack2"].speed = 1.5f;
+		animation["Attack2"].speed = 1.7f;
 		animation.Play("Attack2");
 
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;

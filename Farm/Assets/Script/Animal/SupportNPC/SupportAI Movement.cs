@@ -76,6 +76,10 @@ public class SupportAI_Movement : AI_Movement
 				break;
 			case MoveState.WALKING:
 				//Walk();
+				if (!isAttackAnim)
+				{
+					animation.Play("Walk");
+				}
 				break;
 			case MoveState.WAITING:
 				//Wait();

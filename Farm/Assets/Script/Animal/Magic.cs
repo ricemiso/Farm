@@ -17,6 +17,7 @@ public class Magic : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<Animal>().TakeDamage(Damage);
+            this.gameObject.SetActive(false);
             Destroy(this.gameObject);
 		}
     }
