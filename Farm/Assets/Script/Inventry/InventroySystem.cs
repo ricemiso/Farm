@@ -364,6 +364,9 @@ public class InventorySystem : MonoBehaviour
             case "ミニオン3":
                 objectname = "遠距離ミニオン";
                 break;
+            case "ミニオン2":
+                objectname = "タンクミニオン";
+                break;
             case "遠距離ミニオン":
                 objectname = "ミニオン(遠距離)";
                 break;
@@ -388,7 +391,8 @@ public class InventorySystem : MonoBehaviour
             case "Axe(Clone)":
                 objectname = "斧";
                 break;
-
+            default:
+                return objectname;
         }
 
         return objectname;

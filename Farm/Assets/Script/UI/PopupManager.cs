@@ -82,38 +82,12 @@ public class PopupManager : MonoBehaviour
 
         Animator.SetTrigger("pop");
 
-        string translatedName = TranslateItemName(itemName);
+        string translatedName = InventorySystem.Instance.GetItemName(itemName);
         pickupName.text = translatedName;
         pickupImage.sprite = itemSprite;
 
         yield return new WaitForSeconds(3.0f);  // 3秒待機
 
         pickupAlert.SetActive(false);
-    }
-
-    // アイテム名を翻訳するヘルパーメソッド
-    private string TranslateItemName(string itemName)
-    {
-        switch (itemName)
-        {
-            case "Axe":
-                return "斧";
-            case "Plank":
-                return "木の板";
-            case "Foundation":
-                return "木の床";
-            case "Wall":
-                return "木の壁";
-            case "Log":
-                return "丸太";
-            case "Stone":
-                return "石";
-            case "Stick":
-                return "木の棒";
-            case "Mana":
-                return "マナ";
-            default:
-                return itemName;
-        }
     }
 }
