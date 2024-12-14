@@ -300,6 +300,7 @@ public class SelectionManager : MonoBehaviour
 			if (animal && animal.playerISRange)
 			{
 				animal.canBeChopped = true;
+				animal.canBeChopped = true;
 				isDamage = true;
 				selectedAnimal = animal.gameObject;
 				chopText.text = animal.GetAnimalName();

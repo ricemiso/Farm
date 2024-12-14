@@ -28,6 +28,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        isCrystalMove = true;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M) && !isMenuOpen)

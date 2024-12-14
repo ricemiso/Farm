@@ -22,6 +22,7 @@ public class Animal : MonoBehaviour
     public int damageIncrease = 5;
     public int level;
     public bool canBeChopped;
+    public bool canbeWatch;
 
 
     [SerializeField] float unionForceStrength;
@@ -68,6 +69,8 @@ public class Animal : MonoBehaviour
         unionForceStrength = 10;
         enemyForceStrength = 10;
 
+        canbeWatch = false;
+
         if (CraftingSystem.Instance.islevelUp)
         {
             // 現在のレベルに基づいてステータスを反映
@@ -103,11 +106,13 @@ public class Animal : MonoBehaviour
     private void Update()
     {
         // UIに体力情報を表示
-        if (canBeChopped)
+        if (canBeChopped ||canbeWatch)
         {
             GrobalState.Instance.resourceHelth = currentHealth;
             GrobalState.Instance.resourceMaxHelth = maxHealth;
         }
+        canBeChopped = false;
+        canbeWatch = false;
 
         if (isDead)
         {
