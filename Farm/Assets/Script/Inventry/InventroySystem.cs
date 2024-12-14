@@ -256,7 +256,7 @@ public class InventorySystem : MonoBehaviour
             }
 
             itemList.Add(itemName);
-           
+
         }
 
         if (!SoundManager.Instance.craftingSound.isPlaying)
@@ -473,31 +473,6 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    private GameObject FindLastEmptySlot()
-    {
-        // クイックスロットリストが空またはnullの場合はnullを返す
-        if (EquipSystem.Instance.quickSlotsList == null || EquipSystem.Instance.quickSlotsList.Count == 0)
-        {
-            return null;
-        }
-
-        // リストの逆順で空のスロットを探す
-        for (int i = EquipSystem.Instance.quickSlotsList.Count - 1; i >= 0; i--)
-        {
-            GameObject slot = EquipSystem.Instance.quickSlotsList[i];
-            InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
-
-            // スロットが空の場合
-            if (inventrySlot != null && inventrySlot.itemInSlot == null)
-            {
-                return slot; // 空のスロットを返す
-            }
-        }
-
-        // 空のスロットが見つからない場合
-        return null;
-    }
-
     public bool CheckSlotAvailable(int emptyNeeded)
     {
         int emptySlot = 0;
@@ -640,6 +615,30 @@ public class InventorySystem : MonoBehaviour
             }
         }
 
+        return count;
+    }
+
+    public int GetInventryItemCount(string itemName)
+    {
+        int count = 0;
+
+        foreach (GameObject slot in slotlist)
+        {
+
+            if (slot.transform.childCount > 1)
+            {
+                itemName = GetItemName(itemName);
+                slot.transform.GetChild(0).name = GetItemName(slot.transform.GetChild(0).name);
+
+                if (slot.transform.GetChild(0).name == itemName)
+                {
+                    count++;
+
+                }
+            }
+
+
+        }
         return count;
     }
 }

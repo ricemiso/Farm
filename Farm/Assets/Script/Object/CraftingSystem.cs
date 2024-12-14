@@ -380,6 +380,7 @@ public class CraftingSystem : MonoBehaviour
                     if (inventrySlot != null && inventrySlot.itemInSlot != null)
                     {
                         var itemName = InventorySystem.Instance.GetItemName(blueprintToCraft.itemName);
+
                         if (inventrySlot.itemInSlot.thisName == itemName)
                         {
                             itemExists = true;
@@ -432,8 +433,8 @@ public class CraftingSystem : MonoBehaviour
         canupdate = false;
 
         // 現在のインベントリ内の素材の数を取得
-        int currentAmountReq1 = InventorySystem.Instance.GetItemCount(blueprintToCraft.Req1);
-        int currentAmountReq2 = blueprintToCraft.numOfRequirement == 2 ? InventorySystem.Instance.GetItemCount(blueprintToCraft.Req2) : 0;
+        int currentAmountReq1 = InventorySystem.Instance.GetInventryItemCount(blueprintToCraft.Req1);
+        int currentAmountReq2 = blueprintToCraft.numOfRequirement == 2 ? InventorySystem.Instance.GetInventryItemCount(blueprintToCraft.Req2) : 0;
 
         // 不足している数を計算
         int req1Shortage = Mathf.Max(0, blueprintToCraft.Req1amount - currentAmountReq1);
@@ -484,131 +485,33 @@ public class CraftingSystem : MonoBehaviour
         int mana_count = 0;
         int minion_count = 0;
 
+        // インベントリ内のアイテム数をカウント
+        inventryitemList = InventorySystem.Instance.itemList;
 
-        foreach (GameObject Slot in InventorySystem.Instance.slotlist)
+        foreach (string itemname in inventryitemList)
         {
-
-            if (Slot.transform.childCount > 1)
+            switch (itemname)
             {
-                string itemName = Slot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
-                int cnt = EquipSystem.Instance.GetEquippedItemStackCount(Slot, itemName);
-
-                // アイテムのスタック数に基づいてループ
-                for (int i = 0; i < cnt; i++)
-                {
-
-                    if (itemName == "Stone")
-                    {
-                        stone_count++;
-                    }
-                    else if (itemName == "Stick")
-                    {
-                        stick_count++;
-                    }
-                    else if (itemName == "Log")
-                    {
-                        log_count++;
-                    }
-                    else if (itemName == "Plank")
-                    {
-                        plank_count++;
-                    }
-                    else if (itemName == "Mana")
-                    {
-                        mana_count++;
-                    }
-                    else if (itemName == "ミニオン")
-                    {
-                        minion_count++;
-                    }
-
-                }
+                case "石ころ":
+                    stone_count += 1;
+                    break;
+                case "Stick":
+                    stick_count += 1;
+                    break;
+                case "丸太":
+                    log_count += 1;
+                    break;
+                case "Plank":
+                    plank_count += 1;
+                    break;
+                case "マナ":
+                    mana_count += 1;
+                    break;
+                case "ミニオン":
+                    minion_count += 1;
+                    break;
             }
         }
-
-        //// インベントリ内のアイテム数をカウント
-        //inventryitemList = InventorySystem.Instance.itemList;
-
-        //foreach (string itemname in inventryitemList)
-        //{
-        //    switch (itemname)
-        //    {
-        //        case "石ころ":
-        //            stone_count += 1;
-        //            break;
-        //        case "Stick":
-        //            stick_count += 1;
-        //            break;
-        //        case "丸太":
-        //            log_count += 1;
-        //            break;
-        //        case "Plank":
-        //            plank_count += 1;
-        //            break;
-        //        case "マナ":
-        //            mana_count += 1;
-        //            break;
-        //        case "ミニオン":
-        //            minion_count += 1;
-        //            break;
-        //    }
-        //}
-
-        int quickStoneCount = 0;
-        int quickStickCount = 0;
-        int quickLogCount = 0;
-        int quickPlankCount = 0;
-        int quickManaCount = 0;
-        int quickMinionCount = 0;
-
-        ////TODO:クイックスロットにあるアイテムは現在素材にできない
-        foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
-        {
-            quickStoneCount = 0;
-            quickStickCount = 0;
-            quickLogCount = 0;
-            quickPlankCount = 0;
-            quickManaCount = 0;
-            quickMinionCount = 0;
-
-            if (quickSlot.transform.childCount > 1)
-            {
-                string itemName = quickSlot.transform.GetChild(0).name.Replace("(Clone)", "").Trim();
-                int cnt = EquipSystem.Instance.GetEquippedItemStackCount(quickSlot, itemName);
-
-                // アイテムのスタック数に基づいてループ
-                for (int i = 0; i < cnt; i++)
-                {
-
-                    if (itemName == "Stone")
-                    {
-                        quickStoneCount++;
-                    }
-                    else if (itemName == "Stick")
-                    {
-                        quickStickCount++;
-                    }
-                    else if (itemName == "Log")
-                    {
-                        quickLogCount++;
-                    }
-                    else if (itemName == "Plank")
-                    {
-                        quickPlankCount++;
-                    }
-                    else if (itemName == "Mana")
-                    {
-                        quickManaCount++;
-                    }
-                    else if (itemName == "ミニオン")
-                    {
-                        quickMinionCount++;
-                    }
-
-                }
-            }
-        }
-
 
         //TODO: クラフトアイテムはここで追加
         // ----Axe---- //
