@@ -22,7 +22,7 @@ public class NormalMinion : SupportAI_Movement
 		animation.Play("Attack1");
 
 		float damage = GetComponent<Animal>().damage;
-		Attack(damage);
+		Attack(damage,target);
 	}
 
     private void OnTriggerStay(Collider other)

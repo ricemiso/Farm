@@ -14,25 +14,25 @@ public class Bless : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
-
-        if (other.gameObject.GetComponent<Animal>())
+        float damage = GetComponentInParent<Animal>().damage;
+        if (other.CompareTag("SupportUnit") || other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
         {
-            if (other.gameObject.GetComponent<Animal>().isDead == false && other.CompareTag("SupportUnit"))
+            if (other.gameObject.GetComponent<Animal>())
             {
-                float damage = GetComponent<Animal>().damage;
-                Long.Attack(damage);
-               
+                if (other.gameObject.GetComponent<Animal>().isDead == false)
+                {
+                   
+                    Long.Attack(damage,other.gameObject);
+
+                }
+            }
+            else
+            {
+                Long.Attack(damage, other.gameObject);
+
             }
         }
-        else
-        {
-            if (other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
-            {
 
-                float damage = GetComponentInParent<Animal>().damage;
-                Long.Attack(damage);
-            }
-        }
+
     }
 }

@@ -187,6 +187,8 @@ public class Animal : MonoBehaviour
             if (currentHealth <= 0)
             {
                 PlayDyingSound();
+                Lootable loot = gameObject.GetComponent<Lootable>();
+                StartCoroutine(DelayedLoot(loot));
 
                 //Log.Instance.TriggerPickupPop(animalName);
 
@@ -256,8 +258,11 @@ public class Animal : MonoBehaviour
                 }
 
 
-
-                StartCoroutine(puddleDelay());
+                if (thisAnimalType != AnimalType.Union)
+                {
+                    StartCoroutine(puddleDelay());
+                }
+                   
                 isDead = true;
                
             }
@@ -353,7 +358,6 @@ public class Animal : MonoBehaviour
         int healthIncrease = 20 * nowlevel;
         int damageIncrease = 5 * nowlevel;
 
-
         maxHealth += healthIncrease;
         currentHealth = maxHealth;
         damage += damageIncrease;
@@ -363,12 +367,91 @@ public class Animal : MonoBehaviour
         ParticleSystem partiSystem = levelupparticle;
         partiSystem.Play();
 
+        // 現在のスケールを取得
         Vector3 currentScale = gameObject.transform.localScale;
 
-        // 1.6倍のスケールを計算
-        Vector3 newScale = currentScale * 1.5f;
+        // maxHealth の上限値が800未満の場合のみスケールを変更
+        if (maxHealth < 800)
+        {
+           
 
-        // スケールを更新
-        gameObject.transform.localScale = newScale;
+            // 1.6倍のスケールを計算
+            Vector3 newScale = currentScale * 1.5f;
+
+            // スケールを更新
+            gameObject.transform.localScale = newScale;
+
+           
+        }
+        
     }
+
+    private IEnumerator DelayedLoot(Lootable loot)
+    {
+
+        yield return new WaitForSeconds(1.5f);
+
+        Loot(loot); // 遅延後にLootを呼び出す
+
+    }
+
+    private void Loot(Lootable lootable)
+    {
+        if (lootable.wasLootCalulated == false)
+        {
+            List<LootRecieved> lootRecieveds = new List<LootRecieved>();
+
+            foreach (LootPossibility loot in lootable.possibilities)
+            {
+                var lootAmount = UnityEngine.Random.Range(loot.amountMin, loot.amountMax + 1);
+                if (lootAmount > 0)
+                {
+                    LootRecieved It = new LootRecieved();
+                    It.item = loot.item;
+                    It.amount = lootAmount;
+
+                    lootRecieveds.Add(It);
+                }
+            }
+
+            lootable.finalLoot = lootRecieveds;
+            lootable.wasLootCalulated = true;
+        }
+
+        Vector3 lootSpawnPosition = lootable.gameObject.transform.position;
+        float scatterRange = 2.0f; // 散らばりの範囲を設定
+
+        foreach (LootRecieved lootRecieved in lootable.finalLoot)
+        {
+            for (int i = 0; i < lootRecieved.amount; i++)
+            {
+                // ランダムな位置を生成 (X-Zのみ散らばり、Yは固定)
+                Vector3 randomOffset = new Vector3(
+                    UnityEngine.Random.Range(-scatterRange, scatterRange), // X方向
+                    1,                                         // Y方向はそのまま
+                    UnityEngine.Random.Range(-scatterRange, scatterRange)  // Z方向
+                );
+
+                Vector3 spawnPosition = lootSpawnPosition + randomOffset;
+
+                // アイテムをスポーン
+                GameObject lootSpawn = Instantiate(
+                    Resources.Load<GameObject>(lootRecieved.item.name + "_model"),
+                    spawnPosition,
+                    Quaternion.identity
+                );
+
+                Debug.Log(lootRecieved.item.name);
+            }
+        }
+
+        //if (lootable.GetComponent<Animal>())
+        //{
+        //	lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
+        //}
+
+        Destroy(lootable.gameObject);
+    }
+
 }
+

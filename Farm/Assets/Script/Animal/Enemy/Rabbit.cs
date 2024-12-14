@@ -104,7 +104,7 @@ public class Rabbit : EnemyAI_Movement
         if (GetComponent<Animal>().isDead == false)
         {
             float damage = GetComponent<Animal>().damage;
-            Attack(damage);
+            Attack(damage,target);
         }
        
     }

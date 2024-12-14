@@ -331,26 +331,27 @@ public class SelectionManager : MonoBehaviour
 
 					}
 
-					if (animal.isDead)
-					{
-						//interaction_text.text = "奪う";
-						//interaction_Info_UI.SetActive(true);
-						//chopText.text = "";
-						//chopHolder.gameObject.SetActive(false);
-						//centerDotimage.gameObject.SetActive(false);
-						//handIcon.gameObject.SetActive(true);
+					//if (animal.isDead)
+					//{
+					//	//interaction_text.text = "奪う";
+					//	//interaction_Info_UI.SetActive(true);
+					//	//chopText.text = "";
+					//	//chopHolder.gameObject.SetActive(false);
+					//	//centerDotimage.gameObject.SetActive(false);
+					//	//handIcon.gameObject.SetActive(true);
+					//	Lootable lootable = animal.GetComponent<Lootable>();
 
-						//HandIsVisible = true;
+					//	//HandIsVisible = true;
 
-						isloot = true;
+					//	isloot = true;
 
-						StartCoroutine(DelayedLoot(animal));
+						
 
-						//if (Input.GetMouseButtonDown(0) && !islootDelay)
-						//{
+					//	//if (Input.GetMouseButtonDown(0) && !islootDelay)
+					//	//{
 							
-						//}
-					}
+					//	//}
+					//}
 
 
 				}
@@ -454,74 +455,9 @@ public class SelectionManager : MonoBehaviour
 		isdamageDelay = false;
 	}
 
-	private IEnumerator DelayedLoot(Animal animal)
-	{
-		islootDelay = true;
-		yield return new WaitForSeconds(1f);
-		Lootable lootable = animal.GetComponent<Lootable>();
-		Loot(lootable); // 遅延後にLootを呼び出す
-		islootDelay = false;
-		Debug.Log("Looted!");
-	}
+	
 
-	private void Loot(Lootable lootable)
-	{
-		if (lootable.wasLootCalulated == false)
-		{
-			List<LootRecieved> lootRecieveds = new List<LootRecieved>();
-
-			foreach (LootPossibility loot in lootable.possibilities)
-			{
-				var lootAmount = UnityEngine.Random.Range(loot.amountMin, loot.amountMax + 1);
-				if (lootAmount > 0)
-				{
-					LootRecieved It = new LootRecieved();
-					It.item = loot.item;
-					It.amount = lootAmount;
-
-					lootRecieveds.Add(It);
-				}
-			}
-
-			lootable.finalLoot = lootRecieveds;
-			lootable.wasLootCalulated = true;
-		}
-
-		Vector3 lootSpawnPosition = lootable.gameObject.transform.position;
-		float scatterRange = 2.0f; // 散らばりの範囲を設定
-
-		foreach (LootRecieved lootRecieved in lootable.finalLoot)
-		{
-			for (int i = 0; i < lootRecieved.amount; i++)
-			{
-				// ランダムな位置を生成 (X-Zのみ散らばり、Yは固定)
-				Vector3 randomOffset = new Vector3(
-					UnityEngine.Random.Range(-scatterRange, scatterRange), // X方向
-					0,                                         // Y方向はそのまま
-					UnityEngine.Random.Range(-scatterRange, scatterRange)  // Z方向
-				);
-
-				Vector3 spawnPosition = lootSpawnPosition + randomOffset;
-
-				// アイテムをスポーン
-				GameObject lootSpawn = Instantiate(
-					Resources.Load<GameObject>(lootRecieved.item.name + "_model"),
-					spawnPosition,
-					Quaternion.identity
-				);
-
-				Debug.Log(lootRecieved.item.name);
-			}
-		}
-
-		//if (lootable.GetComponent<Animal>())
-		//{
-		//	lootable.GetComponent<Animal>().bloodPaddle.transform.SetParent(lootable.transform.parent);
-		//}
-
-		Destroy(lootable.gameObject);
-	}
-
+	
 	IEnumerator DealDamageTo(Animal animal, float delay, int damage)
 	{
 		yield return new WaitForSeconds(delay);
