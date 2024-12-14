@@ -161,13 +161,14 @@ public class Plant : MonoBehaviour
             {
                 GameObject produce = Instantiate(producePrefab);
                 Destroy(this.gameObject, 60); // このオブジェクトを60秒後に破棄
-                Destroy(producePrefab, 60); // プレハブを60秒後に破棄
+               
 
                 produce.transform.parent = spawn.transform;
 
                 Vector3 producePos = Vector3.zero;
                 producePos.y = 0f;
                 produce.transform.localPosition = producePos;
+                Destroy(producePrefab, 60); // プレハブを60秒後に破棄
             }
         }
     }
