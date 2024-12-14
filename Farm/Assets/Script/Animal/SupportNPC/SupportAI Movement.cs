@@ -99,7 +99,10 @@ public class SupportAI_Movement : AI_Movement
 	{
 		if (target == null) return;
 
-		animation.Play("Walk");
+		if (!animation.IsPlaying("Attack1") || !animation.IsPlaying("Attack2"))
+		{
+			animation.Play("Walk");
+		}
 		//animator.SetBool("isRunning", true);
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
@@ -140,10 +143,10 @@ public class SupportAI_Movement : AI_Movement
 			if (animal != null && animal.currentHealth > 0)  // nullチェックとcurrentHealthチェック
 			{
 				state = MoveState.CHASE;
-				if(animation != null)
-                {
-					animation.Play("Walk");
-				}
+				//if(animation != null)
+    //            {
+				//	animation.Play("Walk");
+				//}
 				
 				target = other.gameObject;
 
@@ -177,10 +180,10 @@ public class SupportAI_Movement : AI_Movement
 			if (animal != null && animal.currentHealth > 0) // nullチェックとcurrentHealthチェック
 			{
 				state = MoveState.CHASE;
-				if(animation != null)
-                {
-					animation.Play("Walk");
-				}
+				//if(animation != null)
+				//{
+				//	animation.Play("Walk");
+				//}
 				
 				target = other.gameObject;
 
