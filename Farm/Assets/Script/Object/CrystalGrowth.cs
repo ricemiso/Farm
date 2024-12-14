@@ -15,7 +15,7 @@ public class CrystalGrowth : MonoBehaviour
 
 	public bool playerRange;
 	public float CrystalMaxHealth;
-	public bool canBeChopped;
+	public bool canBeWatch;
 	public float CrystalHealth;
 	public bool canBeCharge;
 
@@ -33,6 +33,7 @@ public class CrystalGrowth : MonoBehaviour
 		CrystalHealth = CrystalMaxHealth;
 
 		rotAngle = Vector3.zero;
+		canBeWatch = false;
 	}
 
 	// Update is called once per frame
@@ -40,10 +41,22 @@ public class CrystalGrowth : MonoBehaviour
 	{
 		if (PlayerState.Instance.currentHealth <= 0) return;
 
-		//TODO:止める処理を入れる
+        //TODO:止める処理を入れる
 
-		rotAngle.y += 0.3f;
-		transform.eulerAngles = rotAngle;
+        if (canBeWatch)
+        {
+			GrobalState.Instance.resourceHelth = CrystalHealth;
+			GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
+		}
+
+		canBeWatch = false;
+
+        if (MenuManager.Instance.isCrystalMove)
+        {
+			rotAngle.y += 0.3f;
+			transform.eulerAngles = rotAngle;
+		}
+		
 
 
 		if (PlayerState.Instance.playerBody != null)
@@ -66,7 +79,7 @@ public class CrystalGrowth : MonoBehaviour
 			
 
 
-        if (GrobalState.Instance.isTutorialEnd)
+        if (GrobalState.Instance.isTutorialEnd || GrobalState.Instance.isSkip)
         {
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
 			if (PlayerState.Instance.currentHydrationPercent >= 100)
@@ -85,7 +98,7 @@ public class CrystalGrowth : MonoBehaviour
         else
         {
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
-			if (PlayerState.Instance.currentHydrationPercent >= 1)
+			if (PlayerState.Instance.currentHydrationPercent >= 5)
 			{
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				//Destroy(SoundManager.Instance.gameObject);

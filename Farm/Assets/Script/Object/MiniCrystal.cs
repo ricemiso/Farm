@@ -16,7 +16,7 @@ public class MiniCrystal : MonoBehaviour
 
 	public bool playerRange;
 	public float CrystalMaxHealth;
-	public bool canBeChopped;
+	public bool canBeWatchs;
 	public float CrystalHealth;
 	public bool canBeCharge;
 
@@ -32,6 +32,8 @@ public class MiniCrystal : MonoBehaviour
 		CrystalHealth = CrystalMaxHealth;
 
 		rotAngle = Vector3.zero;
+
+		canBeWatchs = false;
 	}
 
 	// Update is called once per frame
@@ -39,15 +41,21 @@ public class MiniCrystal : MonoBehaviour
 	{
 		if (PlayerState.Instance.playerBody == null) return;
 
-		//TODO:~‚ß‚éˆ—‚ğ“ü‚ê‚é
+        //TODO:~‚ß‚éˆ—‚ğ“ü‚ê‚é
 
-		rotAngle.y += 0.3f;
-		transform.eulerAngles = rotAngle;
-
-        // H
+        if (MenuManager.Instance.isCrystalMove)
+        {
+			rotAngle.y += 0.3f;
+			transform.eulerAngles = rotAngle;
+		}
 		
+        if (canBeWatchs)
+        {
+			GrobalState.Instance.resourceHelth = CrystalHealth;
+			GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
+		}
 
-
+		canBeWatch = false;
 
 		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
