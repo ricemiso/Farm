@@ -27,6 +27,9 @@ public class LongRangeMinion : SupportAI_Movement
 	{
 		attackRange = 20.0f;
 		base.Start();
+
+		target = player;
+		state = MoveState.FOLLOWING;
 	}
 
 	protected override void Update()

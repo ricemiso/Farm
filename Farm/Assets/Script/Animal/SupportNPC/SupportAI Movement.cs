@@ -32,7 +32,7 @@ public class SupportAI_Movement : AI_Movement
 			target = player;
         }
 
-		if (animation.IsPlaying("Attack1") || animation.IsPlaying("Attack2"))
+		if (state == MoveState.CHASE && (animation.IsPlaying("Attack1") || animation.IsPlaying("Attack2")))
 		{
 			isAttackAnim = true;
 		}
