@@ -6,7 +6,7 @@ public class ConstructionTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 ミニオンの配置(1/2)";
+        return "基本操作 ミニオンの配置";
     }
 
     public string GetText()

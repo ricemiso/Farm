@@ -20,8 +20,8 @@ public class CraftAllMinion : ITutorialTask
 
     public bool CheckTask()
     {
-        if (CraftingSystem.Instance.isMinionCraft||CraftingSystem.Instance.isTankMinionCraft
-            ||CraftingSystem.Instance.isMagicMinionCraft)
+        if (CraftingSystem.Instance.isMinionCraft || CraftingSystem.Instance.isTankMinionCraft
+            || CraftingSystem.Instance.isMagicMinionCraft)
         {
             return true;
         }
