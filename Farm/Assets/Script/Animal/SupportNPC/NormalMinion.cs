@@ -19,13 +19,17 @@ public class NormalMinion : SupportAI_Movement
 
 	protected override void checkAttack()
 	{
+		animation.Play("Attack1");
+
 		float damage = GetComponent<Animal>().damage;
 		Attack(damage);
 	}
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy") && !isCheckingAttack)
+		base.OnTriggerStay(other);
+
+		if (other.CompareTag("Enemy") && !isCheckingAttack)
         {
 			StartCoroutine(CheckAttackWithDelay());
 		}
