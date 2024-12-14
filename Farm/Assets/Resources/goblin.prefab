@@ -10553,6 +10553,7 @@ MonoBehaviour:
   damageIncrease: 5
   level: 0
   canBeChopped: 0
+  canbeWatch: 0
   unionForceStrength: 0
   enemyForceStrength: 0
   soundChannel: {fileID: 679122952270926323}
@@ -10707,7 +10708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibilities:
   - item: {fileID: 1722597568480135006, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
-    amountMin: 1
+    amountMin: 3
     amountMax: 5
   finalLoot: []
   wasLootCalulated: 0
