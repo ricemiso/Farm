@@ -50,11 +50,11 @@ public class WallVisible : MonoBehaviour
 
 	void adjustColorAlpha(float distanceToPlayer)
 	{
-		Debug.Log(this.gameObject.name + " " + distanceToPlayer);
+		//Debug.Log(this.gameObject.name + " " + distanceToPlayer);
 		if (distanceToPlayer > maxDst)
 		{
 			this.GetComponent<MeshRenderer>().material.color = new Color(wallMat.color.r, wallMat.color.g, wallMat.color.b, minAlpha) / colorRate;
-			Debug.Log(this.gameObject.name + " " + this.GetComponent<MeshRenderer>().material.color.a);
+			//Debug.Log(this.gameObject.name + " " + this.GetComponent<MeshRenderer>().material.color.a);
 		}
 		else if(distanceToPlayer > minDst)
 		{

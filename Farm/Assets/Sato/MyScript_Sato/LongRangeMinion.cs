@@ -35,7 +35,8 @@ public class LongRangeMinion : SupportAI_Movement
 	}
 
 	protected override void checkAttack()
-	{ 
+	{
+		animation.Play("Attack2");
 
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
 		Quaternion spawnRotation = shootPos.transform.rotation;

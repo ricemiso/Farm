@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SupportAI_Movement : AI_Movement
 {
-	public bool isPushEKey = false;
+	public bool isPushQKey = false;
 
 	// 次攻撃可能になるまでのクールタイム
 	[SerializeField] float currentAttackCooltime;
@@ -33,8 +33,8 @@ public class SupportAI_Movement : AI_Movement
 		// プレイヤーとの距離を計算
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-		// 一定範囲内かつEキーが押された場合のみ停止・再開を切り替える
-		if (isPushEKey && Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
+		// 一定範囲内かつQキーが押された場合のみ停止・再開を切り替える
+		if (isPushQKey && Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
 		{
 			isStopped = !isStopped;  // Eキーで動作を停止/再開
 			if (isStopped)
@@ -45,7 +45,7 @@ public class SupportAI_Movement : AI_Movement
 			}
 			else
 			{
-				animation.Play("Run");
+				animation.Play("Walk");
 				//animator.SetBool("isRunning", true);
 				state = MoveState.FOLLOWING;
 				target = player;
@@ -68,7 +68,7 @@ public class SupportAI_Movement : AI_Movement
 				break;
 			case MoveState.STOP:
 			default:
-				animation.Play("Run");
+				animation.Play("Idle");
 				break;
 		}
 
@@ -81,6 +81,7 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
 	{
+		animation.Play("Walk");
 		//animation.Play("Run");
 		//animator.SetBool("isRunning", true);
 		//animator.SetBool("isRunning", true);
@@ -98,7 +99,7 @@ public class SupportAI_Movement : AI_Movement
 	{
 		if (target == null) return;
 
-		animation.Play("Run");
+		animation.Play("Walk");
 		//animator.SetBool("isRunning", true);
 
 		// プレイヤーの進行方向を取得し、後ろの位置を計算
@@ -127,7 +128,7 @@ public class SupportAI_Movement : AI_Movement
 			state = MoveState.FOLLOWING;
 			if(animation != null)
             {
-				animation.Play("Run");
+				animation.Play("Walk");
 			}
 			
 			target = other.gameObject;
@@ -141,7 +142,7 @@ public class SupportAI_Movement : AI_Movement
 				state = MoveState.CHASE;
 				if(animation != null)
                 {
-					animation.Play("Run");
+					animation.Play("Walk");
 				}
 				
 				target = other.gameObject;
@@ -155,13 +156,15 @@ public class SupportAI_Movement : AI_Movement
 		}
 	}
 
-	private void OnTriggerStay(Collider other)
+	protected void OnTriggerStay(Collider other)
 	{
+		//Debug.Log(this.gameObject.name + "  " + other.name + " + " + other.tag);
+
 		GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
 
 		if (other.CompareTag("Player"))
 		{
-			isPushEKey = true;
+			isPushQKey = true;
 			if (!isStopped)
 			{
 				state = MoveState.FOLLOWING;
@@ -176,7 +179,7 @@ public class SupportAI_Movement : AI_Movement
 				state = MoveState.CHASE;
 				if(animation != null)
                 {
-					animation.Play("Run");
+					animation.Play("Walk");
 				}
 				
 				target = other.gameObject;
@@ -195,5 +198,11 @@ public class SupportAI_Movement : AI_Movement
 		}
 	}
 
-
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			isPushQKey = false;
+		}
+	}
 }
