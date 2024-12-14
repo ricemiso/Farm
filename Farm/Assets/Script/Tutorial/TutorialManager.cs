@@ -169,7 +169,7 @@ public class TutorialManager : MonoBehaviour
 			enemy.SetActive(true);
 			//isSpawn = true;
 		}
-		if(task.GetTitle() == "“|‚¹")
+		if(task.GetTitle() == "“G‚ð“|‚¹")
 		{
 			enemy2.SetActive(true);
 		}
