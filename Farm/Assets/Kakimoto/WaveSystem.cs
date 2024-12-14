@@ -51,6 +51,16 @@ public class WaveSystem : MonoBehaviour
 	[SerializeField] int NightAdd;
 
 
+	// 召喚に使用するコスト
+	int m_Cost = 0;
+	// 継続的に召喚する時刻
+	int m_WaveLimitTime = -1;
+	// 次に召喚する時間
+	float m_NextSummonTime = 0;
+
+
+
+
 	private void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -75,28 +85,52 @@ public class WaveSystem : MonoBehaviour
 	{
 		int day = TimeManager.Instance.dayInGame;
 		float time = DayNightSystem.Instance.currentTimeOfDay;
+		int hour = DayNightSystem.Instance.currentHour;
 
 		// ある程度ポイントが溜まったら敵を生成
 		// 昼
-		if (day * 2 - 1 > m_WaveCount && time > 0.5f)
+		if (day * 2 - 1 > m_WaveCount && hour >= 12)
 		{
+			m_WaveCount++;
+			m_WaveLimitTime = 12;
+			m_NextSummonTime = 0.55f;
+
 			int cost = NoonBase + m_WaveCount * NoonAdd;
-			SummonEnemy(cost);
+			m_Cost = SummonEnemy(cost);
 		}
 		// 夜
-		if (day * 2 - 2 > m_WaveCount)
+		if (day * 2 - 2 > m_WaveCount && hour >= 0)
 		{
+			m_WaveCount++;
+			m_WaveLimitTime = 3;
+			m_NextSummonTime = 0.05f;
+
 			int cost = NightBase + m_WaveCount * NightAdd;
-			SummonEnemy(cost);
+			m_Cost = SummonEnemy(cost);
+		}
+
+		if (hour < m_WaveLimitTime)
+		{// 継続わき中
+			if (m_NextSummonTime <= time)
+			{
+				m_NextSummonTime = time + 0.02f;
+
+				m_Cost += m_WaveCount;
+				m_Cost = SummonEnemy(m_Cost);
+			}
+		}
+		else
+		{// 終了
+			m_WaveLimitTime = -1;
 		}
 
 	}
 
 
 	// リスト内からランダムに敵を召喚する
-	public void SummonEnemy(int cost)
+	// ret : 使用しなかったコスト
+	public int SummonEnemy(int cost)
 	{
-		m_WaveCount++;
 
 		// 敵の決定
 		List<int> enemyIndexList = new List<int>(); // 召喚できる敵のリスト（num m_EnemyListの番号）
@@ -107,7 +141,7 @@ public class WaveSystem : MonoBehaviour
 				enemyIndexList.Add(i);
 			}
 		}
-		if (enemyIndexList.Count == 0) return;
+		if (enemyIndexList.Count == 0) return cost;
 
 		// スポナーの決定
 		List<int> spawnerIndexList = new List<int>(); // 召喚できるスポナーのリスト（num m_SpawnerListの番号）
@@ -118,20 +152,21 @@ public class WaveSystem : MonoBehaviour
 				spawnerIndexList.Add(i);
 			}
 		}
-		if (spawnerIndexList.Count == 0) return;
+		if (spawnerIndexList.Count == 0) return cost;
 
 		// 敵の数を決定
-		List<int> enemyNumList = new List<int>(); // 敵の召喚する数のリスト（index m_EnemyListの番号）
+		List<int> enemyNumList = new List<int>(); // 敵の召喚する数のリスト（index enemyIndexListの番号）
 		int total = 0;  // ratioの合計
-		for (int i = 0; i < m_EnemyList.Count; ++i)
+		for (int i = 0; i < enemyIndexList.Count; ++i)
 		{
 			enemyNumList.Add(0);
-			total += m_EnemyList[i].Ratio;
+			total += m_EnemyList[enemyIndexList[i]].Ratio;
 		}
 
 		int missCount = 0;
 		int costRemains = cost;
-		while (missCount <= 8)
+		// 連続で召喚に失敗したら終わり
+		while (missCount <= 2)
 		{
 			int random = UnityEngine.Random.Range(0, total);
 
@@ -142,7 +177,7 @@ public class WaveSystem : MonoBehaviour
 				if (random < currentWeight)
 				{
 					// コストが残っている場合
-					if (costRemains >= m_EnemyList[enemyIndexList[i]].Ratio)
+					if (costRemains >= m_EnemyList[enemyIndexList[i]].Cost)
 					{
 						costRemains -= m_EnemyList[enemyIndexList[i]].Cost;
 						enemyNumList[i]++;
@@ -152,6 +187,7 @@ public class WaveSystem : MonoBehaviour
 					{
 						missCount++;
 					}
+					break;
 				}
 			}
 		}
@@ -161,9 +197,10 @@ public class WaveSystem : MonoBehaviour
 		float health = 1.0f + m_HealthMultiply * m_WaveCount;
 		float damage = 1.0f + m_DamageMultiply * m_WaveCount;
 		float size = 1.0f + m_SizeMultiply * m_WaveCount;
-		for (int index = 0; index < m_EnemyList.Count; ++index)
+		for (int i = 0; i < enemyIndexList.Count; ++i)
 		{
-			for (int cnt = 0; cnt < enemyNumList[index]; cnt++)
+			int index = enemyIndexList[i];
+			for (int cnt = 0; cnt < enemyNumList[i]; cnt++)
 			{
 				// スポナーを決定
 				int spawnerIndex = spawnerIndexList[UnityEngine.Random.Range(0, spawnerIndexList.Count)];
@@ -190,7 +227,7 @@ public class WaveSystem : MonoBehaviour
 			}
 		}
 
-
+		return costRemains;
 	}
 }
 
