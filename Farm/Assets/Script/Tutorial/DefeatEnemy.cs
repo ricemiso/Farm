@@ -6,12 +6,12 @@ public class DefeatEnemy : ITutorialTask
 {
 	public string GetTitle()
 	{
-		return "“|‚¹";
+		return "“G‚ğ“|‚¹";
 	}
 
 	public string GetText()
 	{
-		return "“G‚ğ“|‚»‚¤";
+		return "ƒ~ƒjƒIƒ“‚Å“G‚ğUŒ‚‚µ‚æ‚¤";
 	}
 
 	public void OnTaskSetting()

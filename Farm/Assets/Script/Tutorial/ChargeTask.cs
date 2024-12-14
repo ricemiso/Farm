@@ -11,7 +11,7 @@ public class ChargeTask : ITutorialTask
 
     public string GetText()
     {
-        return "マナをクリスタルにチャージして成長させよう。100%になるとゲームクリア!(チュートリアルは30%)";
+        return "マナをクリスタルにチャージして成長させよう。100%になるとゲームクリア!(チュートリアルは10%)";
     }
 
     public void OnTaskSetting()
