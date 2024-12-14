@@ -55,7 +55,7 @@ public class MiniCrystal : MonoBehaviour
 			GrobalState.Instance.resourceMaxHelth = CrystalMaxHealth;
 		}
 
-		canBeWatch = false;
+		canBeWatchs = false;
 
 		float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
