@@ -333,22 +333,23 @@ public class SelectionManager : MonoBehaviour
 
 					if (animal.isDead)
 					{
-						interaction_text.text = "’D‚¤";
-						interaction_Info_UI.SetActive(true);
-						chopText.text = "";
-						chopHolder.gameObject.SetActive(false);
-						centerDotimage.gameObject.SetActive(false);
-						handIcon.gameObject.SetActive(true);
+						//interaction_text.text = "’D‚¤";
+						//interaction_Info_UI.SetActive(true);
+						//chopText.text = "";
+						//chopHolder.gameObject.SetActive(false);
+						//centerDotimage.gameObject.SetActive(false);
+						//handIcon.gameObject.SetActive(true);
 
-						HandIsVisible = true;
+						//HandIsVisible = true;
 
 						isloot = true;
 
+						StartCoroutine(DelayedLoot(animal));
 
-						if (Input.GetMouseButtonDown(0) && !islootDelay)
-						{
-							StartCoroutine(DelayedLoot(animal));
-						}
+						//if (Input.GetMouseButtonDown(0) && !islootDelay)
+						//{
+							
+						//}
 					}
 
 
