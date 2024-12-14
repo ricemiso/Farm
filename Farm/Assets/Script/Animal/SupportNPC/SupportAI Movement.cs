@@ -8,6 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 public class SupportAI_Movement : AI_Movement
 {
 	public bool isPushQKey = false;
+	public bool isAttackAnim = false;
 
 	// 次攻撃可能になるまでのクールタイム
 	[SerializeField] float currentAttackCooltime;
@@ -30,6 +31,16 @@ public class SupportAI_Movement : AI_Movement
         {
 			target = player;
         }
+
+		if (animation.IsPlaying("Attack1") || animation.IsPlaying("Attack2"))
+		{
+			isAttackAnim = true;
+		}
+		else
+		{
+			isAttackAnim = false;
+		}
+
 		// プレイヤーとの距離を計算
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -45,7 +56,10 @@ public class SupportAI_Movement : AI_Movement
 			}
 			else
 			{
-				animation.Play("Walk");
+				if (!isAttackAnim)
+				{
+					animation.Play("Walk");
+				}
 				//animator.SetBool("isRunning", true);
 				state = MoveState.FOLLOWING;
 				target = player;
@@ -65,10 +79,13 @@ public class SupportAI_Movement : AI_Movement
 				break;
 			case MoveState.WAITING:
 				//Wait();
-				break;
+				//break;
 			case MoveState.STOP:
 			default:
-				animation.Play("Idle");
+				if (!isAttackAnim)
+				{
+					animation.Play("Idle");
+				}
 				break;
 		}
 
@@ -81,7 +98,10 @@ public class SupportAI_Movement : AI_Movement
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
 	{
-		animation.Play("Walk");
+		if (!isAttackAnim)
+		{
+			animation.Play("Walk");
+		}
 		//animation.Play("Run");
 		//animator.SetBool("isRunning", true);
 		//animator.SetBool("isRunning", true);
@@ -99,7 +119,7 @@ public class SupportAI_Movement : AI_Movement
 	{
 		if (target == null) return;
 
-		if (!animation.IsPlaying("Attack1") || !animation.IsPlaying("Attack2"))
+		if (!isAttackAnim)
 		{
 			animation.Play("Walk");
 		}
@@ -114,7 +134,8 @@ public class SupportAI_Movement : AI_Movement
 		if (distance <= attackRange &&
 			currentAttackCooltime <= 0.0f)
 		{
-			checkAttack();
+			//checkAttack();
+			animation.Stop(); //攻撃アニメーションをすぐに再生させるため
 			currentAttackCooltime = attackCooltime;
 		}
 	}
@@ -128,12 +149,14 @@ public class SupportAI_Movement : AI_Movement
 
 		if (other.CompareTag("Player") && state != MoveState.FOLLOWING && state != MoveState.CHASE && !isStopped)
 		{
+			isPushQKey = true;
+
 			state = MoveState.FOLLOWING;
-			if(animation != null)
+			if(animation != null && !isAttackAnim)
             {
 				animation.Play("Walk");
 			}
-			
+
 			target = other.gameObject;
 		}
 
@@ -152,8 +175,8 @@ public class SupportAI_Movement : AI_Movement
 
                 if (animal.isDead)
                 {
-					state = MoveState.FOLLOWING;
-
+					target = null;
+					state = MoveState.WAITING;
 				}
 			}
 		}
@@ -195,7 +218,7 @@ public class SupportAI_Movement : AI_Movement
 			}
 			else
 			{
-				state = MoveState.FOLLOWING;
+				state = MoveState.WAITING;
 				target = null;
 			}
 		}
