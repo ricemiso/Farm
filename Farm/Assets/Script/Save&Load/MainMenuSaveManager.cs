@@ -36,20 +36,22 @@ public class MainMenuSaveManager : MonoBehaviour
     public bool isSavingJason;
 
     public Canvas loadScreen;
+	public SlideShow show;
 
-    private void Start()
+
+	private void Start()
     {
         JsonPathProject = Application.dataPath + Path.AltDirectorySeparatorChar;
         JsonPathPersistant = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
         binaryPath = Application.persistentDataPath + Path.AltDirectorySeparatorChar;
-    }
+	}
 
 
-    #region || -------- セーブ＆ロード -------- ||
+	#region || -------- セーブ＆ロード -------- ||
 
 
-    #region || -------- Saving -------- ||
-    public void SaveGame(int sloaNumber)
+	#region || -------- Saving -------- ||
+	public void SaveGame(int sloaNumber)
     {
         AllGameData data = new AllGameData();
 
@@ -708,19 +710,20 @@ public class MainMenuSaveManager : MonoBehaviour
         myEventSystem.GetComponent<UnityEngine.EventSystems.EventSystem>().SetSelectedGameObject(null);
     }
 
-    #endregion
+	#endregion
 
 
-    #region || -------- ロードセクション -------- ||
+	#region || -------- ロードセクション -------- ||
 
-    public void ActivateLoadingScene()
+	public void ActivateLoadingScene()
     {
-        loadScreen.gameObject.SetActive(true);
+		loadScreen.gameObject.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         //Todo::ロードアニメーション、Tipsなどはここで
+		show.LoadImage();
     }
 
     public void DisableLoadingScene()

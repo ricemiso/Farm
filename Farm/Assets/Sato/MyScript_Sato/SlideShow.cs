@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.UIElements;
+//using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class SlideShow : MonoBehaviour
 {
-	string[] filePath;
+	public Sprite[] spr;
 
-	Image img;
+	public Image img;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		//filePath[0] = "Art/LoadPicture/loadPic1.png";
-
-		//img.sprite = filePath[0];
+		LoadImage();
 	}
 
 	// Update is called once per frame
 	void Update()
+	{}
+
+	public void LoadImage()
 	{
-		
+		int rnd = Random.Range(0, spr.Length);
+		img.sprite = spr[rnd];
 	}
 }
