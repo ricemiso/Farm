@@ -27027,7 +27027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2478386106024769802, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 2.74
       objectReference: {fileID: 0}
     - target: {fileID: 2478386106024769802, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28619,17 +28619,33 @@ MonoBehaviour:
     IsActive: 1
     WaveLimit: 24
     CrystalMini: {fileID: 0}
-  m_EnemyList: []
+  m_EnemyList:
+  - EnemyObject: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+    Cost: 6
+    WaveLimit: 0
+    Ratio: 5
+  - EnemyObject: {fileID: 7403261691875906541, guid: aa74b80754f8d944fa61e20ecb0acbdc, type: 3}
+    Cost: 8
+    WaveLimit: 0
+    Ratio: 3
+  - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
+    Cost: 16
+    WaveLimit: 6
+    Ratio: 1
+  - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
+    Cost: 1
+    WaveLimit: 0
+    Ratio: 1
   m_HealthMultiply: 0.1
   m_DamageMultiply: 0.4
   m_SizeMultiply: 0.05
-  Range: {x: 0, y: 0, z: 0}
-  Crystal: {fileID: 0}
-  EnemyParent: {fileID: 0}
-  NoonBase: 0
-  NoonAdd: 0
-  NightBase: 0
-  NightAdd: 0
+  Range: {x: 20, y: 0, z: 20}
+  Crystal: {fileID: 568825487}
+  EnemyParent: {fileID: 1671064501}
+  NoonBase: 5
+  NoonAdd: 2
+  NightBase: 10
+  NightAdd: 4
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
