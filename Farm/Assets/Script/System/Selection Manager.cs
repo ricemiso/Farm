@@ -111,7 +111,7 @@ public class SelectionManager : MonoBehaviour
 			}
 			else if (crystal && crystal.playerRange)
 			{
-				//crystal.canBeCharge = true;
+				crystal.canBeWatch = true;
 				selectedCrystal = crystal.gameObject;
 				chopText.text = "マナクリスタル";
 				chopHolder.gameObject.SetActive(true);
@@ -129,7 +129,7 @@ public class SelectionManager : MonoBehaviour
 			}
 			else if (minicrystal && minicrystal.playerRange)
 			{
-				// minicrystal.canBeCharge = true;
+				minicrystal.canBeWatchs = true;
 				selectedCrystal = minicrystal.gameObject;
 				chopText.text = "ミニクリスタル";
 				chopHolder.gameObject.SetActive(true);
