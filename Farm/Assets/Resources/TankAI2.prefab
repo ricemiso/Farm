@@ -4789,7 +4789,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db9c3dd5e104c7f4b836b1097eda5f1f, type: 2}
+  - {fileID: 2100000, guid: e956915f72821d74eafc648314faadca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4956,6 +4956,7 @@ MonoBehaviour:
   damageIncrease: 5
   level: 0
   canBeChopped: 0
+  canbeWatch: 0
   unionForceStrength: 0
   enemyForceStrength: 0
   soundChannel: {fileID: 2127612127266028338}
@@ -5156,7 +5157,8 @@ MonoBehaviour:
   stopDistance: 10
   onGround: 0
   attackRange: 1
-  isPushEKey: 0
+  isPushQKey: 0
+  isAttackAnim: 0
   currentAttackCooltime: 0
 --- !u!1 &6288677722811547862
 GameObject:
