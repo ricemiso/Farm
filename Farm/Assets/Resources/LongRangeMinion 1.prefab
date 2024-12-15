@@ -4820,7 +4820,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c30eeb33c454f234bb79739b431d5dd6, type: 2}
+  - {fileID: 2100000, guid: e956915f72821d74eafc648314faadca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4981,7 +4981,7 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u9060\u8DDD\u96E2)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 40
+  maxHealth: 90
   isCraftedMinion: 0
   damage: 10
   healthIncrease: 20
