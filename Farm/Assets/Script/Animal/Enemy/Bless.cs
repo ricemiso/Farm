@@ -6,16 +6,18 @@ public class Bless : MonoBehaviour
 {
 
     LongRange Long;
+    private bool isdamege;
 
     private void Start()
     {
         Long = GetComponentInParent<LongRange>();
+        isdamege = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
         float damage = GetComponentInParent<Animal>().damage;
-        if (other.CompareTag("SupportUnit") || other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))
+        if ((other.CompareTag("SupportUnit") || other.CompareTag("Player") || other.CompareTag("Crystal") || other.CompareTag("MiniCrystal"))&&!isdamege)
         {
             if (other.gameObject.GetComponent<Animal>())
             {
@@ -31,8 +33,17 @@ public class Bless : MonoBehaviour
                 Long.Attack(damage, other.gameObject);
 
             }
+
+            StartCoroutine(attackDelay());
         }
 
 
+    }
+
+    IEnumerator attackDelay()
+    {
+        isdamege = true;
+        yield return new WaitForSeconds(0.5f);
+        isdamege = false;
     }
 }
