@@ -39,11 +39,22 @@ public class LongRangeMinion : SupportAI_Movement
 
 	protected override void checkAttack()
 	{
-		//if(state != MoveState.CHASE || target.tag == "Player") return;
+        if (target.tag == "Player") return;
 
-		animation["Attack2"].speed = 1.7f;
+        animation["Attack2"].speed = 1.7f;
 		animation.Play("Attack2");
+		StartCoroutine(createDelay());
+	}
 
+	IEnumerator createDelay()
+    {
+		yield return new WaitForSeconds(0.2f);
+		createMagic();
+
+	}
+
+	public void createMagic()
+    {
 		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
 		Quaternion spawnRotation = shootPos.transform.rotation;
 
