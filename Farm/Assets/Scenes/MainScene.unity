@@ -15471,7 +15471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17373419
+      value: 0.668
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.z
@@ -23911,7 +23911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17373419
+      value: 0.499
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28642,35 +28642,35 @@ MonoBehaviour:
   - Object: {fileID: 1630540139}
     IsActive: 1
     WaveLimit: 2
-    CrystalMini: {fileID: 0}
+    CrystalMini: {fileID: 1603576235}
   - Object: {fileID: 806349926}
     IsActive: 1
-    WaveLimit: 10
-    CrystalMini: {fileID: 0}
+    WaveLimit: 8
+    CrystalMini: {fileID: 1412846703}
   - Object: {fileID: 1244982888}
     IsActive: 1
-    WaveLimit: 18
-    CrystalMini: {fileID: 0}
+    WaveLimit: 14
+    CrystalMini: {fileID: 397610559}
   - Object: {fileID: 1672706753}
     IsActive: 1
-    WaveLimit: 24
-    CrystalMini: {fileID: 0}
+    WaveLimit: 20
+    CrystalMini: {fileID: 1950362780}
   m_EnemyList:
   - EnemyObject: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
-    Cost: 6
+    Cost: 3
     WaveLimit: 0
     Ratio: 5
   - EnemyObject: {fileID: 7403261691875906541, guid: aa74b80754f8d944fa61e20ecb0acbdc, type: 3}
-    Cost: 8
+    Cost: 4
     WaveLimit: 0
     Ratio: 3
   - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
-    Cost: 16
-    WaveLimit: 6
+    Cost: 8
+    WaveLimit: 4
     Ratio: 1
   - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
-    Cost: 1
-    WaveLimit: 0
+    Cost: 10
+    WaveLimit: 6
     Ratio: 1
   m_HealthMultiply: 0.1
   m_DamageMultiply: 0.4
@@ -30596,7 +30596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17373419
+      value: 0.465
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30902,7 +30902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17373419
+      value: 0.387
       objectReference: {fileID: 0}
     - target: {fileID: 7705276058635499703, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_LocalPosition.z
