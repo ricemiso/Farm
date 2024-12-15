@@ -197,7 +197,7 @@ MonoBehaviour:
   playerRange: 0
   canBeChopped: 0
   animcooltime: 0
-  stoneMaxHealth: 5
+  stoneMaxHealth: 3
   stoneHealth: 0
   caloriesSpendChoppingWood: 20
   dis: 10
