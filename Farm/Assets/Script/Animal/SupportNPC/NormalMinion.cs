@@ -19,10 +19,15 @@ public class NormalMinion : SupportAI_Movement
 
 	protected override void checkAttack()
 	{
-		animation.Play("Attack1");
 
-		float damage = GetComponent<Animal>().damage;
-		Attack(damage,target);
+		if(target != player)
+        {
+			animation.Play("Attack1");
+
+			float damage = GetComponent<Animal>().damage;
+			Attack(damage, target);
+		}
+		
 
 	}
 
