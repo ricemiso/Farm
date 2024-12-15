@@ -51,7 +51,8 @@ public class AI_Movement : MonoBehaviour
 	public bool onGround;    // 接地しているか
 	public const float maxAngleToTreatAsGround = 20.0f; // 地面と判定する傾き
 
-	public float attackRange = 1.0f;	// 攻撃範囲
+	public float attackRange = 1.0f;    // 攻撃範囲
+	private bool isattack = false;
 
 	// Start is called before the first frame update
 	protected virtual void Start()
@@ -229,18 +230,16 @@ public class AI_Movement : MonoBehaviour
 		}
 	}
 
-	// 対象に攻撃
-	public void Attack(float num, GameObject obj = null)
-	{
-		// TODO : 体力管理を一つのクラスに統合させたい
+	IEnumerator damagedelay(float num, GameObject obj = null)
+    {
+		isattack = true;
+		yield return new WaitForSeconds(0.5f);
 
-
-		// タグごとに処理を分岐
 		if (obj == null) obj = target;
 		switch (obj.tag)
 		{
 			case "Player":
-				if(num >= 30)
+				if (num >= 30)
 				{
 					num = 30;
 				}
@@ -263,7 +262,23 @@ public class AI_Movement : MonoBehaviour
 			default:
 				break;
 		}
+
+		isattack = false;
+
 	}
+
+	// 対象に攻撃
+	public void Attack(float num, GameObject obj = null)
+	{
+		// TODO : 体力管理を一つのクラスに統合させたい
+		if (!isattack) return;
+		StartCoroutine(damagedelay(num,obj));
+		// タグごとに処理を分岐
+		
+	}
+
+	
+
 
 	protected void OnCollisionStay(Collision collision)
 	{
