@@ -16,7 +16,7 @@ public class Animal : MonoBehaviour
     public float maxHealth;
 
     public bool isCraftedMinion = false;
-    public int damage;
+    public float damage;
 
     public int healthIncrease = 20;
     public int damageIncrease = 5;
