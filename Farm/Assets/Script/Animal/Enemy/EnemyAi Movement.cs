@@ -41,7 +41,7 @@ public class EnemyAI_Movement : AI_Movement
     protected override void Update()
 	{
 
-		if (!isStopped && onGround)
+		if (!isStopped)
 		{
             switch (state)
             {
@@ -86,6 +86,7 @@ public class EnemyAI_Movement : AI_Movement
 
 	virtual protected void ChaseEnemy()
 	{
+
 		if(animator != null)
         {
 			animator.SetTrigger("Run");

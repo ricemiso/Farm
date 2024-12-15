@@ -48,7 +48,6 @@ public class AI_Movement : MonoBehaviour
 
 	[SerializeField]public float stopDistance = 10.0f;   // 停止する距離
 
-	public bool onGround;    // 接地しているか
 	public const float maxAngleToTreatAsGround = 20.0f; // 地面と判定する傾き
 
 	public float attackRange = 1.0f;    // 攻撃範囲
@@ -82,7 +81,6 @@ public class AI_Movement : MonoBehaviour
 
 		ChooseDirection();  // 初回の方向を選択
 
-		onGround = false;
 	}
 
 	protected virtual void Update()
@@ -93,7 +91,6 @@ public class AI_Movement : MonoBehaviour
 		waitCounter -= Time.deltaTime;
 
 
-		onGround = false;
 	}
 
 	// 追いかけるメソッド
@@ -128,7 +125,7 @@ public class AI_Movement : MonoBehaviour
 		else
 		{
 			// 近づく
-			transform.position += direction * followSpeed * Time.deltaTime;
+ 			transform.position += direction * followSpeed * Time.deltaTime;
 
 			// アニメーション
 			if (animator != null)
@@ -266,18 +263,18 @@ public class AI_Movement : MonoBehaviour
 
 	
 
-	protected void OnCollisionStay(Collision collision)
-	{
-		// 設置判定
-		for (int i = 0; i < collision.contactCount; i++)
-		{
-			if (Vector3.Angle(Vector3.up, collision.GetContact(i).normal)
-				< maxAngleToTreatAsGround)
-			{
-				//Debug.Log("接地");
-				onGround = true;
-				break;
-			}
-		}
-	}
+	//protected void OnCollisionStay(Collision collision)
+	//{
+	//	// 設置判定
+	//	for (int i = 0; i < collision.contactCount; i++)
+	//	{
+	//		if (Vector3.Angle(Vector3.up, collision.GetContact(i).normal)
+	//			< maxAngleToTreatAsGround)
+	//		{
+	//			//Debug.Log("接地");
+	//			onGround = true;
+	//			break;
+	//		}
+	//	}
+	//}
 }
