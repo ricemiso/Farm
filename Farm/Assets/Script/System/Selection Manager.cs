@@ -310,14 +310,6 @@ public class SelectionManager : MonoBehaviour
 				{
 					if (Input.GetMouseButtonDown(0) && EquipSystem.Instance.IsHoldingWeapon())
 					{
-
-						//‚È‚º‚©‚¤‚Ü‚­‚¢‚©‚È‚¢
-						//Debug.Log("Calling IsThereSwingLock()");
-						//if (EquipSystem.Instance.IsThereSwingLock() == false)
-						//{
-
-						//    StartCoroutine(DealDamageTo(animal, 0.3f, EquipSystem.Instance.GetWeaPonDamage()));
-						//}
 						if (isdamageDelay)
 						{
 
@@ -331,33 +323,10 @@ public class SelectionManager : MonoBehaviour
 
 					}
 
-					//if (animal.isDead)
-					//{
-					//	//interaction_text.text = "’D‚¤";
-					//	//interaction_Info_UI.SetActive(true);
-					//	//chopText.text = "";
-					//	//chopHolder.gameObject.SetActive(false);
-					//	//centerDotimage.gameObject.SetActive(false);
-					//	//handIcon.gameObject.SetActive(true);
-					//	Lootable lootable = animal.GetComponent<Lootable>();
-
-					//	//HandIsVisible = true;
-
-					//	isloot = true;
-
-						
-
-					//	//if (Input.GetMouseButtonDown(0) && !islootDelay)
-					//	//{
-							
-					//	//}
-					//}
-
-
 				}
 				else if (EquipSystem.Instance.IsPlayerHooldingMana())
 				{
-					if (Input.GetMouseButtonDown(0) && !leveling)
+					if (Input.GetMouseButtonDown(0) && !leveling && animal.level<=3)
 					{
 						leveling = true;
 						int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
@@ -390,10 +359,6 @@ public class SelectionManager : MonoBehaviour
 					chopHolder.gameObject.SetActive(false);
 				}
 			}
-
-
-
-
 
 
 			if (!interactable && !animal)
@@ -429,7 +394,7 @@ public class SelectionManager : MonoBehaviour
 
 	IEnumerator DelayWatering()
 	{
-		yield return new WaitForSeconds(2.0f);
+		
 
 		if (Chargeing)
 		{
@@ -441,6 +406,7 @@ public class SelectionManager : MonoBehaviour
 			ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
 		}
 
+		yield return new WaitForSeconds(2.0f);
 		// Destroy(EquipSystem.Instance.selecteditemModel);
 
 		Watering = false;
