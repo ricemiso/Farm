@@ -491,7 +491,7 @@ public class MainMenuSaveManager : MonoBehaviour
     public void StartLoadedGame(string sceneName)
     {
         ActivateLoadingScene();
-        if(sceneName == "TutorialScene" && GrobalState.Instance.isSkip)
+        if(sceneName == "TutorialScene" && (GrobalState.Instance.isSkip || GrobalState.Instance.isTutorialEnd))
         {
             sceneName = "MainScene";
         }
