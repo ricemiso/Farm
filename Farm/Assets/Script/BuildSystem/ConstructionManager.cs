@@ -613,7 +613,7 @@ public class ConstructionManager : MonoBehaviour
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
         // タグを設定
-        if(itemToBeConstructed.name == "ConstractAI2")
+        if(itemToBeConstructed.name == "ConstractAI2"|| itemToBeConstructed.name == "LongRangeMinion 1" || itemToBeConstructed.name == "TankAI2")
         {
             itemToBeConstructed.tag = "SupportUnit";
             // アイテムを親の下に移動

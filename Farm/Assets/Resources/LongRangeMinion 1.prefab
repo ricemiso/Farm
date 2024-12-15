@@ -4887,7 +4887,6 @@ GameObject:
   - component: {fileID: 2473072749452675079}
   - component: {fileID: 8559359141524731401}
   - component: {fileID: 2127612127266028338}
-  - component: {fileID: 4064163772233434320}
   - component: {fileID: 2685701426436218251}
   - component: {fileID: 2007988655042678609}
   - component: {fileID: 5322292645872173344}
@@ -4989,6 +4988,7 @@ MonoBehaviour:
   damageIncrease: 5
   level: 0
   canBeChopped: 0
+  canbeWatch: 0
   unionForceStrength: 0
   enemyForceStrength: 0
   soundChannel: {fileID: 2127612127266028338}
@@ -5018,7 +5018,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 62.32, y: 107.5, z: 174.5}
+  m_Size: {x: 62.32, y: 109.24, z: 174.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &2127612127266028338
 AudioSource:
@@ -5116,24 +5116,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4064163772233434320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522425592210347359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96c72dfda527c6f44b41f3774de134b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibilities:
-  - item: {fileID: 1722597568480135006, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
-    amountMin: 1
-    amountMax: 3
-  finalLoot: []
-  wasLootCalulated: 0
 --- !u!114 &2685701426436218251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5207,7 +5189,8 @@ MonoBehaviour:
   stopDistance: 10
   onGround: 0
   attackRange: 0.9
-  isPushEKey: 0
+  isPushQKey: 0
+  isAttackAnim: 0
   currentAttackCooltime: 0
   shootPos: {fileID: 518973231133983254}
   bullet: {fileID: 7590026145775744859, guid: b97e6c0409eb23f40a5d837298224808, type: 3}
