@@ -31,6 +31,7 @@ public class AI_Movement : MonoBehaviour
 		CHASE,
 		WAITING,
 		STOP,
+		ATTACK,
 	}
 
 	public MoveState state;
@@ -257,7 +258,6 @@ public class AI_Movement : MonoBehaviour
 				break;
 			case "MiniCrystal":
 				target.GetComponent<MiniCrystal>().GetHit(num);
-				
 				break;
 			default:
 				break;
