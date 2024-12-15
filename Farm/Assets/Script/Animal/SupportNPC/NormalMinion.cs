@@ -23,6 +23,7 @@ public class NormalMinion : SupportAI_Movement
 
 		float damage = GetComponent<Animal>().damage;
 		Attack(damage,target);
+
 	}
 
     private void OnTriggerStay(Collider other)
