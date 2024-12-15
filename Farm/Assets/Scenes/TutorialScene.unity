@@ -21003,7 +21003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 200
   currentCalories: 0
   maxCalories: 2000
   playerBody: {fileID: 1686317345}
