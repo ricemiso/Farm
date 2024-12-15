@@ -234,6 +234,7 @@ public class AI_Movement : MonoBehaviour
 	{
 		// TODO : 体力管理を一つのクラスに統合させたい
 
+
 		// タグごとに処理を分岐
 		if (obj == null) obj = target;
 		switch (obj.tag)
