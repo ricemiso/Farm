@@ -31,8 +31,6 @@ public class InventorySystem : MonoBehaviour
 
     public int stackLimit = 10;
 
-    private bool isUpdateRequired = false;
-
     public bool isStacked = false;
 
     //チュートリアル用の変数
@@ -228,7 +226,6 @@ public class InventorySystem : MonoBehaviour
 
         if (stack != null && shoodStack)
         {
-            isUpdateRequired = true;
             itemName = GetItemName(itemName);
             UpdateInventoryItems(itemName);
             //stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;

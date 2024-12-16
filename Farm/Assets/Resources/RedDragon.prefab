@@ -1813,7 +1813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   animation: {fileID: 0}
-  moveSpeed: 0.2
+  moveSpeed: 0.5
   walkCounter: 0
   waitCounter: 0
   state: 0
@@ -1825,7 +1825,6 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   stopDistance: 10
-  onGround: 0
   attackRange: 1
   timeToFoundEnemy: 0
   currentAttackCooltime: 0

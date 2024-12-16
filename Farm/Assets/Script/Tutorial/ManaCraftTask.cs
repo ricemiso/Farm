@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackTask : ITutorialTask
+public class ManaCraftTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 攻撃";
+        return "基本操作 マナへ変換";
     }
 
     public string GetText()
     {
-        return "武器を装備したまま、左クリックで攻撃できます";
+        return "クラフト画面から丸太や石ころをマナに変換してみよう";
     }
 
     public void OnTaskSetting()
@@ -20,7 +20,7 @@ public class AttackTask : ITutorialTask
 
     public bool CheckTask()
     {
-        if (EquipSystem.Instance.IsHoldingWeapon()&& Input.GetMouseButtonDown(0))
+        if (GrobalState.Instance.isManaCraft)
         {
             return true;
         }

@@ -5457,7 +5457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   animation: {fileID: 0}
-  moveSpeed: 0.2
+  moveSpeed: 1.5
   walkCounter: 0
   waitCounter: 0
   state: 0
@@ -5469,7 +5469,6 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   stopDistance: 6
-  onGround: 0
   attackRange: 1
   timeToFoundEnemy: 0
   currentAttackCooltime: 0
@@ -5491,8 +5490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   possibilities:
   - item: {fileID: 1722597568480135006, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
-    amountMin: 3
-    amountMax: 5
+    amountMin: 1
+    amountMax: 3
   finalLoot: []
   wasLootCalulated: 0
 --- !u!82 &5607874515001271811
