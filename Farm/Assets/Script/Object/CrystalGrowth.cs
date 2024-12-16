@@ -96,14 +96,6 @@ public class CrystalGrowth : MonoBehaviour
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
 			if (PlayerState.Instance.currentHydrationPercent >= 10)
 			{
-
-
-				UnityEngine.Cursor.lockState = CursorLockMode.None;
-				//Destroy(SoundManager.Instance.gameObject);
-				// クリアシーン
-
-
-				//Destroy(gameObject.transform.parent.parent.gameObject);
 				clearparth1.gameObject.SetActive(true);
 				clearparth2.gameObject.SetActive(true);
 				clearparth3.gameObject.SetActive(true);
@@ -120,13 +112,15 @@ public class CrystalGrowth : MonoBehaviour
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				UnityEngine.Cursor.visible = true;
 				gameClearCanvas.gameObject.SetActive(true);
+				SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+				SoundManager.Instance.PlaySound(SoundManager.Instance.gameClearBGM);
 				//SceneManager.LoadScene("GameClear");
 			}
         }
         else
         {
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
-			if (PlayerState.Instance.currentHydrationPercent >= 5)
+			if (PlayerState.Instance.currentHydrationPercent >= 10)
 			{
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				//Destroy(SoundManager.Instance.gameObject);
@@ -151,6 +145,8 @@ public class CrystalGrowth : MonoBehaviour
 	public void GetHit(float damage)
 	{
 		Log.Instance.OnFarmAttack(gameObject.name);
+		
+		SoundManager.Instance.PlaySound(SoundManager.Instance.CrystalAttack);
 
 		CrystalHealth -= damage;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
@@ -160,8 +156,9 @@ public class CrystalGrowth : MonoBehaviour
 
 		if (CrystalHealth <= 0)
 		{
-			SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
-			//TODO:ゲームオーバー処理を作る
+			SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
 			CrystalIsDead();
 
 		}

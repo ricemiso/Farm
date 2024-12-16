@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
-   public static SoundManager Instance { get; set; }
+    public static SoundManager Instance { get; set; }
 
     //Œø‰Ê‰¹
     public AudioSource dropItemSound;
@@ -22,16 +22,20 @@ public class SoundManager : MonoBehaviour
     public AudioSource FarmWalkSound;
     public AudioSource EatSound;
     public AudioSource DamageSound;
+    public AudioSource CrystalAttack;
+    public AudioSource Crystalbreak;
+    public AudioSource Stonebreak;
 
-    //public AudioSource WateringSound;
-    //public AudioSource WateringCanSound;
 
     //BGM
     public AudioSource startingZoneBGMMusic;
+    public AudioSource gameClearBGM;
+    public AudioSource gameOverBGM;
+    public AudioSource EnemyCreateBGM;
 
     private void Awake()
     {
-        if(Instance != null &&Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
@@ -47,11 +51,11 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
-        if (scene.name == "GameOver"|| scene.name == "GameClear")
+
+        if (scene.name == "GameOver" || scene.name == "GameClear")
         {
             Destroy(gameObject);
-            SceneManager.sceneLoaded -= OnSceneLoaded; 
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
@@ -69,4 +73,11 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopSound(AudioSource soundToPlay)
+    {
+        if (soundToPlay.isPlaying)
+        {
+            soundToPlay.Stop();
+        }
+    }
 }
