@@ -46,6 +46,7 @@ public class CrystalGrowth : MonoBehaviour
 		clearparth2.gameObject.SetActive(false);
 		clearparth2.gameObject.SetActive(false);
 		gameClearCanvas.gameObject.SetActive(false);
+		falseCanvas.gameObject.SetActive(true);
 	}
 
 	// Update is called once per frame
