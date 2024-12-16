@@ -9723,9 +9723,6 @@ MonoBehaviour:
   selectedAnimal: {fileID: 0}
   selectedStorageBox: {fileID: 0}
   selectedSoil: {fileID: 0}
-  isDamage: 0
-  isloot: 0
-  isFarm1: 0
 --- !u!4 &484624253
 Transform:
   m_ObjectHideFlags: 0
@@ -23317,8 +23314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 474.38745, y: -3.9008}
-  m_SizeDelta: {x: 586.9407, y: 649}
+  m_AnchoredPosition: {x: 474.38745, y: -12.95}
+  m_SizeDelta: {x: 586.9407, y: 630.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222315616
 MonoBehaviour:
@@ -30284,6 +30281,12 @@ MonoBehaviour:
   isStoneChopped: 0
   isTutorialEnd: 0
   isSkip: 0
+  isWater: 0
+  isDamage: 0
+  isloot: 0
+  isFarm1: 0
+  isDeath: 0
+  isManaCraft: 0
 --- !u!1 &1626534545
 GameObject:
   m_ObjectHideFlags: 0

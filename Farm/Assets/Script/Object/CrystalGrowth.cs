@@ -122,7 +122,7 @@ public class CrystalGrowth : MonoBehaviour
 
 	public void GetHit(float damage)
 	{
-		Log.Instance.OnCrystalAttack();
+		Log.Instance.OnFarmAttack(gameObject.name);
 
 		CrystalHealth -= damage;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
