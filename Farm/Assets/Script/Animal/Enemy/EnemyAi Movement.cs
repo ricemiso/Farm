@@ -69,9 +69,9 @@ public class EnemyAI_Movement : AI_Movement
 
 	protected void ChaseCrystal()
     {
-		if (CrystalMini != null && Crystal != null)
+		if (CrystalMini != null || Crystal != null)
 		{
-			if (CrystalMini.GetComponent<MiniCrystal>().IsAlive())
+			if(CrystalMini != null && CrystalMini.TryGetComponent<MiniCrystal>(out MiniCrystal miniCrystal))
 			{
 				// ミニクリスタルが生きているなら
 				FoundTarget(CrystalMini);
