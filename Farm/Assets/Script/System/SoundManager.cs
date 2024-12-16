@@ -33,6 +33,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource gameOverBGM;
     public AudioSource EnemyCreateBGM;
 
+
+    private List<AudioSource> allBGMAudioSources = new List<AudioSource>();
+    private List<AudioSource> allWalkAudioSources = new List<AudioSource>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -48,6 +52,34 @@ public class SoundManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+
+    private void Start()
+    {
+        RegisterAudioSource(startingZoneBGMMusic);
+        RegisterAudioSource(gameClearBGM);
+        RegisterAudioSource(gameOverBGM);
+        RegisterAudioSource(EnemyCreateBGM);
+        WalkRegisterAudioSource(grassWalkSound);
+        WalkRegisterAudioSource(gravelWalkSound);
+        WalkRegisterAudioSource(foundationWalkSound);
+        WalkRegisterAudioSource(FarmWalkSound);
+    }
+
+    public void RegisterAudioSource(AudioSource source)
+    {
+        if (!allBGMAudioSources.Contains(source))
+        {
+            allBGMAudioSources.Add(source);
+        }
+    }
+
+    public void WalkRegisterAudioSource(AudioSource source)
+    {
+        if (!allWalkAudioSources.Contains(source))
+        {
+            allWalkAudioSources.Add(source);
+        }
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -79,5 +111,41 @@ public class SoundManager : MonoBehaviour
         {
             soundToPlay.Stop();
         }
+    }
+
+    public void StopWalkSound()
+    {
+        foreach (AudioSource source in allWalkAudioSources)
+        {
+            if (source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+    }
+
+    public void StopBGMSound()
+    {
+        foreach (AudioSource source in allBGMAudioSources)
+        {
+            if (source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+    }
+
+    public void PlayIfNoOtherMusic(AudioSource soundToPlay)
+    {
+        // åªç›çƒê∂íÜÇÃâπäyÇ™Ç†ÇÈÇ©ÇämîF
+        foreach (AudioSource source in allBGMAudioSources)
+        {
+            if (source.isPlaying)
+            {
+                return;
+            }
+        }
+
+        soundToPlay.Play();
     }
 }

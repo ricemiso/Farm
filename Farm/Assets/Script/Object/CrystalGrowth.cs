@@ -47,6 +47,9 @@ public class CrystalGrowth : MonoBehaviour
 		clearparth2.gameObject.SetActive(false);
 		gameClearCanvas.gameObject.SetActive(false);
 		falseCanvas.gameObject.SetActive(true);
+
+		gameOverCanvas.sortingOrder = -2;
+		gameClearCanvas.sortingOrder = -1;
 	}
 
 	// Update is called once per frame
@@ -112,8 +115,11 @@ public class CrystalGrowth : MonoBehaviour
 				PlayerState.Instance.playerBody.SetActive(false);
 				UnityEngine.Cursor.lockState = CursorLockMode.None;
 				UnityEngine.Cursor.visible = true;
+				gameOverCanvas.sortingOrder = -1;
+				gameClearCanvas.sortingOrder = 2;
 				gameClearCanvas.gameObject.SetActive(true);
 				SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+				SoundManager.Instance.StopWalkSound();
 				SoundManager.Instance.PlaySound(SoundManager.Instance.gameClearBGM);
 				//SceneManager.LoadScene("GameClear");
 			}
@@ -159,6 +165,7 @@ public class CrystalGrowth : MonoBehaviour
 		{
 			SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
 			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.StopWalkSound();
 			SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
 			CrystalIsDead();
 
@@ -175,6 +182,8 @@ public class CrystalGrowth : MonoBehaviour
 		Vector3 newPosition = gameObject.transform.position; // 現在の位置を取得
 		newPosition.y += 4; // y座標をオフセット（上方向に移動）
 		GameObject Crystal = Instantiate(breakCrystal, newPosition, gameObject.transform.rotation);
+		gameOverCanvas.sortingOrder = 2;
+		gameClearCanvas.sortingOrder = -1;
 		gameOverCanvas.gameObject.SetActive(true);
 
 		Destroy(gameObject);

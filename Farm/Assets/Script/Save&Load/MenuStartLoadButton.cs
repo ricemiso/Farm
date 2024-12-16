@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class MenuStartLoadButton : MonoBehaviour
 {
-   public void MunuBottun(string sceneName)
+    private void Start()
+    {
+        SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
+        SoundManager.Instance.StopSound(SoundManager.Instance.gameOverBGM);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.startingZoneBGMMusic);
+    }
+
+    public void MunuBottun(string sceneName)
     {
         MainMenuSaveManager.Instance.StartLoadedGame(sceneName);
     }

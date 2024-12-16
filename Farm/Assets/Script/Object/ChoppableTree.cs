@@ -40,7 +40,7 @@ public class ChoppableTree : MonoBehaviour
             GrobalState.Instance.resourceMaxHelth = treeMaxHealth;
 
         }
-
+        if (PlayerState.Instance.playerBody == null) return;
         float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
         if (distance < dis)
