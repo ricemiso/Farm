@@ -97,6 +97,8 @@ public class WaveSystem : MonoBehaviour
 
 			int cost = NoonBase + m_WaveCount * NoonAdd;
 			m_Cost = SummonEnemy(cost);
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 		}
 		// –é
 		if (day * 2 - 2 > m_WaveCount && hour >= 0)
@@ -107,6 +109,8 @@ public class WaveSystem : MonoBehaviour
 
 			int cost = NightBase + m_WaveCount * NightAdd;
 			m_Cost = SummonEnemy(cost);
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 		}
 
 		if (hour < m_WaveLimitTime)
@@ -117,11 +121,15 @@ public class WaveSystem : MonoBehaviour
 
 				m_Cost += m_WaveCount;
 				m_Cost = SummonEnemy(m_Cost);
+				SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+				SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 			}
 		}
 		else
 		{// I—¹
 			m_WaveLimitTime = -1;
+			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+			SoundManager.Instance.PlaySound(SoundManager.Instance.startingZoneBGMMusic);
 		}
 
 	}

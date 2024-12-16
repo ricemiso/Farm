@@ -78,6 +78,9 @@ public class SettingManager : MonoBehaviour
         AudioListener.volume = masterSlider.value/20;
 
         SoundManager.Instance.startingZoneBGMMusic.volume = musicSlider.value / 20;
+        SoundManager.Instance.gameClearBGM.volume = musicSlider.value / 20;
+        SoundManager.Instance.gameOverBGM.volume = musicSlider.value / 20;
+        SoundManager.Instance.EnemyCreateBGM.volume = musicSlider.value / 20;
 
         SoundManager.Instance.dropItemSound.volume = effectSlider.value / 20;
         SoundManager.Instance.craftingSound.volume = effectSlider.value / 20;
@@ -89,5 +92,11 @@ public class SettingManager : MonoBehaviour
         SoundManager.Instance.PutSeSound.volume = effectSlider.value / 20;
         SoundManager.Instance.gravelWalkSound.volume = effectSlider.value / 20;
         SoundManager.Instance.foundationWalkSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.FarmWalkSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.EatSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.DamageSound.volume = effectSlider.value / 20;
+        SoundManager.Instance.CrystalAttack.volume = effectSlider.value / 20;
+        SoundManager.Instance.Crystalbreak.volume = effectSlider.value / 20;
+        SoundManager.Instance.Stonebreak.volume = effectSlider.value / 20;
     }
 }

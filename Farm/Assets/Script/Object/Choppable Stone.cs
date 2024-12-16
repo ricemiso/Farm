@@ -62,7 +62,7 @@ public class ChoppableStone : MonoBehaviour
 
         if (stoneHealth <= 0)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Instance.treeFallSound);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.Stonebreak);
 
             StoneIsDead();
 
