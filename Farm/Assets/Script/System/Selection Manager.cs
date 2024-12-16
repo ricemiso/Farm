@@ -39,9 +39,6 @@ public class SelectionManager : MonoBehaviour
 
 	private Text chopText;
 	private bool isdamageDelay = false;
-	private bool islootDelay = false;
-
-	//チュートリアル用のフラグなので使用禁止
 	
 
 	private void Start()
@@ -66,6 +63,7 @@ public class SelectionManager : MonoBehaviour
 
 	void Update()
 	{
+		if (Camera.main == null) return;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 		RaycastHit hit;

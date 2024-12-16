@@ -25,6 +25,12 @@ public class CrystalGrowth : MonoBehaviour
 
 	[SerializeField] float dis = 10f;
 	[SerializeField] GameObject breakCrystal;
+	[SerializeField] ParticleSystem clearparth1;
+	[SerializeField] ParticleSystem clearparth2;
+	[SerializeField] ParticleSystem clearparth3;
+	[SerializeField] Canvas falseCanvas;
+	[SerializeField] Canvas gameClearCanvas;
+	[SerializeField] Canvas gameOverCanvas;
 
 	// Start is called before the first frame update
 	void Start()
@@ -35,6 +41,11 @@ public class CrystalGrowth : MonoBehaviour
 
 		rotAngle = Vector3.zero;
 		canBeWatch = false;
+
+		clearparth1.gameObject.SetActive(false);
+		clearparth2.gameObject.SetActive(false);
+		clearparth2.gameObject.SetActive(false);
+		gameClearCanvas.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -83,7 +94,7 @@ public class CrystalGrowth : MonoBehaviour
         if (GrobalState.Instance.isTutorialEnd || GrobalState.Instance.isSkip)
         {
 			// TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
-			if (PlayerState.Instance.currentHydrationPercent >= 100)
+			if (PlayerState.Instance.currentHydrationPercent >= 10)
 			{
 
 
@@ -91,12 +102,25 @@ public class CrystalGrowth : MonoBehaviour
 				//Destroy(SoundManager.Instance.gameObject);
 				// クリアシーン
 
-				
-				Destroy(gameObject.transform.parent.parent.gameObject);
-				
 
-				Debug.Log(gameObject.transform.parent.parent.gameObject.name);
-				SceneManager.LoadScene("GameClear");
+				//Destroy(gameObject.transform.parent.parent.gameObject);
+				clearparth1.gameObject.SetActive(true);
+				clearparth2.gameObject.SetActive(true);
+				clearparth3.gameObject.SetActive(true);
+				falseCanvas.gameObject.SetActive(false);
+
+                if (clearparth1.isPlaying == false)
+                {
+					clearparth1.Play();
+					clearparth2.Play();
+					clearparth3.Play();
+				}
+
+				PlayerState.Instance.playerBody.SetActive(false);
+				UnityEngine.Cursor.lockState = CursorLockMode.None;
+				UnityEngine.Cursor.visible = true;
+				gameClearCanvas.gameObject.SetActive(true);
+				//SceneManager.LoadScene("GameClear");
 			}
         }
         else
@@ -153,8 +177,8 @@ public class CrystalGrowth : MonoBehaviour
 		Vector3 newPosition = gameObject.transform.position; // 現在の位置を取得
 		newPosition.y += 4; // y座標をオフセット（上方向に移動）
 		GameObject Crystal = Instantiate(breakCrystal, newPosition, gameObject.transform.rotation);
-		
-		
+		gameOverCanvas.gameObject.SetActive(true);
+
 		Destroy(gameObject);
 
 	}
