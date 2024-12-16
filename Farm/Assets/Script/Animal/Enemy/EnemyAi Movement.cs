@@ -78,8 +78,12 @@ public class EnemyAI_Movement : AI_Movement
 			}
 			else
 			{
-				// ミニクリスタルが死んでいたら
-				FoundTarget(Crystal);
+				if(Crystal.TryGetComponent<CrystalGrowth>(out CrystalGrowth Crystals))
+                {
+					// ミニクリスタルが死んでいたら
+					FoundTarget(Crystal);
+				}
+				
 			}
 		}
 	}
