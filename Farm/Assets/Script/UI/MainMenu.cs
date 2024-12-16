@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
 
     public Button LoadGameBTN;
+    
 
     public void NewGame()
     {
@@ -22,11 +23,17 @@ public class MainMenu : MonoBehaviour
        
     }
 
+    public void ReturnMenu()
+    {
+
+        
+        SceneManager.LoadScene("MainMenu");
+    }
+
 
 
     public void ExitGame()
     {
-        Debug.Log("Quitting Game");
         Application.Quit();
     }
 }

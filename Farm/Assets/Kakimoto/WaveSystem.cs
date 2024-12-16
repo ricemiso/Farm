@@ -97,8 +97,7 @@ public class WaveSystem : MonoBehaviour
 
 			int cost = NoonBase + m_WaveCount * NoonAdd;
 			m_Cost = SummonEnemy(cost);
-			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
+			
 		}
 		// 夜
 		if (day * 2 - 2 > m_WaveCount && hour >= 0)
@@ -109,8 +108,7 @@ public class WaveSystem : MonoBehaviour
 
 			int cost = NightBase + m_WaveCount * NightAdd;
 			m_Cost = SummonEnemy(cost);
-			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
+			
 		}
 
 		if (hour < m_WaveLimitTime)
@@ -121,15 +119,14 @@ public class WaveSystem : MonoBehaviour
 
 				m_Cost += m_WaveCount;
 				m_Cost = SummonEnemy(m_Cost);
-				SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-				SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
+				
 			}
 		}
 		else
 		{// 終了
 			m_WaveLimitTime = -1;
 			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
-			SoundManager.Instance.PlaySound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.PlayIfNoOtherMusic(SoundManager.Instance.startingZoneBGMMusic);
 		}
 
 	}
@@ -139,6 +136,8 @@ public class WaveSystem : MonoBehaviour
 	// ret : 使用しなかったコスト
 	public int SummonEnemy(int cost)
 	{
+		SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+		SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 
 		// 敵の決定
 		List<int> enemyIndexList = new List<int>(); // 召喚できる敵のリスト（num m_EnemyListの番号）

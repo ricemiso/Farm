@@ -22,8 +22,12 @@ public class ResourceBar : MonoBehaviour
 
     private void Update()
     {
-        currentHealth = globalState.GetComponent<GrobalState>().resourceHelth;
-        maxHealth = globalState.GetComponent<GrobalState>().resourceMaxHelth;
+        if (globalState.GetComponent<GrobalState>())
+        {
+            currentHealth = globalState.GetComponent<GrobalState>().resourceHelth;
+            maxHealth = globalState.GetComponent<GrobalState>().resourceMaxHelth;
+        }
+      
 
         float fillValue = currentHealth / maxHealth;
 
