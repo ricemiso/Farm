@@ -42,9 +42,7 @@ public class SelectionManager : MonoBehaviour
 	private bool islootDelay = false;
 
 	//チュートリアル用のフラグなので使用禁止
-	[HideInInspector] public bool isDamage = false;
-	[HideInInspector] public bool isloot = false;
-	[HideInInspector] public bool isFarm1 = false;
+	
 
 	private void Start()
 	{
@@ -206,7 +204,7 @@ public class SelectionManager : MonoBehaviour
 					if (Input.GetMouseButtonDown(0))
 					{
 						soil.PlantSeed();
-						isFarm1 = true;
+						GrobalState.Instance.isFarm1 = true;
 						ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem);
 						//Destroy(EquipSystem.Instance.selecteditemModel);
 					}
@@ -234,6 +232,7 @@ public class SelectionManager : MonoBehaviour
 							{
 
 								Watering = true;
+								GrobalState.Instance.isWater = true;
 
 								//TODO:変更する　(オーディオクリップを使用する場合は上)
 								//SoundManager.Instance.wateringCannel.PlayoneShot(SoundManager.Instance.wateringChannel);
@@ -301,7 +300,7 @@ public class SelectionManager : MonoBehaviour
 			{
 				animal.canBeChopped = true;
 				animal.canBeChopped = true;
-				isDamage = true;
+				GrobalState.Instance.isDamage = true;
 				selectedAnimal = animal.gameObject;
 				chopText.text = animal.GetAnimalName();
 				chopHolder.gameObject.SetActive(true);
@@ -331,7 +330,6 @@ public class SelectionManager : MonoBehaviour
 						leveling = true;
 						int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
 						animal.LevelUp(stackCount);
-
 						StartCoroutine(DelayWatering());
 					}
 				}
@@ -354,7 +352,6 @@ public class SelectionManager : MonoBehaviour
 				if (selectedAnimal != null)
 				{
 					selectedAnimal.gameObject.GetComponent<Animal>().canBeChopped = false;
-					isDamage = false;
 					selectedAnimal = null;
 					chopHolder.gameObject.SetActive(false);
 				}
@@ -400,6 +397,12 @@ public class SelectionManager : MonoBehaviour
 		{
 			Destroy(EquipSystem.Instance.selectedItem);
 			Destroy(EquipSystem.Instance.selecteditemModel);
+		}
+		else if (leveling)
+        {
+			
+			ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem,3);
+			
 		}
 		else
 		{

@@ -20,7 +20,7 @@ public class FarmTask1 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (SelectionManager.Instance.isFarm1)
+        if (GrobalState.Instance.isFarm1)
         {
             return true;
         }

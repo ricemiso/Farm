@@ -264,7 +264,9 @@ public class Animal : MonoBehaviour
                 }
                    
                 isDead = true;
-               
+                GrobalState.Instance.isDeath = true;
+
+
             }
             else
             {

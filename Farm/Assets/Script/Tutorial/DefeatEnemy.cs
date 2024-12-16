@@ -20,7 +20,7 @@ public class DefeatEnemy : ITutorialTask
 
 	public bool CheckTask()
 	{
-		if (SelectionManager.Instance.isDamage)
+		if (GrobalState.Instance.isDamage)
 		{
 			return true;
 		}

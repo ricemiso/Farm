@@ -203,14 +203,14 @@ public class CraftingSystem : MonoBehaviour
         LogReq1 = toolScreenUI.transform.Find("LogMana").transform.Find("rec1").GetComponent<Text>();
 
         craftLogManaBTN = toolScreenUI.transform.Find("LogMana").transform.Find("LogManaButton").GetComponent<Button>();
-        craftLogManaBTN.onClick.AddListener(delegate { CraftAnyItem(LogManaBLP); });
+        craftLogManaBTN.onClick.AddListener(delegate { CraftAnyItem(LogManaBLP); GrobalState.Instance.isManaCraft = true; });
 
 
         //StoneMana
         StoneReq1 = toolScreenUI.transform.Find("StoneMana").transform.Find("rec1").GetComponent<Text>();
 
         craftStoneManaBTN = toolScreenUI.transform.Find("StoneMana").transform.Find("StoneManaButton").GetComponent<Button>();
-        craftStoneManaBTN.onClick.AddListener(delegate { CraftAnyItem(StoneManaBLP); });
+        craftStoneManaBTN.onClick.AddListener(delegate { CraftAnyItem(StoneManaBLP); GrobalState.Instance.isManaCraft = true; });
     }
 
     /// <summary>

@@ -11,16 +11,13 @@ using UnityEngine.UI;
 /// </summary>
 public class TutorialManager : MonoBehaviour
 {
-	//public static TutorialManager Instance { get; set; }
-
+	
 	// チュートリアル用UI
 	protected RectTransform tutorialTextArea;
 	protected Text TutorialTitle;
 	protected Text TutorialText;
 
-	//public GameObject tree;
-	//public GameObject stone;
-	//public GameObject enemy;
+	
 
 	// チュートリアルタスク
 	protected ITutorialTask currentTask;
@@ -40,18 +37,6 @@ public class TutorialManager : MonoBehaviour
 	public GameObject enemy2;
 	//public bool isSpawn = false;
 
-	//// private void Awake()
-	// {
-	//     if (Instance != null && Instance != this)
-	//     {
-	//         Destroy(gameObject);
-	//     }
-	//     else
-	//     {
-	//         Instance = this;
-	//     }
-	// }
-
 	void Start()
 	{
 		// チュートリアル表示用UIのインスタンス取得
@@ -59,15 +44,12 @@ public class TutorialManager : MonoBehaviour
 		TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
 		TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
 
-		//tree.SetActive(false);
-		//stone.SetActive(false);
-		//enemy.SetActive(false);
-
 		// チュートリアルの一覧
 		tutorialTask = new List<ITutorialTask>()
 		{
 			new MovementTask(),
 			new EquipTask(),
+			new AttackTask(),
 			new OpenInventroyTask(),
 			//new CraftAllMinion(),
 			new FarmTask1(),
@@ -76,12 +58,11 @@ public class TutorialManager : MonoBehaviour
 			new ConstructionTask(),
 			new DefeatEnemy(),
 			new LevelUpTask(),
-			new AttackTask(),
-			new AttackTask2(),
 			new HealTask(),
 			new StackInventroyTask(),
 			new ChoppableTreeTask(),
 			new ChoppableStoneTask(),
+			new ManaCraftTask(),
 			new ChargeTask(),
 		};
 

@@ -20,7 +20,7 @@ public class FarmTask2 : ITutorialTask
 
     public bool CheckTask()
     {
-        if (SelectionManager.Instance.Watering)
+        if (GrobalState.Instance.isWater)
         {
             return true;
         }

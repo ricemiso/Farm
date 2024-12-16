@@ -19,6 +19,13 @@ public class GrobalState : MonoBehaviour
     public bool isStoneChopped = false;
     public bool isTutorialEnd = false;
     public bool isSkip = false;
+    public bool isWater = false;
+    public bool isDamage = false;
+    public bool isloot = false;
+    public bool isFarm1 = false;
+    public bool isDeath = false;
+    public bool isManaCraft = false;
+   
 
 
     private void Awake()

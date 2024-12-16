@@ -343,25 +343,41 @@ public class ConstructionManager : MonoBehaviour
     }
 
     // アイテムのスタック数を確認し、処理するメソッド
-    public void HandleItemStack(GameObject item)
+    public void HandleItemStack(GameObject item,int num =1)
     {
         var inventoryItem = item.GetComponent<InventoryItem>(); // アイテムのスタック数を持つコンポーネントを取得 
 
         if (inventoryItem != null)
         {
-            // スタック数が1より大きい場合は減らす
-            if (inventoryItem.amountInventry > 1)
+            if(num != 1)
             {
-                inventoryItem.amountInventry--; // スタック数を減らす
-                                               
+                if (inventoryItem.amountInventry <= num)
+                {
+                    DestroyItem(item);
+                    Destroy(EquipSystem.Instance.selecteditemModel);
+                }
+
+                inventoryItem.amountInventry -= num; // スタック数を減らす
+
                 InventorySystem.Instance.ReCalculeList();
             }
             else
             {
-                // スタック数が1の場合、アイテムを削除
-                DestroyItem(item);
-                Destroy(EquipSystem.Instance.selecteditemModel);
+                // スタック数が1より大きい場合は減らす
+                if (inventoryItem.amountInventry > 1)
+                {
+                    inventoryItem.amountInventry--; // スタック数を減らす
+
+                    InventorySystem.Instance.ReCalculeList();
+                }
+                else
+                {
+                    // スタック数が1の場合、アイテムを削除
+                    DestroyItem(item);
+                    Destroy(EquipSystem.Instance.selecteditemModel);
+                }
             }
+            
         }
         else
         {
