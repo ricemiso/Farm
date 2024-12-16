@@ -233,6 +233,7 @@ public class AI_Movement : MonoBehaviour
 
 		// ƒ^ƒO‚²‚Æ‚Éˆ—‚ğ•ªŠò
 		if (obj == null) obj = target;
+
 		switch (obj.tag)
 		{
 			case "Player":
@@ -251,6 +252,7 @@ public class AI_Movement : MonoBehaviour
 				target.GetComponent<Animal>().TakeDamage(num);
 				break;
 			case "Crystal":
+				
 				target.GetComponent<CrystalGrowth>().GetHit(num);
 				break;
 			case "MiniCrystal":

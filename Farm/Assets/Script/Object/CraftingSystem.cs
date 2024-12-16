@@ -668,7 +668,7 @@ public class CraftingSystem : MonoBehaviour
         // ---LogMana---- //
         LogReq1.text = "ŠÛ‘¾ 4 [" + (log_count/* + quickLogCount*/) + "]";
 
-        if ((log_count/* + quickLogCount*/) >= 1
+        if ((log_count/* + quickLogCount*/) >= 2
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftLogManaBTN.gameObject.SetActive(true);
@@ -682,7 +682,7 @@ public class CraftingSystem : MonoBehaviour
 		// ---StoneMana---- //
 		StoneReq1.text = "Î‚±‚ë 6 [" + (stone_count /*+ quickStoneCount*/) + "]";
 
-        if ((stone_count/* + quickStoneCount*/) >= 1
+        if ((stone_count/* + quickStoneCount*/) >= 3
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftStoneManaBTN.gameObject.SetActive(true);

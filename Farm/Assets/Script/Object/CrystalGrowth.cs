@@ -24,6 +24,7 @@ public class CrystalGrowth : MonoBehaviour
 	public Canvas loadScreen;
 
 	[SerializeField] float dis = 10f;
+	[SerializeField] GameObject breakCrystal;
 
 	// Start is called before the first frame update
 	void Start()
@@ -90,7 +91,10 @@ public class CrystalGrowth : MonoBehaviour
 				//Destroy(SoundManager.Instance.gameObject);
 				// クリアシーン
 
+				
 				Destroy(gameObject.transform.parent.parent.gameObject);
+				
+
 				Debug.Log(gameObject.transform.parent.parent.gameObject.name);
 				SceneManager.LoadScene("GameClear");
 			}
@@ -146,6 +150,14 @@ public class CrystalGrowth : MonoBehaviour
 		UnityEngine.Cursor.lockState = CursorLockMode.None;
 
 		// ゲームオーバーシーンに移動
-		SceneManager.LoadScene("GameOver");
+		Vector3 newPosition = gameObject.transform.position; // 現在の位置を取得
+		newPosition.y += 4; // y座標をオフセット（上方向に移動）
+		GameObject Crystal = Instantiate(breakCrystal, newPosition, gameObject.transform.rotation);
+		
+		
+		Destroy(gameObject);
+
 	}
+
+	
 }
