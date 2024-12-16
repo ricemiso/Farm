@@ -17,9 +17,12 @@ public class Tutorial_Spawn : MonoBehaviour
 		}
 
 		// Treeを生成
-		Vector3 spawnPosition = new Vector3(15.0f, 0.0f, 46.0f);
-		GameObject newTree = Instantiate(itemToAdd, spawnPosition, Quaternion.identity);
-		newTree.name = "Tree_";  // 名前に連番を追加
+		for (int i = 0; i < 2; i++)
+		{
+			Vector3 spawnPosition = new Vector3(15.0f, 0.0f, 46.0f + i * 10.0f);
+			GameObject newTree = Instantiate(itemToAdd, spawnPosition, Quaternion.identity);
+			newTree.name = "Tree_" + i;  // 名前に連番を追加
+		}
 
 	}
 	// Update is called once per frame
