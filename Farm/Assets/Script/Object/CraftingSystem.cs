@@ -90,8 +90,8 @@ public class CraftingSystem : MonoBehaviour
         TankMinionBLP = new BluePrint("Minion2Seed", 1, 2, "Mana", 1, "Stone", 1);
         MagicMinionBLP = new BluePrint("Minion3Seed", 1, 2, "Mana", 1, "Log", 1);
         ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
-        LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 4, "", 0);
-        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 6, "", 0);
+        LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 2, "", 0);
+        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 3, "", 0);
 
         isOpen = false;
 

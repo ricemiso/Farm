@@ -246,6 +246,7 @@ public class AI_Movement : MonoBehaviour
 				SoundManager.Instance.PlaySound(SoundManager.Instance.DamageSound);
 				break;
 			case "Enemy":
+				GrobalState.Instance.isDamage = true;
 				target.GetComponent<Animal>().TakeDamage(num);
 				break;
 			case "SupportUnit":
