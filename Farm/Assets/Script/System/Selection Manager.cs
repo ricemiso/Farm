@@ -298,7 +298,7 @@ public class SelectionManager : MonoBehaviour
 			{
 				animal.canBeChopped = true;
 				animal.canBeChopped = true;
-				GrobalState.Instance.isDamage = true;
+				
 				selectedAnimal = animal.gameObject;
 				chopText.text = animal.GetAnimalName();
 				chopHolder.gameObject.SetActive(true);

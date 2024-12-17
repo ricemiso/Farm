@@ -10837,7 +10837,7 @@ PrefabInstance:
       objectReference: {fileID: 8468549574247606553}
     - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: CrystalMaxHealth
-      value: 2
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 1208413681778836044, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Mesh
@@ -29358,7 +29358,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: aa7c0584d991b3d449fce8fef6eff7f5, type: 2}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: soils.Array.data[0]
