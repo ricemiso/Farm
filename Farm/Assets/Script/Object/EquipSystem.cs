@@ -274,8 +274,11 @@ public class EquipSystem : MonoBehaviour
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
         Debug.Log("Selected Item Name: " + selectedItemName);
 
+        string instancename = CaculateItemModel(selectedItemName);
+
+        if (instancename == null) return;
         // モデルをインスタンス化
-        selecteditemModel = Instantiate(Resources.Load<GameObject>(CaculateItemModel(selectedItemName)));
+        selecteditemModel = Instantiate(Resources.Load<GameObject>(instancename));
 
         // モデルをツールホルダーに追加
         selecteditemModel.transform.SetParent(toolHolder.transform, false);
