@@ -7,6 +7,9 @@ public class PlayerState : MonoBehaviour
 
 	public static PlayerState Instance { get; set; }
 
+	[SerializeField] Canvas falseCanvas;
+	[SerializeField] Canvas gameOverCanvas;
+
 	//Health
 	public float currentHealth;
 	public float maxHealth;
@@ -48,6 +51,12 @@ public class PlayerState : MonoBehaviour
 	{
 		currentHealth = maxHealth;
 		currentCalories = maxCalories;
+
+		gameOverCanvas.gameObject.SetActive(false);
+
+		gameOverCanvas.sortingOrder = -2;
+	
+
 		currentHydrationPercent = 0;
 
 		//StartCoroutine(decreaseHydration());
@@ -91,6 +100,18 @@ public class PlayerState : MonoBehaviour
 		else if (currentHealth < 0)
 		{
 			currentHealth = 0;
+			falseCanvas.gameObject.SetActive(false);
+			gameOverCanvas.gameObject.SetActive(true);
+			gameOverCanvas.sortingOrder = 1;
+			UnityEngine.Cursor.lockState = CursorLockMode.None;
+			UnityEngine.Cursor.visible = true;
+			playerBody.GetComponent<PlayerMovement>().enabled = false;
+			playerBody.GetComponent<MouseMovement>().enabled = false;
+
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.StopWalkSound();
+			SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
+
 		}
 
 		StartCoroutine(delayPanel());
