@@ -35,6 +35,8 @@ public class CraftingSystem : MonoBehaviour
 
     public bool itemIncreased = false;
 
+    public int minion_count;
+
     [HideInInspector] public BluePrint AxeBLP;
     [HideInInspector] public BluePrint PickaxeBLP;
     [HideInInspector] public BluePrint PlankBLP;
@@ -391,7 +393,7 @@ public class CraftingSystem : MonoBehaviour
 
                 if (!itemExists)
                 {
-                    InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName, false);
+                    InventorySystem.Instance.AddToinventry(blueprintToCraft.itemName, true);
                 }
                 else
                 {
@@ -483,7 +485,7 @@ public class CraftingSystem : MonoBehaviour
         int log_count = 0;
         int plank_count = 0;
         int mana_count = 0;
-        int minion_count = 0;
+        minion_count = 0;
 
         // インベントリ内のアイテム数をカウント
         inventryitemList = InventorySystem.Instance.itemList;

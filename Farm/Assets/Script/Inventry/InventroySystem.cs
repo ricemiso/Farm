@@ -236,7 +236,17 @@ public class InventorySystem : MonoBehaviour
             inventoryUpdated = true;
             itemName = GetReturnItemName(itemName);
 
-            whatSlotToEquip = FindNextEmptySlot();
+            //ÉCÉìÉxÉìÉgÉäÇÃèÍçáÇÕÇ±Ç¡Çø
+
+            if(itemName == "Stone" || itemName == "Log")
+            {
+                whatSlotToEquip = FindNextEmptySlot();
+            }
+            else
+            {
+                whatSlotToEquip = FindQuickNextEmptySlot();
+            }
+           
 
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
@@ -463,6 +473,19 @@ public class InventorySystem : MonoBehaviour
     private GameObject FindNextEmptySlot()
     {
         foreach (GameObject slot in slotlist)
+        {
+            if (slot.transform.childCount <= 1)
+            {
+                return slot;
+            }
+        }
+
+        return new GameObject();
+    }
+
+    private GameObject FindQuickNextEmptySlot()
+    {
+        foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
         {
             if (slot.transform.childCount <= 1)
             {
