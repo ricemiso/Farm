@@ -4159,7 +4159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterText: {fileID: 113900461}
   itemName: "\u30DE\u30CA"
-  counter: 0
+  counter: 10
 --- !u!1 &132428642
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,6 +4385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aaecf825feb6e648aa048e660eabe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnInterval: 5
+  spawnRange: 10
+  playerTransform: {fileID: 0}
+  hasSpawnStarted: 0
+  isManaHaving: 0
+  isEnemyPresent: 0
+  manaCount: {fileID: 113900463}
 --- !u!4 &147358464
 Transform:
   m_ObjectHideFlags: 0
@@ -14804,6 +14811,7 @@ MonoBehaviour:
   islevelUp: 0
   canupdate: 1
   itemIncreased: 0
+  minion_count: 0
   AxeBLP: {fileID: 0}
   PickaxeBLP: {fileID: 0}
   PlankBLP: {fileID: 0}
@@ -42389,6 +42397,6 @@ SceneRoots:
   - {fileID: 85271925}
   - {fileID: 1401823519}
   - {fileID: 377222658}
-  - {fileID: 147358464}
   - {fileID: 387419570}
   - {fileID: 1033260087}
+  - {fileID: 147358464}
