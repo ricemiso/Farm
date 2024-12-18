@@ -23929,7 +23929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalLight: {fileID: 705507994}
-  dayDurationInSecounds: 120
+  dayDurationInSecounds: 360
   currentHour: 0
   currentTimeOfDay: 0.35
   timeUI: {fileID: 408884985}
