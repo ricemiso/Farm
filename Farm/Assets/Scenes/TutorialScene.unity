@@ -1945,7 +1945,13 @@ MonoBehaviour:
   FarmWalkSound: {fileID: 0}
   EatSound: {fileID: 0}
   DamageSound: {fileID: 0}
+  CrystalAttack: {fileID: 0}
+  Crystalbreak: {fileID: 0}
+  Stonebreak: {fileID: 0}
   startingZoneBGMMusic: {fileID: 61512410}
+  gameClearBGM: {fileID: 0}
+  gameOverBGM: {fileID: 0}
+  EnemyCreateBGM: {fileID: 0}
 --- !u!82 &61512404
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21332,6 +21338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c060bca60d0540f41adca1145e587da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  falseCanvas: {fileID: 781400052}
+  gameOverCanvas: {fileID: 1033260088}
   currentHealth: 0
   maxHealth: 200
   currentCalories: 0
