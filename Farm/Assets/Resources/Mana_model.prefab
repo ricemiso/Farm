@@ -9703,7 +9703,8 @@ MonoBehaviour:
   ItemName: Mana
   InventryName: Mana
   playerRange: 0
-  ditectionRange: 10
+  FastPickup: 1
+  ditectionRange: 5
 --- !u!54 &5478193085109567270
 Rigidbody:
   m_ObjectHideFlags: 0
