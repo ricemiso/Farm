@@ -11,6 +11,7 @@ public class InventrySlot : MonoBehaviour
     public bool quickSlot;
 
     private void Update()
+
     {
 
         InventoryItem item = CheckInventryItem();
