@@ -60,6 +60,23 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             gameObject.GetComponent<DragDrop>().enabled = true;
         }
+
+      
+
+        //
+        if (isUseable && EquipSystem.Instance.selectMinion&&!ConstructionManager.Instance.inConstructionMode)
+        {
+            ConstructionManager.Instance.ItemToBeDestroy = gameObject;
+
+
+            if (amountInventry >= 0)
+            {
+               
+            }
+            //gameObject.SetActive(false);
+            itemInfoUI.SetActive(false);
+            EquipSystem.Instance.UseItem(gameObject);
+        }
     }
 
 
@@ -99,15 +116,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
 
 
-            if (isUseable)
-            {
-                ConstructionManager.Instance.ItemToBeDestroy = gameObject;
 
-                gameObject.SetActive(false);
-
-                UseItem();
-            }
-
+            
 
         }
 
@@ -116,90 +126,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
    
-    private void UseItem()
-    {
-
-        itemInfoUI.SetActive(false);
-
-        InventorySystem.Instance.isOpen = false;
-        InventorySystem.Instance.inventoryScreenUI.SetActive(false);
-
-        CraftingSystem.Instance.isOpen = false;
-        CraftingSystem.Instance.craftingScreenUI.SetActive(false);
-        CraftingSystem.Instance.toolScreenUI.SetActive(false);
-        CraftingSystem.Instance.survivalScreenUI.SetActive(false);
-        CraftingSystem.Instance.refineScreenUI.SetActive(false);
-        CraftingSystem.Instance.constractionScreenUI.SetActive(false);
-
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        SelectionManager.Instance.EnableSelection();
-        SelectionManager.Instance.enabled = true; ;
-
-        if (gameObject != null && !gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-        }
-
-
-        //TODO:配置オブジェクトの追加
-        switch (gameObject.name)
-        {
-            case "Foundation":
-                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
-                break;
-            case "Wall":
-                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
-                break;
-            case "ミニオン":
-                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
-                break;
-            case "ミニオン2":
-                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
-                break;
-            case "ミニオン(タンク)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
-                break;
-            case "ミニオン3":
-                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
-                break;
-            case "ミニオン(遠距離)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
-                break;
-            case "Stairs":
-                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
-                break;
-            case "Chest":
-                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
-                break;
-            case "Foundation(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
-                break;
-            case "Wall(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
-                break;
-            case "ミニオン(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
-                break;
-            case "ミニオン2(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
-                break;
-            case "ミニオン3(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
-                break;
-            case "Stairs(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
-                break;
-            case "Chest(Clone)":
-                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
-                break;
-            default:
-                break;
-        }
-
-    }
+    
 
 
     public void OnPointerUp(PointerEventData eventData)

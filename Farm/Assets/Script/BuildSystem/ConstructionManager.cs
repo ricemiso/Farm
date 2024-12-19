@@ -48,6 +48,7 @@ public class ConstructionManager : MonoBehaviour
 
     public void ActivateConstructionPlacement(string itemToConstruct)
     {
+
         GameObject item = Instantiate(Resources.Load<GameObject>(itemToConstruct));
 
 
@@ -327,19 +328,28 @@ public class ConstructionManager : MonoBehaviour
                 DestroyItem(ItemToBeDestroy);
             }
         }
-       
-        if (Input.GetKeyDown(KeyCode.X) && inConstructionMode)
-        {    
 
-            ItemToBeDestroy.SetActive(true);
-            ItemToBeDestroy = null;
+        if ((Input.GetKeyDown(KeyCode.X) && inConstructionMode) ||
+    (EquipSystem.Instance.selectednumber != 3 && inConstructionMode))
+        {
+            // ItemToBeDestroy が null でないかチェック
+            if (ItemToBeDestroy != null)
+            {
+                ItemToBeDestroy.SetActive(true);
+                ItemToBeDestroy = null; // 使用後に初期化
+            }
+            else
+            {
+                Debug.LogWarning("ItemToBeDestroy is null. Skipping SetActive.");
+            }
 
+            // 残りの処理
             DestroyItem(itemToBeConstructed);
             itemToBeConstructed = null;
             selectedGhost = null;
             inConstructionMode = false;
-
         }
+
     }
 
     // アイテムのスタック数を確認し、処理するメソッド
@@ -407,6 +417,7 @@ public class ConstructionManager : MonoBehaviour
                 {
                     itemFoundInInventory = true; // インベントリにアイテムが見つかった
 
+                    
                     if (childObject != null && !childObject.activeSelf)
                     {
                         childObject.SetActive(true);

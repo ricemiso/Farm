@@ -23,8 +23,11 @@ public class EquipSystem : MonoBehaviour
     public GameObject selecteditemModel;
 
     public int stackcnt;
+    public int selectednumber;
 
     public bool SwingWait;
+
+    public bool selectMinion;
 
     private void Awake()
     {
@@ -44,6 +47,7 @@ public class EquipSystem : MonoBehaviour
 
         PopulateSlotList();
         SwingWait = false;
+        selectMinion = false;
     }
 
     private void Update()
@@ -51,30 +55,37 @@ public class EquipSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SelectQuickSlot(1);
+            selectednumber = 1;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SelectQuickSlot(2);
+            selectednumber = 2;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SelectQuickSlot(3);
+            selectednumber = 3;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             SelectQuickSlot(4);
+            selectednumber = 4;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             SelectQuickSlot(5);
+            selectednumber = 5;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             SelectQuickSlot(6);
+            selectednumber = 6;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             SelectQuickSlot(7);
+            selectednumber = 7;
         }
 
        
@@ -82,7 +93,8 @@ public class EquipSystem : MonoBehaviour
 
         if (scroll > 0f)  
         {
-            CycleQuickSlot(1);  
+            CycleQuickSlot(1);
+            
         }
         else if (scroll < 0f)  
         {
@@ -105,6 +117,7 @@ public class EquipSystem : MonoBehaviour
         {
             newSlot = 1;
         }
+        selectednumber = newSlot;
 
         SelectQuickSlot(newSlot);
     }
@@ -131,6 +144,15 @@ public class EquipSystem : MonoBehaviour
 
                 selectedNumber = number;
 
+                if(selectedNumber == 3)
+                {
+                    selectMinion = true;
+                }
+                else
+                {
+                    selectMinion = false;
+                }
+
                 if (selectedItem != null)
                 {
                     selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
@@ -138,6 +160,12 @@ public class EquipSystem : MonoBehaviour
 
                 selectedItem = GetSelectedItem(number);
                 selectedItem.GetComponent<InventoryItem>().isSelected = true;
+
+
+                if(selectedItem.name == "ミニオン")
+                {
+
+                }
 
 
                 SetEquippedModel(selectedItem);
@@ -173,6 +201,88 @@ public class EquipSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void UseItem(GameObject obj)
+    {
+        InventorySystem.Instance.isOpen = false;
+        InventorySystem.Instance.inventoryScreenUI.SetActive(false);
+
+        CraftingSystem.Instance.isOpen = false;
+        CraftingSystem.Instance.craftingScreenUI.SetActive(false);
+        CraftingSystem.Instance.toolScreenUI.SetActive(false);
+        CraftingSystem.Instance.survivalScreenUI.SetActive(false);
+        CraftingSystem.Instance.refineScreenUI.SetActive(false);
+        CraftingSystem.Instance.constractionScreenUI.SetActive(false);
+
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SelectionManager.Instance.EnableSelection();
+        SelectionManager.Instance.enabled = true; ;
+
+        if (gameObject != null && !gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+
+
+        //TODO:配置オブジェクトの追加
+        switch (obj.name)
+        {
+            case "Foundation":
+                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
+                break;
+            case "Wall":
+                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
+                break;
+            case "ミニオン":
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
+                break;
+            case "ミニオン2":
+                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
+                break;
+            case "ミニオン(タンク)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
+                break;
+            case "ミニオン3":
+                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
+                break;
+            case "ミニオン(遠距離)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
+                break;
+            case "Stairs":
+                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
+                break;
+            case "Chest":
+                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
+                break;
+            case "Foundation(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
+                break;
+            case "Wall(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
+                break;
+            case "ミニオン(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("ConstractAI2");
+                break;
+            case "ミニオン2(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("TankAI2");
+                break;
+            case "ミニオン3(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("LongRangeMinion 1");
+                break;
+            case "Stairs(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("StairsWoodemodel");
+                break;
+            case "Chest(Clone)":
+                ConstructionManager.Instance.ActivateConstructionPlacement("Chestmodel");
+                break;
+            default:
+                break;
+        }
+
     }
 
     internal int GetWeaPonDamage()

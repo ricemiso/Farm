@@ -14,6 +14,11 @@ public class ResourceBar : MonoBehaviour
     {
         Slider = GetComponent<Slider>();
 
+        
+    }
+
+    private void Start()
+    {
         if (globalState == null)
         {
             globalState = GameObject.Find("GrobalState");
@@ -22,12 +27,12 @@ public class ResourceBar : MonoBehaviour
 
     private void Update()
     {
-        if (globalState.GetComponent<GrobalState>())
+        if (gameObject != null && globalState.TryGetComponent<GrobalState>(out var grobalState))
         {
-            currentHealth = globalState.GetComponent<GrobalState>().resourceHelth;
-            maxHealth = globalState.GetComponent<GrobalState>().resourceMaxHelth;
+            currentHealth = grobalState.resourceHelth;
+            maxHealth = grobalState.resourceMaxHelth;
         }
-      
+
 
         float fillValue = currentHealth / maxHealth;
 
