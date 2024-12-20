@@ -61,24 +61,67 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             gameObject.GetComponent<DragDrop>().enabled = true;
         }
 
-      
+        if (
+        (Input.GetAxis("Mouse ScrollWheel") != 0 || // マウスホイールの入力
+        Input.GetKeyDown(KeyCode.Alpha1) ||
+        Input.GetKeyDown(KeyCode.Alpha2) ||
+        Input.GetKeyDown(KeyCode.Alpha3) ||
+        Input.GetKeyDown(KeyCode.Alpha4) ||
+        Input.GetKeyDown(KeyCode.Alpha5) ||
+        Input.GetKeyDown(KeyCode.Alpha6) ||
+        Input.GetKeyDown(KeyCode.Alpha7) ||
+        Input.GetKeyDown(KeyCode.Alpha8) ||
+        Input.GetKeyDown(KeyCode.Alpha9)))
+        {
+            ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
+        }
 
         //
-        if (isUseable && EquipSystem.Instance.selectMinion&&!ConstructionManager.Instance.inConstructionMode)
+        if (isUseable && EquipSystem.Instance.selectMinion && !ConstructionManager.Instance.inConstructionMode)
         {
-            ConstructionManager.Instance.ItemToBeDestroy = gameObject;
-
-
-            if (amountInventry >= 0)
-            {
-               
-            }
+            ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
             //gameObject.SetActive(false);
             itemInfoUI.SetActive(false);
-            EquipSystem.Instance.UseItem(gameObject);
+            EquipSystem.Instance.UseItem(EquipSystem.Instance.selectedMinion);
+        }
+
+        if (isConsumable && Input.GetKeyDown(KeyCode.Q) && EquipSystem.Instance.selectMana)
+        {
+            itemPendingConsumption = gameObject;
+            consumingFunction(healthEffect, caloriesEffect, hydrationEffect);
+        }
+
+        if (isConsumable && itemPendingConsumption == gameObject && Input.GetKeyUp(KeyCode.Q) && EquipSystem.Instance.selectMana)
+        {
+            // このアイテムを含むスロットを特定
+            InventrySlot parentSlot = GetComponentInParent<InventrySlot>();
+            if (parentSlot != null && parentSlot.itemInSlot != null)
+            {
+                // スロット内のアイテムが一致するか確認
+                gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
+                if (parentSlot.itemInSlot.thisName == gameObject.name)
+                {
+                    // スタック数が1より多ければ減らす
+                    if (parentSlot.itemInSlot.amountInventry > 1)
+                    {
+                        parentSlot.itemInSlot.amountInventry--; // スタック数を減らす
+                        InventorySystem.Instance.ReCalculeList(); // UIやリストの更新
+                    }
+                    else
+                    {
+                        // スタックが0になる場合はアイテムを削除
+                        DestroyImmediate(gameObject);
+                        InventorySystem.Instance.ReCalculeList();
+                        CraftingSystem.Instance.RefreshNeededItems();
+                    }
+                    return; // この時点で処理終了
+                }
+            }
+
+            // スロットが見つからない場合やエラー時に適切に処理
+            Debug.LogWarning("アイテムが所属するスロットが見つかりませんでした");
         }
     }
-
 
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -89,24 +132,19 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemInfoUI_itemFunctionality.text = thisFunctionality;
     }
 
-   
+
     public void OnPointerExit(PointerEventData eventData)
     {
         itemInfoUI.SetActive(false);
     }
 
-    
+
     public void OnPointerDown(PointerEventData eventData)
     {
-       
+
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (isConsumable)
-            {
-                
-                itemPendingConsumption = gameObject;
-                consumingFunction(healthEffect, caloriesEffect, hydrationEffect);
-            }
+
 
 
             if (isEquippable && isInsideQuiqSlot == false && EquipSystem.Instance.CheckIfFull() == false)
@@ -115,148 +153,24 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 isInsideQuiqSlot = true;
             }
 
-
-
-            
-
         }
 
-        
-        
+
+
     }
 
-   
-    
+
+
 
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (isConsumable && itemPendingConsumption == gameObject)
-            {
-                // このアイテムを含むスロットを特定
-                InventrySlot parentSlot = GetComponentInParent<InventrySlot>();
-                if (parentSlot != null && parentSlot.itemInSlot != null)
-                {
-                    // スロット内のアイテムが一致するか確認
-                    gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-                    if (parentSlot.itemInSlot.thisName == gameObject.name)
-                    {
-                        // スタック数が1より多ければ減らす
-                        if (parentSlot.itemInSlot.amountInventry > 1)
-                        {
-                            parentSlot.itemInSlot.amountInventry--; // スタック数を減らす
-                            InventorySystem.Instance.ReCalculeList(); // UIやリストの更新
-                        }
-                        else
-                        {
-                            // スタックが0になる場合はアイテムを削除
-                            DestroyImmediate(gameObject);
-                            InventorySystem.Instance.ReCalculeList();
-                            CraftingSystem.Instance.RefreshNeededItems();
-                        }
-                        return; // この時点で処理終了
-                    }
-                }
 
-                // スロットが見つからない場合やエラー時に適切に処理
-                Debug.LogWarning("アイテムが所属するスロットが見つかりませんでした");
-            }
         }
     }
 
-    //public void OnPointerUp(PointerEventData eventData)
-    //{
-    //    if (eventData.button == PointerEventData.InputButton.Right)
-    //    {
-    //        if (isConsumable && itemPendingConsumption == gameObject)
-    //        {
-               
-    //            bool foundInQuickSlot = false;
-
-    //            foreach (GameObject quickSlot in EquipSystem.Instance.quickSlotsList)
-    //            {
-    //                InventrySlot inventrySlot = quickSlot.GetComponent<InventrySlot>();
-    //                if (inventrySlot != null)
-    //                {
-    //                    gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                    if (inventrySlot.itemInSlot != null && inventrySlot.itemInSlot.thisName == gameObject.name)
-    //                    {
-    //                        if (inventrySlot.itemInSlot.amountInventry > 1)
-    //                        {
-    //                            inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
-
-    //                            InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
-    //                            gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                        }
-    //                        else
-    //                        {
-    //                            gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                            DestroyImmediate(gameObject);
-    //                            InventorySystem.Instance.ReCalculeList();
-    //                            CraftingSystem.Instance.RefreshNeededItems();
-    //                        }
-
-    //                        InventorySystem.Instance.ReCalculeList(); // UIやリストの更新
-    //                        CraftingSystem.Instance.RefreshNeededItems();
-
-    //                        foundInQuickSlot = true;
-    //                        break; // クイックスロットでアイテムが見つかったら処理を終了
-    //                    }
-    //                }
-    //            }
-
-
-    //            if (!foundInQuickSlot)
-    //            {
-    //                foreach (GameObject slot in InventorySystem.Instance.slotlist)
-    //                {
-    //                    InventrySlot inventrySlot = slot.GetComponent<InventrySlot>();
-
-    //                    if (inventrySlot != null)
-    //                    {
-    //                        // スロットの子オブジェクトを取得
-    //                        GameObject childObject = slot.transform.GetChild(0).gameObject; // 子オブジェクトが1つだけだと仮定している場合
-
-    //                        // スロットからアイテムを取得
-    //                        inventrySlot.itemInSlot = inventrySlot.CheckInventryItem();
-
-    //                        // スロット内にアイテムがある場合
-    //                        if (inventrySlot.itemInSlot != null)
-    //                        {
-    //                            // スロット内のアイテム名が一致するか確認
-    //                            gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                            if (inventrySlot.itemInSlot.thisName == gameObject.name)
-    //                            {
-    //                                // スタック数が1より多ければスタック数を減らす
-    //                                if (inventrySlot.itemInSlot.amountInventry > 1)
-    //                                {
-    //                                    inventrySlot.itemInSlot.amountInventry--; // スタック数を減らす
-    //                                    InventorySystem.Instance.ReCalculeList(); // アイテムのUIやリストの更新
-    //                                    gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                                }
-    //                                else
-    //                                {
-    //                                    gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-    //                                    DestroyImmediate(gameObject);
-    //                                    InventorySystem.Instance.ReCalculeList();
-    //                                    CraftingSystem.Instance.RefreshNeededItems();
-
-    //                                }
-
-    //                                break; // 一致するアイテムが見つかったら処理を終了
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-
-
-              
-    //        }
-    //    }
-    //}
 
     private void consumingFunction(float healthEffect, float caloriesEffect, float hydrationEffect)
     {
@@ -276,7 +190,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void healthEffectCalculation(float healthEffect)
     {
-       
+
 
         float healthBeforeConsumption = PlayerState.Instance.currentHealth;
         float maxHealth = PlayerState.Instance.maxHealth;
@@ -297,7 +211,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void caloriesEffectCalculation(float caloriesEffect)
     {
-        
+
 
         float caloriesBeforeConsumption = PlayerState.Instance.currentCalories;
         float maxCalories = PlayerState.Instance.maxCalories;
@@ -318,7 +232,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private static void hydrationEffectCalculation(float hydrationEffect)
     {
-        
+
 
         float hydrationBeforeConsumption = PlayerState.Instance.currentHydrationPercent;
         float maxHydration = PlayerState.Instance.maxHydrationPercent;
