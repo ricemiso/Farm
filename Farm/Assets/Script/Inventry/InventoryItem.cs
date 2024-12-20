@@ -61,20 +61,20 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             gameObject.GetComponent<DragDrop>().enabled = true;
         }
 
-        if (
-        (Input.GetAxis("Mouse ScrollWheel") != 0 || // マウスホイールの入力
-        Input.GetKeyDown(KeyCode.Alpha1) ||
-        Input.GetKeyDown(KeyCode.Alpha2) ||
-        Input.GetKeyDown(KeyCode.Alpha3) ||
-        Input.GetKeyDown(KeyCode.Alpha4) ||
-        Input.GetKeyDown(KeyCode.Alpha5) ||
-        Input.GetKeyDown(KeyCode.Alpha6) ||
-        Input.GetKeyDown(KeyCode.Alpha7) ||
-        Input.GetKeyDown(KeyCode.Alpha8) ||
-        Input.GetKeyDown(KeyCode.Alpha9)))
-        {
-            ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
-        }
+        //if (
+        //(Input.GetAxis("Mouse ScrollWheel") != 0 || // マウスホイールの入力
+        //Input.GetKeyDown(KeyCode.Alpha1) ||
+        //Input.GetKeyDown(KeyCode.Alpha2) ||
+        //Input.GetKeyDown(KeyCode.Alpha3) ||
+        //Input.GetKeyDown(KeyCode.Alpha4) ||
+        //Input.GetKeyDown(KeyCode.Alpha5) ||
+        //Input.GetKeyDown(KeyCode.Alpha6) ||
+        //Input.GetKeyDown(KeyCode.Alpha7) ||
+        //Input.GetKeyDown(KeyCode.Alpha8) ||
+        //Input.GetKeyDown(KeyCode.Alpha9)))
+        //{
+        //    //ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
+        //}
 
         //
         if (isUseable && EquipSystem.Instance.selectMinion && !ConstructionManager.Instance.inConstructionMode)
@@ -85,7 +85,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             EquipSystem.Instance.UseItem(EquipSystem.Instance.selectedMinion);
         }
 
-        if (isConsumable && Input.GetKeyDown(KeyCode.Q) && EquipSystem.Instance.selectMana)
+        if (isConsumable && Input.GetKeyDown(KeyCode.F) && EquipSystem.Instance.selectMana)
         {
             itemPendingConsumption = gameObject;
             consumingFunction(healthEffect, caloriesEffect, hydrationEffect);
@@ -144,9 +144,6 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-
-
-
             if (isEquippable && isInsideQuiqSlot == false && EquipSystem.Instance.CheckIfFull() == false)
             {
                 EquipSystem.Instance.AddToQuickSlots(gameObject);

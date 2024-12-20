@@ -4696,7 +4696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 474.38745, y: -24.499992}
+  m_AnchoredPosition: {x: -461, y: -24.499992}
   m_SizeDelta: {x: 586.9407, y: 649}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163571832
@@ -6929,6 +6929,7 @@ MonoBehaviour:
   placementHoldingSpot: {fileID: 1008047446}
   placeStorageHoldingSpot: {fileID: 1463748123}
   isConstruction: 0
+  isput: 0
 --- !u!1 &277361425
 GameObject:
   m_ObjectHideFlags: 0
@@ -40212,8 +40213,14 @@ MonoBehaviour:
   selectedItem: {fileID: 0}
   toolHolder: {fileID: 2103019920}
   selecteditemModel: {fileID: 0}
+  selectedMinion: {fileID: 0}
   stackcnt: 0
+  selectednumber: 0
   SwingWait: 0
+  selectMinion: 0
+  selectMana: 0
+  selectedManamodel: 0
+  currentSelectedObject: {fileID: 0}
 --- !u!1 &2131424797
 GameObject:
   m_ObjectHideFlags: 0

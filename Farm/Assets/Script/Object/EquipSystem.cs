@@ -195,15 +195,19 @@ public class EquipSystem : MonoBehaviour
                 selectedItem.GetComponent<InventoryItem>().isSelected = true;
 
 
-                if(selectedItem.name == "ミニオン"||selectedItem.name == "ミニオン2"|| selectedItem.name == "ミニオン3")
+                if(selectedItem.name == "ミニオン"||selectedItem.name == "ミニオン2"|| selectedItem.name == "ミニオン3"||
+                    selectedItem.name == "ミニオン(Clone)" || selectedItem.name == "ミニオン2(Clone)" || selectedItem.name == "ミニオン3(Clone)")
                 {
                     selectedMinion = selectedItem;
                     selectMinion = true;
-                   
+                    selectMana = false;
 
-                }else if(selectedItem.name == "Mana"|| selectedItem.name == "マナ")
+
+                }
+                else if(selectedItem.name == "Mana"|| selectedItem.name == "マナ")
                 {
                     selectMana = true;
+                    selectMinion = false;
                 }
                 else
                 {

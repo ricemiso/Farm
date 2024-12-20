@@ -88,7 +88,7 @@ public class InventorySystem : MonoBehaviour
         {
 
             Debug.Log("i is pressed");
-            inventoryScreenUI.SetActive(true);
+            //inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
