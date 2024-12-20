@@ -305,8 +305,9 @@ public class CraftingSystem : MonoBehaviour
         {
             //TODO:一旦妖精の合成しかないため直接合成スクリーンを出す
             //アルファ版は戻す
-            craftingScreenUI.SetActive(true);
+           // craftingScreenUI.SetActive(true);
             refineScreenUI.SetActive(true);
+            toolScreenUI.SetActive(true);
 
 
 
