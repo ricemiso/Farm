@@ -21,6 +21,7 @@ public class EquipSystem : MonoBehaviour
     public GameObject toolHolder;
 
     public GameObject selecteditemModel;
+    public GameObject selectedMinion;
 
     public int stackcnt;
     public int selectednumber;
@@ -28,6 +29,10 @@ public class EquipSystem : MonoBehaviour
     public bool SwingWait;
 
     public bool selectMinion;
+    public bool selectMana;
+    public bool selectedManamodel;
+
+    public GameObject currentSelectedObject;
 
     private void Awake()
     {
@@ -48,6 +53,7 @@ public class EquipSystem : MonoBehaviour
         PopulateSlotList();
         SwingWait = false;
         selectMinion = false;
+        selectedManamodel = false;
     }
 
     private void Update()
@@ -87,8 +93,18 @@ public class EquipSystem : MonoBehaviour
             SelectQuickSlot(7);
             selectednumber = 7;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            SelectQuickSlot(8);
+            selectednumber = 8;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            SelectQuickSlot(9);
+            selectednumber = 9;
+        }
 
-       
+
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
         if (scroll > 0f)  
@@ -99,6 +115,28 @@ public class EquipSystem : MonoBehaviour
         else if (scroll < 0f)  
         {
             CycleQuickSlot(-1);  
+        }
+
+        UpdateCurrentSelectedObject();
+    }
+
+    private void UpdateCurrentSelectedObject()
+    {
+        if (selectedNumber > 0 && selectedNumber <= quickSlotsList.Count)
+        {
+            GameObject selectedSlot = quickSlotsList[selectedNumber - 1];
+            if (selectedSlot.transform.childCount > 0)
+            {
+                currentSelectedObject = selectedSlot.transform.GetChild(0).gameObject;
+            }
+            else
+            {
+                currentSelectedObject = null; // スロットが空の場合
+            }
+        }
+        else
+        {
+            currentSelectedObject = null; // 選択されていない場合
         }
     }
 
@@ -111,19 +149,20 @@ public class EquipSystem : MonoBehaviour
        
         if (newSlot < 1)
         {
-            newSlot = 7; 
+            newSlot = 9; 
         }
-        else if (newSlot > 7)
+        else if (newSlot > 9)
         {
             newSlot = 1;
         }
         selectednumber = newSlot;
 
+
         SelectQuickSlot(newSlot);
     }
 
     // 現在選択されているクイックスロットを取得する
-    private int GetCurrentQuickSlot()
+    public int GetCurrentQuickSlot()
     {
         if(selectedNumber <=1)
         {
@@ -144,14 +183,8 @@ public class EquipSystem : MonoBehaviour
 
                 selectedNumber = number;
 
-                if(selectedNumber == 3)
-                {
-                    selectMinion = true;
-                }
-                else
-                {
-                    selectMinion = false;
-                }
+
+                ConstructionManager.Instance.inConstructionMode = false;
 
                 if (selectedItem != null)
                 {
@@ -162,9 +195,20 @@ public class EquipSystem : MonoBehaviour
                 selectedItem.GetComponent<InventoryItem>().isSelected = true;
 
 
-                if(selectedItem.name == "ミニオン")
+                if(selectedItem.name == "ミニオン"||selectedItem.name == "ミニオン2"|| selectedItem.name == "ミニオン3")
                 {
+                    selectedMinion = selectedItem;
+                    selectMinion = true;
+                   
 
+                }else if(selectedItem.name == "Mana"|| selectedItem.name == "マナ")
+                {
+                    selectMana = true;
+                }
+                else
+                {
+                    selectMinion = false;
+                    selectMana = false;
                 }
 
 
@@ -581,6 +625,7 @@ public class EquipSystem : MonoBehaviour
         return false;  // 空きがある
     }
 
+   
     public void RemoveItemFromQuickSlots(string itemName, int amountToRemove)
     {
         int counter = amountToRemove;

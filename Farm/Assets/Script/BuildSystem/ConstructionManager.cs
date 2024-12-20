@@ -34,6 +34,9 @@ public class ConstructionManager : MonoBehaviour
 
     [HideInInspector] public bool isConstruction = false;
 
+    private GameObject obj;
+    public bool isput;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -48,6 +51,8 @@ public class ConstructionManager : MonoBehaviour
 
     public void ActivateConstructionPlacement(string itemToConstruct)
     {
+        if (constructionHoldingSpot.transform.childCount > 0) return;
+       
 
         GameObject item = Instantiate(Resources.Load<GameObject>(itemToConstruct));
 
@@ -254,9 +259,14 @@ public class ConstructionManager : MonoBehaviour
             }
         }
 
+        
+
         //TODO:配置アイテムの追加
         if (Input.GetMouseButtonDown(0) && inConstructionMode )
         {
+            obj = ItemToBeDestroy;
+            isput = true;
+
             if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "FoundationModel")
             {
 				if (SoundManager.Instance != null)
@@ -275,8 +285,9 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
+                obj.name = "ミニオン";
 
-                HandleItemStack2(ItemToBeDestroy);
+                HandleItemStack2(obj);
                 isConstruction = true;
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "LongRangeMinion 1")
@@ -287,8 +298,8 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
                 AIPlaceItemFreeStyle();
-
-                HandleItemStack2(ItemToBeDestroy);
+                obj.name = "ミニオン3";
+                HandleItemStack2(obj);
                 isConstruction = true;
             }
             else if (isValidPlacement && selectedGhost == false && itemToBeConstructed.name == "TankAI2")
@@ -299,7 +310,8 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
-
+                //TODO:配置するときはここに追加しないとスタック数が減らない
+                ItemToBeDestroy.name = "ミニオン2";
                 HandleItemStack2(ItemToBeDestroy);
                 isConstruction = true;
             }
@@ -329,8 +341,19 @@ public class ConstructionManager : MonoBehaviour
             }
         }
 
+        if (itemToBeConstructed == null) return;
+
         if ((Input.GetKeyDown(KeyCode.X) && inConstructionMode) ||
-    (EquipSystem.Instance.selectednumber != 3 && inConstructionMode))
+     ((Input.GetAxis("Mouse ScrollWheel") != 0 || // マウスホイールの入力
+       Input.GetKeyDown(KeyCode.Alpha1) ||
+       Input.GetKeyDown(KeyCode.Alpha2) ||
+       Input.GetKeyDown(KeyCode.Alpha3) ||
+       Input.GetKeyDown(KeyCode.Alpha4) ||
+       Input.GetKeyDown(KeyCode.Alpha5) ||
+       Input.GetKeyDown(KeyCode.Alpha6) ||
+       Input.GetKeyDown(KeyCode.Alpha7) ||
+       Input.GetKeyDown(KeyCode.Alpha8) ||
+       Input.GetKeyDown(KeyCode.Alpha9)) && inConstructionMode))
         {
             // ItemToBeDestroy が null でないかチェック
             if (ItemToBeDestroy != null)
@@ -397,7 +420,7 @@ public class ConstructionManager : MonoBehaviour
 
     public void HandleItemStack2(GameObject item)
     {
-        var itemName = ItemName(item); // アイテム名を取得
+        var itemName = ItemName(item.name); // アイテム名を取得
         string selectedItemName = itemName.Replace("(Clone)", "");
 
         bool itemFoundInInventory = false;
@@ -456,7 +479,7 @@ public class ConstructionManager : MonoBehaviour
             foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
             {
                 InventrySlot quickSlot = slot.GetComponent<InventrySlot>();
-
+                selectedItemName = ItemName(selectedItemName);
                 if (quickSlot != null && quickSlot.itemInSlot != null && quickSlot.itemInSlot.thisName == selectedItemName)
                 {
                     // quickSlotsListのスロット内のアイテムを削除
@@ -486,64 +509,67 @@ public class ConstructionManager : MonoBehaviour
 
 
 
-    private string ItemName(GameObject itemname)
+    private string ItemName(string itemname)
     {
-        switch (itemname.name)
+        switch (itemname)
         {
             case "FoundationModel":
-                itemname.name = "Foundation";
+                itemname = "Foundation";
                 break;
             case "ミニオン3(Clone)":
-                itemname.name = "ミニオン(遠距離)";
+                itemname = "ミニオン(遠距離)";
                 break;
             case "ミニオン3":
-                itemname.name = "ミニオン(遠距離)";
+                itemname = "ミニオン(遠距離)";
                 break;
             case "ミニオン2(Clone)":
-                itemname.name = "ミニオン(タンク)";
+                itemname = "ミニオン(タンク)";
+                break;
+            case "ミニオン2":
+                itemname = "ミニオン(タンク)";
                 break;
             case "WallModel":
-                itemname.name = "Wall";
+                itemname = "Wall";
                 break;
             case "ConstractAI2":
-                itemname.name = "ミニオン";
+                itemname = "ミニオン";
                 break;
             case "TankAI2":
-                itemname.name = "ミニオン2";
+                itemname = "ミニオン2";
                 break;
             case "LongRangeMinion 1":
-                itemname.name = "ミニオン3";
+                itemname = "ミニオン3";
                 break;
             case "StairsWoodemodel":
-                itemname.name = "Stairs";
+                itemname = "Stairs";
                 break;
             case "Chestmodel":
-                itemname.name = "Chest";
+                itemname = "Chest";
                 break;
             case "Foundation(Clone)":
-                itemname.name = "FoundationModel";
+                itemname = "FoundationModel";
                 break;
             case "Wall(Clone)":
-                itemname.name = "WallModel";
+                itemname = "WallModel";
                 break;
             case "ConstractAI2(Clone)":
-                itemname.name = "ミニオン";
+                itemname = "ミニオン";
                 break;
             case "TankAI2(Clone)":
-                itemname.name = "ミニオン2";
+                itemname = "ミニオン2";
                 break;
             case "LongRangeMinion 1(Clone)":
-                itemname.name = "ミニオン3";
+                itemname = "ミニオン3";
                 break;
             case "StairsWoodemodel(Clone)":
-                itemname.name = "Stairs";
+                itemname = "Stairs";
                 break;
             case "Chestmodel(Clone)":
-                itemname.name = "Chest";
+                itemname = "Chest";
                 break;
         }
 
-        return itemname.name;
+        return itemname;
     }
 
     private void PlaceItemInGhostPosition(GameObject copyOfGhost)
@@ -665,9 +691,11 @@ public class ConstructionManager : MonoBehaviour
 
     IEnumerator delayMode()
     {
+
         yield return new WaitForSeconds(1.0f);
         // 建設モードを終了
         inConstructionMode = false;
+        isput = false;
     }
 
 
