@@ -191,18 +191,21 @@ public class ConstructionManager : MonoBehaviour
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (itemToBeConstructed.name == "TankAI2")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (itemToBeConstructed.name == "LongRangeMinion 1")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (CheckValidConstructionPosition())
