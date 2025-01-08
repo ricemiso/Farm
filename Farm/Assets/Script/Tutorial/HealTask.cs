@@ -11,7 +11,7 @@ public class HealTask : ITutorialTask
 
     public string GetText()
     {
-        return "マナで体力を回復しよう。インベントリのマナを右クリックすると回復できるよ";
+        return "マナで体力を回復しよう。マナを装備してQキーを押すと、マナを消費して回復できるよ";
     }
 
     public void OnTaskSetting()
