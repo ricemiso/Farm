@@ -41924,6 +41924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickaxe
       objectReference: {fileID: 0}
+    - target: {fileID: 125463345995574245, guid: 2c1044f7a524d7f4aa3693abe4116ca7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3058135618535480773, guid: 2c1044f7a524d7f4aa3693abe4116ca7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
