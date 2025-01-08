@@ -169,6 +169,8 @@ public class ConstructionManager : MonoBehaviour
 
     private void Update()
     {
+        if (constructionHoldingSpot.transform.childCount > 0) inConstructionMode = true;
+
 
         if (inConstructionMode)
         {
@@ -178,6 +180,8 @@ public class ConstructionManager : MonoBehaviour
         {
             ConstructionUI.SetActive(false);
         }
+
+
 
 
         if (itemToBeConstructed != null && inConstructionMode)
@@ -191,18 +195,21 @@ public class ConstructionManager : MonoBehaviour
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (itemToBeConstructed.name == "TankAI2")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (itemToBeConstructed.name == "LongRangeMinion 1")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = false;
+                    itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
 
                 if (CheckValidConstructionPosition())

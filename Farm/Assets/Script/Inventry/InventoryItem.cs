@@ -82,7 +82,12 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
             //gameObject.SetActive(false);
             itemInfoUI.SetActive(false);
-            EquipSystem.Instance.UseItem(EquipSystem.Instance.selectedMinion);
+            
+            if(EquipSystem.Instance.selectedMinion != null)
+            {
+                EquipSystem.Instance.UseItem(EquipSystem.Instance.selectedMinion);
+            }
+           
         }
 
         if (isConsumable && Input.GetKeyDown(KeyCode.F) && EquipSystem.Instance.selectMana)
