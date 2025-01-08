@@ -169,6 +169,8 @@ public class ConstructionManager : MonoBehaviour
 
     private void Update()
     {
+        if (constructionHoldingSpot.transform.childCount > 0) inConstructionMode = true;
+
 
         if (inConstructionMode)
         {
@@ -178,6 +180,8 @@ public class ConstructionManager : MonoBehaviour
         {
             ConstructionUI.SetActive(false);
         }
+
+
 
 
         if (itemToBeConstructed != null && inConstructionMode)
