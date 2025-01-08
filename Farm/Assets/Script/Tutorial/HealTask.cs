@@ -15,8 +15,15 @@ public class HealTask : ITutorialTask
     }
 
     public void OnTaskSetting()
-    {
-    }
+	{
+		PlayerState state = PlayerState.Instance;
+        // ‘Ì—Í‚ª100%‚È‚ç‘Ì—Í‚ğí‚é
+        if(state.maxHealth == state.currentHealth)
+        {
+            state.AddHealth(-1);
+
+		}
+	}
 
     public bool CheckTask()
     {
