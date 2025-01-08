@@ -4,87 +4,109 @@ using UnityEngine;
 
 public class LongRangeMinion : SupportAI_Movement
 {
-	[SerializeField]
-	[Tooltip("’e‚Ì”­ËêŠ")]
-	private GameObject shootPos;
+    [SerializeField]
+    [Tooltip("’e‚Ì”­ËêŠ")]
+    private GameObject shootPos;
 
-	[SerializeField]
-	[Tooltip("’e")]
-	private GameObject bullet;
+    [SerializeField]
+    [Tooltip("’e")]
+    private GameObject bullet;
 
-	[SerializeField]
-	[Tooltip("’e‚Ì‘¬‚³")]
-	private float speed = 30.0f;
+    [SerializeField]
+    [Tooltip("’e‚Ì‘¬‚³")]
+    private float speed = 30.0f;
 
-	[SerializeField]
-	[Tooltip("’e‚Ì¶‘¶ŠÔ")]
-	private float lifeTime = 2.0f;
+    [SerializeField]
+    [Tooltip("’e‚Ì¶‘¶ŠÔ")]
+    private float lifeTime = 2.0f;
 
+    private bool isCheckingAttack = false;
+    private bool isCheckRange = false;  // õ“G”ÍˆÍ“à‚©‚Ç‚¤‚©‚ğ”»’f‚·‚é•Ï”
 
-	private bool isCheckingAttack = false;
+    protected override void Start()
+    {
+        attackRange = 20.0f;
+        base.Start();
 
-	protected override void Start()
-	{
-		attackRange = 20.0f;
-		base.Start();
+        target = player;
+        state = MoveState.FOLLOWING;
+    }
 
-		target = player;
-		state = MoveState.FOLLOWING;
-	}
+    protected override void Update()
+    {
+        base.Update();
 
-	protected override void Update()
-	{
-		base.Update();
-	}
+        // õ“G”ÍˆÍ“à‚È‚çˆÚ“®‚ğ’â~
+        if (isCheckRange)
+        {
+            state = MoveState.STOP;  // ˆÚ“®‚ğ’â~‚·‚é‚½‚ß‚ÉSTOP‚É‚·‚é
+        }
+        else
+        {
+            state = MoveState.FOLLOWING;  // ˆÚ“®ó‘Ô‚É–ß‚·
+        }
+    }
 
-	protected override void checkAttack()
-	{
+    protected override void checkAttack()
+    {
         if (target.tag == "Player") return;
 
         animation["Attack2"].speed = 1.7f;
-		animation.Play("Attack2");
-		StartCoroutine(createDelay());
-	}
+        animation.Play("Attack2");
+        StartCoroutine(createDelay());
+    }
 
-	IEnumerator createDelay()
+    IEnumerator createDelay()
     {
-		yield return new WaitForSeconds(0.2f);
-		createMagic();
+        yield return new WaitForSeconds(0.2f);
+        createMagic();
+    }
 
-	}
-
-	public void createMagic()
+    public void createMagic()
     {
-		Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
-		Quaternion spawnRotation = shootPos.transform.rotation;
+        Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
+        Quaternion spawnRotation = shootPos.transform.rotation;
 
-		GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
+        GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
 
-		Vector3 direction = newBullet.transform.forward;
-		newBullet.GetComponent<Rigidbody>().AddForce(direction * 500.0f, ForceMode.Impulse);
-		newBullet.name = bullet.name;
-		Destroy(newBullet, lifeTime);
-		float damage = GetComponent<Animal>().damage;
-		newBullet.GetComponent<Magic>().SetDamage(damage);
-	}
-
+        Vector3 direction = newBullet.transform.forward;
+        newBullet.GetComponent<Rigidbody>().AddForce(direction * 500.0f, ForceMode.Impulse);
+        newBullet.name = bullet.name;
+        Destroy(newBullet, lifeTime);
+        float damage = GetComponent<Animal>().damage;
+        newBullet.GetComponent<Magic>().SetDamage(damage);
+    }
 
     private void OnTriggerStay(Collider other)
     {
-		if (other.CompareTag("Enemy") && !isCheckingAttack)
-		{
-			StartCoroutine(CheckAttackWithDelay());
-		}
-	}
+        // "Enemy"ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ªÚG‚µ‚½ê‡
+        if (other.CompareTag("Enemy"))
+        {
+            isCheckRange = true;  // õ“G”ÍˆÍ‚É“ü‚Á‚½‚Ì‚ÅˆÚ“®‚ğ’â~
+            if (!isCheckingAttack)
+            {
+                StartCoroutine(CheckAttackWithDelay());
+            }
+        }
+    }
 
-	private IEnumerator CheckAttackWithDelay()
-	{
-		isCheckingAttack = true;
+    private void OnTriggerExit(Collider other)
+    {
+        // "Enemy"ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ª”ÍˆÍŠO‚Éo‚½ê‡
+        if (other.CompareTag("Enemy"))
+        {
+            isCheckRange = false;  // õ“G”ÍˆÍŠO‚Éo‚½‚Ì‚ÅˆÚ“®ÄŠJ
+        }
+    }
 
-		yield return new WaitForSeconds(2.0f);
+    private IEnumerator CheckAttackWithDelay()
+    {
+        isCheckingAttack = true;
 
-		checkAttack();
+        yield return new WaitForSeconds(2.0f);
 
-		isCheckingAttack = false;
-	}
+        checkAttack();
+
+        isCheckingAttack = false;
+    }
 }
