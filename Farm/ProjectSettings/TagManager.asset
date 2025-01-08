@@ -23,6 +23,7 @@ TagManager:
   - placeStairs
   - Crystal
   - MiniCrystal
+  - Mana
   layers:
   - Default
   - TransparentFX
