@@ -11,14 +11,7 @@ public class InventrySlot : MonoBehaviour
     public bool quickSlot;
     [SerializeField] private GameObject alphaobject;
 
-
-    private void Start()
-    {
-        
-    }
-
     private void Update()
-
     {
 
         InventoryItem item = CheckInventryItem();
