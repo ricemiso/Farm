@@ -12,15 +12,16 @@ public class Magic : MonoBehaviour
         Damage = damage;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<Animal>().TakeDamage(Damage);
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			other.gameObject.GetComponent<Animal>().TakeDamage(Damage);
+			this.gameObject.SetActive(false);
+			Destroy(this.gameObject);
 		}
-    }
+	}
+	
 
 
 }
