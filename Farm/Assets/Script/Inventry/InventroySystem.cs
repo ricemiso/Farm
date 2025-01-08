@@ -244,7 +244,7 @@ public class InventorySystem : MonoBehaviour
             }
             else
             {
-                whatSlotToEquip = FindQuickNextEmptySlot();
+                whatSlotToEquip = FindQuickNextNameSlot(itemName);
             }
            
 
@@ -374,6 +374,15 @@ public class InventorySystem : MonoBehaviour
             case "ミニオン2":
                 objectname = "タンクミニオン";
                 break;
+            case "タンクミニオン":
+                objectname = "ミニオン(タンク)";
+                break;
+            case "ミニオン3(Clone)":
+                objectname = "遠距離ミニオン";
+                break;
+            case "ミニオン2(Clone)":
+                objectname = "タンクミニオン";
+                break;
             case "遠距離ミニオン":
                 objectname = "ミニオン(遠距離)";
                 break;
@@ -442,6 +451,7 @@ public class InventorySystem : MonoBehaviour
             case "Log(Clone)":
                 objectname = "Log";
                 break;
+            
         }
 
         return objectname;
@@ -494,6 +504,44 @@ public class InventorySystem : MonoBehaviour
         }
 
         return new GameObject();
+    }
+
+
+    private GameObject FindQuickNextNameSlot(string itemName)
+    {
+        int slotIndex = 0;
+
+        switch (itemName)
+        {
+            case "Mana":
+                slotIndex = 8;
+                break;
+            case "Minion3Seed":
+                slotIndex = 7;
+                break;
+            case "Minion2Seed":
+                slotIndex = 6;
+                break;
+            case "MinionSeed":
+                slotIndex = 5;
+                break;
+            case "ミニオン2":
+                slotIndex = 3;
+                break;
+            case "ミニオン3":
+                slotIndex = 4;
+                break;
+            case "ミニオン":
+                slotIndex = 2;
+                break;
+            default:
+                Debug.LogWarning("a");
+                break;
+        }
+
+        GameObject slot = EquipSystem.Instance.quickSlotsList[slotIndex];
+
+        return slot;
     }
 
 

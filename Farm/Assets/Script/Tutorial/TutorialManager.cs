@@ -49,7 +49,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			new MovementTask(),
 			new EquipTask(),
-			new AttackTask(),
+			//new AttackTask(),
 			new OpenInventroyTask(),
 			//new CraftAllMinion(),
 			new FarmTask1(),
@@ -59,7 +59,7 @@ public class TutorialManager : MonoBehaviour
 			new DefeatEnemy(),
 			new LevelUpTask(),
 			new HealTask(),
-			new StackInventroyTask(),
+			//new StackInventroyTask(),
 			new ChoppableTreeTask(),
 			new ChoppableStoneTask(),
 			new ManaCraftTask(),
