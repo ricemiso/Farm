@@ -5205,13 +5205,14 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u8FD1\u63A5)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 50
   isCraftedMinion: 0
-  damage: 20
+  damage: 10
   healthIncrease: 20
   damageIncrease: 5
   level: 0
   canBeChopped: 0
+  canbeWatch: 0
   unionForceStrength: 0
   enemyForceStrength: 0
   soundChannel: {fileID: 2127612127266028338}
@@ -5365,9 +5366,9 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   stopDistance: 10
-  onGround: 0
   attackRange: 1
-  isPushEKey: 0
+  isPushQKey: 0
+  isAttackAnim: 0
   currentAttackCooltime: 0
 --- !u!114 &2685701426436218251
 MonoBehaviour:

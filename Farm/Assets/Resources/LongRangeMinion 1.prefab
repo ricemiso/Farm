@@ -4981,7 +4981,7 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u9060\u8DDD\u96E2)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 90
+  maxHealth: 50
   isCraftedMinion: 0
   damage: 10
   healthIncrease: 20
@@ -5187,7 +5187,6 @@ MonoBehaviour:
   stopRange: 20
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   stopDistance: 10
-  onGround: 0
   attackRange: 0.9
   isPushQKey: 0
   isAttackAnim: 0
