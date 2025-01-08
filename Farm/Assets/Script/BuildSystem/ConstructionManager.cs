@@ -689,6 +689,7 @@ public class ConstructionManager : MonoBehaviour
 
         // solidCollider を有効にする
         itemToBeConstructed.GetComponent<Constructable>().solidCollider.enabled = true;
+        itemToBeConstructed.GetComponent<Animation>().enabled = true;
 
         // アイテムを配置した後に、itemToBeConstructed を null に設定
         itemToBeConstructed = null;
