@@ -374,15 +374,6 @@ public class InventorySystem : MonoBehaviour
             case "ミニオン2":
                 objectname = "タンクミニオン";
                 break;
-            case "タンクミニオン":
-                objectname = "ミニオン(タンク)";
-                break;
-            case "ミニオン3(Clone)":
-                objectname = "遠距離ミニオン";
-                break;
-            case "ミニオン2(Clone)":
-                objectname = "タンクミニオン";
-                break;
             case "遠距離ミニオン":
                 objectname = "ミニオン(遠距離)";
                 break;
@@ -451,7 +442,6 @@ public class InventorySystem : MonoBehaviour
             case "Log(Clone)":
                 objectname = "Log";
                 break;
-            
         }
 
         return objectname;
