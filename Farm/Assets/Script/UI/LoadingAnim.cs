@@ -31,7 +31,7 @@ public class LoadingAnim : MonoBehaviour
             }
 
             // 子オブジェクトの位置設定
-            rectTransform.anchoredPosition = new Vector2((i - texts.Length / 2) * 55f, 0);
+            rectTransform.anchoredPosition = new Vector2((i - texts.Length / 2) * 50f, 0);
 
 
             // DOTweenアニメーションのシーケンスを作成
