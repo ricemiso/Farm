@@ -9,6 +9,13 @@ public class InventrySlot : MonoBehaviour
     public Text amountTXT;
     public InventoryItem itemInSlot;
     public bool quickSlot;
+    [SerializeField] private GameObject alphaobject;
+
+
+    private void Start()
+    {
+        
+    }
 
     private void Update()
 
@@ -19,10 +26,19 @@ public class InventrySlot : MonoBehaviour
         if (item != null)
         {
             itemInSlot = item;
+            if(alphaobject != null)
+            {
+                alphaobject.SetActive(false);
+            }
+            
         }
         else
         {
             itemInSlot = null;
+            if (alphaobject != null)
+            {
+                alphaobject.SetActive(true);
+            }
         }
 
 
@@ -39,6 +55,8 @@ public class InventrySlot : MonoBehaviour
         {
             amountTXT.gameObject.SetActive(false);
         }
+
+
 
     }
 
