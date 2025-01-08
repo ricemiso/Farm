@@ -15,6 +15,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Text itemInfoUI_itemName;
     private Text itemInfoUI_itemDescription;
     private Text itemInfoUI_itemFunctionality;
+    private bool isvisible = false;
 
     public string thisName, thisDescription, thisFunctionality;
 
@@ -47,6 +48,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         itemInfoUI_itemName = itemInfoUI.transform.Find("itemName").GetComponent<Text>();
         itemInfoUI_itemDescription = itemInfoUI.transform.Find("itemDescription").GetComponent<Text>();
         itemInfoUI_itemFunctionality = itemInfoUI.transform.Find("itemFunctionality").GetComponent<Text>();
+        itemInfoUI.SetActive(false);
     }
 
 
@@ -61,22 +63,28 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             gameObject.GetComponent<DragDrop>().enabled = true;
         }
 
-        //if (
-        //(Input.GetAxis("Mouse ScrollWheel") != 0 || // マウスホイールの入力
-        //Input.GetKeyDown(KeyCode.Alpha1) ||
-        //Input.GetKeyDown(KeyCode.Alpha2) ||
-        //Input.GetKeyDown(KeyCode.Alpha3) ||
-        //Input.GetKeyDown(KeyCode.Alpha4) ||
-        //Input.GetKeyDown(KeyCode.Alpha5) ||
-        //Input.GetKeyDown(KeyCode.Alpha6) ||
-        //Input.GetKeyDown(KeyCode.Alpha7) ||
-        //Input.GetKeyDown(KeyCode.Alpha8) ||
-        //Input.GetKeyDown(KeyCode.Alpha9)))
-        //{
-        //    //ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;
-        //}
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+           
+            isvisible = !isvisible;
 
-        //
+            // UIの表示切り替え
+            float alpha = isvisible ? 1f : 0;
+            itemInfoUI.GetComponent<CanvasGroup>().alpha = alpha;
+            
+
+        }
+
+        if (EquipSystem.Instance.currentSelectedObject == gameObject && isvisible)
+        {
+            // isvisible が true の場合、UI を表示
+            itemInfoUI.SetActive(true);
+            itemInfoUI_itemName.text = thisName;
+            itemInfoUI_itemDescription.text = thisDescription;
+            itemInfoUI_itemFunctionality.text = thisFunctionality;
+        }
+
+
         if (isUseable && EquipSystem.Instance.selectMinion && !ConstructionManager.Instance.inConstructionMode)
         {
             ConstructionManager.Instance.ItemToBeDestroy = EquipSystem.Instance.currentSelectedObject;

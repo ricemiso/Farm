@@ -172,14 +172,14 @@ public class ConstructionManager : MonoBehaviour
         if (constructionHoldingSpot.transform.childCount > 0) inConstructionMode = true;
 
 
-        if (inConstructionMode)
-        {
-            ConstructionUI.SetActive(true);
-        }
-        else
-        {
-            ConstructionUI.SetActive(false);
-        }
+        //if (inConstructionMode)
+        //{
+        //    ConstructionUI.SetActive(true);
+        //}
+        //else
+        //{
+        //    ConstructionUI.SetActive(false);
+        //}
 
 
 
