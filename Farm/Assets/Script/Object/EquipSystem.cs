@@ -186,6 +186,7 @@ public class EquipSystem : MonoBehaviour
 
                 ConstructionManager.Instance.inConstructionMode = false;
 
+
                 if (selectedItem != null)
                 {
                     selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
