@@ -11,7 +11,7 @@ public class ConstructionTask : ITutorialTask
 
     public string GetText()
     {
-        return "収穫したミニオンをインベントリから右クリックして配置してみよう。Xキーを押すとキャンセルできるよ";
+        return "収穫したミニオンをインベントリから右クリックして配置してみよう。";
     }
 
     public void OnTaskSetting()
