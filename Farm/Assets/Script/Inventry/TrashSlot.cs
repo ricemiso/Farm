@@ -5,22 +5,53 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//担当者　越浦晃生
+//インベントリの廃止に伴い現在使用していない
 
+/// <summary>
+/// ゴミ箱スロットを管理するクラス。
+/// </summary>
 public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-
+    /// <summary>
+    /// ゴミ箱アラートUI
+    /// </summary>
     public GameObject trashAlertUI;
 
+    /// <summary>
+    /// テキストを変更するためのTextコンポーネント
+    /// </summary>
     private Text textToModify;
 
+    /// <summary>
+    /// ゴミ箱が閉じているときのスプライト
+    /// </summary>
     public Sprite trash_closed;
+
+    /// <summary>
+    /// ゴミ箱が開いているときのスプライト
+    /// </summary>
     public Sprite trash_opened;
 
+    /// <summary>
+    /// イメージコンポーネント
+    /// </summary>
     private Image imageComponent;
 
-    Button YesBTN, NoBTN;
+    /// <summary>
+    /// "Yes"ボタン
+    /// </summary>
+    private Button YesBTN;
 
-    GameObject draggedItem
+    /// <summary>
+    /// "No"ボタン
+    /// </summary>
+    private Button NoBTN;
+
+    /// <summary>
+    /// ドラッグされたアイテムを取得するプロパティ
+    /// </summary>
+    private GameObject draggedItem
     {
         get
         {
@@ -28,11 +59,15 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         }
     }
 
-    GameObject itemToBeDeleted;
+    /// <summary>
+    /// 削除されるアイテム
+    /// </summary>
+    private GameObject itemToBeDeleted;
 
-
-
-    public string itemName
+    /// <summary>
+    /// アイテム名を取得するプロパティ
+    /// </summary>
+    private string itemName
     {
         get
         {
@@ -43,35 +78,37 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         }
     }
 
-
-
-    void Start()
+    /// <summary>
+    /// 初期設定。
+    /// </summary>
+    private void Start()
     {
         imageComponent = transform.Find("background").GetComponent<Image>();
-
         textToModify = trashAlertUI.transform.Find("Text").GetComponent<Text>();
-
         YesBTN = trashAlertUI.transform.Find("yes").GetComponent<Button>();
         YesBTN.onClick.AddListener(delegate { DeleteItem(); });
 
         NoBTN = trashAlertUI.transform.Find("no").GetComponent<Button>();
         NoBTN.onClick.AddListener(delegate { CancelDeletion(); });
-
     }
 
-
+    /// <summary>
+    /// アイテムがドロップされた時の処理を行います。
+    /// </summary>
+    /// <param name="eventData">イベントデータ</param>
     public void OnDrop(PointerEventData eventData)
     {
-        //itemToBeDeleted = DragDrop.itemBeingDragged.gameObject;
         if (draggedItem.GetComponent<InventoryItem>().isTrashable == true)
         {
             itemToBeDeleted = draggedItem.gameObject;
-
             StartCoroutine(notifyBeforeDeletion());
         }
-
     }
 
+    /// <summary>
+    /// 削除前に通知を行うコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator notifyBeforeDeletion()
     {
         trashAlertUI.SetActive(true);
@@ -79,12 +116,18 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         yield return new WaitForSeconds(1f);
     }
 
+    /// <summary>
+    /// 削除をキャンセルします。
+    /// </summary>
     private void CancelDeletion()
     {
         imageComponent.sprite = trash_closed;
         trashAlertUI.SetActive(false);
     }
 
+    /// <summary>
+    /// アイテムを削除します。
+    /// </summary>
     private void DeleteItem()
     {
         imageComponent.sprite = trash_closed;
@@ -94,16 +137,22 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
         trashAlertUI.SetActive(false);
     }
 
+    /// <summary>
+    /// ポインタがゴミ箱スロットに入った時の処理を行います。
+    /// </summary>
+    /// <param name="eventData">イベントデータ</param>
     public void OnPointerEnter(PointerEventData eventData)
     {
-
         if (draggedItem != null && draggedItem.GetComponent<InventoryItem>().isTrashable == true)
         {
             imageComponent.sprite = trash_opened;
         }
-
     }
 
+    /// <summary>
+    /// ポインタがゴミ箱スロットから出た時の処理を行います。
+    /// </summary>
+    /// <param name="eventData">イベントデータ</param>
     public void OnPointerExit(PointerEventData eventData)
     {
         if (draggedItem != null && draggedItem.GetComponent<InventoryItem>().isTrashable == true)
@@ -111,5 +160,4 @@ public class TrashSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoi
             imageComponent.sprite = trash_closed;
         }
     }
-
 }

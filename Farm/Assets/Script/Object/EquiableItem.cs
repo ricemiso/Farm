@@ -3,23 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// 装備可能なアイテムを管理するクラス。
+/// </summary>
 [RequireComponent(typeof(Animator))]
 public class EquiableItem : MonoBehaviour
 {
-
+    /// <summary>
+    /// アニメーターコンポーネント。
+    /// </summary>
     public Animator animator;
+
+    /// <summary>
+    /// スイング中かどうかを示すフラグ。
+    /// </summary>
     public bool Swinging = false;
+
+    /// <summary>
+    /// 水やり中かどうかを示すフラグ。
+    /// </summary>
     private bool wasWatering = false;
+
+    /// <summary>
+    /// 充電中かどうかを示すフラグ。
+    /// </summary>
     private bool wasChargeing = false;
+
+    /// <summary>
+    /// レベルアップ中かどうかを示すフラグ。
+    /// </summary>
     private bool wasleveling = false;
 
+    /// <summary>
+    /// 初期設定を行います。
+    /// </summary>
     void Start()
     {
         animator = GetComponent<Animator>();
         Swinging = false;
     }
 
-    
+    /// <summary>
+    /// 武器を振った時のアニメーションの再生
+    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0)
@@ -28,22 +56,21 @@ public class EquiableItem : MonoBehaviour
             && SelectionManager.Instance.HandIsVisible == false
             && !ConstructionManager.Instance.inConstructionMode
             && MenuManager.Instance.isMenuOpen == false
-            && EquipSystem.Instance.IsPlayerHooldingWateringCan()== false) 
+            && EquipSystem.Instance.IsPlayerHooldingWateringCan() == false)
         {
-            //EquipSystem.Instance.SwingWait = true;
             Swinging = true;
             StartCoroutine(SwingAction());
         }
 
         if ((SelectionManager.Instance.Watering && !wasWatering) || (SelectionManager.Instance.Chargeing && !wasChargeing)
-            || (SelectionManager.Instance.leveling && !wasleveling)) 
+            || (SelectionManager.Instance.leveling && !wasleveling))
         {
             animator.SetTrigger("Watering");
             wasWatering = true;
             wasChargeing = true;
             wasleveling = true;
         }
-        else if ((!SelectionManager.Instance.Watering && wasWatering)||(!SelectionManager.Instance.Chargeing && wasChargeing)
+        else if ((!SelectionManager.Instance.Watering && wasWatering) || (!SelectionManager.Instance.Chargeing && wasChargeing)
             || (!SelectionManager.Instance.leveling && wasleveling))
         {
             animator.ResetTrigger("Watering");
@@ -51,14 +78,14 @@ public class EquiableItem : MonoBehaviour
             wasChargeing = false;
             wasleveling = false;
         }
-
-
-
     }
 
+    /// <summary>
+    /// スイングアクションを実行するコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator SwingAction()
     {
-        //SwingWait = true; 
         animator.SetTrigger("hit");
 
         yield return new WaitForSeconds(0.2f);  // スイングサウンドの遅延
@@ -66,11 +93,12 @@ public class EquiableItem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);  // 1秒の遅延を追加
 
-        //EquipSystem.Instance.SwingWait = false;
         Swinging = false;
     }
 
-    //Todo: 何かを切り倒すときはここに追加する
+    /// <summary>
+    /// アイテムがヒットされた時の処理を行います。
+    /// </summary>
     public void GetHit()
     {
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
@@ -80,9 +108,8 @@ public class EquiableItem : MonoBehaviour
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitSoundDelay());
-           
         }
-        else if(selectedCraft != null)
+        else if (selectedCraft != null)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.chopSound);
             StartCoroutine(HitCraftSoundDelay());
@@ -91,13 +118,13 @@ public class EquiableItem : MonoBehaviour
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
-
-       
     }
 
+    /// <summary>
+    /// 石をヒットされた時の処理を行います。
+    /// </summary>
     public void GetStoneHit()
     {
-        
         GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
         if (selectedStone != null)
@@ -111,6 +138,9 @@ public class EquiableItem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// マナのチャージをヒットされた時の処理を行います。
+    /// </summary>
     public void GetManaCharge()
     {
         GameObject selectedCrystal = SelectionManager.Instance.selectedCrystal;
@@ -126,7 +156,10 @@ public class EquiableItem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// スイングサウンドの遅延を行うコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator SwingSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
@@ -139,34 +172,41 @@ public class EquiableItem : MonoBehaviour
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
         }
-
     }
 
-
+    /// <summary>
+    /// クラフトアイテムをヒットされた時の処理を行うコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator HitCraftSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
 
         GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
         selectedCraft.GetComponent<Choppablecraft>().GetHit();
-
     }
 
+    /// <summary>
+    /// 木をヒットされた時の処理を行うコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator HitSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
 
         GameObject selectedTree = SelectionManager.Instance.selectedTree;
         selectedTree.GetComponent<ChoppableTree>().GetHit();
-
     }
 
+    /// <summary>
+    /// 石をヒットされた時の処理を行うコルーチン。
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator HitStoneSoundDelay()
     {
         yield return new WaitForSeconds(0.2f);
 
         GameObject selectedCraft = SelectionManager.Instance.selectedStone;
         selectedCraft.GetComponent<ChoppableStone>().GetHit();
-
     }
 }

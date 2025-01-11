@@ -3,39 +3,108 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// 建築管理を行うクラス。建築モードの管理や建築物、ゴーストオブジェクトの操作。
+/// </summary>
 public class ConstructionManager : MonoBehaviour
 {
+    /// <summary>
+    /// クラスのインスタンスを保持するシングルトンプロパティ。
+    /// </summary>
     public static ConstructionManager Instance { get; set; }
 
+    /// <summary>
+    /// 現在建築中のアイテム。
+    /// </summary>
     public GameObject itemToBeConstructed;
+
+    /// <summary>
+    /// 建築モードが有効かどうかを示します。
+    /// </summary>
     public bool inConstructionMode = false;
+
+    /// <summary>
+    /// 建築中のアイテムを保持するスポット。
+    /// </summary>
     public GameObject constructionHoldingSpot;
 
+    /// <summary>
+    /// 現在の配置が有効かどうかを示します。
+    /// </summary>
     public bool isValidPlacement;
 
+    /// <summary>
+    /// ゴーストオブジェクトを選択中かどうかを示します。
+    /// </summary>
     public bool selectingAGhost;
+
+    /// <summary>
+    /// 現在選択されているゴーストオブジェクト。
+    /// </summary>
     public GameObject selectedGhost;
 
-
+    /// <summary>
+    /// 選択されたゴーストのマテリアル。
+    /// </summary>
     public Material ghostSelectedMat;
+
+    /// <summary>
+    /// 半透明のゴーストのマテリアル。
+    /// </summary>
     public Material ghostSemiTransparentMat;
+
+    /// <summary>
+    /// 完全透明のゴーストのマテリアル。
+    /// </summary>
     public Material ghostFullTransparentMat;
 
-
+    /// <summary>
+    /// 存在するすべてのゴーストオブジェクトのリスト。
+    /// </summary>
     public List<GameObject> allGhostsInExistence = new List<GameObject>();
 
+    /// <summary>
+    /// 削除対象のアイテム。
+    /// </summary>
     public GameObject ItemToBeDestroy;
+
+    /// <summary>
+    /// 建築関連のUI。
+    /// </summary>
     public GameObject ConstructionUI;
 
+    /// <summary>
+    /// プレイヤーのオブジェクト。
+    /// </summary>
     public GameObject player;
+
+    /// <summary>
+    /// 配置中のオブジェクトを保持するスポット。
+    /// </summary>
     public GameObject placementHoldingSpot;
+
+    /// <summary>
+    /// ストレージ用の保持スポット。
+    /// </summary>
     public GameObject placeStorageHoldingSpot;
 
-
+    /// <summary>
+    /// 建築が進行中かどうかを示すフラグ。
+    /// </summary>
     [HideInInspector] public bool isConstruction = false;
 
+    /// <summary>
+    /// 一時的に使用するゲームオブジェクト。
+    /// </summary>
     private GameObject obj;
+
+    /// <summary>
+    /// 配置が完了しているかを示すフラグ。
+    /// </summary>
     public bool isput;
+
 
     private void Awake()
     {
@@ -49,6 +118,10 @@ public class ConstructionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 指定されたアイテムを建築モードで設置可能な状態にする。
+    /// </summary>
+    /// <param name="itemToConstruct">配置するアイテムの名前</param>
     public void ActivateConstructionPlacement(string itemToConstruct)
     {
         if (constructionHoldingSpot.transform.childCount > 0) return;
@@ -70,6 +143,11 @@ public class ConstructionManager : MonoBehaviour
         inConstructionMode = true;
     }
 
+
+    /// <summary>
+    /// 指定されたアイテムに関連付けられた全てのゴーストオブジェクトを取得し、リストに追加します。
+    /// </summary>
+    /// <param name="itemToBeConstructed">建築対象のアイテム</param>
     public void GetAllGhosts(GameObject itemToBeConstructed)
     {
         List<GameObject> ghostlist = itemToBeConstructed.gameObject.GetComponent<Constructable>().ghostList;
@@ -83,6 +161,9 @@ public class ConstructionManager : MonoBehaviour
         Debug.Log($"Total ghosts in existence: {allGhostsInExistence.Count}");
     }
 
+    /// <summary>
+    /// ゴーストオブジェクトをスキャンし、同じ位置にある重複するゴーストを削除します。
+    /// </summary>
     private void PerformGhostDeletionScan()
     {
 
@@ -119,9 +200,6 @@ public class ConstructionManager : MonoBehaviour
             }
         }
 
-
-
-
         foreach (GameObject ghost in allGhostsInExistence)
         {
             if (ghost != null)
@@ -139,6 +217,12 @@ public class ConstructionManager : MonoBehaviour
        
     }
 
+
+    /// <summary>
+    /// ゴーストオブジェクトのX座標を小数点第2位まで正確に切り捨てた値を返します。
+    /// </summary>
+    /// <param name="ghost">対象のゴーストオブジェクト</param>
+    /// <returns>切り捨て後のX座標</returns>
     private float XPositionToAccurateFloat(GameObject ghost)
     {
         if (ghost != null)
@@ -152,6 +236,11 @@ public class ConstructionManager : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// ゴーストオブジェクトのZ座標を小数点第2位まで正確に切り捨てた値を返します。
+    /// </summary>
+    /// <param name="ghost">対象のゴーストオブジェクト</param>
+    /// <returns>切り捨て後のZ座標</returns>
     private float ZPositionToAccurateFloat(GameObject ghost)
     {
 
@@ -167,6 +256,10 @@ public class ConstructionManager : MonoBehaviour
         return 0;
     }
 
+
+    /// <summary>
+    /// オブジェクトが配置できる条件ならば選ばれているオブジェクトを建築モードとして配置する
+    /// </summary>
     private void Update()
     {
         if (constructionHoldingSpot.transform.childCount > 0) inConstructionMode = true;
@@ -180,9 +273,6 @@ public class ConstructionManager : MonoBehaviour
         //{
         //    ConstructionUI.SetActive(false);
         //}
-
-
-
 
         if (itemToBeConstructed != null && inConstructionMode)
         {
@@ -229,8 +319,6 @@ public class ConstructionManager : MonoBehaviour
             }
 
             
-
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -382,7 +470,11 @@ public class ConstructionManager : MonoBehaviour
 
     }
 
-    // アイテムのスタック数を確認し、処理するメソッド
+    /// <summary>
+    /// アイテムのスタック数を確認し、削除処理するメソッド
+    /// </summary>
+    /// <param name="item">スタックしているアイテム</param>
+    /// <param name="num">減らす数</param>
     public void HandleItemStack(GameObject item,int num =1)
     {
         var inventoryItem = item.GetComponent<InventoryItem>(); // アイテムのスタック数を持つコンポーネントを取得 
@@ -425,6 +517,11 @@ public class ConstructionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// スタックされたアイテムを削除する
+    /// インベントリとクイックスロットで同じアイテムがある場合、片方のみ削除する
+    /// </summary>
+    /// <param name="item">削除するアイテム</param>
     public void HandleItemStack2(GameObject item)
     {
         var itemName = ItemName(item.name); // アイテム名を取得
@@ -515,7 +612,11 @@ public class ConstructionManager : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// アイテム名を変換する関数
+    /// </summary>
+    /// <param name="itemname">アイテム名</param>
+    /// <returns></returns>
     private string ItemName(string itemname)
     {
         switch (itemname)
@@ -579,6 +680,12 @@ public class ConstructionManager : MonoBehaviour
         return itemname;
     }
 
+    /// <summary>
+    /// アイテムをゴースト位置に配置。  
+    /// ゴーストオブジェクトの位置と回転を取得し、ランダムなオフセットを加えて配置。
+    /// アイテムの種類に応じて異なるタグを設定し、ゴーストのメンバーを抽出、削除処理を行う。
+    /// </summary>
+    /// <param name="copyOfGhost">ゴーストオブジェクト</param>
     private void PlaceItemInGhostPosition(GameObject copyOfGhost)
     {
 
@@ -624,6 +731,12 @@ public class ConstructionManager : MonoBehaviour
     }
 
 
+
+    /// <summary>
+    /// 指定されたアイテムを即時に削除する。  
+    /// アイテムを削除し、インベントリとクラフトシステムを更新する。
+    /// </summary>
+    /// <param name="item">削除するオブジェクト</param>
     void DestroyItem(GameObject item)
     {
 
@@ -633,7 +746,9 @@ public class ConstructionManager : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// アイテムを配置する関数。  
+    /// </summary>
     private void PlaceItemFreeStyle()
     {
 
@@ -665,10 +780,11 @@ public class ConstructionManager : MonoBehaviour
         inConstructionMode = false;
     }
 
+    /// <summary>
+    /// ミニオンを配置する関数
+    /// </summary>
     private void AIPlaceItemFreeStyle()
     {
-       
-
         // デフォルトの色に設定
         itemToBeConstructed.GetComponent<Constructable>().SetDefaultColor();
 
@@ -697,16 +813,23 @@ public class ConstructionManager : MonoBehaviour
         StartCoroutine(delayMode());
     }
 
+    /// <summary>
+    /// 一定時間後に建設モードを終了する。  
+    /// 遅延を設けて建設モードのフラグを更新する。
+    /// </summary>
     IEnumerator delayMode()
     {
-
         yield return new WaitForSeconds(1.0f);
         // 建設モードを終了
         inConstructionMode = false;
         isput = false;
     }
 
-
+    /// <summary>
+    /// 有効な建設位置かどうかを確認する。  
+    /// アイテムが有効に配置可能かをチェックする。
+    /// </summary>
+    /// <returns>アイテムが有効な建設位置にある場合はtrue、それ以外はfalse</returns>
     private bool CheckValidConstructionPosition()
     {
         if (itemToBeConstructed != null)

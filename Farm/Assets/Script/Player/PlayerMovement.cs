@@ -2,43 +2,109 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
 
+/// <summary>
+/// プレイヤーの移動を管理するクラス。
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
+    /// <summary>
+    /// キャラクターコントローラー。
+    /// </summary>
     public CharacterController controller;
-    public Terrain terrain;
-    private TerrainData terrainData;
-    private Vector3 terrainPos;
-    private AudioSource currentAudioSource; // 現在の足音用のAudioSource
 
+    /// <summary>
+    /// 地形データを持つTerrainオブジェクト。
+    /// </summary>
+    public Terrain terrain;
+
+    /// <summary>
+    /// 地形データ。
+    /// </summary>
+    private TerrainData terrainData;
+
+    /// <summary>
+    /// 地形の位置。
+    /// </summary>
+    private Vector3 terrainPos;
+
+    /// <summary>
+    /// 現在の足音用のAudioSource。
+    /// </summary>
+    private AudioSource currentAudioSource;
+
+    /// <summary>
+    /// プレイヤーの移動速度。
+    /// </summary>
     public float speed = 12f;
+
+    /// <summary>
+    /// 重力。
+    /// </summary>
     public float gravity = -9.81f * 2;
+
+    /// <summary>
+    /// ジャンプの高さ。
+    /// </summary>
     public float jumpHeight = 3f;
 
+    /// <summary>
+    /// 地面をチェックするためのTransform。
+    /// </summary>
     public Transform groundCheck;
+
+    /// <summary>
+    /// 地面との距離。
+    /// </summary>
     public float groundDistance = 0.4f;
+
+    /// <summary>
+    /// 地面のレイヤーマスク。
+    /// </summary>
     public LayerMask groundMask;
 
+    /// <summary>
+    /// プレイヤーの速度。
+    /// </summary>
     Vector3 velocity;
+
+    /// <summary>
+    /// プレイヤーが地面にいるかどうかのフラグ。
+    /// </summary>
     public bool isGrounded;
+
+    /// <summary>
+    /// 最後の位置。
+    /// </summary>
     private Vector3 lastPosition;
+
+    /// <summary>
+    /// プレイヤーが移動中かどうかのフラグ。
+    /// </summary>
     public bool isMoving;
 
-    // foundationに乗っているかのフラグ
+    /// <summary>
+    /// foundationに乗っているかのフラグ。
+    /// </summary>
     private bool isOnFoundation = false;
 
+    /// <summary>
+    /// 初期設定を行います。
+    /// </summary>
     private void Start()
     {
         lastPosition = new Vector3(0f, 0f, 0f);
         terrainData = terrain.terrainData;
         terrainPos = terrain.transform.position;
         controller = GetComponent<CharacterController>();
-
     }
 
+    /// <summary>
+    /// 毎フレームの更新処理を行います。
+    /// </summary>
     void Update()
     {
-
         if (StorageManager.Instance.storageUIOpen == true) return;
 
         isGrounded = controller.isGrounded;
@@ -68,7 +134,6 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && move.magnitude > 0.1f)
         {
             isMoving = true;
-
             UpdateFootstepSound();
         }
         else
@@ -86,18 +151,11 @@ public class PlayerMovement : MonoBehaviour
         PlayerState.Instance.setPlayerPosition(lastPosition);
     }
 
+    /// <summary>
+    /// 足音を更新します。
+    /// </summary>
     private void UpdateFootstepSound()
     {
-        ////if (isOnFoundation)
-        ////{
-        ////    PlayFoundationFootstep();
-        ////    return;
-        ////}
-        //else
-        //{
-            
-        //}
-
         // 通常の地形ごとの足音を再生
         Vector3 playerPosition = transform.position;
         int layerIndex = GetCurrentTerrainLayer(playerPosition);
@@ -120,6 +178,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 指定されたレイヤーの足音を取得します。
+    /// </summary>
+    /// <param name="layerIndex">レイヤーのインデックス</param>
+    /// <returns>AudioSource</returns>
     private AudioSource GetFootstepSoundForLayer(int layerIndex)
     {
         AudioSource audioSource;
@@ -144,6 +207,11 @@ public class PlayerMovement : MonoBehaviour
         return audioSource;
     }
 
+    /// <summary>
+    /// 現在の地形レイヤーを取得します。
+    /// </summary>
+    /// <param name="position">プレイヤーの位置</param>
+    /// <returns>レイヤーのインデックス</returns>
     private int GetCurrentTerrainLayer(Vector3 position)
     {
         TerrainData terrainData = terrain.terrainData;
@@ -168,46 +236,4 @@ public class PlayerMovement : MonoBehaviour
 
         return maxTextureIndex;
     }
-
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    if (hit.collider.CompareTag("placedFoundation") && !hit.collider.CompareTag("Ground"))
-    //    {
-    //        isOnFoundation = true;
-    //    }
-    //    else
-    //    {
-    //        isOnFoundation = false;
-    //    }
-    //}
-
-    //private void PlayFoundationFootstep()
-    //{
-    //    if (SoundManager.Instance.foundationWalkSound == null)
-    //    {
-    //        Debug.LogError("foundationWalkSound is not set in SoundManager.");
-    //        return;
-    //    }
-
-    //    if (currentAudioSource != null && currentAudioSource.isPlaying)
-    //    {
-    //        currentAudioSource.Stop();
-    //    }
-
-    //    currentAudioSource = SoundManager.Instance.foundationWalkSound;
-    //    Debug.Log("Assigned foundationWalkSound to currentAudioSource.");
-
-    //    if (currentAudioSource.clip == null)
-    //    {
-    //        Debug.LogError("No AudioClip assigned to foundationWalkSound.");
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Assigned AudioClip: " + currentAudioSource.clip.name);
-    //    }
-
-    //    currentAudioSource.loop = true;
-    //    currentAudioSource.Play();
-    //    Debug.Log("Playing foundationWalkSound.");
-    //}
 }

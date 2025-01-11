@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// AI全般に関わるクラス。レベルアップやダメージの処理
-/// </summary>
+//担当者　越浦晃生
 
+/// <summary>
+/// AI全般に関わるクラス。レベルアップやダメージの処理、アイテムドロップを行う
+/// </summary>
 public class Animal : MonoBehaviour
 {
     public string animalName;
@@ -63,7 +64,9 @@ public class Animal : MonoBehaviour
         return animalName;
     }
 
-   
+   /// <summary>
+   /// 初期化
+   /// </summary>
     private void Start()
     {
         unionForceStrength = 10;
@@ -103,6 +106,9 @@ public class Animal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 体力を更新する
+    /// </summary>
     private void Update()
     {
         // UIに体力情報を表示
@@ -388,6 +394,11 @@ public class Animal : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 敵からのドロップを行うまでの遅延(アニメーションの時間によって変更)
+    /// </summary>
+    /// <param name="loot"></param>
+    /// <returns></returns>
     private IEnumerator DelayedLoot(Lootable loot)
     {
 
@@ -397,6 +408,10 @@ public class Animal : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ランダムな範囲にドロップアイテムを指定された個数をランダムにポップさせる
+    /// </summary>
+    /// <param name="lootable"></param>
     private void Loot(Lootable lootable)
     {
         if (lootable.wasLootCalulated == false)

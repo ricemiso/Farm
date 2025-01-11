@@ -5,17 +5,46 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// セーブスロットを管理するクラス。
+/// </summary>
 public class SaveSlot : MonoBehaviour
 {
+    /// <summary>
+    /// ボタンコンポーネント。
+    /// </summary>
     private Button button;
+
+    /// <summary>
+    /// ボタンのテキストコンポーネント。
+    /// </summary>
     private TextMeshProUGUI buttonText;
 
+    /// <summary>
+    /// スロット番号。
+    /// </summary>
     public int slotNumber;
 
+    /// <summary>
+    /// アラートUIのゲームオブジェクト。
+    /// </summary>
     public GameObject alertUI;
-    Button yesBTN, noBTN;
 
+    /// <summary>
+    /// "Yes"ボタン。
+    /// </summary>
+    Button yesBTN;
 
+    /// <summary>
+    /// "No"ボタン。
+    /// </summary>
+    Button noBTN;
+
+    /// <summary>
+    /// 初期設定を行います。
+    /// </summary>
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -23,9 +52,11 @@ public class SaveSlot : MonoBehaviour
 
         yesBTN = alertUI.transform.Find("YesButton").GetComponent<Button>();
         noBTN = alertUI.transform.Find("NoButton").GetComponent<Button>();
-
     }
 
+    /// <summary>
+    /// ボタンがクリックされた時の処理を行います。
+    /// </summary>
     public void Start()
     {
         button.onClick.AddListener(() =>
@@ -38,12 +69,12 @@ public class SaveSlot : MonoBehaviour
             {
                 DisplayOverrideWarning();
             }
-
         });
     }
 
-
-
+    /// <summary>
+    /// 毎フレームの更新処理を行います。
+    /// </summary>
     private void Update()
     {
         if (MainMenuSaveManager.Instance.IsSlotEmpty(slotNumber))
@@ -56,7 +87,9 @@ public class SaveSlot : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// 上書き警告を表示します。
+    /// </summary>
     public void DisplayOverrideWarning()
     {
         alertUI.SetActive(true);
@@ -73,12 +106,15 @@ public class SaveSlot : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// ゲームのセーブ設定を行います。
+    /// </summary>
     private void SaveGameCinfig()
     {
         MainMenuSaveManager.Instance.SaveGame(slotNumber);
 
         DateTime dt = DateTime.Now;
-        string time = dt.ToString("yyyy-MM-dd HH:mm"); 
+        string time = dt.ToString("yyyy-MM-dd HH:mm");
 
         string description = "Save Game " + slotNumber + " | " + time;
 

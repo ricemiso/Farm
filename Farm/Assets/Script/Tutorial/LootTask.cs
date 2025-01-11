@@ -20,7 +20,7 @@ public class LootTask : ITutorialTask
 
     public bool CheckTask()
     {
-        if (Input.GetMouseButtonDown(0) && GrobalState.Instance.isloot)
+        if (Input.GetMouseButtonDown(0) && GrobalState.Instance.isLoot)
         {
             return true;
         }

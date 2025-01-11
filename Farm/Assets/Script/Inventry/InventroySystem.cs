@@ -4,33 +4,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// インベントリを管理するプログラム
+/// </summary>
 public class InventorySystem : MonoBehaviour
 {
-
-    public GameObject ItemInfoUI;
-
+    /// <summary>
+    /// インベントリシステムのインスタンス
+    /// </summary>
     public static InventorySystem Instance { get; set; }
 
+    /// <summary>
+    /// アイテム情報UI
+    /// </summary>
+    public GameObject ItemInfoUI;
+
+    /// <summary>
+    /// インベントリ画面UI
+    /// </summary>
     public GameObject inventoryScreenUI;
 
+    /// <summary>
+    /// インベントリスロットのリスト
+    /// </summary>
     public List<GameObject> slotlist = new List<GameObject>();
 
+    /// <summary>
+    /// アイテムリスト
+    /// </summary>
     public List<string> itemList = new List<string>();
 
+    /// <summary>
+    /// 追加するアイテム
+    /// </summary>
     private GameObject itemToAdd;
 
+    /// <summary>
+    /// 装備するスロット
+    /// </summary>
     private GameObject whatSlotToEquip;
 
+    /// <summary>
+    /// インベントリが開いているかどうか
+    /// </summary>
     public bool isOpen;
 
+    /// <summary>
+    /// インベントリが更新されたかどうか
+    /// </summary>
     public bool inventoryUpdated;
 
-    public bool isPop;
-
+    /// <summary>
+    /// 取得したアイテムのリスト
+    /// </summary>
     public List<string> itemsPickedup = new List<string>();
 
+    /// <summary>
+    /// スタック制限
+    /// </summary>
     public int stackLimit = 10;
 
+    /// <summary>
+    /// アイテムがスタックしているかどうか
+    /// </summary>
     public bool isStacked = false;
 
     //チュートリアル用の変数
@@ -49,7 +87,9 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 初期化
+    /// </summary>
     void Start()
     {
         isOpen = false;
@@ -61,6 +101,9 @@ public class InventorySystem : MonoBehaviour
         stackLimit = 64;
     }
 
+    /// <summary>
+    /// インベントリスロットリストの生成。
+    /// </summary>
     private void PopulateSlotList()
     {
         foreach (Transform child in inventoryScreenUI.transform)
@@ -72,23 +115,20 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// アイテムの個数の計算
+    /// インベントリ(現在廃止中)、クラフトスクリーンの開閉
+    /// スロットにアイテムを適応させる
+    /// </summary>
     void Update()
     {
 
-        //if (inventoryUpdated)
-        //{
         ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
-        inventoryUpdated = false;
-        //}
-
-
+       
 
         if (Input.GetKeyDown(KeyCode.E) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
-
-            Debug.Log("i is pressed");
-            //inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -133,6 +173,10 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// インベントリアイテムを更新する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
     public void UpdateInventoryItems(string itemName)
     {
         if (!CraftingSystem.Instance.canupdate) return;
@@ -216,20 +260,19 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
-
+    /// <summary>
+    /// インベントリにアイテムを追加する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <param name="shoodStack">スタックするかどうか</param>
     public void AddToinventry(string itemName, bool shoodStack)
     {
-
-
         GameObject stack = CheckIfStackExists(itemName);
 
         if (stack != null && shoodStack)
         {
             itemName = GetItemName(itemName);
             UpdateInventoryItems(itemName);
-            //stack.GetComponent<InventrySlot>().itemInSlot.amountInventry++;
-            //stack.GetComponent<InventrySlot>().SetItemInSlot();
         }
         else
         {
@@ -237,8 +280,7 @@ public class InventorySystem : MonoBehaviour
             itemName = GetReturnItemName(itemName);
 
             //インベントリの場合はこっち
-
-            if(itemName == "Stone" || itemName == "Log")
+            if (itemName == "Stone" || itemName == "Log")
             {
                 whatSlotToEquip = FindNextEmptySlot();
             }
@@ -246,7 +288,6 @@ public class InventorySystem : MonoBehaviour
             {
                 whatSlotToEquip = FindQuickNextNameSlot(itemName);
             }
-           
 
             itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
             itemToAdd.transform.SetParent(whatSlotToEquip.transform);
@@ -263,7 +304,6 @@ public class InventorySystem : MonoBehaviour
             }
 
             itemList.Add(itemName);
-
         }
 
         if (!SoundManager.Instance.craftingSound.isPlaying)
@@ -272,16 +312,23 @@ public class InventorySystem : MonoBehaviour
         }
 
         // アイテム追加後にリストを更新
-        //ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
     }
 
+    /// <summary>
+    /// スタック状態を設定する関数。
+    /// </summary>
+    /// <param name="state">スタック状態</param>
     public void SetStackState(bool state)
     {
         isStacked = state;
     }
 
-
+    /// <summary>
+    /// 指定したアイテムのスタックが存在するかどうかを確認する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>条件を満たすスロットのGameObject</returns>
     private GameObject CheckIfStackExists(string itemName)
     {
         // クイックスロットリストを検索
@@ -327,31 +374,12 @@ public class InventorySystem : MonoBehaviour
         return null;
     }
 
-    private GameObject CheckIfStackMana(string itemName)
-    {
-        foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
-        {
-            InventrySlot inventryslot = slot.GetComponent<InventrySlot>();
 
-            inventryslot.SetItemInSlot();
-
-            if (inventryslot != null && inventryslot.itemInSlot != null)
-            {
-
-                itemName = GetItemName(itemName);
-
-                if (inventryslot.itemInSlot.thisName == itemName &&
-                    inventryslot.itemInSlot.amountInventry < stackLimit)
-                {
-                    itemName = GetReturnItemName(itemName);
-                    return slot;
-                }
-            }
-        }
-
-        return null;
-    }
-
+    /// <summary>
+    /// アイテム名を日本語に変換する関数。
+    /// </summary>
+    /// <param name="objectname">元のアイテム名</param>
+    /// <returns>変換後のアイテム名</returns>
     public string GetItemName(string objectname)
     {
         switch (objectname)
@@ -414,6 +442,11 @@ public class InventorySystem : MonoBehaviour
         return objectname;
     }
 
+    /// <summary>
+    /// アイテム名を英語に戻す関数。
+    /// </summary>
+    /// <param name="objectname">変換後のアイテム名</param>
+    /// <returns>元のアイテム名</returns>
     public string GetReturnItemName(string objectname)
     {
         switch (objectname)
@@ -451,16 +484,17 @@ public class InventorySystem : MonoBehaviour
             case "Log(Clone)":
                 objectname = "Log";
                 break;
-            
         }
 
         return objectname;
     }
 
+    /// <summary>
+    /// インベントリにアイテムをロードする関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
     public void LoadToinventry(string itemName)
     {
-
-
         inventoryUpdated = true;
         whatSlotToEquip = FindNextEmptySlot();
         Debug.Log(itemName);
@@ -476,10 +510,12 @@ public class InventorySystem : MonoBehaviour
 
         ReCalculeList();
         CraftingSystem.Instance.RefreshNeededItems();
-
     }
 
-
+    /// <summary>
+    /// 次の空きスロットを見つける関数。
+    /// </summary>
+    /// <returns>次の空きスロットのGameObject</returns>
     private GameObject FindNextEmptySlot()
     {
         foreach (GameObject slot in slotlist)
@@ -493,6 +529,10 @@ public class InventorySystem : MonoBehaviour
         return new GameObject();
     }
 
+    /// <summary>
+    /// クイックスロットから次の空きスロットを見つける関数。
+    /// </summary>
+    /// <returns>次の空きスロットのGameObject</returns>
     private GameObject FindQuickNextEmptySlot()
     {
         foreach (GameObject slot in EquipSystem.Instance.quickSlotsList)
@@ -506,7 +546,11 @@ public class InventorySystem : MonoBehaviour
         return new GameObject();
     }
 
-
+    /// <summary>
+    /// クイックスロットから特定のアイテム名に基づいて次の空きスロットを見つける関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>次の空きスロットのGameObject</returns>
     private GameObject FindQuickNextNameSlot(string itemName)
     {
         int slotIndex = 0;
@@ -535,7 +579,6 @@ public class InventorySystem : MonoBehaviour
                 slotIndex = 2;
                 break;
             default:
-                Debug.LogWarning("a");
                 break;
         }
 
@@ -544,7 +587,11 @@ public class InventorySystem : MonoBehaviour
         return slot;
     }
 
-
+    /// <summary>
+    /// 指定された空きスロットの数が利用可能かどうかを確認する関数。
+    /// </summary>
+    /// <param name="emptyNeeded">必要な空きスロットの数</param>
+    /// <returns>空きスロットが利用可能な場合はtrue、そうでない場合はfalse</returns>
     public bool CheckSlotAvailable(int emptyNeeded)
     {
         int emptySlot = 0;
@@ -555,7 +602,6 @@ public class InventorySystem : MonoBehaviour
             {
                 emptySlot += 1;
             }
-
         }
 
         if (emptySlot >= emptyNeeded)
@@ -566,15 +612,18 @@ public class InventorySystem : MonoBehaviour
         {
             return false;
         }
-
     }
 
-
+    /// <summary>
+    /// 指定されたアイテムをインベントリから削除する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <param name="amountToRemove">削除する数量</param>
     public void RemoveItem(string itemName, int amountToRemove)
     {
         int remainingAmountToRemove = amountToRemove;
 
-        // Iterate through the slot list and reduce inventory as long as we still have items to remove
+        // スロットリストを反復処理し、削除するアイテムがある限りインベントリを減らす
         foreach (GameObject slot in slotlist)
         {
             if (slot.GetComponent<InventrySlot>() != null && remainingAmountToRemove > 0)
@@ -589,7 +638,7 @@ public class InventorySystem : MonoBehaviour
                     item.amountInventry -= amountToDeduct;
                     remainingAmountToRemove -= amountToDeduct;
 
-                    // If the amount in the slot becomes 0, destroy the item
+                    // スロット内の数量が0になった場合、アイテムを削除
                     if (item.amountInventry == 0)
                     {
                         Destroy(item.gameObject);
@@ -604,33 +653,14 @@ public class InventorySystem : MonoBehaviour
             CraftingSystem.Instance.RefreshNeededItems();
 
             if (remainingAmountToRemove == 0)
-                break; // Exit the loop early if all items are removed
+                break; // すべてのアイテムが削除されたらループを早期終了
         }
-
-        // After removing items, recalculate the inventory and update crafting
-
     }
 
 
-    //public void RemoveItem2(string nameToRemove, int amountToRemove)
-    //{
-    //    inventoryUpdated = true;
-    //    int counter = amountToRemove;
-
-    //    for (var i = slotlist.Count - 1; i >= 0; i--)
-    //    {
-    //        if (slotlist[i].transform.childCount > 0)
-    //        {
-    //            if (slotlist[i].transform.GetChild(0).name == nameToRemove + "(Clone)" && counter != 0)
-    //            {
-    //                Destroy(slotlist[i].transform.GetChild(0).gameObject);
-
-    //                counter--;
-    //            }
-    //        }
-    //    }
-    //}
-
+    /// <summary>
+    /// インベントリリストを再計算する関数。
+    /// </summary>
     public void ReCalculeList()
     {
         itemList.Clear();  // リストをクリア
@@ -672,7 +702,11 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 指定されたアイテムの総数を取得する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>アイテムの総数</returns>
     public int GetItemCount(string itemName)
     {
         int count = 0;
@@ -690,13 +724,17 @@ public class InventorySystem : MonoBehaviour
         return count;
     }
 
+    /// <summary>
+    /// 指定されたアイテムのインベントリ内の数量を取得する関数。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>インベントリ内のアイテムの数量</returns>
     public int GetInventryItemCount(string itemName)
     {
         int count = 0;
 
         foreach (GameObject slot in slotlist)
         {
-
             if (slot.transform.childCount > 1)
             {
                 itemName = GetItemName(itemName);
@@ -705,12 +743,10 @@ public class InventorySystem : MonoBehaviour
                 if (slot.transform.GetChild(0).name == itemName)
                 {
                     count++;
-
                 }
             }
-
-
         }
         return count;
     }
+
 }

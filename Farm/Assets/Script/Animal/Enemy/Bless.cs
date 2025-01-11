@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// ドラゴンのブレスを管理するプログラム
+/// </summary>
 public class Bless : MonoBehaviour
 {
 
@@ -14,6 +19,11 @@ public class Bless : MonoBehaviour
         isdamege = false;
     }
 
+
+    /// <summary>
+    /// ブレスが接触したものが、ミニオン、クリスタルだった場合ダメージを与える
+    /// </summary>
+    /// <param name="other">接触した敵</param>
     private void OnTriggerStay(Collider other)
     {
         float damage = GetComponentInParent<Animal>().damage;
@@ -40,6 +50,10 @@ public class Bless : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 連続ヒットさせないために遅延を入れてフラグを立てる
+    /// </summary>
+    /// <returns></returns>
     IEnumerator attackDelay()
     {
         isdamege = true;

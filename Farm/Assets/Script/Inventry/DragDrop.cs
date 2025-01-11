@@ -5,34 +5,58 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// ドラッグ＆ドロップ機能を実装するクラス。
+/// </summary>
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-
-    //[SerializeField] private Canvas canvas;
-
-    private RectTransform rectTransform;
-    private CanvasGroup canvasGroup;
-
+    /// <summary>
+    /// アイテムがドラッグ中かどうかを示すゲームオブジェクト。
+    /// </summary>
     public static GameObject itemBeingDragged;
+
+    /// <summary>
+    /// アイテムの初期位置。
+    /// </summary>
     Vector3 startPosition;
+
+    /// <summary>
+    /// アイテムの初期の親オブジェクト。
+    /// </summary>
     Transform startParent;
+
+    /// <summary>
+    /// アイテムがスタックしているかどうか。
+    /// </summary>
     public bool isStack = false;
 
+    /// <summary>
+    /// アイテムのRectTransformコンポーネント。
+    /// </summary>
+    private RectTransform rectTransform;
 
+    /// <summary>
+    /// アイテムのCanvasGroupコンポーネント。
+    /// </summary>
+    private CanvasGroup canvasGroup;
+
+    /// <summary>
+    /// コンポーネントを初期化します。
+    /// </summary>
     private void Awake()
     {
-
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-
     }
 
-
+    /// <summary>
+    /// ドラッグ開始時の処理。
+    /// </summary>
+    /// <param name="eventData">イベントデータ。</param>
     public void OnBeginDrag(PointerEventData eventData)
     {
-
-
-
         Debug.Log("OnBeginDrag");
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
@@ -40,17 +64,21 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         startParent = transform.parent;
         transform.SetParent(transform.root);
         itemBeingDragged = gameObject;
-
     }
 
+    /// <summary>
+    /// ドラッグ中の処理。
+    /// </summary>
+    /// <param name="eventData">イベントデータ。</param>
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta /*/canvas.scaaleFactor*/;
-
     }
 
-
-
+    /// <summary>
+    /// ドラッグ終了時の処理。
+    /// </summary>
+    /// <param name="eventData">イベントデータ。</param>
     public void OnEndDrag(PointerEventData eventData)
     {
         var termpItemReference = itemBeingDragged;
@@ -68,7 +96,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     if (responce)
                     {
                         DropItemIntoTheWorld(termpItemReference);
-
                     }
                     else
                     {
@@ -119,7 +146,10 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         canvasGroup.blocksRaycasts = true;
     }
 
-    // アイテムのスタック分割
+    /// <summary>
+    /// アイテムのスタック分割処理。
+    /// </summary>
+    /// <param name="termpItemReference">ドラッグ中のアイテム。</param>
     private void DivdeStack(GameObject termpItemReference)
     {
         InventoryItem item = termpItemReference.GetComponent<InventoryItem>();
@@ -136,16 +166,21 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
     }
 
-
+    /// <summary>
+    /// ドラッグキャンセル処理。
+    /// </summary>
+    /// <param name="termpItemReference">ドラッグ中のアイテム。</param>
     void CancelDragging(GameObject termpItemReference)
     {
         transform.position = startPosition;
         transform.SetParent(startParent);
-
         termpItemReference.SetActive(true);
     }
 
-
+    /// <summary>
+    /// アイテムをワールドにドロップする処理。
+    /// </summary>
+    /// <param name="termpItemReference">ドラッグ中のアイテム。</param>
     private void DropItemIntoTheWorld(GameObject termpItemReference)
     {
         string cleanName = termpItemReference.name.Split(new string[] { "(Clone)" }, StringSplitOptions.None)[0];
