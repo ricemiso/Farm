@@ -11,7 +11,7 @@ public class OpenInventroyTask : ITutorialTask
 
     public string GetText()
     {
-        return "Eキーを押してインベントリを開こう";
+        return "Eキーを押してクラフト画面を開こう";
     }
 
     public void OnTaskSetting()

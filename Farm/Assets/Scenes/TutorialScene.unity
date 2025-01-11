@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.549069, g: 0.7945378, b: 0.9727815, a: 1}
+  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,6 +228,7 @@ MonoBehaviour:
   amountTXT: {fileID: 814457386}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &7321905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,6 +1530,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1891547184}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &52333613
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,6 +4054,7 @@ MonoBehaviour:
   amountTXT: {fileID: 2105605103}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &113900458
 GameObject:
   m_ObjectHideFlags: 0
@@ -4388,7 +4391,7 @@ MonoBehaviour:
   spawnInterval: 5
   spawnRange: 10
   playerTransform: {fileID: 0}
-  hasSpawnStarted: 0
+  hasSpawnAllowed: 0
   isManaHaving: 0
   isEnemyPresent: 0
   manaCount: {fileID: 113900463}
@@ -5703,6 +5706,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1199000638}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &208045528
 GameObject:
   m_ObjectHideFlags: 0
@@ -5817,7 +5821,6 @@ MonoBehaviour:
   itemList: []
   isOpen: 0
   inventoryUpdated: 0
-  isPop: 0
   itemsPickedup: []
   stackLimit: 3
   isStacked: 0
@@ -6404,6 +6407,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1711142967}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &234010166
 GameObject:
   m_ObjectHideFlags: 0
@@ -6869,6 +6873,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1357869446}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &261921311
 GameObject:
   m_ObjectHideFlags: 0
@@ -7986,6 +7991,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1022925186}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &336892405
 GameObject:
   m_ObjectHideFlags: 0
@@ -8170,6 +8176,7 @@ MonoBehaviour:
   amountTXT: {fileID: 231961521}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &345011660
 GameObject:
   m_ObjectHideFlags: 0
@@ -9102,6 +9109,7 @@ MonoBehaviour:
   amountTXT: {fileID: 659153383}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &408884983
 GameObject:
   m_ObjectHideFlags: 0
@@ -10455,6 +10463,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1008943117}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1001 &499308825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12012,6 +12021,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1068636043}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &593814739
 GameObject:
   m_ObjectHideFlags: 0
@@ -12684,6 +12694,7 @@ MonoBehaviour:
   amountTXT: {fileID: 21811930}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &627923960
 GameObject:
   m_ObjectHideFlags: 0
@@ -13057,6 +13068,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1968014753}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &659153380
 GameObject:
   m_ObjectHideFlags: 0
@@ -14091,6 +14103,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1891168446}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &714801323
 GameObject:
   m_ObjectHideFlags: 0
@@ -17516,6 +17529,7 @@ MonoBehaviour:
   amountTXT: {fileID: 29924819}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &876304620
 GameObject:
   m_ObjectHideFlags: 0
@@ -18539,6 +18553,7 @@ MonoBehaviour:
   amountTXT: {fileID: 48697755}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &934033128
 GameObject:
   m_ObjectHideFlags: 0
@@ -18644,6 +18659,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1126465348}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1001 &935147643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20257,6 +20273,7 @@ MonoBehaviour:
   amountTXT: {fileID: 234671859}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &1001678351
 GameObject:
   m_ObjectHideFlags: 0
@@ -21282,6 +21299,7 @@ MonoBehaviour:
   amountTXT: {fileID: 822842875}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1001 &1033260087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21493,6 +21511,7 @@ MonoBehaviour:
   amountTXT: {fileID: 2047398489}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &1038967541
 GameObject:
   m_ObjectHideFlags: 0
@@ -22224,6 +22243,7 @@ MonoBehaviour:
   amountTXT: {fileID: 476946437}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!114 &1071950255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23694,6 +23714,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1825603773}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &1170929609
 GameObject:
   m_ObjectHideFlags: 0
@@ -25680,6 +25701,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1233472483}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1001 &1272060086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25852,6 +25874,7 @@ MonoBehaviour:
   amountTXT: {fileID: 37767364}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &1283357990
 GameObject:
   m_ObjectHideFlags: 0
@@ -27479,6 +27502,7 @@ MonoBehaviour:
   amountTXT: {fileID: 2058116310}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &1362682104
 GameObject:
   m_ObjectHideFlags: 0
@@ -31827,7 +31851,7 @@ MonoBehaviour:
   isSkip: 0
   isWater: 0
   isDamage: 0
-  isloot: 0
+  isLoot: 0
   isFarm1: 0
   isDeath: 0
   isManaCraft: 0
@@ -38478,6 +38502,7 @@ MonoBehaviour:
   amountTXT: {fileID: 234010169}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &2039024505
 GameObject:
   m_ObjectHideFlags: 0
@@ -39992,6 +40017,7 @@ MonoBehaviour:
   amountTXT: {fileID: 1812283133}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &2098288310
 GameObject:
   m_ObjectHideFlags: 0
@@ -40375,6 +40401,10 @@ PrefabInstance:
     - target: {fileID: 125463345995574245, guid: 98ab325c0dddb63488432083bb7db89d, type: 3}
       propertyPath: m_Name
       value: Axe
+      objectReference: {fileID: 0}
+    - target: {fileID: 125463345995574245, guid: 98ab325c0dddb63488432083bb7db89d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3058135618535480773, guid: 98ab325c0dddb63488432083bb7db89d, type: 3}
       propertyPath: m_Pivot.x
@@ -40771,6 +40801,7 @@ MonoBehaviour:
   amountTXT: {fileID: 823008065}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &2130662680
 GameObject:
   m_ObjectHideFlags: 0
@@ -40935,6 +40966,7 @@ MonoBehaviour:
   amountTXT: {fileID: 976795666}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!1 &2136151635
 GameObject:
   m_ObjectHideFlags: 0
@@ -41106,6 +41138,10 @@ PrefabInstance:
     - target: {fileID: 125463345995574245, guid: 2c1044f7a524d7f4aa3693abe4116ca7, type: 3}
       propertyPath: m_Name
       value: Pickaxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 125463345995574245, guid: 2c1044f7a524d7f4aa3693abe4116ca7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3058135618535480773, guid: 2c1044f7a524d7f4aa3693abe4116ca7, type: 3}
       propertyPath: m_Pivot.x
@@ -41374,6 +41410,7 @@ MonoBehaviour:
   amountTXT: {fileID: 528296910}
   itemInSlot: {fileID: 0}
   quickSlot: 0
+  alphaobject: {fileID: 0}
 --- !u!114 &2141946149
 MonoBehaviour:
   m_ObjectHideFlags: 0
