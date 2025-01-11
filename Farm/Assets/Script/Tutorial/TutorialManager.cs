@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//担当者　越浦晃生
+
 /// <summary>
 /// ゲーム上のチュートリアルを管理するマネージャクラス
 /// </summary>

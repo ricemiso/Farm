@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//担当者　越浦晃生
+
 /// <summary>
 /// クラフトメニューの操作を管理
 /// UI要素の表示/非表示切り替え、ボタンのクリックイベント設定、
@@ -11,30 +14,75 @@ using UnityEngine.UI;
 /// </summary>
 public class CraftingSystem : MonoBehaviour
 {
+    /// <summary>
+    /// クラフティングシステムのインスタンス。
+    /// </summary>
     public static CraftingSystem Instance { get; set; }
 
+    /// <summary>
+    /// クラフティング画面のUI。
+    /// </summary>
     public GameObject craftingScreenUI;
-    public GameObject toolScreenUI, survivalScreenUI, refineScreenUI, constractionScreenUI;
 
+    /// <summary>
+    /// ツール画面のUI。
+    /// </summary>
+    public GameObject toolScreenUI;
+
+    /// <summary>
+    /// サバイバル画面のUI。
+    /// </summary>
+    public GameObject survivalScreenUI;
+
+    /// <summary>
+    /// 精錬画面のUI。
+    /// </summary>
+    public GameObject refineScreenUI;
+
+    /// <summary>
+    /// 建築画面のUI。
+    /// </summary>
+    public GameObject constractionScreenUI;
+
+    /// <summary>
+    /// インベントリアイテムリスト。
+    /// </summary>
     public List<string> inventryitemList = new List<string>();
 
     Button toolsBTN, survivalBTN, refineBTN, construnctinBTN;
     Button toolsExitBTN, survivalExitBTN, refineExitBTN, construnctinExitBTN;
-    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN,craftChestBTN;
+    Button craftAxeBTN, craftPlankBTN, craftfoundationBTN, craftWallBTN, craftPickaxeBTN, MinionBTN, craftStairBTN, craftChestBTN;
     Button normalMinionBTN, TankMinionBTN, MagicMinionBTN;
     Button craftLogManaBTN, craftStoneManaBTN;
 
-    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1,ChestReq1,LogReq1, StoneReq1;
+    Text AxeReq1, AxeReq2, PickaxeReq1, PickaxeReq2, PlankReq1, foundationReq1, WallReq1, MinionReq1, MinionReq2, StairReq1, ChestReq1, LogReq1, StoneReq1;
     Text normalMinionReq1, TankMinionReq1, TankMinionReq2, MagicMinionReq1, MagicMinionReq2;
-   
 
+    /// <summary>
+    /// クラフティング画面が開いているかどうか。
+    /// </summary>
     public bool isOpen;
+
+    /// <summary>
+    /// レベルアップしているかどうか。
+    /// </summary>
     public bool islevelUp;
+
     private bool canCraft = true;
+
+    /// <summary>
+    /// アップデート可能かどうか。
+    /// </summary>
     public bool canupdate = true;
 
+    /// <summary>
+    /// アイテムが増えたかどうか。
+    /// </summary>
     public bool itemIncreased = false;
 
+    /// <summary>
+    /// ミニオンのカウント。
+    /// </summary>
     public int minion_count;
 
     [HideInInspector] public BluePrint AxeBLP;
@@ -51,14 +99,13 @@ public class CraftingSystem : MonoBehaviour
     [HideInInspector] public BluePrint LogManaBLP;
     [HideInInspector] public BluePrint StoneManaBLP;
 
-
     [HideInInspector] public bool isMinionCraft = false;
     [HideInInspector] public bool isTankMinionCraft = false;
     [HideInInspector] public bool isMagicMinionCraft = false;
 
-
-    //チュートリアル用の変数
+    // チュートリアル用の変数
     [HideInInspector] public bool isFarm3 = false;
+
 
 
     private void Awake()
@@ -76,6 +123,7 @@ public class CraftingSystem : MonoBehaviour
     /// <summary>
     /// クラフティングシステムの初期設定を行います。
     /// 必要なボタンやUIコンポーネントを取得し、リスナーを追加します。
+    /// クラフトのレシピなどもここで初期化
     /// </summary>
     void Start()
     {
@@ -298,6 +346,9 @@ public class CraftingSystem : MonoBehaviour
     }
 
    
+    /// <summary>
+    /// クラフトスクリーンをキー入力で出力
+    /// </summary>
     void Update()
     {
 

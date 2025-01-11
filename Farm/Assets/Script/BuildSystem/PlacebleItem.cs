@@ -1,6 +1,11 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
+//’S“–Ò@‰z‰YW¶
+
+//”z’uƒAƒCƒeƒ€‚É˜gü‚ğ’Ç‰Á‚·‚é
+
+
 //public class PlacebleItem : MonoBehaviour
 //{
 //    // Validation

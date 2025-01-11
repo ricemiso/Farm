@@ -3,14 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// ストレージを管理するクラス。
+/// </summary>
 public class StorageManager : MonoBehaviour
 {
+    /// <summary>
+    /// StorageManagerのインスタンス。
+    /// </summary>
     public static StorageManager Instance { get; set; }
 
+    /// <summary>
+    /// 小さな収納ボックスのUI。
+    /// </summary>
     [SerializeField] GameObject storageBoxSmallUI;
+
+    /// <summary>
+    /// 選択された収納ボックス。
+    /// </summary>
     [SerializeField] StrageBox selectedStorage;
+
+    /// <summary>
+    /// 収納UIが開かれているかどうかを示すフラグ。
+    /// </summary>
     public bool storageUIOpen;
 
+    /// <summary>
+    /// シングルトンパターンを適用し、インスタンスを初期化します。
+    /// </summary>
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,10 +45,13 @@ public class StorageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 収納ボックスを開きます。
+    /// </summary>
+    /// <param name="storage">開く収納ボックス</param>
     public void OpenBox(StrageBox storage)
     {
         SetSelectedStorage(storage);
-
         PopulateStorage(GetRelevantUI(selectedStorage));
 
         GetRelevantUI(selectedStorage).SetActive(true);
@@ -39,9 +64,13 @@ public class StorageManager : MonoBehaviour
         SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false;
     }
 
+    /// <summary>
+    /// 収納UIにアイテムを配置します。
+    /// </summary>
+    /// <param name="storageUI">収納UI</param>
     private void PopulateStorage(GameObject storageUI)
     {
-        // Get all slots of the ui
+        // UIの全てのスロットを取得
         List<GameObject> uiSlots = new List<GameObject>();
 
         foreach (Transform child in storageUI.transform)
@@ -49,7 +78,7 @@ public class StorageManager : MonoBehaviour
             uiSlots.Add(child.gameObject);
         }
 
-        // Now, instantiate the prefab and set it as a child of each GameObject
+        // プレハブをインスタンス化し、それぞれのGameObjectの子として設定
         foreach (string name in selectedStorage.items)
         {
             foreach (GameObject slot in uiSlots)
@@ -72,10 +101,12 @@ public class StorageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 収納ボックスを閉じます。
+    /// </summary>
     public void CloseBox()
     {
         RecalculateStorage(GetRelevantUI(selectedStorage));
-
 
         GetRelevantUI(selectedStorage).SetActive(false);
         storageUIOpen = false;
@@ -87,20 +118,23 @@ public class StorageManager : MonoBehaviour
         SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
     }
 
+    /// <summary>
+    /// 収納データを再計算します。
+    /// </summary>
+    /// <param name="storageUI">収納UI</param>
     private void RecalculateStorage(GameObject storageUI)
     {
         List<GameObject> uiList = new List<GameObject>();
 
-        foreach(Transform child in storageUI.transform)
+        foreach (Transform child in storageUI.transform)
         {
             uiList.Add(child.gameObject);
         }
 
         selectedStorage.items.Clear();
-
         List<GameObject> toBeDeleted = new List<GameObject>();
 
-        foreach(GameObject slot in uiList)
+        foreach (GameObject slot in uiList)
         {
             if (slot.transform.childCount > 0)
             {
@@ -110,24 +144,32 @@ public class StorageManager : MonoBehaviour
 
                 selectedStorage.items.Add(result);
                 toBeDeleted.Add(slot.transform.GetChild(0).gameObject);
-
             }
         }
 
-        foreach(GameObject obj in toBeDeleted)
+        foreach (GameObject obj in toBeDeleted)
         {
             Destroy(obj);
         }
     }
 
+    /// <summary>
+    /// 選択された収納を設定します。
+    /// </summary>
+    /// <param name="storage">選択された収納</param>
     public void SetSelectedStorage(StrageBox storage)
     {
         selectedStorage = storage;
     }
 
+    /// <summary>
+    /// 関連するUIを取得します。
+    /// </summary>
+    /// <param name="storage">収納</param>
+    /// <returns>関連するUIのGameObject</returns>
     private GameObject GetRelevantUI(StrageBox storage)
     {
-        // Create a switch for other types
+        // 他のタイプのスイッチを作成
         return storageBoxSmallUI;
     }
 }

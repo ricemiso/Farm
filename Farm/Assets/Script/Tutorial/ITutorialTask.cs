@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
  
+//’S“–Ò@‰z‰YW¶
+
 public interface ITutorialTask
 {
     /// <summary>

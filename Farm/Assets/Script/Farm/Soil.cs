@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//担当者　越浦晃生
+
 /// <summary>
 /// 植物を制御するクラス。成長や収穫の管理を行う。  
 /// 土壌の状態（空か、植えられているか）や植物の成長を監視し、ユーザーが植物に水やりをする処理を管理

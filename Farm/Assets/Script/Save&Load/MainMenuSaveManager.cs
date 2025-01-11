@@ -6,6 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//’S“–Ò@‰z‰YW¶
+
 public class MainMenuSaveManager : MonoBehaviour
 {
     public static MainMenuSaveManager Instance { get; set; }

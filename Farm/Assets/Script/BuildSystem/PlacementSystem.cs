@@ -3,6 +3,8 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
+//’S“–Ò@‰z‰YW¶
+
 //public class PlacementSystem : MonoBehaviour
 //{
 //    public static PlacementSystem Instance { get; set; }

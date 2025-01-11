@@ -3,37 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//担当者　越浦晃生
+
+/// <summary>
+/// 装備システムを管理するクラス。
+/// </summary>
 public class EquipSystem : MonoBehaviour
 {
+    /// <summary>
+    /// 装備システムのインスタンス。
+    /// </summary>
     public static EquipSystem Instance { get; set; }
 
     // -- UI -- //
+    /// <summary>
+    /// クイックスロットパネルのゲームオブジェクト。
+    /// </summary>
     public GameObject quickSlotsPanel;
 
+    /// <summary>
+    /// クイックスロットのリスト。
+    /// </summary>
     public List<GameObject> quickSlotsList = new List<GameObject>();
 
+    /// <summary>
+    /// 番号ホルダーのゲームオブジェクト。
+    /// </summary>
     public GameObject numbersHolder;
 
-
+    /// <summary>
+    /// 選択された番号。
+    /// </summary>
     public int selectedNumber = -1;
+
+    /// <summary>
+    /// 選択されたアイテム。
+    /// </summary>
     public GameObject selectedItem;
 
+    /// <summary>
+    /// ツールホルダーのゲームオブジェクト。
+    /// </summary>
     public GameObject toolHolder;
 
+    /// <summary>
+    /// 選択されたアイテムモデル。
+    /// </summary>
     public GameObject selecteditemModel;
+
+    /// <summary>
+    /// 選択されたミニオン。
+    /// </summary>
     public GameObject selectedMinion;
 
+    /// <summary>
+    /// スタックカウント。
+    /// </summary>
     public int stackcnt;
+
+    /// <summary>
+    /// 選択された番号。
+    /// </summary>
     public int selectednumber;
 
+    /// <summary>
+    /// スイング待機フラグ。
+    /// </summary>
     public bool SwingWait;
 
+    /// <summary>
+    /// ミニオンが選択されているかどうか。
+    /// </summary>
     public bool selectMinion;
+
+    /// <summary>
+    /// マナが選択されているかどうか。
+    /// </summary>
     public bool selectMana;
+
+    /// <summary>
+    /// マナモデルが選択されているかどうか。
+    /// </summary>
     public bool selectedManamodel;
 
+    /// <summary>
+    /// 現在選択されているオブジェクト。
+    /// </summary>
     public GameObject currentSelectedObject;
 
+    /// <summary>
+    /// シングルトンパターンを適用し、インスタンスを初期化します。
+    /// </summary>
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,16 +106,20 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 初期設定を行います。
+    /// </summary>
     private void Start()
     {
-
         PopulateSlotList();
         SwingWait = false;
         selectMinion = false;
         selectedManamodel = false;
     }
 
+    /// <summary>
+    /// マウスホイールでクイックスロットを変更
+    /// </summary>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -104,22 +168,24 @@ public class EquipSystem : MonoBehaviour
             selectednumber = 9;
         }
 
-
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (scroll > 0f)  
+        if (scroll > 0f)
         {
             CycleQuickSlot(1);
-            
         }
-        else if (scroll < 0f)  
+        else if (scroll < 0f)
         {
-            CycleQuickSlot(-1);  
+            CycleQuickSlot(-1);
         }
 
         UpdateCurrentSelectedObject();
     }
 
+
+    /// <summary>
+    /// 現在選択されているオブジェクトを更新します。
+    /// </summary>
     private void UpdateCurrentSelectedObject()
     {
         if (selectedNumber > 0 && selectedNumber <= quickSlotsList.Count)
@@ -140,16 +206,18 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-    // クイックスロットを切り替える
+    /// <summary>
+    /// マウスホイールでクイックスロットを切り替えます。
+    /// </summary>
+    /// <param name="direction">切り替える方向</param>
     private void CycleQuickSlot(int direction)
     {
         int currentSlot = GetCurrentQuickSlot();
         int newSlot = currentSlot + direction;
 
-       
         if (newSlot < 1)
         {
-            newSlot = 9; 
+            newSlot = 9;
         }
         else if (newSlot > 9)
         {
@@ -157,35 +225,36 @@ public class EquipSystem : MonoBehaviour
         }
         selectednumber = newSlot;
 
-
         SelectQuickSlot(newSlot);
     }
 
-    // 現在選択されているクイックスロットを取得する
+    /// <summary>
+    /// 現在選択されているクイックスロットを取得します。
+    /// </summary>
+    /// <returns>現在のクイックスロット番号</returns>
     public int GetCurrentQuickSlot()
     {
-        if(selectedNumber <=1)
+        if (selectedNumber <= 1)
         {
             selectedNumber = 1;
         }
 
         return selectedNumber;
-
     }
 
-
+    /// <summary>
+    /// クイックスロットを選択します。
+    /// </summary>
+    /// <param name="number">クイックスロット番号</param>
     public void SelectQuickSlot(int number)
     {
         if (checkIfSlotIsFull(number) == true)
         {
             if (selectedNumber != number)
             {
-
                 selectedNumber = number;
 
-
                 ConstructionManager.Instance.inConstructionMode = false;
-
 
                 if (selectedItem != null)
                 {
@@ -195,17 +264,14 @@ public class EquipSystem : MonoBehaviour
                 selectedItem = GetSelectedItem(number);
                 selectedItem.GetComponent<InventoryItem>().isSelected = true;
 
-
-                if(selectedItem.name == "ミニオン"||selectedItem.name == "ミニオン2"|| selectedItem.name == "ミニオン3"||
+                if (selectedItem.name == "ミニオン" || selectedItem.name == "ミニオン2" || selectedItem.name == "ミニオン3" ||
                     selectedItem.name == "ミニオン(Clone)" || selectedItem.name == "ミニオン2(Clone)" || selectedItem.name == "ミニオン3(Clone)")
                 {
                     selectedMinion = selectedItem;
                     selectMinion = true;
                     selectMana = false;
-
-
                 }
-                else if(selectedItem.name == "Mana"|| selectedItem.name == "マナ")
+                else if (selectedItem.name == "Mana" || selectedItem.name == "マナ")
                 {
                     selectMana = true;
                     selectMinion = false;
@@ -215,7 +281,6 @@ public class EquipSystem : MonoBehaviour
                     selectMinion = false;
                     selectMana = false;
                 }
-
 
                 SetEquippedModel(selectedItem);
 
@@ -243,7 +308,6 @@ public class EquipSystem : MonoBehaviour
                     selecteditemModel = null;
                 }
 
-
                 foreach (Transform child in numbersHolder.transform)
                 {
                     child.transform.Find("Text").GetComponent<Text>().color = Color.gray;
@@ -252,6 +316,11 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 配置するアイテムを使用する処理を行います。
+    /// </summary>
+    /// <param name="obj">使用するアイテムのゲームオブジェクト</param>
     public void UseItem(GameObject obj)
     {
         InventorySystem.Instance.isOpen = false;
@@ -264,20 +333,18 @@ public class EquipSystem : MonoBehaviour
         CraftingSystem.Instance.refineScreenUI.SetActive(false);
         CraftingSystem.Instance.constractionScreenUI.SetActive(false);
 
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         SelectionManager.Instance.EnableSelection();
-        SelectionManager.Instance.enabled = true; ;
+        SelectionManager.Instance.enabled = true;
 
         if (gameObject != null && !gameObject.activeSelf)
         {
             gameObject.SetActive(true);
         }
 
-
-        //TODO:配置オブジェクトの追加
+        // 配置オブジェクトの追加
         switch (obj.name)
         {
             case "Foundation":
@@ -331,9 +398,12 @@ public class EquipSystem : MonoBehaviour
             default:
                 break;
         }
-
     }
 
+    /// <summary>
+    /// 選択されたアイテムの武器ダメージを取得します。
+    /// </summary>
+    /// <returns>武器ダメージ</returns>
     internal int GetWeaPonDamage()
     {
         if (selectedItem != null)
@@ -346,7 +416,10 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// プレイヤーが種を持っているかどうかを確認します。
+    /// </summary>
+    /// <returns>種を持っている場合はtrue、それ以外はfalse</returns>
     public bool IsPlayerHooldingSeed()
     {
         if (selecteditemModel != null)
@@ -365,6 +438,10 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーがじょうろを持っているかどうかを確認します。
+    /// </summary>
+    /// <returns>じょうろを持っている場合はtrue、それ以外はfalse</returns>
     internal bool IsPlayerHooldingWateringCan()
     {
         if (selectedItem != null)
@@ -373,7 +450,6 @@ public class EquipSystem : MonoBehaviour
             {
                 case "じょうろ":
                     return true;
-
                 default:
                     return false;
             }
@@ -384,6 +460,11 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// プレイヤーがマナを持っているかどうかを確認します。
+    /// </summary>
+    /// <returns>マナを持っている場合はtrue、それ以外はfalse</returns>
     internal bool IsPlayerHooldingMana()
     {
         if (selecteditemModel != null)
@@ -402,6 +483,10 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーが武器を持っているかどうかを確認します。
+    /// </summary>
+    /// <returns>武器を持っている場合はtrue、それ以外はfalse</returns>
     internal bool IsHoldingWeapon()
     {
         if (selectedItem != null)
@@ -421,7 +506,10 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-    //TODO:手に持たせるモデルの追加
+    /// <summary>
+    /// 装備モデルを設定します。
+    /// </summary>
+    /// <param name="selectedItem">選択されたアイテム</param>
     private void SetEquippedModel(GameObject selectedItem)
     {
         if (selecteditemModel != null)
@@ -443,15 +531,17 @@ public class EquipSystem : MonoBehaviour
         selecteditemModel.transform.SetParent(toolHolder.transform, false);
     }
 
-
-    //TODO:持つ武器はここで追加する(位置、回転はプレハブの座標で!!)
-    //TODO:種が増えるごとにここに追加する
+    /// <summary>
+    /// アイテムモデルを計算します。
+    /// </summary>
+    /// <param name="selectedItemName">選択されたアイテムの名前</param>
+    /// <returns>アイテムモデルの名前</returns>
     private string CaculateItemModel(string selectedItemName)
     {
         switch (selectedItemName)
         {
             case "Axe":
-                //TODO:音を後で直す
+                // 音を再生
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 return "Axe_model";
 
@@ -459,7 +549,7 @@ public class EquipSystem : MonoBehaviour
                 return "Stone_model";
 
             case "Pickaxe":
-                //TODO:音を後で直す
+                // 音を再生
                 SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 return "Pickaxe_model";
 
@@ -476,22 +566,20 @@ public class EquipSystem : MonoBehaviour
                 return "WateringCan_model";
 
             case "Mana":
-                return "Mana_Handmodel";
             case "マナ":
                 return "Mana_Handmodel";
 
             default:
                 return null;
-
         }
-
     }
 
-    
-
+    /// <summary>
+    /// スイングロックがあるかどうかを確認します。
+    /// </summary>
+    /// <returns>スイングロックがある場合はtrue、それ以外はfalse</returns>
     public bool IsThereSwingLock()
     {
-
         if (selecteditemModel && selecteditemModel.GetComponent<EquiableItem>())
         {
             Debug.Log("SwingWait in IsThereSwingLock: " + selecteditemModel.GetComponent<EquiableItem>().Swinging);
@@ -503,12 +591,21 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 選択されたアイテムを取得します。
+    /// </summary>
+    /// <param name="slotnumber">スロット番号</param>
+    /// <returns>選択されたアイテム</returns>
     GameObject GetSelectedItem(int slotnumber)
     {
         return quickSlotsList[slotnumber - 1].transform.GetChild(0).gameObject;
     }
 
-
+    /// <summary>
+    /// スロットが満杯かどうかを確認します。
+    /// </summary>
+    /// <param name="slotNumber">スロット番号</param>
+    /// <returns>スロットが満杯の場合はtrue、それ以外はfalse</returns>
     bool checkIfSlotIsFull(int slotNumber)
     {
         if (quickSlotsList[slotNumber - 1].transform.childCount > 1)
@@ -521,7 +618,9 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// スロットリストを生成します。
+    /// </summary>
     private void PopulateSlotList()
     {
         foreach (Transform child in quickSlotsPanel.transform)
@@ -533,9 +632,13 @@ public class EquipSystem : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// アイテムをクイックスロットに追加します。
+    /// </summary>
+    /// <param name="itemToEquip">装備するアイテムのゲームオブジェクト</param>
     public void AddToQuickSlots(GameObject itemToEquip)
     {
-
         GameObject availableSlot = FindNextEmptySlot();
 
         itemToEquip.transform.SetParent(availableSlot.transform, false);
@@ -544,7 +647,10 @@ public class EquipSystem : MonoBehaviour
         CraftingSystem.Instance.RefreshNeededItems();
     }
 
-
+    /// <summary>
+    /// 次の空きスロットを見つけます。
+    /// </summary>
+    /// <returns>空きスロットのゲームオブジェクト</returns>
     public GameObject FindNextEmptySlot()
     {
         foreach (GameObject slot in quickSlotsList)
@@ -557,6 +663,12 @@ public class EquipSystem : MonoBehaviour
         return new GameObject();
     }
 
+    /// <summary>
+    /// 指定されたスロットの装備されたアイテムのスタック数を取得します。
+    /// </summary>
+    /// <param name="slot">スロットのゲームオブジェクト</param>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>スタック数</returns>
     public int GetEquippedItemStackCount(GameObject slot, string itemName)
     {
         int totalStackCount = 0;
@@ -571,15 +683,17 @@ public class EquipSystem : MonoBehaviour
             if (inventoryItem != null && inventoryItem.thisName == itemName)
             {
                 totalStackCount += inventoryItem.amountInventry;
-                //itemName = InventorySystem.Instance.GetReturnItemName(itemName);
-
             }
         }
 
         return totalStackCount;
     }
 
-
+    /// <summary>
+    /// 指定されたスロット番号の装備されたアイテムのスタック数を取得します。
+    /// </summary>
+    /// <param name="slotNumber">スロット番号</param>
+    /// <returns>スタック数</returns>
     public int GetEquippedItemStackCountBySlot(int slotNumber)
     {
         if (slotNumber > 0 && slotNumber <= quickSlotsList.Count)
@@ -596,6 +710,11 @@ public class EquipSystem : MonoBehaviour
         return 0; // 無効なスロット番号やアイテムがない場合は0を返す
     }
 
+    /// <summary>
+    /// 指定されたアイテム名のスタック数を取得します。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <returns>スタック数</returns>
     public int ItemStackCnt(string itemName)
     {
         int totalStackCount = 0;
@@ -618,6 +737,10 @@ public class EquipSystem : MonoBehaviour
         return totalStackCount;
     }
 
+    /// <summary>
+    /// クイックスロットが満杯かどうかを確認します。
+    /// </summary>
+    /// <returns>満杯の場合はtrue、それ以外はfalse</returns>
     public bool CheckIfFull()
     {
         foreach (GameObject slot in quickSlotsList)
@@ -630,7 +753,11 @@ public class EquipSystem : MonoBehaviour
         return false;  // 空きがある
     }
 
-   
+    /// <summary>
+    /// クイックスロットからアイテムを削除します。
+    /// </summary>
+    /// <param name="itemName">アイテム名</param>
+    /// <param name="amountToRemove">削除する数量</param>
     public void RemoveItemFromQuickSlots(string itemName, int amountToRemove)
     {
         int counter = amountToRemove;
@@ -671,4 +798,5 @@ public class EquipSystem : MonoBehaviour
 
         // アイテム削除後の処理
     }
+
 }

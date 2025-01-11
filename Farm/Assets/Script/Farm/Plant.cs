@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//’S“–Ò@‰z‰YW¶
+
 /// <summary>
 /// A•¨‚ğ§Œä‚·‚éƒNƒ‰ƒXB¬’·‚âûŠn‚ÌŠÇ—
 /// </summary>
