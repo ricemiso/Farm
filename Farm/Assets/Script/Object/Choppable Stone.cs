@@ -76,6 +76,7 @@ public class ChoppableStone : MonoBehaviour
             GrobalState.Instance.resourceMaxHelth = stoneMaxHealth;
         }
 
+        if (PlayerState.Instance == null) return;
         float distance = Vector3.Distance(PlayerState.Instance.playerBody.transform.position, transform.position);
 
         if (distance < dis)
