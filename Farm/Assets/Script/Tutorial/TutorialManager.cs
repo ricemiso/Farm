@@ -51,6 +51,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			new MovementTask(),
 			new EquipTask(),
+			new infoTask(),
 			//new AttackTask(),
 			new OpenInventroyTask(),
 			//new CraftAllMinion(),
@@ -103,7 +104,7 @@ public class TutorialManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.H))
+		if (Input.GetKeyDown(KeyCode.Y))
 		{
 			SwitchEnabled();
 		}

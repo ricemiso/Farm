@@ -16,6 +16,7 @@ public class Magic : MonoBehaviour
 	{
 		if (other.gameObject.CompareTag("Enemy"))
 		{
+			GrobalState.Instance.isDamage = true;
 			other.gameObject.GetComponent<Animal>().TakeDamage(Damage);
 			this.gameObject.SetActive(false);
 			Destroy(this.gameObject);

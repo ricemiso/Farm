@@ -1,3 +1,5 @@
+//担当者　越浦晃生
+
 Shader "Custom/SkyboxTransition"
 {
     // シェーダーのプロパティ（外部から設定可能な値）
@@ -64,17 +66,17 @@ Shader "Custom/SkyboxTransition"
         return o;
     }
 
-    // フラグメントシェーダー
+   
     half4 frag(v2f i) : SV_Target
     {
-        // 大気のキューブマップから色を取得
+        // 変更前のキューブマップから色を取得
         half4 atmosphereColor = texCUBE(_AtmosphereTex, i.pos);
 
-        // 宇宙のキューブマップから色を取得
+        // 変更後のキューブマップから色を取得
         half4 spaceColor = texCUBE(_SpaceTex, i.pos);
 
         // _TransitionFactor に基づいて、2つのキューブマップの色を線形補間
-        // _TransitionFactor が0のときは大気の色、1のときは宇宙の色
+        // _TransitionFactor が0のときは変更前の色、1のときは変更後の色
         half4 finalColor = lerp(atmosphereColor, spaceColor, _TransitionFactor);
 
         // 最終的な色を返す

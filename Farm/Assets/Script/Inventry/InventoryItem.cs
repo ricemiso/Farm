@@ -100,6 +100,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     /// インベントリ内のアイテムの数量
     /// </summary>
     public int amountInventry = 1;
+ 
 
     /// <summary>
     /// アイテム情報UIの初期化と設定
@@ -130,6 +131,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (Input.GetKeyDown(KeyCode.H))
         {
+            GrobalState.Instance.isInfoTask = true;
             isvisible = !isvisible;
 
             // UIの表示切り替え
