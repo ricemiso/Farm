@@ -11,7 +11,7 @@ public class ChoppableTreeTask : ITutorialTask
 
     public string GetText()
     {
-        return "•€‚Å–Ø‚ğ”°Ì‚µ‚Ä‚İ‚æ‚¤";
+        return "•€‚Å–Ø‚ğ”°Ì‚Å‚«‚Ü‚·B";
     }
 
     public void OnTaskSetting()

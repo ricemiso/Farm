@@ -11,7 +11,7 @@ public class ManaCraftTask : ITutorialTask
 
     public string GetText()
     {
-        return "クラフト画面から丸太や石ころをマナに変換してみよう";
+        return "クラフト画面から丸太や石ころをマナに変換できます。";
     }
 
     public void OnTaskSetting()
