@@ -11,7 +11,7 @@ public class DefeatEnemy : ITutorialTask
 
 	public string GetText()
 	{
-		return "ミニオンで敵を攻撃しよう";
+		return "ミニオンは周囲の敵を自動的に攻撃できます。";
 	}
 
 	public void OnTaskSetting()

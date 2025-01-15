@@ -11,7 +11,7 @@ public class FarmTask1 : ITutorialTask
 
     public string GetText()
     {
-        return "種をクラフトして土壌に植えてみよう。土壌に近づいて左クリックで植えれるよ";
+        return "種をクラフトして、土壌に近づいて左クリックで植えられます。";
     }
 
     public void OnTaskSetting()

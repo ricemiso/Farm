@@ -32,6 +32,7 @@ public class AI_Movement : MonoBehaviour
 		WAITING,
 		STOP,
 		ATTACK,
+		GO_BACK,
 	}
 
 	public MoveState state;

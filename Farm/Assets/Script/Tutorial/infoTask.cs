@@ -11,7 +11,7 @@ public class infoTask : ITutorialTask
 
     public string GetText()
     {
-        return "Hキーを押すと装備したアイテム説明を見れるよ";
+        return "Hキーを押すと装備したアイテム説明を見ることができます。";
     }
 
     public void OnTaskSetting()
