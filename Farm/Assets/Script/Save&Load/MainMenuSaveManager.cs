@@ -636,11 +636,40 @@ public class MainMenuSaveManager : MonoBehaviour
     }
 
 
-    #endregion 
 
 
+    #endregion
 
-    #endregion 
+
+    [System.Serializable]
+    public class MouseSettings
+    {
+        public float mouse;
+    }
+
+    public void SaveVolumeMouseSettings(float sens)
+    {
+        MouseSettings mouseSettings = new MouseSettings()
+        {
+            mouse = sens
+        };
+
+        PlayerPrefs.SetString("Mouse", JsonUtility.ToJson(mouseSettings));
+        PlayerPrefs.Save();
+
+
+        print("Saved Player Prefs");
+
+    }
+
+
+    public MouseSettings LoadMouseSettings()
+    {
+        return JsonUtility.FromJson<MouseSettings>(PlayerPrefs.GetString("Mouse"));
+    }
+
+
+    #endregion
 
 
     #region || -------- à√çÜâª -------- ||

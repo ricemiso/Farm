@@ -79,6 +79,11 @@ public class PlayerState : MonoBehaviour
     public GameObject bloodPannl;
 
     /// <summary>
+    /// マウスの感度
+    /// </summary>
+    public float mousesensitivity;
+
+    /// <summary>
     /// シングルトンパターンを適用し、インスタンスを初期化します。
     /// </summary>
     private void Awake()

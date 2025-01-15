@@ -37,6 +37,8 @@ public class MouseMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
+        mouseSensitivity = PlayerState.Instance.mousesensitivity;
+
         if (!InventorySystem.Instance.isOpen && !CraftingSystem.Instance.isOpen && !MenuManager.Instance.isMenuOpen && !StorageManager.Instance.storageUIOpen)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
