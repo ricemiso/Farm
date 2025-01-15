@@ -122,6 +122,8 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public AudioSource EnemyCreateBGM;
 
+    public AudioSource TutorialBGM;
+
     /// <summary>
     /// 全てのBGMオーディオソースのリスト。
     /// </summary>
@@ -159,10 +161,12 @@ public class SoundManager : MonoBehaviour
         RegisterAudioSource(gameClearBGM);
         RegisterAudioSource(gameOverBGM);
         RegisterAudioSource(EnemyCreateBGM);
+        RegisterAudioSource(TutorialBGM);
         WalkRegisterAudioSource(grassWalkSound);
         WalkRegisterAudioSource(gravelWalkSound);
         WalkRegisterAudioSource(foundationWalkSound);
         WalkRegisterAudioSource(FarmWalkSound);
+
     }
 
     /// <summary>
@@ -200,6 +204,10 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
             SceneManager.sceneLoaded -= OnSceneLoaded;
+        }else if(scene.name == "MainScene")
+        {
+            StopSound(TutorialBGM);
+            PlaySound(startingZoneBGMMusic);
         }
     }
 
