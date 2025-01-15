@@ -21,7 +21,9 @@ public class LongRangeMinion : SupportAI_Movement
     private float lifeTime = 2.0f;
 
     private bool isCheckingAttack = false;
-    private bool isCheckRange = false;  // 索敵範囲内かどうかを判断する変数
+
+    // 範囲内に敵がいない時間
+    private float isNotRangeTime; 
 
     protected override void Start()
     {
@@ -30,20 +32,32 @@ public class LongRangeMinion : SupportAI_Movement
 
         target = player;
         state = MoveState.FOLLOWING;
+
+        isNotRangeTime = 0.0f;
     }
 
     protected override void Update()
     {
         base.Update();
 
-        // 索敵範囲内なら移動を停止
-        if (isCheckRange)
+        isNotRangeTime += Time.deltaTime;
+
+		// 索敵範囲内なら移動を停止
+		if (isNotRangeTime < 3.0f)
         {
             state = MoveState.STOP;  // 移動を停止するためにSTOPにする
         }
         else
         {
-            state = MoveState.FOLLOWING;  // 移動状態に戻す
+
+			if (stopPosition != Vector3.zero)
+			{
+				state = MoveState.GO_BACK;  // 元の位置に戻る
+			}
+            else
+			{
+				state = MoveState.FOLLOWING;  // 移動状態に戻す
+			}
         }
     }
 
@@ -82,20 +96,11 @@ public class LongRangeMinion : SupportAI_Movement
         // "Enemy"タグのオブジェクトが接触した場合
         if (other.CompareTag("Enemy"))
         {
-            isCheckRange = true;  // 索敵範囲に入ったので移動を停止
+            isNotRangeTime = 0.0f;
             if (!isCheckingAttack)
             {
                 StartCoroutine(CheckAttackWithDelay());
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // "Enemy"タグのオブジェクトが範囲外に出た場合
-        if (other.CompareTag("Enemy"))
-        {
-            isCheckRange = false;  // 索敵範囲外に出たので移動再開
         }
     }
 
@@ -108,7 +113,5 @@ public class LongRangeMinion : SupportAI_Movement
         checkAttack();
 
         isCheckingAttack = false;
-        // 一時的に移動お許可(敵が攻撃範囲内にいたらもう一度trueになる)
-		isCheckRange = false;
 	}
 }
