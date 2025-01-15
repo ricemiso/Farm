@@ -4983,7 +4983,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   isCraftedMinion: 0
-  damage: 50
+  damage: 20
   healthIncrease: 20
   damageIncrease: 5
   level: 0
@@ -5193,7 +5193,7 @@ MonoBehaviour:
   currentAttackCooltime: 0
   shootPos: {fileID: 518973231133983254}
   bullet: {fileID: 7590026145775744859, guid: b97e6c0409eb23f40a5d837298224808, type: 3}
-  speed: 30
+  speed: 15
   lifeTime: 2
 --- !u!1 &5893304841787217920
 GameObject:

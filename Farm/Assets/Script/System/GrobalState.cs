@@ -50,6 +50,7 @@ public class GrobalState : MonoBehaviour
     public bool isFarm1 = false;
     public bool isDeath = false;
     public bool isManaCraft = false;
+    public bool isInfoTask = false;
 
     /// <summary>
     /// シングルトンパターンを適用し、インスタンスを初期化します。

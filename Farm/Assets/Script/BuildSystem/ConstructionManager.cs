@@ -284,6 +284,7 @@ public class ConstructionManager : MonoBehaviour
                 if (itemToBeConstructed.name == "ConstractAI2")
                 {
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
+                    itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = true;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
                     itemToBeConstructed.GetComponent<Animation>().enabled = false;
                 }
@@ -293,6 +294,7 @@ public class ConstructionManager : MonoBehaviour
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = false;
                     itemToBeConstructed.GetComponent<Animation>().enabled = false;
+                    itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = true;
                 }
 
                 if (itemToBeConstructed.name == "LongRangeMinion 1")
@@ -300,6 +302,7 @@ public class ConstructionManager : MonoBehaviour
                     itemToBeConstructed.GetComponent<Rigidbody>().useGravity = false;
                     itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = false;
                     itemToBeConstructed.GetComponent<Animation>().enabled = false;
+                    itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = true;
                 }
 
                 if (CheckValidConstructionPosition())
@@ -378,6 +381,7 @@ public class ConstructionManager : MonoBehaviour
                 if(SoundManager.Instance != null)
                     SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
                 obj.name = "ミニオン";
@@ -391,6 +395,7 @@ public class ConstructionManager : MonoBehaviour
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
                 AIPlaceItemFreeStyle();
                 obj.name = "ミニオン3";
@@ -403,6 +408,7 @@ public class ConstructionManager : MonoBehaviour
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
                 //TODO:配置するときはここに追加しないとスタック数が減らない

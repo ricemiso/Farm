@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenInventroyTask : ITutorialTask
+public class infoTask : ITutorialTask
 {
     public string GetTitle()
     {
-        return "基本操作 クラフト画面";
+        return "基本操作 アイテム説明の表示";
     }
 
     public string GetText()
     {
-        return "Eキーを押してクラフト画面を開こう";
+        return "Hキーを押すと装備したアイテム説明を見れるよ";
     }
 
     public void OnTaskSetting()
     {
+       
+      
     }
 
     public bool CheckTask()
     {
-        if (InventorySystem.Instance.isOpen)
+        if (GrobalState.Instance.isInfoTask)
         {
             return true;
         }

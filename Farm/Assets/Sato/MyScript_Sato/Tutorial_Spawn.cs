@@ -47,8 +47,10 @@ public class Tutorial_Spawn : MonoBehaviour
 	public Transform playerTransform; // プレイヤーのTransform
 
 	public bool hasSpawnAllowed = false; // 召喚を許可するか
+	public bool hasSpawnStone = false; // 召喚を許可するか
 	public bool isManaHaving;
 	public bool isEnemyPresent;
+	public bool isStonePresent;
 	public ItemCounter manaCount;
 
 	void Start()
@@ -71,6 +73,7 @@ public class Tutorial_Spawn : MonoBehaviour
 
 		isManaHaving = true;
 		isEnemyPresent = false;
+		isStonePresent = false;
 
 		// プレイヤーのTransformを自動的に取得
 		if (playerTransform == null)
@@ -137,7 +140,56 @@ public class Tutorial_Spawn : MonoBehaviour
 
 		}
 
+		// シーン上のStoneオブジェクト数を確認
+		isStonePresent = GameObject.FindGameObjectsWithTag("Stone").Length > 0;
+
 		
+			if (GameObject.FindGameObjectsWithTag("Stone").Length == 0)
+			{
+
+				Debug.Log("マナが存在しないため、Enemyのスポーンを開始します。");
+
+				SetName("Rock"); // goblinのリソースをロード
+
+				// プレイヤーの周辺でランダムにスポーン位置を決定
+				Vector3 spawnPosition = new Vector3(
+					playerTransform.position.x + Random.Range(-spawnRange, spawnRange),
+					0.0f,
+					playerTransform.position.z + Random.Range(-spawnRange, spawnRange)
+				);
+
+				// Enemyを生成
+				GameObject newEnemy = Instantiate(itemToAdd, spawnPosition, Quaternion.identity);
+				newEnemy.name = "Enemy_" + enemyCount; // 名前に連番を追加
+				newEnemy.tag = "Stone"; // タグを明示的に設定
+				enemyCount++;
+			}
+
+		// シーン上のStoneオブジェクト数を確認
+		isStonePresent = GameObject.FindGameObjectsWithTag("Tree").Length > 0;
+
+
+		if (GameObject.FindGameObjectsWithTag("Tree").Length == 0)
+		{
+
+			Debug.Log("マナが存在しないため、Enemyのスポーンを開始します。");
+
+			SetName("Tree"); // goblinのリソースをロード
+
+			// プレイヤーの周辺でランダムにスポーン位置を決定
+			Vector3 spawnPosition = new Vector3(
+				playerTransform.position.x + Random.Range(-spawnRange, spawnRange),
+				0.0f,
+				playerTransform.position.z + Random.Range(-spawnRange, spawnRange)
+			);
+
+			// Enemyを生成
+			GameObject newEnemy = Instantiate(itemToAdd, spawnPosition, Quaternion.identity);
+			newEnemy.name = "Enemy_" + enemyCount; // 名前に連番を追加
+			newEnemy.tag = "Tree"; // タグを明示的に設定
+			enemyCount++;
+		}
+
 	}
 
 
