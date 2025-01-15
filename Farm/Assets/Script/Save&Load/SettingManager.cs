@@ -165,7 +165,7 @@ public class SettingManager : MonoBehaviour
 
         if (PlayerState.Instance != null)
         {
-            PlayerState.Instance.mousesensitivity = sensiviritySlider.value;
+            PlayerState.Instance.mousesensitivity = sensiviritySlider.value/10;
         }
        
     }
