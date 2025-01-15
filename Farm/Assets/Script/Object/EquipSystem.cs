@@ -213,20 +213,40 @@ public class EquipSystem : MonoBehaviour
     private void CycleQuickSlot(int direction)
     {
         int currentSlot = GetCurrentQuickSlot();
-        int newSlot = currentSlot + direction;
+        int newSlot = currentSlot;
 
-        if (newSlot < 1)
+        // 次のスロットを探す
+        bool found = false;
+        for (int i = 1; i <= quickSlotsList.Count; i++)
         {
-            newSlot = 9;
-        }
-        else if (newSlot > 9)
-        {
-            newSlot = 1;
-        }
-        selectednumber = newSlot;
+            newSlot += direction;
 
-        SelectQuickSlot(newSlot);
+            // スロット番号が範囲外になった場合、ループさせる
+            if (newSlot < 1)
+            {
+                newSlot = quickSlotsList.Count;
+            }
+            else if (newSlot > quickSlotsList.Count)
+            {
+                newSlot = 1;
+            }
+
+            // 新しいスロットにアイテムがあるか確認
+            if (checkIfSlotIsFull(newSlot))
+            {
+                found = true;
+                break;
+            }
+        }
+
+        // アイテムのあるスロットが見つかった場合に選択を切り替え
+        if (found)
+        {
+            selectednumber = newSlot;
+            SelectQuickSlot(newSlot);
+        }
     }
+
 
     /// <summary>
     /// 現在選択されているクイックスロットを取得します。
