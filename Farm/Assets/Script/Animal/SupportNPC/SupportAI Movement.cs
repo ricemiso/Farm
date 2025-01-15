@@ -10,6 +10,9 @@ public class SupportAI_Movement : AI_Movement
 	public bool isPushQKey = false;
 	public bool isAttackAnim = false;
 
+	// 停止命令をおらった位置（Vector3.zeroの場合は未設定）
+	protected Vector3 stopPosition;
+
 	// 次攻撃可能になるまでのクールタイム
 	[SerializeField] float currentAttackCooltime;
 	public const float attackCooltime = 2.0f;
@@ -21,6 +24,9 @@ public class SupportAI_Movement : AI_Movement
 			animation = GetComponent<Animation>();
         }
 		currentAttackCooltime = 0.0f;
+
+		stopPosition = Vector3.zero;
+
 		base.Start();
     }
 
@@ -53,6 +59,8 @@ public class SupportAI_Movement : AI_Movement
 				target = null;
 				state = MoveState.STOP;
 				//animator.SetBool("isRunning", false);  // アニメーションを停止
+
+				stopPosition = gameObject.transform.position;
 			}
 			else
 			{
@@ -63,6 +71,8 @@ public class SupportAI_Movement : AI_Movement
 				//animator.SetBool("isRunning", true);
 				state = MoveState.FOLLOWING;
 				target = player;
+
+				stopPosition = Vector3.zero;
 			}
 		}
 
@@ -81,12 +91,23 @@ public class SupportAI_Movement : AI_Movement
 					animation.Play("Walk");
 				}
 				break;
+			case MoveState.GO_BACK:
+				// 停止位置から離れていたら戻る
+				if (Vector3.Distance(stopPosition, gameObject.transform.position) >= 1.0f)
+				{
+					ReturnStopPos();
+				}
+				else
+				{
+					state = MoveState.STOP;
+				}
+				break;
 			case MoveState.WAITING:
 				//Wait();
 				//break;
 			case MoveState.STOP:
 			default:
-				if (!isAttackAnim)
+				if (!isAttackAnim && !animation.IsPlaying("Idle"))
 				{
 					animation.Play("Idle");
 				}
@@ -117,6 +138,17 @@ public class SupportAI_Movement : AI_Movement
 		Vector3 followPosition = player.transform.Find("GroundCheck").position;
 
 		Chase(followPosition, true);
+	}
+
+	// 待機命令の出された場所に移動する
+	void ReturnStopPos()
+	{
+		if (!isAttackAnim)
+		{
+			animation.Play("Walk");
+		}
+
+		Chase(stopPosition, true);
 	}
 
 	void ChaseEnemy()
@@ -222,7 +254,14 @@ public class SupportAI_Movement : AI_Movement
 			}
 			else
 			{
-				state = MoveState.WAITING;
+				if(stopPosition != Vector3.zero)
+				{
+					state = MoveState.GO_BACK;
+				}
+				else
+				{
+					state = MoveState.FOLLOWING;
+				}
 				target = null;
 			}
 		}
