@@ -11,7 +11,7 @@ public class ChoppableStoneTask : ITutorialTask
 
     public string GetText()
     {
-        return "‚Â‚é‚Í‚µ‚ÅÎ‚ğÌŒ@‚µ‚Ä‚İ‚æ‚¤";
+        return "‚Â‚é‚Í‚µ‚ÅÎ‚ğÌŒ@‚Å‚«‚Ü‚·B";
     }
 
     public void OnTaskSetting()

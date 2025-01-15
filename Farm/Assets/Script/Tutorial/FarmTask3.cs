@@ -11,7 +11,7 @@ public class FarmTask3 : ITutorialTask
 
     public string GetText()
     {
-        return "育て上げた作物を収穫しよう。作物をポイントして左クリックで収穫できるよ";
+        return "育て上げた作物をポイントして、左クリックで収穫できます。";
     }
 
     public void OnTaskSetting()
