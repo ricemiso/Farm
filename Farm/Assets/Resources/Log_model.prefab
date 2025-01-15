@@ -261,6 +261,7 @@ MonoBehaviour:
   ItemName: Log
   InventryName: Log
   playerRange: 0
+  FastPickup: 0
   ditectionRange: 10
 --- !u!65 &121578431752439766
 BoxCollider:
