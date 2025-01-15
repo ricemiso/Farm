@@ -108,5 +108,7 @@ public class LongRangeMinion : SupportAI_Movement
         checkAttack();
 
         isCheckingAttack = false;
-    }
+        // ˆê“I‚ÉˆÚ“®‚¨‹–‰Â(“G‚ªUŒ‚”ÍˆÍ“à‚É‚¢‚½‚ç‚à‚¤ˆê“xtrue‚É‚È‚é)
+		isCheckRange = false;
+	}
 }
