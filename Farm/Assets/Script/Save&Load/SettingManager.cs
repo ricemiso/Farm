@@ -53,7 +53,18 @@ public class SettingManager : MonoBehaviour
     /// </summary>
     public GameObject effectValue;
 
+    /// <summary>
+    /// マウス感度の値を表示するオブジェクト
+    /// </summary>
+    public GameObject sensivirityValue;
+
+    /// <summary>
+    /// 効果音ボリュームのスライダー。
+    /// </summary>
+    public Slider sensiviritySlider;
+
    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -74,6 +85,8 @@ public class SettingManager : MonoBehaviour
         backBTN.onClick.AddListener(() =>
         {
             MainMenuSaveManager.Instance.SaveVolumeSettings(musicSlider.value, effectSlider.value, masterSlider.value);
+            MainMenuSaveManager.Instance.SaveVolumeMouseSettings(sensiviritySlider.value);
+
             // MainMenuSaveManager.Instance.SaveVolumeSettings(0.3f, 0.3f, 0.3f);
         });
 
@@ -87,6 +100,7 @@ public class SettingManager : MonoBehaviour
     private IEnumerator LoadAndApplySetting()
     {
         LoadAndSetVolume();
+        LoadAndSetMouse();
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -101,7 +115,16 @@ public class SettingManager : MonoBehaviour
         musicSlider.value = volumeSettings.musics;
         effectSlider.value = volumeSettings.effects;
 
-        print("Volume Setting Load");
+        
+    }
+
+    /// <summary>
+    /// マウスの感度をロードする
+    /// </summary>
+    private  void LoadAndSetMouse()
+    {
+        MouseSettings mouseSetting = MainMenuSaveManager.Instance.LoadMouseSettings();
+        sensiviritySlider.value = mouseSetting.mouse;
     }
 
     /// <summary>
@@ -112,6 +135,8 @@ public class SettingManager : MonoBehaviour
         masterValue.GetComponent<TextMeshProUGUI>().text = $"{masterSlider.value}";
         musicValue.GetComponent<TextMeshProUGUI>().text = $"{musicSlider.value}";
         effectValue.GetComponent<TextMeshProUGUI>().text = $"{effectSlider.value}";
+        sensivirityValue.GetComponent<TextMeshProUGUI>().text = $"{sensiviritySlider.value}";
+
 
         // TODO:音を追加した時はここに追加する
         AudioListener.volume = masterSlider.value / 20;
@@ -137,5 +162,11 @@ public class SettingManager : MonoBehaviour
         SoundManager.Instance.CrystalAttack.volume = effectSlider.value / 20;
         SoundManager.Instance.Crystalbreak.volume = effectSlider.value / 20;
         SoundManager.Instance.Stonebreak.volume = effectSlider.value / 20;
+
+        if (PlayerState.Instance != null)
+        {
+            PlayerState.Instance.mousesensitivity = sensiviritySlider.value;
+        }
+       
     }
 }
