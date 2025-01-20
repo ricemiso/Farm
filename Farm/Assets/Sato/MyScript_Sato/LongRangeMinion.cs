@@ -49,6 +49,7 @@ public class LongRangeMinion : SupportAI_Movement
         }
         else
         {
+            if (isStopped) return;
 
 			if (stopPosition != Vector3.zero)
 			{
