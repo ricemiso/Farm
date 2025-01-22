@@ -131,7 +131,7 @@ public class EnemyAI_Movement : AI_Movement
 	private void OnTriggerStay(Collider other)
 	{
 
-		else if (other.CompareTag("SupportUnit") && IsChaseSupportUnit)
+		if (other.CompareTag("SupportUnit") && IsChaseSupportUnit)
 		{
 			FoundTarget(other.GameObject());
 		}
