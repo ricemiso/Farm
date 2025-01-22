@@ -9220,10 +9220,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3193331678396411774, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f63e04110228d034d8e6d973011dcffc, type: 2}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -393.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 193.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
       value: 1000
@@ -9284,6 +9304,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e642edf96567b194f86950d253fb6048, type: 2}
+    - target: {fileID: 8490463280004441066, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9297,6 +9321,11 @@ Transform:
 --- !u!1 &397610559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7164334286499985402, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+  m_PrefabInstance: {fileID: 397610557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &397610560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
   m_PrefabInstance: {fileID: 397610557}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &408604413
@@ -28577,6 +28606,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3193331678396411774, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_LightProbeUsage
       value: 1
@@ -28585,6 +28618,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 074a7f7de92bb8c44b433daf289ebafb, type: 2}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.b
+      value: 0.20523341
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.g
+      value: 0.18256311
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.r
+      value: 0.97735846
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: -2.0042742e+9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.43e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -2.0042721e+9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 7.43e-43
+      objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
       value: 1000
@@ -28658,6 +28719,11 @@ Transform:
 --- !u!1 &1412846703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7164334286499985402, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+  m_PrefabInstance: {fileID: 1412846701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1412846704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
   m_PrefabInstance: {fileID: 1412846701}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1414343205
@@ -30064,18 +30130,22 @@ MonoBehaviour:
     IsActive: 1
     WaveLimit: 2
     CrystalMini: {fileID: 1603576235}
+    CrystalLight: {fileID: 1603576236}
   - Object: {fileID: 806349926}
     IsActive: 1
     WaveLimit: 8
     CrystalMini: {fileID: 1412846703}
+    CrystalLight: {fileID: 1412846704}
   - Object: {fileID: 1244982888}
     IsActive: 1
     WaveLimit: 14
     CrystalMini: {fileID: 397610559}
+    CrystalLight: {fileID: 397610560}
   - Object: {fileID: 1672706753}
     IsActive: 1
     WaveLimit: 20
     CrystalMini: {fileID: 1950362780}
+    CrystalLight: {fileID: 1950362781}
   m_EnemyList:
   - EnemyObject: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
     Cost: 3
@@ -31163,10 +31233,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3193331678396411774, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: aa7c0584d991b3d449fce8fef6eff7f5, type: 2}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.b
+      value: 0.94716984
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21499063
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11258806
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: -464.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 95.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
       value: 1000
@@ -31227,6 +31329,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a072072939d65f64284408246794df22, type: 2}
+    - target: {fileID: 8490463280004441066, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.92
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31240,6 +31346,11 @@ Transform:
 --- !u!1 &1603576235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7164334286499985402, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+  m_PrefabInstance: {fileID: 1603576233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1603576236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
   m_PrefabInstance: {fileID: 1603576233}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1605211698
@@ -38175,10 +38286,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3193331678396411774, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e2b1a7f3cbd62c1409aa3bddb3a2bd9a, type: 2}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.b
+      value: 0.32769835
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.g
+      value: 0.87169814
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_Color.r
+      value: 0.320719
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110376120928153557, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5482904323971619441, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
       propertyPath: CrystalMaxHealth
       value: 1000
@@ -38239,6 +38382,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 87bed0ef9f0cd314db1113d152380244, type: 2}
+    - target: {fileID: 8490463280004441066, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.57
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38252,6 +38399,11 @@ Transform:
 --- !u!1 &1950362780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7164334286499985402, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
+  m_PrefabInstance: {fileID: 1950362778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1950362781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2819473777782885668, guid: 44969e90f9cba1f42a2c6a6c7deedb20, type: 3}
   m_PrefabInstance: {fileID: 1950362778}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1950759183
