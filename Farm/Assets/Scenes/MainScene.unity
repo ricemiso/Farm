@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.549069, g: 0.7945378, b: 0.9727815, a: 1}
+  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30133,17 +30133,17 @@ MonoBehaviour:
     CrystalLight: {fileID: 1603576236}
   - Object: {fileID: 806349926}
     IsActive: 1
-    WaveLimit: 3
+    WaveLimit: 2
     CrystalMini: {fileID: 1412846703}
     CrystalLight: {fileID: 1412846704}
   - Object: {fileID: 1244982888}
     IsActive: 1
-    WaveLimit: 4
+    WaveLimit: 3
     CrystalMini: {fileID: 397610559}
     CrystalLight: {fileID: 397610560}
   - Object: {fileID: 1672706753}
     IsActive: 1
-    WaveLimit: 5
+    WaveLimit: 4
     CrystalMini: {fileID: 1950362780}
     CrystalLight: {fileID: 1950362781}
   m_EnemyList:
@@ -30163,8 +30163,8 @@ MonoBehaviour:
     Cost: 10
     WaveLimit: 5
     Ratio: 1
-  m_HealthMultiply: 0.2
-  m_DamageMultiply: 0.3
+  m_HealthMultiply: 0.4
+  m_DamageMultiply: 0.6
   m_SizeMultiply: 0
   Range: {x: 40, y: 0, z: 40}
   Crystal: {fileID: 568825487}
