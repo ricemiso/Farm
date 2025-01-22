@@ -135,9 +135,7 @@ public class SupportAI_Movement : AI_Movement
 		//Vector3 directionBehindPlayer = -player.transform.forward;  // プレイヤーの後ろ側
 		//Vector3 followPosition = player.transform.position + directionBehindPlayer * 2f;  // プレイヤーから2ユニット後ろ
 
-		Vector3 followPosition = player.transform.Find("GroundCheck").position;
-
-		Chase(followPosition, true);
+		
 	}
 
 	// 待機命令の出された場所に移動する

@@ -23,7 +23,13 @@ public class Rabbit : EnemyAI_Movement
 
     protected override void Update()
     {
-        base.Update();
+
+       
+      
+            base.Update();
+        
+
+        
 
         //switch (state)
         //{
@@ -46,6 +52,8 @@ public class Rabbit : EnemyAI_Movement
         //        // ’â~’†‚È‚Ç‘¼‚Ìó‘Ô‚Ìˆ—
         //        break;
         //}
+
+       
     }
 
     protected override void ChaseEnemy()
@@ -108,5 +116,4 @@ public class Rabbit : EnemyAI_Movement
         }
        
     }
-
 }
