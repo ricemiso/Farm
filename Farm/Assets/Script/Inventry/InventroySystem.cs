@@ -64,7 +64,7 @@ public class InventorySystem : MonoBehaviour
     /// <summary>
     /// スタック制限
     /// </summary>
-    public int stackLimit = 10;
+    public int stackLimit = 999;
 
     /// <summary>
     /// アイテムがスタックしているかどうか
@@ -98,7 +98,7 @@ public class InventorySystem : MonoBehaviour
         PopulateSlotList();
 
         Cursor.visible = false;
-        stackLimit = 64;
+        stackLimit = 999;
     }
 
     /// <summary>
