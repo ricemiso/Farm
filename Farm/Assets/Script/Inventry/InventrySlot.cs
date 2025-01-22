@@ -56,7 +56,7 @@ public class InventrySlot : MonoBehaviour
             }
         }
 
-        if (itemInSlot != null && itemInSlot.amountInventry >= 2)
+        if (itemInSlot != null && itemInSlot.amountInventry >= 2 && itemInSlot.amountInventry<= InventorySystem.Instance.stackLimit)
         {
             amountTXT.gameObject.SetActive(true);
             amountTXT.text = $"{itemInSlot.amountInventry}";
