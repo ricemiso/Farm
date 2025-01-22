@@ -168,7 +168,6 @@ public class SelectionManager : MonoBehaviour
         {
             var selectionTransform = hit.transform;
 
-            Debug.Log("Hit Object: " + hit.collider.name);
             //TODO : ”j‰ó‚Í‚±‚±‚É’Ç‰Á‚µ‚Ä‚¢‚­
             ChoppableTree choppableTree = selectionTransform.GetComponent<ChoppableTree>();
             Choppablecraft choppableCraft = selectionTransform.GetComponent<Choppablecraft>();

@@ -135,7 +135,10 @@ public class SupportAI_Movement : AI_Movement
 		//Vector3 directionBehindPlayer = -player.transform.forward;  // プレイヤーの後ろ側
 		//Vector3 followPosition = player.transform.position + directionBehindPlayer * 2f;  // プレイヤーから2ユニット後ろ
 
-		
+		Vector3 followPosition = player.transform.Find("GroundCheck").position;
+
+		// 移動処理
+		Chase(followPosition, true);
 	}
 
 	// 待機命令の出された場所に移動する
@@ -185,7 +188,7 @@ public class SupportAI_Movement : AI_Movement
 		{
 			isPushQKey = true;
 
-			state = MoveState.FOLLOWING;
+			//state = MoveState.FOLLOWING;
 			if(animation != null && !isAttackAnim)
             {
 				animation.Play("Walk");
@@ -222,13 +225,13 @@ public class SupportAI_Movement : AI_Movement
 
 		//GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
 
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("Player")||!isStopped)
 		{
 			isPushQKey = true;
-			if (!isStopped)
-			{
-				state = MoveState.FOLLOWING;
-			}
+			//if (!isStopped)
+			//{
+			//	state = MoveState.FOLLOWING;
+			//}
 		}
 
 		if (other.CompareTag("Enemy") && target != null) // targetのnullチェックを追加
