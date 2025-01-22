@@ -78,6 +78,11 @@ public class WaveSystem : MonoBehaviour
 	{
 		m_WaveCount = 0;
 
+		m_SpawnerList[0].CrystalLight.active = true;
+		for (int i = 1; i < m_SpawnerList.Count; ++i)
+		{
+			m_SpawnerList[i].CrystalLight.active = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -221,6 +226,12 @@ public class WaveSystem : MonoBehaviour
 				EnemyAI_Movement ai = obj.GetComponent<EnemyAI_Movement>();
 				ai.Crystal = Crystal;
 				ai.CrystalMini = m_SpawnerList[spawnerIndex].CrystalMini;
+
+				//ミニクリスタルのライトを点灯
+				if (m_WaveCount == m_SpawnerList[i].WaveLimit - 1 && !m_SpawnerList[spawnerIndex].CrystalLight.active)
+				{
+					m_SpawnerList[spawnerIndex].CrystalLight.active = true;
+				}
 			}
 		}
 
@@ -240,6 +251,8 @@ public class SpawnerStruct
 	public int WaveLimit;
 	// 召喚した敵に渡すミニクリスタルへの参照
 	public GameObject CrystalMini;
+	//ミニクリスタルの発光用ライトへの参照
+	public GameObject CrystalLight;
 }
 
 
