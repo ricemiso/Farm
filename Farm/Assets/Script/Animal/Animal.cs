@@ -381,15 +381,11 @@ public class Animal : MonoBehaviour
         // maxHealth の上限値が800未満の場合のみスケールを変更
         if (maxHealth < 800)
         {
-           
-
             // 1.6倍のスケールを計算
             Vector3 newScale = currentScale * 1.5f;
 
             // スケールを更新
             gameObject.transform.localScale = newScale;
-
-           
         }
         
     }
