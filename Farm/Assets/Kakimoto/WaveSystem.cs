@@ -148,6 +148,11 @@ public class WaveSystem : MonoBehaviour
 			if (m_WaveCount >= m_SpawnerList[i].WaveLimit)
 			{
 				spawnerIndexList.Add(i);
+				//ミニクリスタルのライトを点灯
+				if (m_WaveCount == m_SpawnerList[i].WaveLimit - 1 && !m_SpawnerList[i].CrystalLight.active)
+				{
+					m_SpawnerList[i].CrystalLight.active = true;
+				}
 			}
 		}
 		if (spawnerIndexList.Count == 0) return cost;
@@ -223,11 +228,6 @@ public class WaveSystem : MonoBehaviour
 				ai.Crystal = Crystal;
 				ai.CrystalMini = m_SpawnerList[spawnerIndex].CrystalMini;
 
-				//ミニクリスタルのライトを点灯
-				if (m_WaveCount == m_SpawnerList[i].WaveLimit - 1 && !m_SpawnerList[spawnerIndex].CrystalLight.active)
-				{
-					m_SpawnerList[spawnerIndex].CrystalLight.active = true;
-				}
 			}
 		}
 
