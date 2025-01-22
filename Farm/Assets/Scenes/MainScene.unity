@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5493344, g: 0.7941628, b: 0.9733974, a: 1}
+  m_IndirectSpecularColor: {r: 0.549069, g: 0.7945378, b: 0.9727815, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25835,7 +25835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalLight: {fileID: 705507994}
-  dayDurationInSecounds: 360
+  dayDurationInSecounds: 300
   currentHour: 0
   currentTimeOfDay: 0.35
   timeUI: {fileID: 408884985}
@@ -30124,26 +30124,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c76e799399bef74aa0055431addb4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WaveCount: 0
+  m_WaveCount: 1
   m_SpawnerList:
   - Object: {fileID: 1630540139}
     IsActive: 1
-    WaveLimit: 2
+    WaveLimit: 1
     CrystalMini: {fileID: 1603576235}
     CrystalLight: {fileID: 1603576236}
   - Object: {fileID: 806349926}
     IsActive: 1
-    WaveLimit: 8
+    WaveLimit: 3
     CrystalMini: {fileID: 1412846703}
     CrystalLight: {fileID: 1412846704}
   - Object: {fileID: 1244982888}
     IsActive: 1
-    WaveLimit: 14
+    WaveLimit: 4
     CrystalMini: {fileID: 397610559}
     CrystalLight: {fileID: 397610560}
   - Object: {fileID: 1672706753}
     IsActive: 1
-    WaveLimit: 20
+    WaveLimit: 5
     CrystalMini: {fileID: 1950362780}
     CrystalLight: {fileID: 1950362781}
   m_EnemyList:
@@ -30157,22 +30157,20 @@ MonoBehaviour:
     Ratio: 3
   - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
     Cost: 8
-    WaveLimit: 4
+    WaveLimit: 3
     Ratio: 1
   - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
     Cost: 10
-    WaveLimit: 6
+    WaveLimit: 5
     Ratio: 1
-  m_HealthMultiply: 0.1
-  m_DamageMultiply: 0.4
-  m_SizeMultiply: 0.05
-  Range: {x: 20, y: 0, z: 20}
+  m_HealthMultiply: 0.2
+  m_DamageMultiply: 0.3
+  m_SizeMultiply: 0
+  Range: {x: 40, y: 0, z: 40}
   Crystal: {fileID: 568825487}
   EnemyParent: {fileID: 1671064501}
-  NoonBase: 5
-  NoonAdd: 2
   NightBase: 10
-  NightAdd: 4
+  NightAdd: 6
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
