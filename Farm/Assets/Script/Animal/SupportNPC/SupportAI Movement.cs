@@ -17,6 +17,12 @@ public class SupportAI_Movement : AI_Movement
 	[SerializeField] float currentAttackCooltime;
 	public const float attackCooltime = 2.0f;
 
+	[SerializeField] private LayerMask groundLayer;  // 地面のレイヤーマスク
+	[SerializeField] private Transform groundCheck;  // 接地判定用の位置（キャラクターの足元）
+
+	private float groundCheckRadius = 0.2f;  // 接地判定の半径
+	private bool isGrounded = false;        // 接地しているかどうか
+
 	protected override void Start()
     {
 		if(animation == null)
@@ -33,12 +39,18 @@ public class SupportAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
-		//if (gameObject.transform.position.y <= 0)
-		//{
-		//	Vector3 newPosition = gameObject.transform.position;
-		//	newPosition.y = 1.0f;
-		//	gameObject.transform.position = newPosition;
-		//}
+		// 接地判定
+		isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+		if (!isGrounded)
+		{
+			// 地面に戻るロジック（例: 重力を適用）
+			Vector3 velocity = gameObject.GetComponent<Rigidbody>().velocity;
+			velocity.y += Physics.gravity.y * Time.deltaTime;
+			gameObject.GetComponent<Rigidbody>().velocity = velocity;
+
+			return;
+		}
 
 		if (target == null)
         {

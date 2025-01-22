@@ -380,7 +380,7 @@ public class ConstructionManager : MonoBehaviour
                 //TODO:èCê≥Ç∑ÇÈ
                 if(SoundManager.Instance != null)
                     SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
-                //itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();
@@ -394,7 +394,7 @@ public class ConstructionManager : MonoBehaviour
 				//TODO:èCê≥Ç∑ÇÈ
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
-                //itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
                 AIPlaceItemFreeStyle();
@@ -407,7 +407,7 @@ public class ConstructionManager : MonoBehaviour
 				//TODO:èCê≥Ç∑ÇÈ
 				if (SoundManager.Instance != null)
 					SoundManager.Instance.PlaySound(SoundManager.Instance.PutSeSound);
-                //itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
+                itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<SupportAI_Movement>().enabled = true;
                 AIPlaceItemFreeStyle();

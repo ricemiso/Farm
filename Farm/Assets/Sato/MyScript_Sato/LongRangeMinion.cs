@@ -79,15 +79,24 @@ public class LongRangeMinion : SupportAI_Movement
 
     public void createMagic()
     {
-        Vector3 spawnPosition = shootPos.transform.position + shootPos.transform.forward;
-        Quaternion spawnRotation = shootPos.transform.rotation;
+        // ’e‚Ì¶¬ˆÊ’u‚Æ‰ñ“]‚ğİ’è
+        Vector3 spawnPosition = shootPos.transform.position;
+        Quaternion spawnRotation = Quaternion.LookRotation((target.transform.position - spawnPosition).normalized);
 
+        // ’e‚ğ¶¬
         GameObject newBullet = Instantiate(bullet, spawnPosition, spawnRotation);
 
-        Vector3 direction = newBullet.transform.forward;
+        // ’e‚Ì”ò‚Ô•ûŒü‚ğŒvZ
+        Vector3 direction = (target.transform.position - spawnPosition).normalized;
+
+        // ’e‚É—Í‚ğ‰Á‚¦‚é
         newBullet.GetComponent<Rigidbody>().AddForce(direction * 500.0f, ForceMode.Impulse);
+
+        // ’e‚Ì–¼‘O‚Æõ–½‚ğİ’è
         newBullet.name = bullet.name;
         Destroy(newBullet, lifeTime);
+
+        // ƒ_ƒ[ƒW‚ğİ’è
         float damage = GetComponent<Animal>().damage;
         newBullet.GetComponent<Magic>().SetDamage(damage);
     }
