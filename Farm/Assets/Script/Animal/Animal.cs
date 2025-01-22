@@ -19,8 +19,8 @@ public class Animal : MonoBehaviour
     public bool isCraftedMinion = false;
     public float damage;
 
-    public int healthIncrease = 20;
-    public int damageIncrease = 5;
+    public int healthIncrease = 0;
+    public int damageIncrease = 0;
     public int level;
     public bool canBeChopped;
     public bool canbeWatch;
@@ -363,12 +363,12 @@ public class Animal : MonoBehaviour
         nowlevel += 1;
         level = nowlevel;
 
-        int healthIncrease = 20 * nowlevel;
-        int damageIncrease = 5 * nowlevel;
+        int HealthIncrease = healthIncrease * nowlevel;
+        int DamageIncrease = damageIncrease * nowlevel;
 
-        maxHealth += healthIncrease;
+        maxHealth += HealthIncrease;
         currentHealth = maxHealth;
-        damage += damageIncrease;
+        damage += DamageIncrease;
 
         CraftingSystem.Instance.islevelUp = false;
 

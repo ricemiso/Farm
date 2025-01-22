@@ -5208,8 +5208,8 @@ MonoBehaviour:
   maxHealth: 50
   isCraftedMinion: 0
   damage: 30
-  healthIncrease: 20
-  damageIncrease: 5
+  healthIncrease: 10
+  damageIncrease: 2
   level: 0
   canBeChopped: 0
   canbeWatch: 0
@@ -5359,6 +5359,7 @@ MonoBehaviour:
   waitCounter: 0
   state: 0
   player: {fileID: 0}
+  tankMinion: {fileID: 0}
   followSpeed: 15
   rotateSpeed: 10
   target: {fileID: 0}
