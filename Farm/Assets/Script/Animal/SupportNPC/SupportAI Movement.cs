@@ -268,7 +268,7 @@ public class SupportAI_Movement : AI_Movement
 				}
 				else
 				{
-a					state = MoveState.FOLLOWING;
+					state = MoveState.FOLLOWING;
 				}
 				target = null;
 			}
