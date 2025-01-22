@@ -39795,6 +39795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf52a1aba6e7a34bb60de1fe8878c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InRange: 0
 --- !u!1 &4650221878539368626
 GameObject:
   m_ObjectHideFlags: 0
@@ -45411,7 +45412,7 @@ MonoBehaviour:
   waitCounter: 0
   state: 0
   player: {fileID: 0}
-  followSpeed: 2
+  followSpeed: 5
   rotateSpeed: 10
   target: {fileID: 0}
   isStopped: 0

@@ -11,7 +11,7 @@ public class LevelUpTask : ITutorialTask
 
     public string GetText()
     {
-        return "マナを与えてミニオンを強化できます。配置したミニオンに近づいて、左クリックで強化できます。";
+        return "マナを与えてミニオンを強化できます。\n配置したミニオンに近づいて、\n左クリックで強化できます。";
     }
 
     public void OnTaskSetting()

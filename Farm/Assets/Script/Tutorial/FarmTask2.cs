@@ -11,7 +11,7 @@ public class FarmTask2 : ITutorialTask
 
     public string GetText()
     {
-        return "種を植えた土壌にマナをあげて成長できます。マナを装備して左クリックであげられます。";
+        return "種を植えた土壌にマナをあげて成長できます。\nマナを装備して左クリックであげられます。";
     }
 
     public void OnTaskSetting()

@@ -11,7 +11,7 @@ public class EquipTask : ITutorialTask
 
     public string GetText()
     {
-        return "クイックスロットの右上にある数字のキー、マウスのホイールで装備できます。";
+        return "クイックスロットの右上にある数字のキー、\nマウスのホイールで装備できます。";
     }
 
     public void OnTaskSetting()

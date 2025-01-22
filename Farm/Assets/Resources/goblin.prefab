@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf52a1aba6e7a34bb60de1fe8878c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InRange: 0
 --- !u!1 &2052452127262710163
 GameObject:
   m_ObjectHideFlags: 0
@@ -10578,12 +10579,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   animation: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 10
   walkCounter: 0
   waitCounter: 0
   state: 0
   player: {fileID: 0}
-  followSpeed: 2
+  followSpeed: 7
   rotateSpeed: 10
   target: {fileID: 0}
   isStopped: 0
