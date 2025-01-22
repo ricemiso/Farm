@@ -28,6 +28,11 @@ public class EnemyAI_Movement : AI_Movement
 	// プレイヤーユニットを見つけた際に追いかけるか
 	public bool IsChasePlayer = false;
 
+	/// <summary>
+	/// 自分とタンクミニオンの距離
+	/// </summary>
+	private float distance =0;
+
 
 
 
@@ -64,6 +69,14 @@ public class EnemyAI_Movement : AI_Movement
 
 		timeToFoundEnemy += Time.deltaTime;
 		currentAttackCooltime -= Time.deltaTime;
+
+		Vector3 followPosition = tankMinion.transform.position;
+		distance = Vector3.Distance(followPosition, transform.position);
+
+        if (distance < 30.0f)
+        {
+			Chase(followPosition, true);
+        }
 
 		base.Update();
 	}
@@ -117,11 +130,7 @@ public class EnemyAI_Movement : AI_Movement
 	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerStay(Collider other)
 	{
-		if (other.CompareTag("SupportUnit")&&tankMinion != null)
-		{
-			Vector3 followPosition = tankMinion.transform.position;
-			FoundTarget(other.GameObject());
-		}
+
 		else if (other.CompareTag("SupportUnit") && IsChaseSupportUnit)
 		{
 			FoundTarget(other.GameObject());

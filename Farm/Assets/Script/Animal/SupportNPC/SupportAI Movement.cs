@@ -33,7 +33,14 @@ public class SupportAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
-		if(target == null)
+		if (gameObject.transform.position.y <= 1)
+		{
+			Vector3 newPosition = gameObject.transform.position;
+			newPosition.y = 1.0f;
+			gameObject.transform.position = newPosition;
+		}
+
+		if (target == null)
         {
 			target = player;
         }
@@ -261,7 +268,7 @@ public class SupportAI_Movement : AI_Movement
 				}
 				else
 				{
-					state = MoveState.FOLLOWING;
+a					state = MoveState.FOLLOWING;
 				}
 				target = null;
 			}
