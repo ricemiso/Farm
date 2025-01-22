@@ -19,9 +19,6 @@ public class AI_Movement : MonoBehaviour
 
 	int WalkDirection;
 
-
-
-
 	// 状態リスト
 	public enum MoveState
 	{
@@ -38,6 +35,7 @@ public class AI_Movement : MonoBehaviour
 	public MoveState state;
 
 	public GameObject player;  // 追従するプレイヤーのTransform
+	public GameObject tankMinion = null;
 	public float followSpeed = 5f;  // 追従速度
 	public float rotateSpeed = 10.0f;   // 回転速度
 	public GameObject target; // ターゲット中の敵
@@ -69,6 +67,11 @@ public class AI_Movement : MonoBehaviour
 			player = GameObject.FindWithTag("Player");  // タグが"Player"のオブジェクトを自動的に取得
 		}
 
+		if(tankMinion == null)
+        {
+			tankMinion = GameObject.Find("TankAI2");
+        }
+
 		// ランダムな歩行時間と待機時間を設定
 		//walkTime = Random.Range(3, 6);
 		//waitTime = Random.Range(5, 7);
@@ -79,6 +82,8 @@ public class AI_Movement : MonoBehaviour
 		walkCounter = walkTime;
 
 		state = MoveState.WALKING;
+
+		
 
 		ChooseDirection();  // 初回の方向を選択
 

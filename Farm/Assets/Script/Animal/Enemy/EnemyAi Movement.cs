@@ -34,12 +34,15 @@ public class EnemyAI_Movement : AI_Movement
 	protected override void Start()
     {
 		currentAttackCooltime = 0.0f;
+
         base.Start();
 	}
 
     // Update is called once per frame
     protected override void Update()
 	{
+
+		
 
 		if (!isStopped)
 		{
@@ -65,7 +68,7 @@ public class EnemyAI_Movement : AI_Movement
 		currentAttackCooltime -= Time.deltaTime;
 
 		base.Update();
-    }
+	}
 
 	protected void ChaseCrystal()
     {
@@ -103,7 +106,6 @@ public class EnemyAI_Movement : AI_Movement
 				animation.Play("run");
 			}
 
-
 		}
 
 		// 長い時間対象を認識していない場合諦める
@@ -113,16 +115,20 @@ public class EnemyAI_Movement : AI_Movement
 		}
 	}
 
-
+	
 	// プレイヤーがコライダーに入ったとき
 	private void OnTriggerStay(Collider other)
 	{
-		if(other.CompareTag("SupportUnit") && IsChaseSupportUnit)
+		if (other.CompareTag("SupportUnit")&&tankMinion != null)
+		{
+			Vector3 followPosition = tankMinion.transform.position;
+			FoundTarget(other.GameObject());
+		}
+		else if (other.CompareTag("SupportUnit") && IsChaseSupportUnit)
 		{
 			FoundTarget(other.GameObject());
 		}
-
-		if(other.CompareTag("Player") && IsChasePlayer)
+		else if(other.CompareTag("Player") && IsChasePlayer)
 		{
 			FoundTarget(other.GameObject());
 		}

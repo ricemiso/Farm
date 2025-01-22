@@ -31,6 +31,10 @@ public class LongRange : EnemyAI_Movement
 
 	protected override void Update()
 	{
+		Vector3 followPosition = player.transform.Find("GroundCheck").position;
+
+		Chase(followPosition, true);
+
 		base.Update();
 
 		//switch (state)
