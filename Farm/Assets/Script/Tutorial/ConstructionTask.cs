@@ -11,7 +11,7 @@ public class ConstructionTask : ITutorialTask
 
     public string GetText()
     {
-        return "収穫したミニオンを装備して左クリックで配置できます。";
+        return "収穫したミニオンを装備して、\n左クリックで配置できます。";
     }
 
     public void OnTaskSetting()

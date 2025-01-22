@@ -11,7 +11,7 @@ public class HealTask : ITutorialTask
 
     public string GetText()
     {
-        return "マナを装備してFキーを押すと、マナを消費して回復できます。";
+        return "マナを装備してFキーを押すと、\nマナを消費して回復できます。";
     }
 
     public void OnTaskSetting()

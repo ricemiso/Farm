@@ -1818,7 +1818,7 @@ MonoBehaviour:
   waitCounter: 0
   state: 0
   player: {fileID: 0}
-  followSpeed: 2
+  followSpeed: 3
   rotateSpeed: 10
   target: {fileID: 0}
   isStopped: 0
