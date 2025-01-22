@@ -141,11 +141,15 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (EquipSystem.Instance.currentSelectedObject == gameObject && isvisible)
         {
+           
+
             // isvisible Ç™ true ÇÃèÍçáÅAUI Çï\é¶
             itemInfoUI.SetActive(true);
             itemInfoUI_itemName.text = thisName;
-            itemInfoUI_itemDescription.text = thisDescription;
-            itemInfoUI_itemFunctionality.text = thisFunctionality;
+            SetText(itemInfoUI_itemDescription, thisDescription);
+            SetText(itemInfoUI_itemFunctionality, thisFunctionality);
+            //itemInfoUI_itemDescription.text = thisDescription;
+            //itemInfoUI_itemFunctionality.text = thisFunctionality;
         }
 
         if (isUseable && EquipSystem.Instance.selectMinion && !ConstructionManager.Instance.inConstructionMode)
@@ -337,5 +341,10 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 PlayerState.Instance.setHydration(hydrationBeforeConsumption + hydrationEffect);
             }
         }
+    }
+
+    public void SetText(Text self, string text)
+    {
+        self.text = text.Replace(" ", "\n");
     }
 }

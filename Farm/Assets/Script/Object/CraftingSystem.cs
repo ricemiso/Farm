@@ -141,7 +141,7 @@ public class CraftingSystem : MonoBehaviour
         MagicMinionBLP = new BluePrint("Minion3Seed", 1, 2, "Mana", 1, "Log", 1);
         ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
         LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 2, "", 0);
-        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 3, "", 0);
+        StoneManaBLP = new BluePrint("Mana", 2, 1, "Stone", 6, "", 0);
 
         isOpen = false;
 
@@ -734,9 +734,9 @@ public class CraftingSystem : MonoBehaviour
 
 
 		// ---StoneMana---- //
-		StoneReq1.text = "Î‚±‚ë 3 [" + (stone_count /*+ quickStoneCount*/) + "]";
+		StoneReq1.text = "Î‚±‚ë 6 [" + (stone_count /*+ quickStoneCount*/) + "]";
 
-        if ((stone_count/* + quickStoneCount*/) >= 3
+        if ((stone_count/* + quickStoneCount*/) >= 6
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftStoneManaBTN.gameObject.SetActive(true);
