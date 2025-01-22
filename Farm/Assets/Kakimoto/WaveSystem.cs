@@ -41,10 +41,6 @@ public class WaveSystem : MonoBehaviour
 	// 敵リストへの参照
 	[SerializeField] GameObject EnemyParent;
 
-	// 昼の初期召喚コスト
-	[SerializeField] int NoonBase;
-	// 昼のWave毎に増える召喚コスト
-	[SerializeField] int NoonAdd;
 	// 夜の初期召喚コスト
 	[SerializeField] int NightBase;
 	// 夜のWave毎に増える召喚コスト
@@ -76,7 +72,7 @@ public class WaveSystem : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		m_WaveCount = 0;
+		m_WaveCount = 1;
 
 		m_SpawnerList[0].CrystalLight.active = true;
 		for (int i = 1; i < m_SpawnerList.Count; ++i)
