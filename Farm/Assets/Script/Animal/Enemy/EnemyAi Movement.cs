@@ -70,13 +70,19 @@ public class EnemyAI_Movement : AI_Movement
 		timeToFoundEnemy += Time.deltaTime;
 		currentAttackCooltime -= Time.deltaTime;
 
-		Vector3 followPosition = tankMinion.transform.position;
-		distance = Vector3.Distance(followPosition, transform.position);
-
-        if (distance < 30.0f)
+		if (tankMinion != null)
         {
-			Chase(followPosition, true);
-        }
+			Vector3 followPosition = tankMinion.transform.position;
+			distance = Vector3.Distance(followPosition, transform.position);
+
+			if (distance < 30.0f)
+			{
+				Chase(followPosition, true);
+			}
+		}
+		
+
+       
 
 		base.Update();
 	}
