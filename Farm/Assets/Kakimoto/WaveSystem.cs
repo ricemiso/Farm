@@ -87,20 +87,8 @@ public class WaveSystem : MonoBehaviour
 		float time = DayNightSystem.Instance.currentTimeOfDay;
 		int hour = DayNightSystem.Instance.currentHour;
 
-		// ‚ ‚é’ö“xƒ|ƒCƒ“ƒg‚ª—­‚Ü‚Á‚½‚ç“G‚ð¶¬
-		// ’‹
-		if (day * 2 - 1 > m_WaveCount && hour >= 12)
-		{
-			m_WaveCount++;
-			m_WaveLimitTime = 12;
-			m_NextSummonTime = 0.55f;
-
-			int cost = NoonBase + m_WaveCount * NoonAdd;
-			m_Cost = SummonEnemy(cost);
-			
-		}
 		// –é
-		if (day * 2 - 2 > m_WaveCount && hour >= 0)
+		if (day > m_WaveCount)
 		{
 			m_WaveCount++;
 			m_WaveLimitTime = 3;
@@ -112,15 +100,8 @@ public class WaveSystem : MonoBehaviour
 		}
 
 		if (hour < m_WaveLimitTime)
-		{// Œp‘±‚í‚«’†
-			if (m_NextSummonTime <= time)
-			{
-				m_NextSummonTime = time + 0.02f;
-
-				m_Cost += m_WaveCount;
-				m_Cost = SummonEnemy(m_Cost);
-				
-			}
+		{
+			// Wave’†‚É‚â‚è‚½‚¢‚±‚Æ
 		}
 		else
 		{// I—¹
@@ -129,6 +110,15 @@ public class WaveSystem : MonoBehaviour
 			SoundManager.Instance.PlayIfNoOtherMusic(SoundManager.Instance.startingZoneBGMMusic);
 		}
 
+		// Œp‘±‚í‚«
+		if (m_NextSummonTime <= time)
+		{
+			m_NextSummonTime = time + 0.02f;
+
+			m_Cost += m_WaveCount;
+			m_Cost = SummonEnemy(m_Cost);
+
+		}
 	}
 
 
