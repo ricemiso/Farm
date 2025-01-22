@@ -81,9 +81,9 @@ public class AI_Movement : MonoBehaviour
 		waitCounter = waitTime;
 		walkCounter = walkTime;
 
-		state = MoveState.WALKING;
+		state = MoveState.STOP;
 
-		
+
 
 		ChooseDirection();  // ‰‰ñ‚Ì•ûŒü‚ğ‘I‘ğ
 
@@ -184,7 +184,7 @@ public class AI_Movement : MonoBehaviour
 	protected void ChangeStateWait()
 	{
 		stopPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-		state = MoveState.WAITING;
+		state = MoveState.STOP;
 		transform.position = stopPosition;
 
 		if (animator != null)
@@ -212,7 +212,7 @@ public class AI_Movement : MonoBehaviour
 	protected void ChooseDirection()
 	{
 		WalkDirection = Random.Range(0, 4);
-		state = MoveState.WALKING;
+		state = MoveState.STOP;
 		walkCounter = walkTime;
 
 		if (animator != null)

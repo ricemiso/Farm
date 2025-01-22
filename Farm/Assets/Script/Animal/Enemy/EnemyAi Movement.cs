@@ -42,8 +42,6 @@ public class EnemyAI_Movement : AI_Movement
     protected override void Update()
 	{
 
-		
-
 		if (!isStopped)
 		{
             switch (state)
