@@ -73,6 +73,8 @@ public class WaveSystem : MonoBehaviour
 	void Start()
 	{
 		m_WaveCount = 1;
+		m_Cost = 0;
+		m_NextSummonTime = DayNightSystem.Instance.currentTimeOfDay;
 
 		m_SpawnerList[0].CrystalLight.active = true;
 		for (int i = 1; i < m_SpawnerList.Count; ++i)
@@ -149,7 +151,7 @@ public class WaveSystem : MonoBehaviour
 			{
 				spawnerIndexList.Add(i);
 				//ミニクリスタルのライトを点灯
-				if (m_WaveCount == m_SpawnerList[i].WaveLimit - 1 && !m_SpawnerList[i].CrystalLight.active)
+				if (!m_SpawnerList[i].CrystalLight.active)
 				{
 					m_SpawnerList[i].CrystalLight.active = true;
 				}
