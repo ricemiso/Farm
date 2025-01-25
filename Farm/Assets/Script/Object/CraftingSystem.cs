@@ -692,7 +692,7 @@ public class CraftingSystem : MonoBehaviour
 
         // ---MagicMinion---- //
         MagicMinionReq1.text = "ƒ}ƒi 1 [" + (mana_count /*+ quickManaCount*/) + "]";
-        MagicMinionReq2.text = "–Ø 1 [" + (log_count /*+ quickLogCount*/) + "]";
+        MagicMinionReq2.text = "ŠÛ‘¾ 1 [" + (log_count /*+ quickLogCount*/) + "]";
 
         if ((mana_count /*+ quickManaCount*/) >= 1 && (log_count /*+ quickLogCount*/) >= 1
             && InventorySystem.Instance.CheckSlotAvailable(1))

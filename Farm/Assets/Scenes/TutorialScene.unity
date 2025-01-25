@@ -7798,7 +7798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -159}
+  m_AnchoredPosition: {x: -0, y: 13}
   m_SizeDelta: {x: 519, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &301113543
@@ -25251,7 +25251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 30}
+  m_AnchoredPosition: {x: -0, y: -161}
   m_SizeDelta: {x: 519, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1170929611
@@ -31636,18 +31636,22 @@ MonoBehaviour:
     IsActive: 1
     WaveLimit: 3
     CrystalMini: {fileID: 0}
+    CrystalLight: {fileID: 0}
   - Object: {fileID: 806349926}
     IsActive: 1
     WaveLimit: 5
     CrystalMini: {fileID: 0}
+    CrystalLight: {fileID: 0}
   - Object: {fileID: 1244982888}
     IsActive: 1
     WaveLimit: 8
     CrystalMini: {fileID: 0}
+    CrystalLight: {fileID: 0}
   - Object: {fileID: 1672706753}
     IsActive: 1
     WaveLimit: 10
     CrystalMini: {fileID: 0}
+    CrystalLight: {fileID: 0}
   m_EnemyList: []
   m_HealthMultiply: 0.1
   m_DamageMultiply: 0
@@ -31655,8 +31659,6 @@ MonoBehaviour:
   Range: {x: 0, y: 0, z: 0}
   Crystal: {fileID: 0}
   EnemyParent: {fileID: 0}
-  NoonBase: 0
-  NoonAdd: 0
   NightBase: 0
   NightAdd: 0
 --- !u!1 &1538169292
