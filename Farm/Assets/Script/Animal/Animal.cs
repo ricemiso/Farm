@@ -360,14 +360,9 @@ public class Animal : MonoBehaviour
     /// <param name="nowlevel">現在のレベル</param>
     public void LevelUp(int nowlevel)
     {
-       
-
-        // maxHealth の上限値が800未満の場合のみスケールを変更
-        for(int i=1;i< nowlevel; i++)
+        for (int i = 1; i < nowlevel; i++)
         {
-            nowlevel += 1;
-            level = nowlevel;
-
+            
             int HealthIncrease = healthIncrease * nowlevel;
             int DamageIncrease = damageIncrease * nowlevel;
 
@@ -377,20 +372,23 @@ public class Animal : MonoBehaviour
 
             CraftingSystem.Instance.islevelUp = false;
 
+            // パーティクルを再生
             ParticleSystem partiSystem = levelupparticle;
             partiSystem.Play();
 
             // 現在のスケールを取得
             Vector3 currentScale = gameObject.transform.localScale;
 
-            // 1.6倍のスケールを計算
+            // スケールを1.2倍にする
             Vector3 newScale = currentScale * 1.2f;
-
-            // スケールを更新
             gameObject.transform.localScale = newScale;
         }
 
-        
+       
+        level = nowlevel;
+
+
+
     }
 
     /// <summary>
