@@ -30,8 +30,8 @@ public class LongRangeMinion : SupportAI_Movement
         attackRange = 20.0f;
         base.Start();
 
-        target = player;
-        state = MoveState.FOLLOWING;
+        target = null;
+        state = MoveState.STOP;
 
         isNotRangeTime = 0.0f;
     }
@@ -49,7 +49,7 @@ public class LongRangeMinion : SupportAI_Movement
         }
         else
         {
-            if (isStopped) return;
+            if (!isStopped) return;
 
 			if (stopPosition != Vector3.zero)
 			{
