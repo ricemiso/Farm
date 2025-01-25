@@ -100,7 +100,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     /// インベントリ内のアイテムの数量
     /// </summary>
     public int amountInventry = 1;
- 
+
 
     /// <summary>
     /// アイテム情報UIの初期化と設定
@@ -120,6 +120,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     /// </summary>
     void Update()
     {
+
+
         if (isSelected)
         {
             gameObject.GetComponent<DragDrop>().enabled = false;
@@ -131,25 +133,22 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GrobalState.Instance.isInfoTask = true;
-            isvisible = !isvisible;
-
-            // UIの表示切り替え
-            float alpha = isvisible ? 1f : 0;
-            itemInfoUI.GetComponent<CanvasGroup>().alpha = alpha;
+            visivbleUI();
         }
 
-        if (EquipSystem.Instance.currentSelectedObject == gameObject && isvisible)
-        {
-           
 
-            // isvisible が true の場合、UI を表示
-            itemInfoUI.SetActive(true);
-            itemInfoUI_itemName.text = thisName;
-            SetText(itemInfoUI_itemDescription, thisDescription);
-            SetText(itemInfoUI_itemFunctionality, thisFunctionality);
-            //itemInfoUI_itemDescription.text = thisDescription;
-            //itemInfoUI_itemFunctionality.text = thisFunctionality;
+        if (isvisible)
+        {
+            if (EquipSystem.Instance.currentSelectedObject != null &&
+                EquipSystem.Instance.currentSelectedObject.TryGetComponent<InventoryItem>(out var inventoryItem) &&
+                isvisible)
+            {
+                // isvisible が true かつ InventoryItem が存在する場合、UI を表示
+                itemInfoUI.SetActive(true);
+                itemInfoUI_itemName.text = inventoryItem.thisName;
+                SetText(itemInfoUI_itemDescription, inventoryItem.thisDescription);
+                SetText(itemInfoUI_itemFunctionality, inventoryItem.thisFunctionality);
+            }
         }
 
         if (isUseable && EquipSystem.Instance.selectMinion && !ConstructionManager.Instance.inConstructionMode)
@@ -163,7 +162,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
-        if (isConsumable && Input.GetKeyDown(KeyCode.F) && EquipSystem.Instance.selectMana && PlayerState.Instance.currentHealth<200)
+        if (isConsumable && Input.GetKeyDown(KeyCode.F) && EquipSystem.Instance.selectMana && PlayerState.Instance.currentHealth < 200)
         {
             itemPendingConsumption = gameObject;
 
@@ -186,30 +185,62 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
-        //if (isConsumable && itemPendingConsumption == gameObject && Input.GetKeyUp(KeyCode.Q) && EquipSystem.Instance.selectMana)
-        //{
-        //    InventrySlot parentSlot = GetComponentInParent<InventrySlot>();
-        //    if (parentSlot != null && parentSlot.itemInSlot != null)
-        //    {
-        //        gameObject.name = InventorySystem.Instance.GetItemName(gameObject.name);
-        //        if (parentSlot.itemInSlot.thisName == gameObject.name)
-        //        {
-        //            if (parentSlot.itemInSlot.amountInventry > 1)
-        //            {
-        //                parentSlot.itemInSlot.amountInventry--;
-        //                InventorySystem.Instance.ReCalculeList();
-        //            }
-        //            else
-        //            {
-        //                DestroyImmediate(gameObject);
-        //                InventorySystem.Instance.ReCalculeList();
-        //                CraftingSystem.Instance.RefreshNeededItems();
-        //            }
-        //            return;
-        //        }
-        //    }
-        //    Debug.LogWarning("アイテムが所属するスロットが見つかりませんでした");
-        //}
+
+    }
+
+    /// <summary>
+    /// 現在のスロットのゲームオブジェクトを取得
+    /// </summary>
+    /// <param name="slot">ストっと番号</param>
+    /// <returns></returns>
+    private GameObject GetSlotItemWithInventoryCheck(int slot)
+    {
+        if (slot >= 0 && slot < EquipSystem.Instance.quickSlotsList.Count)
+        {
+            GameObject potentialObject = EquipSystem.Instance.quickSlotsList[slot];
+
+            // InventoryItem を持っているかチェック
+            if (potentialObject.GetComponent<InventoryItem>() != null)
+            {
+                return potentialObject; // InventoryItem を持っているオブジェクトを返す
+            }
+            else
+            {
+                // 子オブジェクトを探索
+                Transform childTransform = potentialObject.transform;
+                bool found = false;
+
+                while (childTransform.childCount > 0 && !found)
+                {
+                    childTransform = childTransform.GetChild(0);
+
+                    if (childTransform.GetComponent<InventoryItem>() != null)
+                    {
+                        return childTransform.gameObject;
+                    }
+                }
+
+                // InventoryItem が見つからなければ null を返す
+                return null;
+            }
+        }
+
+        // 無効なスロット番号の場合は null を返す
+        return null;
+    }
+
+
+    /// <summary>
+    /// アイテム説明画面を表示する関数
+    /// </summary>
+    private void visivbleUI()
+    {
+        GrobalState.Instance.isInfoTask = true;
+        isvisible = !isvisible;
+
+        // UIの表示切り替え
+        float alpha = isvisible ? 1f : 0;
+        itemInfoUI.GetComponent<CanvasGroup>().alpha = alpha;
     }
 
     /// <summary>

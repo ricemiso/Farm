@@ -92,6 +92,16 @@ public class EquipSystem : MonoBehaviour
     public GameObject currentSelectedObject;
 
     /// <summary>
+    /// 選択されていないのにミニオンが無限にわかないようにするためのフラグ
+    /// </summary>
+    public bool isnotselected = false;
+
+    /// <summary>
+    /// アイテム情報UIが表示されているかどうかの状態
+    /// </summary>
+    public bool isvisible = false;
+
+    /// <summary>
     /// シングルトンパターンを適用し、インスタンスを初期化します。
     /// </summary>
     private void Awake()
@@ -181,10 +191,11 @@ public class EquipSystem : MonoBehaviour
 
         UpdateCurrentSelectedObject();
 
-        if(selectedNumber == -1)
+        if (selectedNumber == -1)
         {
             destoroymodel();
         }
+
     }
 
 
@@ -198,7 +209,37 @@ public class EquipSystem : MonoBehaviour
             GameObject selectedSlot = quickSlotsList[selectedNumber - 1];
             if (selectedSlot.transform.childCount > 0)
             {
-                currentSelectedObject = selectedSlot.transform.GetChild(0).gameObject;
+                GameObject potentialObject = selectedSlot.transform.GetChild(0).gameObject;
+
+                // InventoryItem を持っているかチェック
+                if (potentialObject.GetComponent<InventoryItem>() != null)
+                {
+                    currentSelectedObject = potentialObject;
+                   
+                }
+                else
+                {
+                    // 子オブジェクトを探索
+                    Transform childTransform = potentialObject.transform;
+                    bool found = false;
+
+                    while (childTransform.childCount > 0 && !found)
+                    {
+                        childTransform = childTransform.GetChild(0);
+
+                        if (childTransform.GetComponent<InventoryItem>() != null)
+                        {
+                            currentSelectedObject = childTransform.gameObject;
+                            found = true;
+                        }
+                    }
+
+                    // InventoryItem が見つからなければ null に設定
+                    if (!found)
+                    {
+                        currentSelectedObject = null;
+                    }
+                }
             }
             else
             {
@@ -277,6 +318,7 @@ public class EquipSystem : MonoBehaviour
         {
             if (selectedNumber != number)
             {
+                isnotselected = true;
                 selectedNumber = number;
 
                 ConstructionManager.Instance.inConstructionMode = false;
@@ -319,6 +361,7 @@ public class EquipSystem : MonoBehaviour
             }
             else
             {
+                isnotselected = false;
                 selectedNumber = -1;
 
                 destoroymodel();
@@ -354,7 +397,7 @@ public class EquipSystem : MonoBehaviour
     /// <param name="obj">使用するアイテムのゲームオブジェクト</param>
     public void UseItem(GameObject obj)
     {
-        if (selectedNumber == -1) return;
+        if (!isnotselected) return;
 
         InventorySystem.Instance.isOpen = false;
         InventorySystem.Instance.inventoryScreenUI.SetActive(false);
@@ -552,7 +595,6 @@ public class EquipSystem : MonoBehaviour
         }
 
         string selectedItemName = selectedItem.name.Replace("(Clone)", "");
-        Debug.Log("Selected Item Name: " + selectedItemName);
 
         string instancename = CaculateItemModel(selectedItemName);
 
