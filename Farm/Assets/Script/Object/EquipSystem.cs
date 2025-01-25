@@ -180,11 +180,6 @@ public class EquipSystem : MonoBehaviour
         }
 
         UpdateCurrentSelectedObject();
-
-        if(selectedNumber == -1)
-        {
-            destoroymodel();
-        }
     }
 
 
@@ -321,29 +316,23 @@ public class EquipSystem : MonoBehaviour
             {
                 selectedNumber = -1;
 
-                destoroymodel();
+                if (selectedItem != null)
+                {
+                    selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
+                    selectedItem = null;
+                }
+
+                if (selecteditemModel != null)
+                {
+                    DestroyImmediate(selecteditemModel.gameObject);
+                    selecteditemModel = null;
+                }
+
+                foreach (Transform child in numbersHolder.transform)
+                {
+                    child.transform.Find("Text").GetComponent<Text>().color = Color.gray;
+                }
             }
-        }
-    }
-
-
-    public void destoroymodel()
-    {
-        if (selectedItem != null)
-        {
-            selectedItem.gameObject.GetComponent<InventoryItem>().isSelected = false;
-            selectedItem = null;
-        }
-
-        if (selecteditemModel != null)
-        {
-            DestroyImmediate(selecteditemModel.gameObject);
-            selecteditemModel = null;
-        }
-
-        foreach (Transform child in numbersHolder.transform)
-        {
-            child.transform.Find("Text").GetComponent<Text>().color = Color.gray;
         }
     }
 
@@ -354,8 +343,6 @@ public class EquipSystem : MonoBehaviour
     /// <param name="obj">使用するアイテムのゲームオブジェクト</param>
     public void UseItem(GameObject obj)
     {
-        if (selectedNumber == -1) return;
-
         InventorySystem.Instance.isOpen = false;
         InventorySystem.Instance.inventoryScreenUI.SetActive(false);
 
@@ -615,6 +602,7 @@ public class EquipSystem : MonoBehaviour
     {
         if (selecteditemModel && selecteditemModel.GetComponent<EquiableItem>())
         {
+            Debug.Log("SwingWait in IsThereSwingLock: " + selecteditemModel.GetComponent<EquiableItem>().Swinging);
             return selecteditemModel.GetComponent<EquiableItem>().Swinging;
         }
         else
