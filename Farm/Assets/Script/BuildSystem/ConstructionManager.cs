@@ -566,7 +566,7 @@ public class ConstructionManager : MonoBehaviour
                             if (itemComponent != null)
                             {
                                 Destroy(itemComponent.gameObject); // 子オブジェクトを削除
-                                EquipSystem.Instance.selectedNumber = -1;
+                                EquipSystem.Instance.isnotselected = false;
                             }
                         }
                     }
