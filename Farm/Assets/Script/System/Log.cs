@@ -1,3 +1,5 @@
+// 作成者：立石大翔
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +16,9 @@ public class Log : MonoBehaviour
     public float displayDuration = 5f; // ログが表示される時間
     public float fadeDuration = 2f;   // フェードアウトにかかる時間
 
-    // ピックアップポップアップのキュー
-    private Queue<string> pickupQueue = new Queue<string>();
-    private bool isProcessing = false;
+    private Queue<string> logQueue = new Queue<string>();
+    private bool isDisplaying = false;
 
-    public bool isDamaged = false;
-
-    // ログメッセージを保持するクラス
     private class LogMessage
     {
         public GameObject logObject;   // ログ表示用のUIオブジェクト
@@ -48,139 +46,105 @@ public class Log : MonoBehaviour
             Instance = this;
         }
 
-        // パネルを初期状態で非表示にする
         logPanel.SetActive(false);
     }
 
-    // 味方が死んだ時のメソッド
     public void OnAllyDeath(string allyName)
     {
-        AddLogMessage("味方 " + allyName + " が死亡しました。");
+        AddLogMessageToQueue("味方 " + allyName + " が死亡しました。");
     }
 
-    // クリスタルが攻撃された時のメソッド
     public IEnumerator OnCrystalAttack()
     {
-        if (!isDamaged)
-        {
-            isDamaged = true;
-            AddLogMessage(" クリスタルが攻撃されました。");
-        }
-		yield return new WaitForSeconds(5.0f);
+        AddLogMessageToQueue("クリスタルが攻撃されました。");
+        yield return null;
+    }
 
-        isDamaged = false;
-	}
-
-    // 敵が出現した時のメソッド
     public void OnEnemySpawn(string enemyName)
     {
-        AddLogMessage("敵 " + enemyName + " が出現しました。");
+        AddLogMessageToQueue("敵 " + enemyName + " が出現しました。");
     }
 
-    // 畑　攻撃された時のメソッド
     public void OnFarmAttack(string FarmName)
     {
-        AddLogMessage(FarmName + " が攻撃されました。");
+        AddLogMessageToQueue(FarmName + " が攻撃されました。");
     }
 
-    // 畑　死んだ時のメソッド
     public void OnFarmDeath(string FarmName)
     {
-        AddLogMessage(FarmName + " が破壊されました。");
+        AddLogMessageToQueue(FarmName + " が破壊されました。");
     }
 
-    private void AddLogMessage(string message)
+    private void AddLogMessageToQueue(string message)
     {
-        //// 既存のログメッセージと同じ内容があるか確認
-        //foreach (LogMessage log in logMessages)
-        //{
-        //    if (log.logText.text == message)
-        //    {
-        //        // 同じ内容のログがある場合はタイマーをリセット
-        //        log.timer = displayDuration;
-        //        return; // 新しいログは追加しない
-        //    }
-        //}
-
-        // プレハブから新しいログオブジェクトを生成
-        GameObject newLogObject = Instantiate(logTextPrefab, logContainer);
-        Text newLogText = newLogObject.GetComponent<Text>();
-
-        // タイムスタンプを含めずにログメッセージを設定
-        newLogText.text = message;
-
-        // 新しいログメッセージをリストに追加
-        logMessages.Add(new LogMessage(newLogObject, newLogText, displayDuration));
-
-        // パネルを表示
-        logPanel.SetActive(true);
-    }
-
-    private void Update()
-    {
-        // 各ログメッセージのタイマーを更新し、フェードアウトまたは削除する
-        for (int i = logMessages.Count - 1; i >= 0; i--)
+        logQueue.Enqueue(message);
+        if (!isDisplaying)
         {
-            LogMessage log = logMessages[i];
-            log.timer -= Time.deltaTime;
+            StartCoroutine(ProcessLogQueue());
+        }
+    }
 
-            if (log.timer <= fadeDuration)
+    private IEnumerator ProcessLogQueue()
+    {
+        isDisplaying = true;
+
+        while (logQueue.Count > 0)
+        {
+            string message = logQueue.Dequeue();
+
+            // プレハブから新しいログオブジェクトを生成
+            GameObject newLogObject = Instantiate(logTextPrefab, logContainer);
+            Text newLogText = newLogObject.GetComponent<Text>();
+
+            // ログメッセージを設定
+            newLogText.text = message;
+
+            // ログメッセージをリストに追加
+            logMessages.Add(new LogMessage(newLogObject, newLogText, displayDuration));
+
+            // パネルを表示
+            logPanel.SetActive(true);
+
+            // ログの表示時間を待機
+            yield return new WaitForSeconds(displayDuration);
+
+            // フェードアウト処理
+            float fadeTime = fadeDuration;
+            while (fadeTime > 0)
             {
-                // フェードアウト処理
-                float alpha = log.timer / fadeDuration;
-                Color color = log.logText.color;
-                color.a = Mathf.Clamp01(alpha);
-                log.logText.color = color;
+                fadeTime -= Time.deltaTime;
+                float alpha = Mathf.Clamp01(fadeTime / fadeDuration);
+                Color color = newLogText.color;
+                color.a = alpha;
+                newLogText.color = color;
+                yield return null;
             }
 
-            if (log.timer <= 0)
+            // 表示時間が経過したログを削除
+            if (logMessages.Count > 0)
             {
-                // 表示時間を超えたらログを削除
+                LogMessage log = logMessages[0];
                 Destroy(log.logObject);
-                logMessages.RemoveAt(i);
+                logMessages.RemoveAt(0);
             }
+
+            // パネルが空になったら非表示にする
+            if (logMessages.Count == 0)
+            {
+                logPanel.SetActive(false);
+            }
+
+            // 次のログ表示まで1秒待機
+            yield return new WaitForSeconds(1f);
         }
 
-        // パネルが空になったら非表示にする
-        if (logMessages.Count == 0)
-        {
-            logPanel.SetActive(false);
-        }
+        isDisplaying = false;
     }
 
-    // ピックアップポップアップをトリガーするメソッド
     public void TriggerPickupPop(string itemName)
     {
-        pickupQueue.Enqueue(itemName);
-
-        if (!isProcessing)
-        {
-            StartCoroutine(ProcessPopupQueue());
-        }
-    }
-
-    // キューを順番に処理するコルーチン
-    private IEnumerator ProcessPopupQueue()
-    {
-        isProcessing = true;
-
-        while (pickupQueue.Count > 0)
-        {
-            string itemName = pickupQueue.Dequeue();
-            yield return StartCoroutine(ShowPickupPopup(itemName));
-        }
-
-        isProcessing = false;
-    }
-
-    // ピックアップポップアップを表示するメソッド
-    private IEnumerator ShowPickupPopup(string itemName)
-    {
-        // 実際のポップアップ表示の実装をここに追加してください
-        // 例えば、UIにアイテム名を表示するなど
-        AddLogMessage($"死亡しました: {itemName}");
-
-        // ポップアップが表示される時間を制御する
-        yield return new WaitForSeconds(2f);
+        AddLogMessageToQueue($"死亡しました: {itemName}");
     }
 }
+
+
