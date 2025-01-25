@@ -360,11 +360,11 @@ public class Animal : MonoBehaviour
     /// <param name="nowlevel">現在のレベル</param>
     public void LevelUp(int nowlevel)
     {
-        for (int i = 1; i < nowlevel; i++)
+        for (int i = 1; i <= nowlevel; i++)
         {
             
-            int HealthIncrease = healthIncrease * nowlevel;
-            int DamageIncrease = damageIncrease * nowlevel;
+            int HealthIncrease = healthIncrease * (level+1);
+            int DamageIncrease = damageIncrease * (level + 1);
 
             maxHealth += HealthIncrease;
             currentHealth = maxHealth;
@@ -380,7 +380,7 @@ public class Animal : MonoBehaviour
             Vector3 currentScale = gameObject.transform.localScale;
 
             // スケールを1.2倍にする
-            Vector3 newScale = currentScale * 1.2f;
+            Vector3 newScale = currentScale * 1.1f;
             gameObject.transform.localScale = newScale;
         }
 
