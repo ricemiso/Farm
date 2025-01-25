@@ -33,6 +33,8 @@ public class SupportAI_Movement : AI_Movement
 
 		stopPosition = Vector3.zero;
 
+		isStopped = true;
+
 		base.Start();
     }
 
@@ -73,8 +75,11 @@ public class SupportAI_Movement : AI_Movement
 		if (Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
 		{
 
-			// 目的地と現在位置の距離
-			if(Vector3.Distance(transform.position, player.transform.position) <= 50)
+			// プレイヤーの正面から少し前の座標
+			Vector3 followPosition = player.transform.position + player.transform.forward * 4f;
+
+			// プレイヤーと現在位置の距離が近いなら停止
+			if (Vector3.Distance(transform.position, followPosition) <= 10)
 			{
 				isStopped = !isStopped;  // Eキーで動作を停止/再開
 				if (isStopped)
