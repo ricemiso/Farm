@@ -70,28 +70,33 @@ public class SupportAI_Movement : AI_Movement
 		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
 		// 一定範囲内かつQキーが押された場合のみ停止・再開を切り替える
-		if (isPushQKey && Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
+		if (Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
 		{
-			isStopped = !isStopped;  // Eキーで動作を停止/再開
-			if (isStopped)
-			{
-				target = null;
-				state = MoveState.STOP;
-				//animator.SetBool("isRunning", false);  // アニメーションを停止
 
-				stopPosition = gameObject.transform.position;
-			}
-			else
+			// 目的地と現在位置の距離
+			if(Vector3.Distance(transform.position, player.transform.position) <= 50)
 			{
-				if (!isAttackAnim)
+				isStopped = !isStopped;  // Eキーで動作を停止/再開
+				if (isStopped)
 				{
-					animation.Play("Walk");
-				}
-				//animator.SetBool("isRunning", true);
-				state = MoveState.FOLLOWING;
-				target = player;
+					target = null;
+					state = MoveState.STOP;
+					//animator.SetBool("isRunning", false);  // アニメーションを停止
 
-				stopPosition = Vector3.zero;
+					stopPosition = gameObject.transform.position;
+				}
+				else
+				{
+					if (!isAttackAnim)
+					{
+						animation.Play("Walk");
+					}
+					//animator.SetBool("isRunning", true);
+					state = MoveState.FOLLOWING;
+					target = player;
+
+					stopPosition = Vector3.zero;
+				}
 			}
 		}
 
@@ -205,8 +210,6 @@ public class SupportAI_Movement : AI_Movement
 
 		if (other.CompareTag("Player") && state != MoveState.FOLLOWING && state != MoveState.CHASE && !isStopped)
 		{
-			isPushQKey = true;
-
 			//state = MoveState.FOLLOWING;
 			if(animation != null && !isAttackAnim)
             {
@@ -244,15 +247,6 @@ public class SupportAI_Movement : AI_Movement
 
 		//GameObjectUtility.RemoveMonoBehavioursWithMissingScript(gameObject);
 
-		if (other.CompareTag("Player")||!isStopped)
-		{
-			isPushQKey = true;
-			//if (!isStopped)
-			//{
-			//	state = MoveState.FOLLOWING;
-			//}
-		}
-
 		if (other.CompareTag("Enemy") && target != null) // targetのnullチェックを追加
 		{
 			var animal = target.GetComponent<Animal>();
@@ -284,14 +278,6 @@ public class SupportAI_Movement : AI_Movement
 				}
 				target = null;
 			}
-		}
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			isPushQKey = false;
 		}
 	}
 }

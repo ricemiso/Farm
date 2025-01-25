@@ -73,7 +73,7 @@ public class WaveSystem : MonoBehaviour
 	void Start()
 	{
 		m_WaveCount = 1;
-		m_Cost = 0;
+		m_Cost = -3;
 		m_NextSummonTime = DayNightSystem.Instance.currentTimeOfDay;
 
 		m_SpawnerList[0].CrystalLight.active = true;
