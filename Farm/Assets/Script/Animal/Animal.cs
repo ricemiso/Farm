@@ -360,7 +360,8 @@ public class Animal : MonoBehaviour
     /// <param name="nowlevel">現在のレベル</param>
     public void LevelUp(int nowlevel)
     {
-        
+       
+
         // maxHealth の上限値が800未満の場合のみスケールを変更
         for(int i=1;i< nowlevel; i++)
         {
@@ -381,7 +382,14 @@ public class Animal : MonoBehaviour
 
             // 現在のスケールを取得
             Vector3 currentScale = gameObject.transform.localScale;
+
+            // 1.6倍のスケールを計算
+            Vector3 newScale = currentScale * 1.2f;
+
+            // スケールを更新
+            gameObject.transform.localScale = newScale;
         }
+
         
     }
 
