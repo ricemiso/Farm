@@ -329,7 +329,6 @@ public class ConstructionManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log($"Hit: {hit.transform.name}");
                 var selectionTransform = hit.transform;
                 if (selectionTransform.gameObject.CompareTag("ghost") && itemToBeConstructed.name == "FoundationModel")
                 {
@@ -462,10 +461,7 @@ public class ConstructionManager : MonoBehaviour
                 ItemToBeDestroy.SetActive(true);
                 ItemToBeDestroy = null; // 使用後に初期化
             }
-            else
-            {
-                Debug.LogWarning("ItemToBeDestroy is null. Skipping SetActive.");
-            }
+           
 
             // 残りの処理
             DestroyItem(itemToBeConstructed);
@@ -570,6 +566,7 @@ public class ConstructionManager : MonoBehaviour
                             if (itemComponent != null)
                             {
                                 Destroy(itemComponent.gameObject); // 子オブジェクトを削除
+                                EquipSystem.Instance.selectedNumber = -1;
                             }
                         }
                     }
