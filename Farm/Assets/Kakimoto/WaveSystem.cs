@@ -99,7 +99,9 @@ public class WaveSystem : MonoBehaviour
 
 			int cost = NightBase + m_WaveCount * NightAdd;
 			m_Cost = SummonEnemy(cost);
-			
+
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 		}
 
 		if (hour < m_WaveLimitTime)
@@ -129,8 +131,6 @@ public class WaveSystem : MonoBehaviour
 	// ret : 使用しなかったコスト
 	public int SummonEnemy(int cost)
 	{
-		SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-		SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
 
 		// 敵の決定
 		List<int> enemyIndexList = new List<int>(); // 召喚できる敵のリスト（num m_EnemyListの番号）
