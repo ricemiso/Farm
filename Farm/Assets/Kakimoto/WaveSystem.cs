@@ -76,10 +76,10 @@ public class WaveSystem : MonoBehaviour
 		m_Cost = -3;
 		m_NextSummonTime = DayNightSystem.Instance.currentTimeOfDay;
 
-		m_SpawnerList[0].CrystalLight.active = true;
+		m_SpawnerList[0].CrystalLight.SetActive(true);
 		for (int i = 1; i < m_SpawnerList.Count; ++i)
 		{
-			m_SpawnerList[i].CrystalLight.active = false;
+			m_SpawnerList[i].CrystalLight.SetActive(false);
 		}
 	}
 
@@ -151,9 +151,9 @@ public class WaveSystem : MonoBehaviour
 			{
 				spawnerIndexList.Add(i);
 				//ミニクリスタルのライトを点灯
-				if (!m_SpawnerList[i].CrystalLight.active)
+				if (m_SpawnerList[i].CrystalLight != null)
 				{
-					m_SpawnerList[i].CrystalLight.active = true;
+					m_SpawnerList[i].CrystalLight.SetActive(true);
 				}
 			}
 		}
