@@ -82,7 +82,7 @@ public class AI_Movement : MonoBehaviour
 		walkCounter = walkTime;
 
 		state = MoveState.STOP;
-
+		
 
 
 		ChooseDirection();  // 初回の方向を選択
@@ -110,7 +110,6 @@ public class AI_Movement : MonoBehaviour
 		// 目的地と現在位置の距離
 		float distance = Vector3.Distance(followPosition, transform.position);
 
-		// AIキャラクターをプレイヤーの後ろに移動
 		Vector3 direction = (followPosition - transform.position).normalized;
 		Quaternion targetRotation = Quaternion.LookRotation(direction);  // AIが向く方向を計算
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);  // 方向転換をスムーズに
