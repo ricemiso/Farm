@@ -193,8 +193,8 @@ public class CrystalGrowth : MonoBehaviour
                 gameOverCanvas.sortingOrder = -1;
                 gameClearCanvas.sortingOrder = 2;
                 gameClearCanvas.gameObject.SetActive(true);
-                SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-                SoundManager.Instance.StopWalkSound();
+				SoundManager.Instance.StopBGMSound();
+				SoundManager.Instance.StopWalkSound();
                 SoundManager.Instance.PlaySound(SoundManager.Instance.gameClearBGM);
                 Transform enemyparent = CreateEnemyPlace.transform;
                 // 親オブジェクトのすべての子オブジェクトを削除
@@ -249,8 +249,8 @@ public class CrystalGrowth : MonoBehaviour
         if (CrystalHealth <= 0)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
-            SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-            SoundManager.Instance.StopWalkSound();
+			SoundManager.Instance.StopBGMSound();
+			SoundManager.Instance.StopWalkSound();
             SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
             CrystalIsDead();
         }

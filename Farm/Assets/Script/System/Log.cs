@@ -68,7 +68,7 @@ public class Log : MonoBehaviour
         string coloredFarmName = $"<color=#{colorHex}>{farmName}</color>";
 
         logQueue.Clear();
-        AddLogMessageToQueue(coloredFarmName + "‚àŠˆ«‰»‚µ‚Ä‚¢‚éBPŒ‚‚³‚ê‚»‚¤‚¾");
+        AddLogMessageToQueue(coloredFarmName + " ‚àŠˆ«‰»‚µ‚Ä‚¢‚éB PŒ‚‚³‚ê‚»‚¤‚¾");
     }
 
 
