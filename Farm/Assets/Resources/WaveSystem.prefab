@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2201245445665378081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5891683408142338059}
+  - component: {fileID: 7078042451055064250}
+  m_Layer: 0
+  m_Name: WaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5891683408142338059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201245445665378081}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 399.3, y: 18.366644, z: 227.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7078042451055064250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201245445665378081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c76e799399bef74aa0055431addb4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WaveCount: 1
+  m_SpawnerList: []
+  m_EnemyList:
+  - EnemyObject: {fileID: 4210931457121724944, guid: f05a96b0e80bc5d4fba97b605f7aa50b, type: 3}
+    Cost: 3
+    WaveLimit: 0
+    Ratio: 5
+  - EnemyObject: {fileID: 7403261691875906541, guid: aa74b80754f8d944fa61e20ecb0acbdc, type: 3}
+    Cost: 4
+    WaveLimit: 0
+    Ratio: 3
+  - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
+    Cost: 8
+    WaveLimit: 3
+    Ratio: 1
+  - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
+    Cost: 10
+    WaveLimit: 5
+    Ratio: 1
+  m_HealthMultiply: 0.8
+  m_DamageMultiply: 0.4
+  m_SizeMultiply: 0
+  Range: {x: 30, y: 0, z: 30}
+  Crystal: {fileID: 0}
+  EnemyParent: {fileID: 0}
+  NightBase: 5
+  NightAdd: 15
