@@ -140,8 +140,8 @@ public class CraftingSystem : MonoBehaviour
         TankMinionBLP = new BluePrint("Minion2Seed", 1, 2, "Mana", 1, "Stone", 1);
         MagicMinionBLP = new BluePrint("Minion3Seed", 1, 2, "Mana", 1, "Log", 1);
         ChestBLP = new BluePrint("Chest", 1, 1, "Log", 4, "", 0);
-        LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 1, "", 0);
-        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 1, "", 0);
+        LogManaBLP = new BluePrint("Mana", 1, 1, "Log", 2, "", 0);
+        StoneManaBLP = new BluePrint("Mana", 1, 1, "Stone", 6, "", 0);
 
         isOpen = false;
 
@@ -722,7 +722,7 @@ public class CraftingSystem : MonoBehaviour
         // ---LogMana---- //
         LogReq1.text = "ŠÛ‘¾ 2 [" + (log_count/* + quickLogCount*/) + "]";
 
-        if ((log_count/* + quickLogCount*/) >= 1
+        if ((log_count/* + quickLogCount*/) >= 2
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftLogManaBTN.gameObject.SetActive(true);
@@ -736,7 +736,7 @@ public class CraftingSystem : MonoBehaviour
 		// ---StoneMana---- //
 		StoneReq1.text = "Î‚±‚ë 6 [" + (stone_count /*+ quickStoneCount*/) + "]";
 
-        if ((stone_count/* + quickStoneCount*/) >= 1
+        if ((stone_count/* + quickStoneCount*/) >= 6
             && InventorySystem.Instance.CheckSlotAvailable(1))
         {
             craftStoneManaBTN.gameObject.SetActive(true);
