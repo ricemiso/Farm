@@ -6,6 +6,8 @@ using UnityEngine;
 public class Rabbit : EnemyAI_Movement
 {
 
+    bool isInRange = false;
+
     protected override void Start()
     {
         base.Start();
@@ -23,37 +25,16 @@ public class Rabbit : EnemyAI_Movement
 
     protected override void Update()
     {
+        base.Update();
 
-       
-      
-            base.Update();
-        
+        // ターゲットと現在位置との距離を計算
+        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
-        
+        // 判定する距離の閾値 (適宜調整)
+        float detectionRange = 15.0f;
 
-        //switch (state)
-        //{
-        //    case MoveState.WALKING:
-        //        Walk();
-        //        break;
-
-        //    case MoveState.CHASE:
-        //        if (target != null)
-        //        {
-        //            ChaseEnemy();
-        //        }
-        //        break;
-
-        //    case MoveState.WAITING:
-        //        Wait();
-        //        break;
-
-        //    default:
-        //        // 停止中など他の状態の処理
-        //        break;
-        //}
-
-       
+        // 距離が一定の範囲内であれば true、それ以外なら false
+        isInRange = distanceToTarget <= detectionRange;
     }
 
     protected override void ChaseEnemy()
@@ -81,11 +62,11 @@ public class Rabbit : EnemyAI_Movement
 
     public void CheckAttack(GameObject obj)
     {
-        if (obj != target) return;
+        if (obj != target || !isInRange) return;
 
         if (currentAttackCooltime <= 0.0f)
         {
-            if(animator == null)
+            if (animator == null)
             {
                 if (animation.GetClip("attack01") != null)
                 {
@@ -102,18 +83,18 @@ public class Rabbit : EnemyAI_Movement
                     animation.Play("attack03");
                 }
             }
-            
+
             currentAttackCooltime = attackCooltime;
         }
     }
 
     public void attackwait()
     {
-        if (GetComponent<Animal>().isDead == false )
+        if (GetComponent<Animal>().isDead == false)
         {
             float damage = GetComponent<Animal>().damage;
-            Attack(damage,target);
+            Attack(damage, target);
         }
-       
+
     }
 }
