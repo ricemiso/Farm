@@ -117,6 +117,11 @@ public class SelectionManager : MonoBehaviour
     [HideInInspector] public GameObject selectedSoil;
 
     /// <summary>
+    /// 強化に必要なマナの差分
+    /// </summary>
+    private int unincreesemana = 0;
+
+    /// <summary>
     /// チョップテキスト。
     /// </summary>
     private Text chopText;
@@ -214,7 +219,6 @@ public class SelectionManager : MonoBehaviour
 
                     int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
                     crystal.GetEnergy(stackCount);
-
                     StartCoroutine(DelayWatering());
                 }
             }
@@ -422,21 +426,18 @@ public class SelectionManager : MonoBehaviour
                     {
                         leveling = true;
                         int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                        unincreesemana = 3 -animal.level;
                         animal.LevelUp(stackCount);
                         StartCoroutine(DelayWatering());
                     }
                 }
                 else
                 {
-
                     //interaction_Info_UI.SetActive(true);
-
                     centerDotimage.gameObject.SetActive(true);
                     handIcon.gameObject.SetActive(false);
 
                     HandIsVisible = false;
-
-
                 }
 
             }
@@ -499,7 +500,11 @@ public class SelectionManager : MonoBehaviour
         }
         else if (leveling)
         {
-            ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem, 3);
+            if (unincreesemana >= 0)
+            {
+                ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem, unincreesemana);
+            }
+           
         }
         else
         {
