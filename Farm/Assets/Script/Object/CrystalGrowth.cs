@@ -112,7 +112,8 @@ public class CrystalGrowth : MonoBehaviour
 	/// </summary>
 	void Start()
     {
-        waveSystem.active = true;
+        if(waveSystem != null)
+            waveSystem.active = true;
 
 		currentEnergy = 0;
         CrystalHealth = CrystalMaxHealth;
@@ -171,7 +172,8 @@ public class CrystalGrowth : MonoBehaviour
             // TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
             if (PlayerState.Instance.currentHydrationPercent >= 100)
             {
-				waveSystem.active = false;
+				if (waveSystem != null)
+					waveSystem.active = false;
 
 				clearparth1.gameObject.SetActive(true);
                 clearparth2.gameObject.SetActive(true);
