@@ -49,35 +49,30 @@ public class Log : MonoBehaviour
         logPanel.SetActive(false);
     }
 
-    public void OnAllyDeath(string allyName)
-    {
-        AddLogMessageToQueue("味方 " + allyName + " が死亡しました。");
-    }
-
-    public IEnumerator OnCrystalAttack()
-    {
-        AddLogMessageToQueue("クリスタルが攻撃されました。");
-        yield return null;
-    }
-
-    public void OnEnemySpawn(string enemyName)
-    {
-        AddLogMessageToQueue("敵 " + enemyName + " が出現しました。");
-    }
-
     public void OnFarmAttack(string FarmName)
     {
+        logQueue.Clear();
         AddLogMessageToQueue(FarmName + " が攻撃されました。");
     }
 
     public void OnFarmDeath(string FarmName)
     {
+        logQueue.Clear();
         AddLogMessageToQueue(FarmName + " が破壊されました。");
     }
+
+    public void OnCreateEnemy(string FarmName)
+    {
+        logQueue.Clear();
+        AddLogMessageToQueue(FarmName + " も活性化している。襲撃されそうだ");
+    }
+
+
 
     private void AddLogMessageToQueue(string message)
     {
         logQueue.Enqueue(message);
+      
         if (!isDisplaying)
         {
             StartCoroutine(ProcessLogQueue());
