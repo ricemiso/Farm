@@ -37423,7 +37423,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7999408748968879015, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
       propertyPath: amountInventry
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1722597568480135006, guid: 6f970b18c92d90f418d7d77a3fe953d4, type: 3}
       propertyPath: m_Name
@@ -44866,11 +44866,11 @@ PrefabInstance:
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[1].Object
       value: 
-      objectReference: {fileID: 806349926}
+      objectReference: {fileID: 1244982888}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[2].Object
       value: 
-      objectReference: {fileID: 1244982888}
+      objectReference: {fileID: 806349926}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[3].Object
       value: 
@@ -44914,11 +44914,11 @@ PrefabInstance:
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[1].CrystalMini
       value: 
-      objectReference: {fileID: 1412846703}
+      objectReference: {fileID: 397610559}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[2].CrystalMini
       value: 
-      objectReference: {fileID: 397610559}
+      objectReference: {fileID: 1412846703}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[3].CrystalMini
       value: 
@@ -44930,11 +44930,11 @@ PrefabInstance:
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[1].CrystalLight
       value: 
-      objectReference: {fileID: 1412846704}
+      objectReference: {fileID: 397610560}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[2].CrystalLight
       value: 
-      objectReference: {fileID: 397610560}
+      objectReference: {fileID: 1412846704}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.data[3].CrystalLight
       value: 
