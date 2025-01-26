@@ -86,19 +86,19 @@ public class DayNightSystem : MonoBehaviour
         UpdateSkyBox();
 
 
-        if (GrobalState.Instance.isTutorialEnd)
+        if (GrobalState.Instance.isTutorialEnd || GrobalState.Instance.isSkip)
         {
             if (currentHour >= 22 && currentHour <= 23 && TimeManager.Instance.dayInGame == 1)
             {
-                Log.Instance.OnCreateEnemy("ミニクリスタル(黄)");
+                Log.Instance.OnCreateEnemy("ミニクリスタル(黄)",Color.yellow);
             }
             else if (currentHour >= 22 && currentHour < 23 && TimeManager.Instance.dayInGame == 2)
             {
-                Log.Instance.OnCreateEnemy("ミニクリスタル(赤)");
+                Log.Instance.OnCreateEnemy("ミニクリスタル(赤)",Color.red);
             }
             else if (currentHour >= 22 && currentHour < 23 && TimeManager.Instance.dayInGame == 3)
             {
-                Log.Instance.OnCreateEnemy("ミニクリスタル(緑)");
+                Log.Instance.OnCreateEnemy("ミニクリスタル(緑)",Color.green);
             }
         }
 

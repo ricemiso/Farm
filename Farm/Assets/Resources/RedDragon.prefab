@@ -2692,7 +2692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973075987484898, guid: 33c0560598ab16c48bf782d8ab9aebd2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4317874184272834, guid: 33c0560598ab16c48bf782d8ab9aebd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -2828,7 +2828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8ead8100d5e1442b2579a7e0b8a19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageInterval: 0.5
+  damageInterval: 0.3
+  boxCollider: {fileID: 2626644360580178454}
 --- !u!198 &8888929712928968268 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198421077076039884, guid: 33c0560598ab16c48bf782d8ab9aebd2, type: 3}
