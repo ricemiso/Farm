@@ -453,7 +453,6 @@ public class Animal : MonoBehaviour
                     Quaternion.identity
                 );
 
-                Debug.Log(lootRecieved.item.name);
             }
         }
 
