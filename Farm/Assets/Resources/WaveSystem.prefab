@@ -52,7 +52,7 @@ MonoBehaviour:
     WaveLimit: 0
     Ratio: 5
   - EnemyObject: {fileID: 7403261691875906541, guid: aa74b80754f8d944fa61e20ecb0acbdc, type: 3}
-    Cost: 4
+    Cost: 5
     WaveLimit: 0
     Ratio: 3
   - EnemyObject: {fileID: 2551284450811901093, guid: 9c6a8b9c372b3ba4b8a7fcaa0cd86a94, type: 3}
