@@ -85,22 +85,24 @@ public class DayNightSystem : MonoBehaviour
         directionalLight.transform.rotation = Quaternion.Euler(new Vector3((currentTimeOfDay * 360) - 90, 170, 0));
         UpdateSkyBox();
 
-        //if (currentHour >= 10 && currentHour < 11&&TimeManager.Instance.dayInGame==1)
-        //{
-        //    Log.Instance.OnCreateEnemy("ミニクリスタル(青)");
-        //}
-        if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 2)
+
+        if (GrobalState.Instance.isTutorialEnd)
         {
-            Log.Instance.OnCreateEnemy("ミニクリスタル(黄)");
+            if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 1)
+            {
+                Log.Instance.OnCreateEnemy("ミニクリスタル(黄)");
+            }
+            else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 2)
+            {
+                Log.Instance.OnCreateEnemy("ミニクリスタル(赤)");
+            }
+            else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 3)
+            {
+                Log.Instance.OnCreateEnemy("ミニクリスタル(緑)");
+            }
         }
-        else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 3)
-        {
-            Log.Instance.OnCreateEnemy("ミニクリスタル(赤)");
-        }
-        else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 4)
-        {
-            Log.Instance.OnCreateEnemy("ミニクリスタル(緑)");
-        }
+
+       
     }
 
     /// <summary>

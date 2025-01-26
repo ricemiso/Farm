@@ -26,9 +26,23 @@ public class Bless : MonoBehaviour
     /// </summary>
     public float damageInterval = 0.5f;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField] BoxCollider boxCollider;
+
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
+
     private void Update()
     {
-        // 範囲内のすべてのターゲットにダメージを与える
+        if (boxCollider == null) return;
+
+            // 範囲外のターゲットを除外
+            ValidateTargetsInRange();
+
         foreach (var target in targetsInRange)
         {
             if (targetCooldowns.TryGetValue(target, out bool isOnCooldown) && !isOnCooldown)
@@ -42,7 +56,6 @@ public class Bless : MonoBehaviour
     /// <summary>
     /// ブレスが接触した対象を追跡リストに追加
     /// </summary>
-    /// <param name="other">接触した敵</param>
     private void OnTriggerEnter(Collider other)
     {
         if (IsValidTarget(other))
@@ -58,21 +71,49 @@ public class Bless : MonoBehaviour
     /// <summary>
     /// 範囲から出た対象を追跡リストから削除
     /// </summary>
-    /// <param name="other">離脱した敵</param>
     private void OnTriggerExit(Collider other)
     {
-        if (targetsInRange.Contains(other))
+        RemoveTarget(other);
+    }
+
+    /// <summary>
+    /// 範囲内のターゲットを確認し、不適切なものを削除
+    /// </summary>
+    private void ValidateTargetsInRange()
+    {
+        var targetsToRemove = new List<Collider>();
+
+        foreach (var target in targetsInRange)
         {
-            targetsInRange.Remove(other);
-            targetCooldowns.Remove(other);
+            // ターゲットが範囲外なら削除リストに追加
+            if (!IsTargetInRange(target))
+            {
+                targetsToRemove.Add(target);
+            }
         }
+
+        // 範囲外のターゲットをリストから削除
+        foreach (var target in targetsToRemove)
+        {
+            RemoveTarget(target);
+        }
+    }
+
+    /// <summary>
+    /// ターゲットがブレスの範囲内にいるかを確認
+    /// </summary>
+    private bool IsTargetInRange(Collider target)
+    {
+        if (boxCollider == null) return false;
+
+        Bounds bounds = boxCollider.bounds;
+
+        return bounds.Contains(target.transform.position);
     }
 
     /// <summary>
     /// 有効なターゲットかどうかを判定
     /// </summary>
-    /// <param name="other">ターゲット</param>
-    /// <returns>有効かどうか</returns>
     private bool IsValidTarget(Collider other)
     {
         return other.CompareTag("SupportUnit") ||
@@ -84,7 +125,6 @@ public class Bless : MonoBehaviour
     /// <summary>
     /// ターゲットにダメージを与える処理
     /// </summary>
-    /// <param name="other">ターゲット</param>
     private void ApplyDamage(Collider other)
     {
         float damage = GetComponentInParent<Animal>().damage;
@@ -113,11 +153,19 @@ public class Bless : MonoBehaviour
     /// <summary>
     /// ターゲットにクールダウンを設定
     /// </summary>
-    /// <param name="target">ターゲット</param>
     private IEnumerator SetCooldown(Collider target)
     {
         targetCooldowns[target] = true;
         yield return new WaitForSeconds(damageInterval);
-        targetCooldowns[target] = false; 
+        targetCooldowns[target] = false;
+    }
+
+    /// <summary>
+    /// ターゲットをリストから削除
+    /// </summary>
+    private void RemoveTarget(Collider target)
+    {
+        targetsInRange.Remove(target);
+        targetCooldowns.Remove(target);
     }
 }
