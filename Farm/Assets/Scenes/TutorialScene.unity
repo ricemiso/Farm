@@ -12410,6 +12410,10 @@ PrefabInstance:
       propertyPath: gameClearCanvas
       value: 
       objectReference: {fileID: 387419571}
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: CreateEnemyPlace
+      value: 
+      objectReference: {fileID: 1671064501}
     - target: {fileID: 1208413681778836044, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -31661,6 +31665,8 @@ MonoBehaviour:
   EnemyParent: {fileID: 0}
   NightBase: 0
   NightAdd: 0
+  NoonBase: 0
+  NoonAdd: 0
 --- !u!1 &1538169292
 GameObject:
   m_ObjectHideFlags: 0
@@ -42905,6 +42911,8 @@ MonoBehaviour:
   selectMana: 0
   selectedManamodel: 0
   currentSelectedObject: {fileID: 0}
+  isnotselected: 0
+  isvisible: 0
 --- !u!1 &2131424797
 GameObject:
   m_ObjectHideFlags: 0

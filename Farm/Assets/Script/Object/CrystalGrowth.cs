@@ -102,6 +102,8 @@ public class CrystalGrowth : MonoBehaviour
     /// </summary>
     [SerializeField] Canvas gameOverCanvas;
 
+    [SerializeField] GameObject CreateEnemyPlace;
+
     /// <summary>
     /// 初期設定を行います。
     /// </summary>
@@ -185,7 +187,12 @@ public class CrystalGrowth : MonoBehaviour
                 SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
                 SoundManager.Instance.StopWalkSound();
                 SoundManager.Instance.PlaySound(SoundManager.Instance.gameClearBGM);
-                //SceneManager.LoadScene("GameClear");
+                Transform enemyparent = CreateEnemyPlace.transform;
+                // 親オブジェクトのすべての子オブジェクトを削除
+                foreach (Transform child in enemyparent)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
         else
