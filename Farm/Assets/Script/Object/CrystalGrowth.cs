@@ -104,12 +104,17 @@ public class CrystalGrowth : MonoBehaviour
 
     [SerializeField] GameObject CreateEnemyPlace;
 
-    /// <summary>
-    /// 初期設定を行います。
-    /// </summary>
-    void Start()
+	//WaveSysytemの参照
+	public GameObject waveSystem;
+
+	/// <summary>
+	/// 初期設定を行います。
+	/// </summary>
+	void Start()
     {
-        currentEnergy = 0;
+        waveSystem.active = true;
+
+		currentEnergy = 0;
         CrystalHealth = CrystalMaxHealth;
         rotAngle = Vector3.zero;
         canBeWatch = false;
@@ -166,7 +171,9 @@ public class CrystalGrowth : MonoBehaviour
             // TODO:中央クリスタルにマナが溜まり切ったらゲームクリア
             if (PlayerState.Instance.currentHydrationPercent >= 100)
             {
-                clearparth1.gameObject.SetActive(true);
+				waveSystem.active = false;
+
+				clearparth1.gameObject.SetActive(true);
                 clearparth2.gameObject.SetActive(true);
                 clearparth3.gameObject.SetActive(true);
                 falseCanvas.gameObject.SetActive(false);

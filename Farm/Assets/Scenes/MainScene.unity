@@ -11786,6 +11786,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4629910313565238438}
     - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: waveSystem
+      value: 
+      objectReference: {fileID: 7825326947658433250}
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: falseCanvas
       value: 
       objectReference: {fileID: 781400052}
@@ -11831,7 +11835,7 @@ PrefabInstance:
       objectReference: {fileID: 425461300}
     - target: {fileID: 2057393547380818641, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_VersionIndex
-      value: 2825
+      value: 2831
       objectReference: {fileID: 0}
     - target: {fileID: 2442985320947855581, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Mesh
@@ -11927,7 +11931,7 @@ PrefabInstance:
       objectReference: {fileID: 1199941283}
     - target: {fileID: 8525132927396582224, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_VersionIndex
-      value: 2640
+      value: 2646
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44964,6 +44968,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4917a7999fe9a72488230e29336468db, type: 3}
+--- !u!1 &7825326947658433250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2201245445665378081, guid: 4917a7999fe9a72488230e29336468db, type: 3}
+  m_PrefabInstance: {fileID: 7825326947658433249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7874624364442104913
 PrefabInstance:
   m_ObjectHideFlags: 0
