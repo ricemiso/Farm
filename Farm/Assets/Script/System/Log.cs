@@ -64,7 +64,7 @@ public class Log : MonoBehaviour
     public void OnCreateEnemy(string FarmName)
     {
         logQueue.Clear();
-        AddLogMessageToQueue(FarmName + " ‚àŠˆ«‰»‚µ‚Ä‚¢‚éBPŒ‚‚³‚ê‚»‚¤‚¾");
+        AddLogMessageToQueue(FarmName + "‚àŠˆ«‰»‚µ‚Ä‚¢‚éBPŒ‚‚³‚ê‚»‚¤‚¾");
     }
 
 
