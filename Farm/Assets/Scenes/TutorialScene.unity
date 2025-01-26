@@ -12403,6 +12403,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781400052}
     - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: CrystalHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 1033260088}
@@ -12414,6 +12418,10 @@ PrefabInstance:
       propertyPath: CreateEnemyPlace
       value: 
       objectReference: {fileID: 1671064501}
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: CrystalMaxHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1208413681778836044, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Mesh
       value: 
