@@ -1669,7 +1669,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 200
   isCraftedMinion: 0
-  damage: 1
+  damage: 10
   healthIncrease: 20
   damageIncrease: 5
   level: 0
@@ -2828,6 +2828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8ead8100d5e1442b2579a7e0b8a19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageInterval: 0.5
 --- !u!198 &8888929712928968268 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198421077076039884, guid: 33c0560598ab16c48bf782d8ab9aebd2, type: 3}
