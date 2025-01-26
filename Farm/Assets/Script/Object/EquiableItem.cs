@@ -88,12 +88,14 @@ public class EquiableItem : MonoBehaviour
     {
         animator.SetTrigger("hit");
 
-        yield return new WaitForSeconds(0.2f);  // スイングサウンドの遅延
-        StartCoroutine(SwingSoundDelay());
+		//yield return new WaitForSeconds(0.2f);  // スイングサウンドの遅延
+		//StartCoroutine(SwingSoundDelay());
+		//yield return new WaitForSeconds(1f);  // 1秒の遅延を追加
 
-        yield return new WaitForSeconds(1f);  // 1秒の遅延を追加
+		//SwingSoundDelayメソッドの処理が不要のため、遅延秒数を統合
+		yield return new WaitForSeconds(1.4f);
 
-        Swinging = false;
+		Swinging = false;
     }
 
     /// <summary>
@@ -164,14 +166,14 @@ public class EquiableItem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        GameObject selectedTree = SelectionManager.Instance.selectedTree;
-        GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
-        GameObject selectedStone = SelectionManager.Instance.selectedStone;
+        //GameObject selectedTree = SelectionManager.Instance.selectedTree;
+        //GameObject selectedCraft = SelectionManager.Instance.selectedCraft;
+        //GameObject selectedStone = SelectionManager.Instance.selectedStone;
 
-        if (selectedTree == null && selectedCraft == null && selectedStone == null)
-        {
-            SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
-        }
+        //if (selectedTree == null && selectedCraft == null && selectedStone == null)
+        //{
+        //    SoundManager.Instance.PlaySound(SoundManager.Instance.toolSwingSound);
+        //}
     }
 
     /// <summary>
