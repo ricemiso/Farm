@@ -23,7 +23,9 @@ public class LongRangeMinion : SupportAI_Movement
     private bool isCheckingAttack = false;
 
     // 範囲内に敵がいない時間
-    private float isNotRangeTime; 
+    private float isNotRangeTime;
+
+    private float attackCheckTime;
 
     protected override void Start()
     {
@@ -38,33 +40,44 @@ public class LongRangeMinion : SupportAI_Movement
 
     protected override void Update()
     {
-        base.Update();
-
+        
+        // 子クラス側の処理を先に行う
         isNotRangeTime += Time.deltaTime;
 
-		// 索敵範囲内なら移動を停止
-		if (isNotRangeTime < 3.0f && target != null)
+        
+
+        // 索敵範囲内なら移動を停止
+        if (isNotRangeTime < 3.0f && target != null && target.transform.GetComponent<Animal>() != null && !target.transform.GetComponent<Animal>().isDead)
         {
             state = MoveState.STOP;  // 移動を停止するためにSTOPにする
         }
         else
         {
-            if (!isStopped) return;
-
-			if (stopPosition != Vector3.zero)
-			{
-				state = MoveState.GO_BACK;  // 元の位置に戻る
-			}
-            else
-			{
-				state = MoveState.FOLLOWING;  // 移動状態に戻す
-			}
+            
+            if (stopPosition != Vector3.zero)
+            {
+                state = MoveState.GO_BACK;  // 元の位置に戻る
+            }
+            else if(!isStopped)
+            {
+                state = MoveState.FOLLOWING;  // 移動状態に戻す
+            }
+           
         }
+
+        base.Update();
     }
+
+
 
     protected override void checkAttack()
     {
-        if (target.tag == "Player") return;
+        // targetがnullまたは破棄されている場合は処理を終了
+        if (target == null || target.tag == "Player" || target.transform == null)
+        {
+            target = null;
+            return;
+        }
 
         animation["Attack2"].speed = 1.7f;
         animation.Play("Attack2");
@@ -106,9 +119,9 @@ public class LongRangeMinion : SupportAI_Movement
         // "Enemy"タグのオブジェクトが接触した場合
         if (other.CompareTag("Enemy"))
         {
+            isNotRangeTime = 0.0f;
             if (!isCheckingAttack)
             {
-                isNotRangeTime = 0.0f;
                 StartCoroutine(CheckAttackWithDelay());
             }
         }
