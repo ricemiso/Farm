@@ -258,7 +258,6 @@ public class AI_Movement : MonoBehaviour
 				target.GetComponent<Animal>().TakeDamage(num);
 				break;
 			case "Crystal":
-				
 				target.GetComponent<CrystalGrowth>().GetHit(num);
 				break;
 			case "MiniCrystal":
