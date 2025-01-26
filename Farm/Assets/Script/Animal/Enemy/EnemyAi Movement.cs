@@ -75,9 +75,10 @@ public class EnemyAI_Movement : AI_Movement
 			Vector3 followPosition = tankMinion.transform.position;
 			distance = Vector3.Distance(followPosition, transform.position);
 
-			if (distance < 50.0f)
+			if (distance < 100.0f)
 			{
-				Chase(followPosition, true);
+				target = tankMinion;
+				state = MoveState.CHASE;
 			}
 		}
 		
