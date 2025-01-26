@@ -16300,6 +16300,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 984581673}
     m_Modifications:
+    - target: {fileID: 130733935938592577, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588131460345256473, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_Name
       value: spawner red
@@ -25503,6 +25507,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 984581673}
     m_Modifications:
+    - target: {fileID: 130733935938592577, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588131460345256473, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_Name
       value: spawner yellow
@@ -31935,6 +31943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 984581673}
     m_Modifications:
+    - target: {fileID: 130733935938592577, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588131460345256473, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_Name
       value: spawner blue
@@ -32349,6 +32361,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 984581673}
     m_Modifications:
+    - target: {fileID: 130733935938592577, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588131460345256473, guid: 42fd4b53caf232141bbccc6e364dcc29, type: 3}
       propertyPath: m_Name
       value: spawner green
