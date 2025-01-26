@@ -61,11 +61,16 @@ public class Log : MonoBehaviour
         AddLogMessageToQueue(FarmName + " ‚ª”j‰ó‚³‚ê‚Ü‚µ‚½B");
     }
 
-    public void OnCreateEnemy(string FarmName)
+    public void OnCreateEnemy(string farmName, Color color)
     {
+        string colorHex = ColorUtility.ToHtmlStringRGB(color);
+
+        string coloredFarmName = $"<color=#{colorHex}>{farmName}</color>";
+
         logQueue.Clear();
-        AddLogMessageToQueue(FarmName + "‚àŠˆ«‰»‚µ‚Ä‚¢‚éBPŒ‚‚³‚ê‚»‚¤‚¾");
+        AddLogMessageToQueue(coloredFarmName + "‚àŠˆ«‰»‚µ‚Ä‚¢‚éBPŒ‚‚³‚ê‚»‚¤‚¾");
     }
+
 
 
 
