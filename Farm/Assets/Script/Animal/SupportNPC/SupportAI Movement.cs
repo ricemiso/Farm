@@ -31,7 +31,7 @@ public class SupportAI_Movement : AI_Movement
         }
 		currentAttackCooltime = 0.0f;
 
-		stopPosition = Vector3.zero;
+		stopPosition = transform.position;
 
 		isStopped = true;
 
@@ -74,7 +74,6 @@ public class SupportAI_Movement : AI_Movement
 		// 一定範囲内かつQキーが押された場合のみ停止・再開を切り替える
 		if (Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
 		{
-
 			// プレイヤーの正面から少し前の座標
 			Vector3 followPosition = player.transform.position + player.transform.forward * 4f;
 
