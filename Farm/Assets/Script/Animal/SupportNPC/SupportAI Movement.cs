@@ -41,35 +41,7 @@ public class SupportAI_Movement : AI_Movement
     // Update is called once per frame
     protected override void Update()
 	{
-		// 接地判定
-		isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
-
-		if (!isGrounded)
-		{
-			// 地面に戻るロジック（例: 重力を適用）
-			Vector3 velocity = gameObject.GetComponent<Rigidbody>().velocity;
-			velocity.y += Physics.gravity.y * Time.deltaTime;
-			gameObject.GetComponent<Rigidbody>().velocity = velocity;
-
-			return;
-		}
-
-		if (target == null)
-        {
-			target = player;
-        }
-
-		if (state == MoveState.CHASE && (animation.IsPlaying("Attack1") || animation.IsPlaying("Attack2")))
-		{
-			isAttackAnim = true;
-		}
-		else
-		{
-			isAttackAnim = false;
-		}
-
-		// プレイヤーとの距離を計算
-		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+		base.Update();
 
 		// 一定範囲内かつQキーが押された場合のみ停止・再開を切り替える
 		if (Input.GetKeyDown(KeyCode.Q))  // Eキーで動作を停止/再開
@@ -107,6 +79,36 @@ public class SupportAI_Movement : AI_Movement
 			}
 		}
 
+		
+
+		
+
+
+		// 接地判定
+		isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
+		if (!isGrounded)
+		{
+			// 地面に戻るロジック（例: 重力を適用）
+			Vector3 velocity = gameObject.GetComponent<Rigidbody>().velocity;
+			velocity.y += Physics.gravity.y * Time.deltaTime;
+			gameObject.GetComponent<Rigidbody>().velocity = velocity;
+		}
+
+		if (target == null && player != null)
+		{
+			target = player;
+		}
+
+		if (state == MoveState.CHASE && (animation.IsPlaying("Attack1") || animation.IsPlaying("Attack2")))
+		{
+			isAttackAnim = true;
+		}
+		else
+		{
+			isAttackAnim = false;
+		}
+
 		switch (state)
 		{
 			case MoveState.CHASE:
@@ -134,8 +136,8 @@ public class SupportAI_Movement : AI_Movement
 				}
 				break;
 			case MoveState.WAITING:
-				//Wait();
-				//break;
+			//Wait();
+			//break;
 			case MoveState.STOP:
 			default:
 				if (!isAttackAnim && !animation.IsPlaying("Idle"))
@@ -145,11 +147,12 @@ public class SupportAI_Movement : AI_Movement
 				break;
 		}
 
-		currentAttackCooltime -= Time.deltaTime;
-		base.Update();
 
+		currentAttackCooltime -= Time.deltaTime;
 		
-    }
+		// プレイヤーとの距離を計算
+		//float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+	}
 
 	// プレイヤーに後ろから追従するメソッド
 	void FollowPlayer()
