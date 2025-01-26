@@ -45,6 +45,10 @@ public class WaveSystem : MonoBehaviour
 	[SerializeField] int NightBase;
 	// 夜のWave毎に増える召喚コスト
 	[SerializeField] int NightAdd;
+	// 継続湧きの初期召喚コスト
+	[SerializeField] int NoonBase;
+	// 継続湧きのWave毎に増える召喚コスト
+	[SerializeField] int NoonAdd;
 
 
 	// 召喚に使用するコスト
@@ -53,6 +57,7 @@ public class WaveSystem : MonoBehaviour
 	int m_WaveLimitTime = -1;
 	// 次に召喚する時間
 	float m_NextSummonTime = 0;
+
 
 
 
@@ -73,7 +78,7 @@ public class WaveSystem : MonoBehaviour
 	void Start()
 	{
 		m_WaveCount = 1;
-		m_Cost = -3;
+		m_Cost = -10;
 		m_NextSummonTime = DayNightSystem.Instance.currentTimeOfDay;
 
 		m_SpawnerList[0].CrystalLight.SetActive(true);
@@ -97,8 +102,8 @@ public class WaveSystem : MonoBehaviour
 			m_WaveLimitTime = 3;
 			m_NextSummonTime = 0.05f;
 
-			int cost = NightBase + m_WaveCount * NightAdd;
-			m_Cost = SummonEnemy(cost);
+			m_Cost += NightBase + m_WaveCount * NightAdd;
+			m_Cost = SummonEnemy(m_Cost);
 
 			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
 			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
@@ -120,7 +125,7 @@ public class WaveSystem : MonoBehaviour
 		{
 			m_NextSummonTime = time + 0.02f;
 
-			m_Cost += m_WaveCount;
+			m_Cost += NoonBase + m_WaveCount * NoonAdd;
 			m_Cost = SummonEnemy(m_Cost);
 
 		}

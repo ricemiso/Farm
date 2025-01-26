@@ -5428,7 +5428,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   isCraftedMinion: 0
-  damage: 25
+  damage: 15
   healthIncrease: 0
   damageIncrease: 0
   level: 0
