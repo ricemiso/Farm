@@ -45,7 +45,7 @@ public class Animal : MonoBehaviour
         Dragon
     }
 
-    [SerializeField] AnimalType thisAnimalType;
+    [SerializeField]public AnimalType thisAnimalType;
 
 
     private Animator animator;
