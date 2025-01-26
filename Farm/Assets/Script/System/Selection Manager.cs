@@ -273,7 +273,6 @@ public class SelectionManager : MonoBehaviour
                 selectgameObject = interactable.gameObject;
 
                 interaction_text.text = interactable.GetItemName(selectgameObject);
-                Debug.Log(selectgameObject.name);
                 interaction_Info_UI.SetActive(true);
 
                 centerDotimage.gameObject.SetActive(false);
