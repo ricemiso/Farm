@@ -357,12 +357,15 @@ public class Animal : MonoBehaviour
     /// <summary>
     /// ミニオンをレベルアップさせる
     /// </summary>
-    /// <param name="nowlevel">現在のレベル</param>
-    public void LevelUp(int nowlevel)
+    /// <param name="manacnt">使用するマナの数</param>
+    public void LevelUp(int manacnt)
     {
-        for (int i = 1; i <= nowlevel; i++)
+       
+
+        for (int i = 0; i < manacnt; i++)
         {
-            
+            if (level >= 3) return;
+
             int HealthIncrease = healthIncrease * (level+1);
             int DamageIncrease = damageIncrease * (level + 1);
 
@@ -380,15 +383,10 @@ public class Animal : MonoBehaviour
             Vector3 currentScale = gameObject.transform.localScale;
 
             // スケールを1.2倍にする
-            Vector3 newScale = currentScale * 1.1f;
+            Vector3 newScale = currentScale * 1.2f;
             gameObject.transform.localScale = newScale;
+            level++;
         }
-
-       
-        level = nowlevel;
-
-
-
     }
 
     /// <summary>
