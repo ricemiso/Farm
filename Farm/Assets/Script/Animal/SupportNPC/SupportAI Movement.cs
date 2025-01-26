@@ -85,7 +85,10 @@ public class SupportAI_Movement : AI_Movement
 				{
 					target = null;
 					state = MoveState.STOP;
-					//animator.SetBool("isRunning", false);  // アニメーションを停止
+					if (!animation.IsPlaying("Idle"))
+					{
+						animation.Play("Idle");
+					}
 
 					stopPosition = gameObject.transform.position;
 				}
