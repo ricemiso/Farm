@@ -14,7 +14,7 @@ public class LongRangeMinion : SupportAI_Movement
 
     [SerializeField]
     [Tooltip("’e‚Ì‘¬‚³")]
-    private float speed = 30.0f;
+    private float speed = 200.0f;
 
     [SerializeField]
     [Tooltip("’e‚Ì¶‘¶ŠÔ")]
@@ -43,7 +43,7 @@ public class LongRangeMinion : SupportAI_Movement
         isNotRangeTime += Time.deltaTime;
 
 		// õ“G”ÍˆÍ“à‚È‚çˆÚ“®‚ğ’â~
-		if (isNotRangeTime < 3.0f)
+		if (isNotRangeTime < 3.0f && target != null)
         {
             state = MoveState.STOP;  // ˆÚ“®‚ğ’â~‚·‚é‚½‚ß‚ÉSTOP‚É‚·‚é
         }
@@ -90,7 +90,7 @@ public class LongRangeMinion : SupportAI_Movement
         Vector3 direction = (target.transform.position - spawnPosition).normalized;
 
         // ’e‚É—Í‚ğ‰Á‚¦‚é
-        newBullet.GetComponent<Rigidbody>().AddForce(direction * 500.0f, ForceMode.Impulse);
+        newBullet.GetComponent<Rigidbody>().AddForce(direction * speed, ForceMode.Impulse);
 
         // ’e‚Ì–¼‘O‚Æõ–½‚ğİ’è
         newBullet.name = bullet.name;
@@ -106,9 +106,9 @@ public class LongRangeMinion : SupportAI_Movement
         // "Enemy"ƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚ªÚG‚µ‚½ê‡
         if (other.CompareTag("Enemy"))
         {
-            isNotRangeTime = 0.0f;
             if (!isCheckingAttack)
             {
+                isNotRangeTime = 0.0f;
                 StartCoroutine(CheckAttackWithDelay());
             }
         }
