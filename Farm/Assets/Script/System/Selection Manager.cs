@@ -119,7 +119,7 @@ public class SelectionManager : MonoBehaviour
     /// <summary>
     /// 強化に必要なマナの差分
     /// </summary>
-    private int unincreesemana = 0;
+    private int decreaseMana = 0;
 
     /// <summary>
     /// チョップテキスト。
@@ -425,9 +425,11 @@ public class SelectionManager : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && !leveling && animal.level <= 3)
                     {
                         leveling = true;
-                        int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
-                        unincreesemana = 3 -animal.level;
-                        animal.LevelUp(stackCount);
+						//unincreesemana = 3 - animal.level;
+						//animal.LevelUp(stackCount);
+						int stackCount = EquipSystem.Instance.GetEquippedItemStackCountBySlot(EquipSystem.Instance.selectedNumber);
+                        decreaseMana = Math.Min(3 -animal.level, stackCount);
+                        animal.LevelUp(decreaseMana);
                         StartCoroutine(DelayWatering());
                     }
                 }
@@ -500,9 +502,9 @@ public class SelectionManager : MonoBehaviour
         }
         else if (leveling)
         {
-            if (unincreesemana >= 0)
+            if (decreaseMana >= 0)
             {
-                ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem, unincreesemana);
+                ConstructionManager.Instance.HandleItemStack(EquipSystem.Instance.selectedItem, decreaseMana);
             }
            
         }
