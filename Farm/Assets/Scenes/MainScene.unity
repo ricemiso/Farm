@@ -11798,6 +11798,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8468549574247606553}
     - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
+      propertyPath: CreateEnemyPlace
+      value: 
+      objectReference: {fileID: 1671064501}
+    - target: {fileID: -5113967709488760974, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: CrystalMaxHealth
       value: 2000
       objectReference: {fileID: 0}
@@ -11827,7 +11831,7 @@ PrefabInstance:
       objectReference: {fileID: 425461300}
     - target: {fileID: 2057393547380818641, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_VersionIndex
-      value: 2822
+      value: 2825
       objectReference: {fileID: 0}
     - target: {fileID: 2442985320947855581, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_Mesh
@@ -11923,7 +11927,7 @@ PrefabInstance:
       objectReference: {fileID: 1199941283}
     - target: {fileID: 8525132927396582224, guid: 667baf5b44b92b145b1471959b616818, type: 3}
       propertyPath: m_VersionIndex
-      value: 2637
+      value: 2640
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
