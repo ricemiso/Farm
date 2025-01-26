@@ -88,15 +88,15 @@ public class DayNightSystem : MonoBehaviour
 
         if (GrobalState.Instance.isTutorialEnd)
         {
-            if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 1)
+            if (currentHour >= 22 && currentHour <= 23 && TimeManager.Instance.dayInGame == 1)
             {
                 Log.Instance.OnCreateEnemy("ミニクリスタル(黄)");
             }
-            else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 2)
+            else if (currentHour >= 22 && currentHour < 23 && TimeManager.Instance.dayInGame == 2)
             {
                 Log.Instance.OnCreateEnemy("ミニクリスタル(赤)");
             }
-            else if (currentHour >= 10 && currentHour < 11 && TimeManager.Instance.dayInGame == 3)
+            else if (currentHour >= 22 && currentHour < 23 && TimeManager.Instance.dayInGame == 3)
             {
                 Log.Instance.OnCreateEnemy("ミニクリスタル(緑)");
             }
