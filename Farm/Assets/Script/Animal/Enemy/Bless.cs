@@ -2,28 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//担当者　越浦晃生
+
 /// <summary>
 /// ドラゴンのブレスを管理するプログラム
 /// </summary>
 public class Bless : MonoBehaviour
 {
-    //担当者　越浦晃生
 
-    private LongRange Long;
-    private HashSet<Collider> targetsInRange = new HashSet<Collider>(); // 範囲内のオブジェクトを追跡
-    public float damageInterval = 0.5f; // ダメージ間隔
+    /// <summary>
+    /// 範囲内のターゲットを追跡
+    /// </summary>
+    private HashSet<Collider> targetsInRange = new HashSet<Collider>();
 
-    private void Start()
-    {
-        Long = GetComponentInParent<LongRange>();
-    }
+    /// <summary>
+    /// ターゲットごとのクールダウン
+    /// </summary>
+    private Dictionary<Collider, bool> targetCooldowns = new Dictionary<Collider, bool>();
+
+    /// <summary>
+    /// ダメージ間隔
+    /// </summary>
+    public float damageInterval = 0.5f;
 
     private void Update()
     {
         // 範囲内のすべてのターゲットにダメージを与える
         foreach (var target in targetsInRange)
         {
-            ApplyDamage(target);
+            if (targetCooldowns.TryGetValue(target, out bool isOnCooldown) && !isOnCooldown)
+            {
+                ApplyDamage(target);
+                StartCoroutine(SetCooldown(target));
+            }
         }
     }
 
@@ -36,6 +48,10 @@ public class Bless : MonoBehaviour
         if (IsValidTarget(other))
         {
             targetsInRange.Add(other);
+            if (!targetCooldowns.ContainsKey(other))
+            {
+                targetCooldowns[other] = false; // 初期状態でクールダウンはオフ
+            }
         }
     }
 
@@ -48,6 +64,7 @@ public class Bless : MonoBehaviour
         if (targetsInRange.Contains(other))
         {
             targetsInRange.Remove(other);
+            targetCooldowns.Remove(other);
         }
     }
 
@@ -72,75 +89,35 @@ public class Bless : MonoBehaviour
     {
         float damage = GetComponentInParent<Animal>().damage;
 
-        if (!IsCooldownActive(other))
+        if (other.TryGetComponent<Animal>(out var animal))
         {
-            if (other.TryGetComponent<Animal>(out var animal))
+            if (!animal.isDead && animal.animalName != "ドラゴン")
             {
-                if (!animal.isDead && animal.animalName != "ドラゴン")
-                {
-                    animal.TakeDamage(damage);
-                }
+                animal.TakeDamage(damage);
             }
-            else if (other.TryGetComponent<CrystalGrowth>(out var crystal))
-            {
-                crystal.GetHit(damage);
-            }
-            else if (other.TryGetComponent<MiniCrystal>(out var minicrystal))
-            {
-                minicrystal.GetHit(damage);
-            }
-            else if (other.GetComponent<MouseMovement>())
-            {
-                PlayerState.Instance.AddHealth(-damage);
-            }
-
-            // クールダウンを設定
-            StartCoroutine(SetCooldown(other));
         }
-    }
-
-    /// <summary>
-    /// クールダウンがアクティブかどうかを確認
-    /// </summary>
-    /// <param name="other">ターゲット</param>
-    /// <returns>クールダウン中かどうか</returns>
-    private bool IsCooldownActive(Collider other)
-    {
-        return other.GetComponent<TargetCooldown>()?.IsCooldown ?? false;
+        else if (other.TryGetComponent<CrystalGrowth>(out var crystal))
+        {
+            crystal.GetHit(damage);
+        }
+        else if (other.TryGetComponent<MiniCrystal>(out var minicrystal))
+        {
+            minicrystal.GetHit(damage);
+        }
+        else if (other.GetComponent<MouseMovement>())
+        {
+            PlayerState.Instance.AddHealth(-damage);
+        }
     }
 
     /// <summary>
     /// ターゲットにクールダウンを設定
     /// </summary>
-    /// <param name="other">ターゲット</param>
-    private IEnumerator SetCooldown(Collider other)
+    /// <param name="target">ターゲット</param>
+    private IEnumerator SetCooldown(Collider target)
     {
-        var cooldown = other.GetComponent<TargetCooldown>();
-        if (cooldown == null)
-        {
-            cooldown = other.gameObject.AddComponent<TargetCooldown>();
-        }
-
-        cooldown.StartCooldown(damageInterval);
+        targetCooldowns[target] = true;
         yield return new WaitForSeconds(damageInterval);
-    }
-}
-
-/// <summary>
-/// クールダウン管理クラス
-/// </summary>
-public class TargetCooldown : MonoBehaviour
-{
-    public bool IsCooldown { get; private set; }
-
-    public void StartCooldown(float cooldownTime)
-    {
-        IsCooldown = true;
-        Invoke(nameof(EndCooldown), cooldownTime);
-    }
-
-    private void EndCooldown()
-    {
-        IsCooldown = false;
+        targetCooldowns[target] = false; 
     }
 }
