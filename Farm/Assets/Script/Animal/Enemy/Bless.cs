@@ -106,10 +106,27 @@ public class Bless : MonoBehaviour
     {
         if (boxCollider == null) return false;
 
-        Bounds bounds = boxCollider.bounds;
+        Vector3 boxCenter = boxCollider.bounds.center;
+        Vector3 boxSize = boxCollider.size * 0.5f; // 半分のサイズを取得（ローカルサイズ）
 
-        return bounds.Contains(target.transform.position);
+        // BoxColliderの回転を考慮
+        Quaternion rotation = boxCollider.transform.rotation;
+
+        // OverlapBoxでターゲットが範囲内かを確認
+        Collider[] hits = Physics.OverlapBox(boxCenter, boxSize, rotation);
+
+        // hits にターゲットが含まれているかを確認
+        foreach (var hit in hits)
+        {
+            if (hit == target)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
+
 
     /// <summary>
     /// 有効なターゲットかどうかを判定
