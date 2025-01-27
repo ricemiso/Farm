@@ -232,7 +232,7 @@ public class AI_Movement : MonoBehaviour
 	}
 
 	// ‘ÎÛ‚ÉUŒ‚
-	public void Attack(float num, GameObject obj = null)
+	public void Attack(float num, GameObject obj = null, GameObject caller = null)
 	{
 		// TODO : ‘Ì—ÍŠÇ—‚ğˆê‚Â‚ÌƒNƒ‰ƒX‚É“‡‚³‚¹‚½‚¢
 
@@ -242,7 +242,9 @@ public class AI_Movement : MonoBehaviour
 		switch (obj.tag)
 		{
 			case "Player":
-				if(num >= 30)
+				if (caller != null && caller.CompareTag("SupportUnit")) 
+					break;
+				if (num >= 30)
 				{
 					num = 30;
 				}
