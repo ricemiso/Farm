@@ -4950,10 +4950,10 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u30BF\u30F3\u30AF)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 200
+  maxHealth: 250
   isCraftedMinion: 0
   damage: 5
-  healthIncrease: 200
+  healthIncrease: 250
   damageIncrease: 1
   level: 0
   canBeChopped: 0
@@ -5165,6 +5165,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheck: {fileID: 1707359576386018356}
+  distance: 30
 --- !u!1 &4656628903524664573
 GameObject:
   m_ObjectHideFlags: 0
