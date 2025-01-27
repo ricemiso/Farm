@@ -7,6 +7,7 @@ public class Rabbit : EnemyAI_Movement
 {
 
     bool isInRange = false;
+    [SerializeField] float Enemydistance = 8.0;
 
     protected override void Start()
     {
@@ -31,7 +32,7 @@ public class Rabbit : EnemyAI_Movement
         float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
         // 判定する距離の閾値 (適宜調整)
-        float detectionRange = 15.0f;
+        float detectionRange = Enemydistance;
 
         // 距離が一定の範囲内であれば true、それ以外なら false
         isInRange = distanceToTarget <= detectionRange;
@@ -62,7 +63,7 @@ public class Rabbit : EnemyAI_Movement
 
     public void CheckAttack(GameObject obj)
     {
-        if (obj != target || !isInRange) return;
+        if (obj != target && isInRange) return;
 
         if (currentAttackCooltime <= 0.0f)
         {
@@ -90,7 +91,7 @@ public class Rabbit : EnemyAI_Movement
 
     public void attackwait()
     {
-        if (GetComponent<Animal>().isDead == false)
+        if (GetComponent<Animal>().isDead == false )
         {
             float damage = GetComponent<Animal>().damage;
             Attack(damage, target);

@@ -185,6 +185,7 @@ public class Animal : MonoBehaviour
             if (ai != null)
             {
                 ai.IsChaseSupportUnit = true;
+                
                 ai.IsChasePlayer = true;
             }
 
