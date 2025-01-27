@@ -49,7 +49,7 @@ public class NormalMinion : SupportAI_Movement
 	protected override void checkAttack()
 	{
 
-		if(target != player)
+		if(target != player || gameObject.transform.parent.name != ConstructionManager.Instance.constructionHoldingSpot.name)
         {
 			animation.Play("Attack1");
 
