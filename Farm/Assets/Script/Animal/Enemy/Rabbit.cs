@@ -28,8 +28,10 @@ public class Rabbit : EnemyAI_Movement
     {
         base.Update();
 
-        // ターゲットと現在位置との距離を計算
-        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+        if (target == null) return;
+
+            // ターゲットと現在位置との距離を計算
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
         // 判定する距離の閾値 (適宜調整)
         float detectionRange = Enemydistance;
