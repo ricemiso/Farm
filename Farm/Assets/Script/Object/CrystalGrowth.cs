@@ -255,7 +255,10 @@ public class CrystalGrowth : MonoBehaviour
 
         if (CrystalHealth <= 0)
         {
-            SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
+            //UI”ñ•\Ž¦
+			falseCanvas.gameObject.SetActive(false);
+
+			SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
 			//SoundManager.Instance.StopBGMSound();
 			SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
 			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
