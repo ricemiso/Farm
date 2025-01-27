@@ -38,20 +38,26 @@ public class Bless : MonoBehaviour
 
     private void Update()
     {
+        // boxCollider が null の場合は処理をスキップ
         if (boxCollider == null) return;
 
-            // 範囲外のターゲットを除外
-            ValidateTargetsInRange();
+        // 範囲外のターゲットを除外
+        ValidateTargetsInRange();
 
+        // 有効なターゲットだけに対して処理を行う
         foreach (var target in targetsInRange)
         {
+            if (target == null) continue; // null チェック
+
+            // targetCooldowns にターゲットが存在し、クールダウン中でない場合
             if (targetCooldowns.TryGetValue(target, out bool isOnCooldown) && !isOnCooldown)
             {
-                ApplyDamage(target);
-                StartCoroutine(SetCooldown(target));
+                ApplyDamage(target); // ダメージを適用
+                StartCoroutine(SetCooldown(target)); // クールダウンを開始
             }
         }
     }
+
 
     /// <summary>
     /// ブレスが接触した対象を追跡リストに追加
@@ -76,18 +82,23 @@ public class Bless : MonoBehaviour
         RemoveTarget(other);
     }
 
-    /// <summary>
-    /// 範囲内のターゲットを確認し、不適切なものを削除
-    /// </summary>
     private void ValidateTargetsInRange()
     {
+        // boxCollider が null の場合は処理を中断
         if (boxCollider == null) return;
 
         var targetsToRemove = new List<Collider>();
 
         foreach (var target in targetsInRange)
         {
-            // ターゲットが範囲外なら削除リストに追加
+            // ターゲットが null または破棄されている場合をチェック
+            if (target == null)
+            {
+                targetsToRemove.Add(target);
+                continue;
+            }
+
+            // ターゲットが範囲外の場合をチェック
             if (!IsTargetInRange(target))
             {
                 targetsToRemove.Add(target);
@@ -97,9 +108,13 @@ public class Bless : MonoBehaviour
         // 範囲外のターゲットをリストから削除
         foreach (var target in targetsToRemove)
         {
-            RemoveTarget(target);
+            if (target != null) // 念のため null チェック
+            {
+                RemoveTarget(target);
+            }
         }
     }
+
 
     /// <summary>
     /// ターゲットがブレスの範囲内にいるかを確認（Bounds.Contains を使わない）
