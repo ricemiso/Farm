@@ -162,7 +162,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
-        if (isConsumable && Input.GetKeyDown(KeyCode.F) && EquipSystem.Instance.currentSelectedObject.name=="Mana" && PlayerState.Instance.currentHealth < 200)
+        if (isConsumable && Input.GetKeyDown(KeyCode.F) && (EquipSystem.Instance.currentSelectedObject.name=="Mana"|| EquipSystem.Instance.currentSelectedObject.name == "Mana(Clone)") && PlayerState.Instance.currentHealth < 200)
         {
             itemPendingConsumption = gameObject;
 
