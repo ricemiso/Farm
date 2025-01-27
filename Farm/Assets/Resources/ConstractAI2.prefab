@@ -5206,11 +5206,11 @@ MonoBehaviour:
   animalName: "\u30DF\u30CB\u30AA\u30F3(\u8FD1\u63A5)"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 50
+  maxHealth: 100
   isCraftedMinion: 0
-  damage: 30
-  healthIncrease: 45
-  damageIncrease: 25
+  damage: 20
+  healthIncrease: 25
+  damageIncrease: 35
   level: 0
   canBeChopped: 0
   canbeWatch: 0
@@ -5376,6 +5376,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   groundCheck: {fileID: 5877598633676571140}
+  distance: 30
 --- !u!114 &2685701426436218251
 MonoBehaviour:
   m_ObjectHideFlags: 0
