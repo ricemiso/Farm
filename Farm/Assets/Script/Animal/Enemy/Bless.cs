@@ -100,31 +100,29 @@ public class Bless : MonoBehaviour
     }
 
     /// <summary>
-    /// ターゲットがブレスの範囲内にいるかを確認
+    /// ターゲットがブレスの範囲内にいるかを確認（Bounds.Contains を使わない）
+    /// </summary>
+    /// <summary>
+    /// ターゲットが拡張されたブレスの範囲内にいるかを確認
     /// </summary>
     private bool IsTargetInRange(Collider target)
     {
         if (boxCollider == null) return false;
 
-        Vector3 boxCenter = boxCollider.bounds.center;
-        Vector3 boxSize = boxCollider.size * 0.5f; // 半分のサイズを取得（ローカルサイズ）
+        // 判定範囲の拡大倍率（必要に応じてインスペクターから調整可能）
+        float rangeMultiplier = 1.5f; // 1.5倍の範囲
 
-        // BoxColliderの回転を考慮
-        Quaternion rotation = boxCollider.transform.rotation;
+        // BoxCollider の中心とサイズを取得
+        Vector3 boxCenter = boxCollider.transform.TransformPoint(boxCollider.center);
+        Vector3 boxSize = (boxCollider.size * 0.5f) * rangeMultiplier; // 範囲を拡大
 
-        // OverlapBoxでターゲットが範囲内かを確認
-        Collider[] hits = Physics.OverlapBox(boxCenter, boxSize, rotation);
+        // ターゲットの位置を BoxCollider のローカル空間に変換
+        Vector3 localTargetPosition = boxCollider.transform.InverseTransformPoint(target.transform.position);
 
-        // hits にターゲットが含まれているかを確認
-        foreach (var hit in hits)
-        {
-            if (hit == target)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        // ローカル空間の範囲でチェック
+        return Mathf.Abs(localTargetPosition.x) <= boxSize.x &&
+               Mathf.Abs(localTargetPosition.y) <= boxSize.y &&
+               Mathf.Abs(localTargetPosition.z) <= boxSize.z;
     }
 
 
