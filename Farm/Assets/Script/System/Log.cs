@@ -27,6 +27,7 @@ public class Log : MonoBehaviour
         }
 
         logPanel.SetActive(false); // 初期状態ではパネルを非表示
+
     }
 
     public void OnFarmAttack(string farmName, Color color)
@@ -76,8 +77,8 @@ public class Log : MonoBehaviour
         // パネルを表示
         logPanel.SetActive(true);
 
-        // メッセージを個別に処理
-        StartCoroutine(HandleLogLifetime(newLogObject, newLogText, message));
+		// メッセージを個別に処理
+		StartCoroutine(HandleLogLifetime(newLogObject, newLogText, message));
     }
 
     private IEnumerator HandleLogLifetime(GameObject logObject, Text logText, string message)
@@ -99,15 +100,17 @@ public class Log : MonoBehaviour
 
         // ログを削除
         Destroy(logObject);
+		logPanel.SetActive(false);
 
-        // メッセージの状態を「再表示可能」に設定
-        logStatus[message] = true;
+		// メッセージの状態を「再表示可能」に設定
+		logStatus[message] = true;
 
-        // ログが全て消えたらパネルを非表示にする
-        if (logContainer.childCount == 0)
-        {
-            logPanel.SetActive(false);
-        }
+		// ログが全て消えたらパネルを非表示にする
+		//childCountの初期値が1のため、 １以下とする
+		//if (logContainer.childCount <= 1)
+  //      {
+		//	logPanel.SetActive(false);
+  //      }
     }
 
     /// <summary>

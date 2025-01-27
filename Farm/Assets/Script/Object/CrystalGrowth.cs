@@ -135,6 +135,9 @@ public class CrystalGrowth : MonoBehaviour
     /// </summary>
     void Update()
     {
+        Debug.Log("childCount " +  Log.Instance.logContainer.childCount);
+
+
         if (PlayerState.Instance.currentHealth <= 0) return;
 
         //TODO:Ž~‚ß‚éˆ—‚ð“ü‚ê‚é
@@ -193,7 +196,10 @@ public class CrystalGrowth : MonoBehaviour
                 gameOverCanvas.sortingOrder = -1;
                 gameClearCanvas.sortingOrder = 2;
                 gameClearCanvas.gameObject.SetActive(true);
-				SoundManager.Instance.StopBGMSound();
+				//SoundManager.Instance.StopBGMSound();
+				SoundManager.Instance.StopSound(SoundManager.Instance.gameOverBGM);
+				SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+				SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
 				SoundManager.Instance.StopWalkSound();
                 SoundManager.Instance.PlaySound(SoundManager.Instance.gameClearBGM);
                 Transform enemyparent = CreateEnemyPlace.transform;
@@ -237,7 +243,7 @@ public class CrystalGrowth : MonoBehaviour
     public void GetHit(float damage)
     {
 
-        Log.Instance.OnFarmAttack(gameObject.name,Color.black);
+        Log.Instance.OnFarmAttack(gameObject.name,Color.cyan);
 
         SoundManager.Instance.PlaySound(SoundManager.Instance.CrystalAttack);
 
@@ -250,7 +256,10 @@ public class CrystalGrowth : MonoBehaviour
         if (CrystalHealth <= 0)
         {
             SoundManager.Instance.PlaySound(SoundManager.Instance.Crystalbreak);
-			SoundManager.Instance.StopBGMSound();
+			//SoundManager.Instance.StopBGMSound();
+			SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
+			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
 			SoundManager.Instance.StopWalkSound();
             SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
             CrystalIsDead();

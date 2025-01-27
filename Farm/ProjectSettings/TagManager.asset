@@ -35,11 +35,11 @@ TagManager:
   - 
   - Ground
   - Equiable
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Bullet
+  - EnemyBullet
+  - Minion
   - 
   - 
   - 

@@ -12,16 +12,23 @@ public class Magic : MonoBehaviour
         Damage = damage;
     }
 
-	private void OnTriggerEnter(Collider other)
+	private void OnCollisionEnter(Collision collision)
 	{
-		if (other.gameObject.CompareTag("Enemy"))
+		if (collision.gameObject.CompareTag("Enemy"))
 		{
 			GrobalState.Instance.isDamage = true;
-			other.gameObject.GetComponent<Animal>().TakeDamage(Damage);
+			collision.gameObject.GetComponent<Animal>().TakeDamage(Damage);
 			Destroy(this.gameObject);
 		}
 	}
-	
 
-
+	//private void OnTriggerEnter(Collider other)
+	//{
+	//	if (other.gameObject.CompareTag("Enemy"))
+	//	{
+	//		GrobalState.Instance.isDamage = true;
+	//		other.gameObject.GetComponent<Animal>().TakeDamage(Damage);
+	//		Destroy(this.gameObject);
+	//	}
+	//}
 }
