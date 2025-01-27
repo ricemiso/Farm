@@ -196,6 +196,8 @@ public class EquipSystem : MonoBehaviour
             destoroymodel();
         }
 
+
+
     }
 
 
@@ -212,10 +214,19 @@ public class EquipSystem : MonoBehaviour
                 GameObject potentialObject = selectedSlot.transform.GetChild(0).gameObject;
 
                 // InventoryItem を持っているかチェック
-                if (potentialObject.GetComponent<InventoryItem>() != null)
+                InventoryItem item = potentialObject.GetComponent<InventoryItem>();
+                if (item != null)
                 {
-                    currentSelectedObject = potentialObject;
-                   
+                    // スタックが0の場合は削除
+                    if (item.amountInventry <= 0)
+                    {
+                        Destroy(potentialObject);
+                        currentSelectedObject = null;
+                    }
+                    else
+                    {
+                        currentSelectedObject = potentialObject;
+                    }
                 }
                 else
                 {
@@ -226,10 +237,20 @@ public class EquipSystem : MonoBehaviour
                     while (childTransform.childCount > 0 && !found)
                     {
                         childTransform = childTransform.GetChild(0);
+                        item = childTransform.GetComponent<InventoryItem>();
 
-                        if (childTransform.GetComponent<InventoryItem>() != null)
+                        if (item != null)
                         {
-                            currentSelectedObject = childTransform.gameObject;
+                            // スタックが0の場合は削除
+                            if (item.amountInventry <= 0)
+                            {
+                                Destroy(childTransform.gameObject);
+                                currentSelectedObject = null;
+                            }
+                            else
+                            {
+                                currentSelectedObject = childTransform.gameObject;
+                            }
                             found = true;
                         }
                     }
@@ -251,6 +272,7 @@ public class EquipSystem : MonoBehaviour
             currentSelectedObject = null; // 選択されていない場合
         }
     }
+
 
     /// <summary>
     /// マウスホイールでクイックスロットを切り替えます。
