@@ -367,12 +367,12 @@ public class Animal : MonoBehaviour
         {
             if (level >= 3) return;
 
-            int HealthIncrease = healthIncrease * (level+1);
-            int DamageIncrease = damageIncrease * (level + 1);
+            //int HealthIncrease = healthIncrease * (level+1);
+            //int DamageIncrease = damageIncrease * (level + 1);
 
-            maxHealth += HealthIncrease;
+            maxHealth += healthIncrease;
             currentHealth = maxHealth;
-            damage += DamageIncrease;
+            damage += damageIncrease;
 
             CraftingSystem.Instance.islevelUp = false;
 
