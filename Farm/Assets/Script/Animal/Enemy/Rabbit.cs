@@ -7,7 +7,7 @@ public class Rabbit : EnemyAI_Movement
 {
 
     bool isInRange = false;
-    [SerializeField] float Enemydistance = 8.0;
+    [SerializeField] float Enemydistance = 8.0f;
 
     protected override void Start()
     {
