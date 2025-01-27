@@ -81,6 +81,8 @@ public class Bless : MonoBehaviour
     /// </summary>
     private void ValidateTargetsInRange()
     {
+        if (boxCollider == null) return;
+
         var targetsToRemove = new List<Collider>();
 
         foreach (var target in targetsInRange)
