@@ -142,7 +142,7 @@ public class SupportAI_Movement : AI_Movement
 			default:
 				if (!isAttackAnim && !animation.IsPlaying("Idle"))
 				{
-					animation.Play("Idle");
+					animation.PlayQueued("Idle");
 				}
 				break;
 		}
