@@ -44908,14 +44908,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671064501}
     - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
-      propertyPath: m_DamageMultiply
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
-      propertyPath: m_HealthMultiply
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7078042451055064250, guid: 4917a7999fe9a72488230e29336468db, type: 3}
       propertyPath: m_SpawnerList.Array.size
       value: 4
       objectReference: {fileID: 0}

@@ -63,13 +63,13 @@ MonoBehaviour:
     Cost: 100
     WaveLimit: 5
     Ratio: 1
-  m_HealthMultiply: 0.8
-  m_DamageMultiply: 0.2
-  m_SizeMultiply: 0
+  m_HealthMultiply: 1.9
+  m_DamageMultiply: 1.3
+  m_SizeMultiply: 1
   Range: {x: 30, y: 0, z: 30}
   Crystal: {fileID: 0}
   EnemyParent: {fileID: 0}
-  NightBase: 0
-  NightAdd: 150
-  NoonBase: 4
-  NoonAdd: 8
+  NightBase: -100
+  NightAdd: 200
+  NoonBase: 0
+  NoonAdd: 10

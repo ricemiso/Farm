@@ -204,9 +204,9 @@ public class WaveSystem : MonoBehaviour
 
 		// “G‚Ì¢Š«
 
-		float health = 1.0f + m_HealthMultiply * m_WaveCount;
-		float damage = 1.0f + m_DamageMultiply * m_WaveCount;
-		float size = 1.0f + m_SizeMultiply * m_WaveCount;
+		float health = MathF.Pow(m_HealthMultiply, m_WaveCount);
+		float damage = MathF.Pow(m_DamageMultiply, m_WaveCount);
+		float size = MathF.Pow(m_SizeMultiply, m_WaveCount);
 		for (int i = 0; i < enemyIndexList.Count; ++i)
 		{
 			int index = enemyIndexList[i];
