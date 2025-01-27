@@ -61,7 +61,7 @@ MonoBehaviour:
     Ratio: 1
   - EnemyObject: {fileID: 5624160981380968612, guid: 64d7cdd3cecdc8e4cb520cc43b472224, type: 3}
     Cost: 100
-    WaveLimit: 5
+    WaveLimit: 4
     Ratio: 1
   m_HealthMultiply: 1.9
   m_DamageMultiply: 1.3
@@ -72,4 +72,4 @@ MonoBehaviour:
   NightBase: -100
   NightAdd: 200
   NoonBase: 0
-  NoonAdd: 10
+  NoonAdd: 11
