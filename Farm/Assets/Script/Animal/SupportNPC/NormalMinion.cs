@@ -10,7 +10,7 @@ public class NormalMinion : SupportAI_Movement
 	/// <summary>
 	/// 自分とタンクミニオンの距離
 	/// </summary>
-	private float distance = 0;
+	[SerializeField] float distance = 30.0f;
 
 	protected override void Start()
 	{
@@ -25,7 +25,7 @@ public class NormalMinion : SupportAI_Movement
 		if (tankMinion != null && !tankMinion.gameObject.GetComponent<Animal>().isDead)  // タンクミニオンが生きているかチェック
 		{
 
-			Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, 50.0f); // 100.0f以内にいる敵を取得
+			Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, distance);
 
 			foreach (var enemy in nearbyEnemies)
 			{
