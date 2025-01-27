@@ -5426,7 +5426,7 @@ MonoBehaviour:
   animalName: "\u30A6\u30EB\u30D5"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 150
+  maxHealth: 300
   isCraftedMinion: 0
   damage: 25
   healthIncrease: 0
