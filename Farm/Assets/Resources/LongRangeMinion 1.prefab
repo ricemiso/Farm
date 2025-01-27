@@ -5005,9 +5005,9 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 40
   isCraftedMinion: 0
-  damage: 15
-  healthIncrease: 5
-  damageIncrease: 5
+  damage: 20
+  healthIncrease: 0
+  damageIncrease: 15
   level: 0
   canBeChopped: 0
   canbeWatch: 0
