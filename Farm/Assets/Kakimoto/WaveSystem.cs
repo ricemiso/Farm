@@ -106,7 +106,7 @@ public class WaveSystem : MonoBehaviour
 			m_Cost = SummonEnemy(m_Cost);
 
 			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-			SoundManager.Instance.PlaySound(SoundManager.Instance.EnemyCreateBGM);
+			SoundManager.Instance.PlayIfNoOtherMusic(SoundManager.Instance.EnemyCreateBGM);
 		}
 
 		if (hour < m_WaveLimitTime)

@@ -15,11 +15,12 @@ public class MenuStartLoadButton : MonoBehaviour
     private void Start()
     {
         //BGM‚Ì‰Šúİ’è
-        //SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
-        //SoundManager.Instance.StopSound(SoundManager.Instance.gameOverBGM);
-		//SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
-        SoundManager.Instance.StopBGMSound();
-		SoundManager.Instance.PlaySound(SoundManager.Instance.TutorialBGM);
+        SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
+        SoundManager.Instance.StopSound(SoundManager.Instance.gameOverBGM);
+        SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+        SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+        //SoundManager.Instance.StopBGMSound();
+        SoundManager.Instance.PlaySound(SoundManager.Instance.TutorialBGM);
     }
 
     /// <summary>

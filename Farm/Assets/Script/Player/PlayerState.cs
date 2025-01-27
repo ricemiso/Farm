@@ -165,7 +165,10 @@ public class PlayerState : MonoBehaviour
             playerBody.GetComponent<PlayerMovement>().enabled = false;
             playerBody.GetComponent<MouseMovement>().enabled = false;
 
-			SoundManager.Instance.StopBGMSound();
+			//SoundManager.Instance.StopBGMSound();
+			SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
+			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
 			SoundManager.Instance.StopWalkSound();
             SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
         }
