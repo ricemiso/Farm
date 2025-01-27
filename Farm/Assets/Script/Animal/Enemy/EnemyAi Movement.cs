@@ -134,6 +134,8 @@ public class EnemyAI_Movement : AI_Movement
 	}
 
 
+
+
 	// “G‚ğ”­Œ©‚µ‚½‚Æ‚«‚Ìˆ—
 	protected void FoundTarget(GameObject other)
 	{
