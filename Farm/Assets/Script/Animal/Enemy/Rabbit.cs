@@ -65,7 +65,8 @@ public class Rabbit : EnemyAI_Movement
 
     public void CheckAttack(GameObject obj)
     {
-        if (obj.name != target.name || !isInRange) return;
+        if (target == null) return;
+        if (obj.name != target.name || !isInRange ) return;
 
         if (currentAttackCooltime <= 0.0f)
         {
