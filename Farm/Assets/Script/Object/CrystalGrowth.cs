@@ -236,7 +236,8 @@ public class CrystalGrowth : MonoBehaviour
     /// <param name="damage">éÛÇØÇÈÉ_ÉÅÅ[ÉWó </param>
     public void GetHit(float damage)
     {
-        Log.Instance.OnFarmAttack(gameObject.name);
+
+        Log.Instance.OnFarmAttack(gameObject.name,Color.black);
 
         SoundManager.Instance.PlaySound(SoundManager.Instance.CrystalAttack);
 
