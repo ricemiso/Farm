@@ -303,6 +303,7 @@ public class ConstructionManager : MonoBehaviour
                     itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = false;
                     itemToBeConstructed.GetComponent<Animation>().enabled = false;
                     itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = true;
+                    itemToBeConstructed.GetComponent<BoxCollider>().enabled = false;
                 }
 
                 if (CheckValidConstructionPosition())
@@ -396,6 +397,7 @@ public class ConstructionManager : MonoBehaviour
                 itemToBeConstructed.GetComponent<Rigidbody>().useGravity = true;
                 itemToBeConstructed.GetComponent<Rigidbody>().isKinematic = false;
                 itemToBeConstructed.GetComponent<LongRangeMinion>().enabled = true;
+                itemToBeConstructed.GetComponent<BoxCollider>().enabled = true;
                 AIPlaceItemFreeStyle();
                 obj.name = "ƒ~ƒjƒIƒ“3";
                 HandleItemStack2(obj);

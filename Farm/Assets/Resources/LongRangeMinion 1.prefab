@@ -4883,9 +4883,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2829281492017950068}
   - component: {fileID: 5553299472333991714}
+  - component: {fileID: 8559359141524731401}
   - component: {fileID: 3578436797761816706}
   - component: {fileID: 2473072749452675079}
-  - component: {fileID: 8559359141524731401}
   - component: {fileID: 2127612127266028338}
   - component: {fileID: 2685701426436218251}
   - component: {fileID: 2007988655042678609}
@@ -4946,6 +4946,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &8559359141524731401
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522425592210347359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200, y: 109.24, z: 200}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!65 &3578436797761816706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5000,27 +5021,6 @@ MonoBehaviour:
   bloodparticle: {fileID: 8396051554211694687}
   levelupparticle: {fileID: 2484091959238204396}
   bloodPaddle: {fileID: 6288677722811547862}
---- !u!65 &8559359141524731401
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522425592210347359}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 200, y: 109.24, z: 200}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!82 &2127612127266028338
 AudioSource:
   m_ObjectHideFlags: 0

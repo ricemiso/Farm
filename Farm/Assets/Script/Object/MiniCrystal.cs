@@ -79,8 +79,12 @@ public class MiniCrystal : MonoBehaviour
 
 	public void GetHit(float damage)
 	{
+
+
+
+		Color color = Log.Instance.ColorChange(gameObject);
+		Log.Instance.OnFarmAttack(gameObject.name, color);
 		
-		Log.Instance.OnFarmAttack(gameObject.name);
 
 		CrystalHealth -= damage;
 		GrobalState.Instance.resourceHelth = CrystalHealth;
@@ -90,7 +94,9 @@ public class MiniCrystal : MonoBehaviour
 
 		if (CrystalHealth <= 0 || PlayerState.Instance.currentHealth <= 0)
 		{
-			Log.Instance.OnFarmDeath(gameObject.name);
+
+			Color deathcolor = Log.Instance.ColorChange(gameObject);
+			Log.Instance.OnFarmDeath(gameObject.name, deathcolor);
 
             foreach(GameObject soil in soils)
             {
@@ -102,6 +108,8 @@ public class MiniCrystal : MonoBehaviour
 		}
 
 	}
+
+	
 
 	// ミニクリスタルが生きているか
 	public bool IsAlive()

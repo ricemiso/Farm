@@ -72,12 +72,14 @@ public class LongRangeMinion : SupportAI_Movement
 
     protected override void checkAttack()
     {
-        // target‚ªnull‚Ü‚½‚Í”jŠü‚³‚ê‚Ä‚¢‚éê‡‚Íˆ—‚ğI—¹
-        if (target == null || target.tag == "Player" || target.transform == null)
+        
+        if (target == null || target.tag == "Player" || target.transform == null || 
+            gameObject.transform.parent.name == ConstructionManager.Instance.constructionHoldingSpot.name)
         {
             target = null;
             return;
         }
+
 
         animation["Attack2"].speed = 1.7f;
         animation.Play("Attack2");
