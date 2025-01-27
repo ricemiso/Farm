@@ -5426,9 +5426,9 @@ MonoBehaviour:
   animalName: "\u30A6\u30EB\u30D5"
   playerISRange: 0
   currentHealth: 0
-  maxHealth: 100
+  maxHealth: 150
   isCraftedMinion: 0
-  damage: 15
+  damage: 25
   healthIncrease: 0
   damageIncrease: 0
   level: 0
@@ -5478,6 +5478,7 @@ MonoBehaviour:
   CrystalMini: {fileID: 0}
   IsChaseSupportUnit: 1
   IsChasePlayer: 1
+  Enemydistance: 8
 --- !u!114 &6324738823497126971
 MonoBehaviour:
   m_ObjectHideFlags: 0
