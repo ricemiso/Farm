@@ -274,17 +274,22 @@ public class CrystalGrowth : MonoBehaviour
     /// </summary>
     public void CrystalIsDead()
     {
-        //Destroy(SoundManager.Instance.gameObject);
-        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        if (PlayerState.Instance.isGameOver==false)
+        {
+            //Destroy(SoundManager.Instance.gameObject);
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
 
-        // ゲームオーバーシーンに移動
-        Vector3 newPosition = gameObject.transform.position; // 現在の位置を取得
-        newPosition.y += 4; // y座標をオフセット（上方向に移動）
-        GameObject Crystal = Instantiate(breakCrystal, newPosition, gameObject.transform.rotation);
-        gameOverCanvas.sortingOrder = 2;
-        gameClearCanvas.sortingOrder = -1;
-        gameOverCanvas.gameObject.SetActive(true);
+            // ゲームオーバーシーンに移動
+            Vector3 newPosition = gameObject.transform.position; // 現在の位置を取得
+            newPosition.y += 4; // y座標をオフセット（上方向に移動）
+            GameObject Crystal = Instantiate(breakCrystal, newPosition, gameObject.transform.rotation);
+            gameOverCanvas.sortingOrder = 2;
+            gameClearCanvas.sortingOrder = -1;
+            gameOverCanvas.gameObject.SetActive(true);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
+
+           
     }
 }

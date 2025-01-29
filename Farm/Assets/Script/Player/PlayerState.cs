@@ -84,6 +84,11 @@ public class PlayerState : MonoBehaviour
     public float mousesensitivity;
 
     /// <summary>
+    /// ゲームオーバーを管理するフラグ
+    /// </summary>
+    public bool isGameOver = false;
+
+    /// <summary>
     /// シングルトンパターンを適用し、インスタンスを初期化します。
     /// </summary>
     private void Awake()
@@ -156,21 +161,28 @@ public class PlayerState : MonoBehaviour
         }
         else if (currentHealth < 0)
         {
-            currentHealth = 0;
+            if (!isGameOver)
+            {
+                currentHealth = 0;
             falseCanvas.gameObject.SetActive(false);
             gameOverCanvas.gameObject.SetActive(true);
             gameOverCanvas.sortingOrder = 1;
             UnityEngine.Cursor.lockState = CursorLockMode.None;
             UnityEngine.Cursor.visible = true;
+           
             playerBody.GetComponent<PlayerMovement>().enabled = false;
             playerBody.GetComponent<MouseMovement>().enabled = false;
 
-			//SoundManager.Instance.StopBGMSound();
-			SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
-			SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
-			SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
-			SoundManager.Instance.StopWalkSound();
-            SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
+          
+                //SoundManager.Instance.StopBGMSound();
+                SoundManager.Instance.StopSound(SoundManager.Instance.gameClearBGM);
+                SoundManager.Instance.StopSound(SoundManager.Instance.EnemyCreateBGM);
+                SoundManager.Instance.StopSound(SoundManager.Instance.startingZoneBGMMusic);
+                SoundManager.Instance.StopWalkSound();
+                SoundManager.Instance.PlaySound(SoundManager.Instance.gameOverBGM);
+                isGameOver = true;
+            }
+           
         }
 
         StartCoroutine(delayPanel());
