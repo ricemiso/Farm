@@ -88,6 +88,11 @@ public class DayNightSystem : MonoBehaviour
 
         if (GrobalState.Instance.isTutorialEnd || GrobalState.Instance.isSkip)
         {
+            if(currentHour >= 8 && currentHour <= 10 && TimeManager.Instance.dayInGame == 1)
+            {
+                Log.Instance.OnCreateEnemy("ミニクリスタル(青)", Color.blue);
+            }
+
             if (currentHour >= 22 && currentHour <= 23 && TimeManager.Instance.dayInGame == 1)
             {
                 Log.Instance.OnCreateEnemy("ミニクリスタル(黄)",Color.yellow);
