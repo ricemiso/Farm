@@ -360,6 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7321906}
   - component: {fileID: 7321907}
+  - component: {fileID: 7321908}
   m_Layer: 0
   m_Name: SettingManager
   m_TagString: Untagged
@@ -403,6 +404,19 @@ MonoBehaviour:
   effectValue: {fileID: 2001056613}
   sensivirityValue: {fileID: 2087752437}
   sensiviritySlider: {fileID: 568388466}
+--- !u!114 &7321908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1867ac20af4b9984e9ab5249406a0416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 781400049}
 --- !u!1 &11689744
 GameObject:
   m_ObjectHideFlags: 0
@@ -22397,6 +22411,7 @@ MonoBehaviour:
   playerSpeedRate: 1
   bloodPannl: {fileID: 165445900}
   mousesensitivity: 0
+  isGameOver: 0
 --- !u!1 &1049366976
 GameObject:
   m_ObjectHideFlags: 0
